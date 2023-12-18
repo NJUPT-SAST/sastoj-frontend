@@ -1,0 +1,41 @@
+{
+  "name": "@sast/oj",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install",
+    "ui:dev": "pnpm --filter @sast/oj-ui dev",
+    "ui:build": "pnpm --filter @sast/oj-ui build:lib",
+    "ui:lint": "pnpm --filter @sast/oj-ui lint",
+    "ui:format": "pnpm --filter @sast/oj-ui format",
+    "ui:test": "pnpm --filter @sast/oj-ui test",
+    "competition:dev": "pnpm --filter @sast/oj-competition dev",
+    "competition:build": "pnpm --filter @sast/oj-competition build:lib",
+    "competition:lint": "pnpm --filter @sast/oj-competition lint",
+    "docs:dev": "pnpm --filter @sast/oj-docs dev",
+    "docs:build": "pnpm --filter @sast/oj-docs build",
+    "commit": "git add .;pnpm lint-staged -p false;pnpm cz"
+  },
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=8"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog-zh"
+    }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog-zh": "^0.0.2",
+    "husky": "^8.0.0",
+    "typescript": "^5.3.3"
+  }
+}
