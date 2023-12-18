@@ -1,4 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-pnpm commit
+if [ -z "$GIT_EDITOR" ]; then
+    echo "\033[0;31m⛔️ 请不要使用 git commit 提交不了哦\033[0m \n \033[0;32m使用 'pnpm commit' 提交\033[0m"
+    exit 1
+fi
