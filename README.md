@@ -45,6 +45,12 @@ pnpm install
 ```bash
 pnpm ui:dev
 ```
+
+你也可以直接build仓库并实时监听代码修改，以便于在比赛系统中使用。
+
+```bash
+pnpm ui:start
+```
 #### 文档开发
 文档开发的包在 packages/docs 下，使用 Rspress 进行开发。使用以下指令快速打开文档预览。
 
