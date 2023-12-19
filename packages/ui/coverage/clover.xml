@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1702919586619" clover="3.2.0">
-  <project timestamp="1702919586619" name="All files">
+<coverage generated="1702954971469" clover="3.2.0">
+  <project timestamp="1702954971469" name="All files">
     <metrics statements="22" coveredstatements="22" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0" elements="22" coveredelements="22" complexity="0" loc="22" ncloc="22" packages="1" files="1" classes="1"/>
     <file name="Button.tsx" path="/Users/maxtune/workspace/sastoj-frontend/packages/ui/lib/Button/Button.tsx">
       <metrics statements="22" coveredstatements="22" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>

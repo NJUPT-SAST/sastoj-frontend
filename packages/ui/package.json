@@ -30,6 +30,7 @@
   },
   "scripts": {
     "dev": "storybook dev -p 6006",
+    "dev:lib": "tsc && vite build --watch",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
