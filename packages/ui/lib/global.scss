@@ -1,0 +1,18 @@
+@import url('./reset.scss');
+
+* {
+  // color variables
+  --primary-color: #0078d4;
+  --secondary-color: #71afe5;
+  --danger-color: #ff0000;
+  --warning-color: #ffb900;
+  --success-color: #00c853;
+  --white-color: #ffffff;
+  --black-color: #121212;
+
+  // font variables
+  --small-font-size: 12px;
+  --medium-font-size: 16px;
+  --large-font-size: 20px;
+  font-family: sans-serif;
+}
