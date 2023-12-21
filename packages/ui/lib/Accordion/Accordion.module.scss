@@ -1,0 +1,37 @@
+.base {
+  width: 100%;
+  display: grid;
+  grid-template-rows: 0fr 0fr;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+  &.show {
+    grid-template-rows: 0fr 1fr;
+  }
+  .accordionTrigger {
+    all: unset;
+    cursor: pointer;
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    padding: 20px;
+    &:hover {
+      background-color: #fcfcfc;
+    }
+    .icon {
+      transition: all 0.2s ease-out;
+      &.rotate {
+        transform: rotate(180deg);
+      }
+    }
+  }
+  .accordionContentWrap {
+    width: 100%;
+    background-color: #f1f1f1;
+    min-height: 0px;
+    .inner {
+      padding: 20px;
+    }
+  }
+}

@@ -6,7 +6,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   /**
    * The color of the button.
    */
-  color?: 'primary' | 'secondary' | 'danger';
+  color?: 'primary' | 'secondary' | 'tertiary' | 'danger';
 
   /**
    * The size of the button.
