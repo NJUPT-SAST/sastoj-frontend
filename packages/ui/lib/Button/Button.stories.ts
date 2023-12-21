@@ -11,7 +11,7 @@ const meta = {
   tags: ['autodocs'],
   argTypes: {
     color: {
-      options: ['primary', 'secondary', 'danger'],
+      options: ['primary', 'secondary', 'tertiary', 'danger'],
       control: { type: 'select' },
     },
     size: {
