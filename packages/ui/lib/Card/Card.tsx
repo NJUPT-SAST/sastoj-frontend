@@ -4,7 +4,7 @@ import classnames from 'classnames';
 
 export interface CardProps {
   /**
-   * The theme of the Card
+   * The theme of the Card.
    */
   theme?: 'dark' | 'light';
 

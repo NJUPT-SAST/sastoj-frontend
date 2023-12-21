@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { Card, type CardProps } from './Card';
 import { Button } from '../Button/Button';
+import { Input } from '../Input/Input';
 
 const meta = {
   title: 'Components/Card',
@@ -38,6 +39,12 @@ const defaultProps: CardProps = {
 export const DefaultCard: Story = {
   args: {
     ...defaultProps,
+  },
+};
+
+export const ExampleCard: Story = {
+  args: {
+    ...defaultProps,
     header: (
       <>
         <h3 style={{ color: 'rgba(128, 128, 128)' }}>SAST</h3>
@@ -55,6 +62,33 @@ export const DefaultCard: Story = {
           基础知识竞赛基础知识竞赛基础知识竞赛基础知识竞赛基础知识竞赛基础知识竞赛基础知识竞赛基础知识竞赛基础知识竞赛基础知识竞赛基础知识竞赛基础知识竞赛基础知识竞赛
         </div>
       </>
+    ),
+    footer: (
+      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 20 }}>
+        <Button color="danger">cancel</Button>
+        <Button>enter</Button>
+      </div>
+    ),
+  },
+};
+
+export const LoginCard: Story = {
+  args: {
+    ...defaultProps,
+    header: (
+      <>
+        <h3 style={{ color: 'rgba(128, 128, 128)' }}>SASTOJ</h3>
+        <h1>LOGIN</h1>
+      </>
+    ),
+    content: (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 15 }}>
+        <Input label={<span>studentId</span>}></Input>
+        <Input
+          label={<span>password</span>}
+          type="password"
+        ></Input>
+      </div>
     ),
     footer: (
       <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 20 }}>
