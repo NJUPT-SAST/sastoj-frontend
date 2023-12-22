@@ -22,6 +22,7 @@
   .footer {
     margin-top: 40px;
     width: 100%;
+    display: flex;
   }
   &.light {
     background-color: var(--white-color);

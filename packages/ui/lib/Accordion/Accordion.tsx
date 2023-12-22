@@ -1,17 +1,12 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './Accordion.module.scss';
 import classnames from 'classnames';
 
 export interface AccordionProps {
   /**
-   * The color of the Accordion.
+   * the width of the Accordion
    */
-  color?: 'primary' | 'secondary' | 'tertiary' | 'danger';
-
-  /**
-   * The size of the Accordion.
-   */
-  size?: 'small' | 'medium' | 'large';
+  width?: number;
   /**
    * If `true`, the Accordion will be disabled.
    */
@@ -27,31 +22,22 @@ export interface AccordionProps {
 }
 
 export const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
-  (
-    {
-      color = 'primary',
-      size = 'medium',
-      disabled = false,
-      accordionTrigger,
-      accordionContent,
-      ...rest
-    },
-    ref,
-  ) => {
+  ({ disabled = false, accordionTrigger, accordionContent, width = 280, ...rest }, ref) => {
     const accordionClass = classnames(styles['base']);
     const [visible, setVisble] = useState<boolean>(false);
-
     return (
       <div
+        style={{ width: width }}
         ref={ref}
         className={`${accordionClass}  ${visible ? styles['show'] : ''}`}
         {...rest}
       >
         <button
-          className={styles['accordionTrigger']}
+          className={`${styles['accordionTrigger']} ${disabled ? styles['disabled'] : ''}`}
           onClick={() => setVisble(!visible)}
+          disabled={disabled}
         >
-          {accordionTrigger}
+          <div> {accordionTrigger}</div>
           <svg
             width={15}
             height={15}
@@ -65,9 +51,10 @@ export const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
             ></path>
           </svg>
         </button>
-        <div className={`${styles['accordionContentWrap']}`}>
+        <div className={styles['accordionContentWrap']}>
           <div className={styles['inner']}>{accordionContent}</div>
         </div>
+        <div className={styles['divider']}></div>
       </div>
     );
   },
