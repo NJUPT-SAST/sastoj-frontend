@@ -1,7 +1,7 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
-import { Button } from "@sast/oj-ui";
+import { Accordion, Button, Input, Card } from "@sast/oj-ui";
 import "./App.css";
 
 function App() {
@@ -23,6 +23,12 @@ function App() {
           count is {count}
         </button>
         <Button color="primary">hello</Button>
+        <Input></Input>
+        <Accordion
+          accordionTrigger={<span>hi</span>}
+          accordionContent={<span>hello</span>}
+        ></Accordion>
+        <Card></Card>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>

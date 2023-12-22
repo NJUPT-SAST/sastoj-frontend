@@ -1,5 +1,4 @@
 .base {
-  width: 100%;
   display: grid;
   grid-template-rows: 0fr 0fr;
   overflow: hidden;
@@ -10,28 +9,37 @@
   .accordionTrigger {
     all: unset;
     cursor: pointer;
-    width: 300px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-size: 14px;
     padding: 20px;
-    &:hover {
+    font-weight: bolder;
+    &:hover:not(.disabled) {
       background-color: #fcfcfc;
     }
     .icon {
-      transition: all 0.2s ease-out;
+      transition: all 0.2s ease-in-out;
       &.rotate {
         transform: rotate(180deg);
       }
     }
+    &.disabled {
+      cursor: not-allowed;
+      opacity: 0.3;
+    }
   }
   .accordionContentWrap {
     width: 100%;
-    background-color: #f1f1f1;
     min-height: 0px;
+    display: flex;
     .inner {
       padding: 20px;
     }
+  }
+  .divider {
+    height: 0.5px;
+    width: 100%;
+    background-color: #e5e5e5;
   }
 }
