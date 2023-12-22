@@ -13,7 +13,7 @@
     align-items: center;
     justify-content: space-between;
     font-size: 14px;
-    padding: 20px;
+    padding: 16px 20px;
     font-weight: bolder;
     &:hover:not(.disabled) {
       background-color: #fcfcfc;
@@ -34,11 +34,16 @@
     min-height: 0px;
     display: flex;
     .inner {
-      padding: 20px;
+      padding: 10px 20px;
+      opacity: 0;
+      transition: all 0.2s ease-in;
+      &.show {
+        opacity: 1;
+      }
     }
   }
   .divider {
-    height: 0.5px;
+    height: 1px;
     width: 100%;
     background-color: #e5e5e5;
   }

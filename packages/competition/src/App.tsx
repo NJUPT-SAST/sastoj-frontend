@@ -6,6 +6,7 @@ import "./App.css";
 
 function App() {
   const [count, setCount] = useState(0);
+  const [visible, setVisble] = useState(true);
 
   return (
     <>
@@ -22,7 +23,9 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <Button color="primary">hello</Button>
+        <Button color="primary" onClick={() => setVisble(!visible)}>
+          hello
+        </Button>
         <Input></Input>
         <Accordion
           accordionTrigger={<span>hi</span>}

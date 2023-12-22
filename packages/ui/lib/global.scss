@@ -3,10 +3,18 @@
 * {
   // color variables
   --primary-color: #0078d4;
+  --primary-color-rgb: 0, 120, 212;
+  --primary-color-background-rgb: 219, 236, 249;
   --secondary-color: #71afe5;
   --danger-color: #ff0000;
+  --danger-color-rgb: 255, 0, 0;
+  --danger-color-background-rgb: 255, 245, 245;
   --warning-color: #ffb900;
+  --warning-color-rgb: 255, 185, 0;
+  --warning-color-background-rgb: 255, 252, 245;
   --success-color: #00c853;
+  --success-color-rgb: 0, 200, 83;
+  --success-color-background-rgb: 245, 253, 248;
   --white-color: #ffffff;
   --black-color: #121212;
   --shadow-color: rgba(128, 128, 128, 0.5);
