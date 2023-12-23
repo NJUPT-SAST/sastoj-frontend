@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 import { Card, type CardProps } from './Card';
 import { Button } from '../Button/Button';
-import { Input } from '../Input/Input';
+import { Radio } from '../Radio/Radio';
 
 const meta = {
   title: 'Components/Card',
@@ -82,13 +82,12 @@ export const LoginCard: Story = {
       </>
     ),
     content: (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 15 }}>
-        <Input label={<span>studentId</span>}></Input>
-        <Input
-          label={<span>password</span>}
-          type="password"
-        ></Input>
-      </div>
+      <>
+        <Radio>hello</Radio>
+        <Radio>hello</Radio>
+        <Radio>hello</Radio>
+        <Radio>hello</Radio>
+      </>
     ),
     footer: (
       <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 20 }}>

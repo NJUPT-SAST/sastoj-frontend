@@ -38,7 +38,7 @@ export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
   ) => {
     const [visible, setVisble] = useState(true);
 
-    const cardClass = classNames(
+    const toastClass = classNames(
       styles['base'],
       styles[type],
       styles[size],
@@ -48,7 +48,7 @@ export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
     return (
       <div
         ref={ref}
-        className={cardClass}
+        className={toastClass}
         {...rest}
       >
         <div className={styles['inner']}>

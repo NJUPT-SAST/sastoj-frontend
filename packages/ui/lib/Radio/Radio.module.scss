@@ -1,0 +1,162 @@
+@mixin medium {
+  width: 20px;
+  height: 20px;
+}
+@mixin large {
+  width: 30px;
+  height: 30px;
+}
+@mixin small {
+  width: 16px;
+  height: 16px;
+}
+
+.base {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  &.disabled,
+  &.disabled .radioItem,
+  &.disabled .radioSpan {
+    cursor: not-allowed;
+    opacity: 0;
+  }
+  &.primary {
+    .radioItem {
+      &:checked::before {
+        background-color: var(--primary-color);
+        box-shadow: 0 0px 6px rgba(var(--primary-color-rgb), 0.4);
+      }
+    }
+  }
+  &.warning {
+    .radioItem {
+      &:checked::before {
+        background-color: var(--warning-color);
+        box-shadow: 0 0px 6px rgba(var(--warning-color-rgb), 0.4);
+      }
+    }
+  }
+  &.danger {
+    .radioItem {
+      &:checked::before {
+        background-color: var(--danger-color);
+        box-shadow: 0 0px 6px rgba(var(--danger-color-rgb), 0.4);
+      }
+    }
+  }
+  &.large {
+    gap: 10px;
+    .radioItem {
+      @include large();
+      &::before {
+        @include large();
+      }
+      &::after {
+        @include large();
+      }
+      &:checked::before {
+        @include large();
+      }
+      &:checked::after {
+        width: 10px;
+        height: 10px;
+      }
+    }
+    .radioSpan {
+      font-size: 27px;
+    }
+  }
+  &.medium {
+    gap: 5px;
+    .radioItem {
+      @include medium();
+      &::before {
+        @include medium();
+      }
+      &::after {
+        @include medium();
+      }
+      &:checked::before {
+        @include medium();
+      }
+      &:checked::after {
+        width: 8px;
+        height: 8px;
+      }
+    }
+    .radioSpan {
+      font-size: 18px;
+    }
+  }
+  &.small {
+    gap: 3px;
+    .radioItem {
+      @include small();
+      &::before {
+        @include small();
+      }
+      &::after {
+        @include small();
+      }
+      &:checked::before {
+        @include small();
+      }
+      &:checked::after {
+        width: 6px;
+        height: 6px;
+      }
+    }
+    .radioSpan {
+      font-size: 15px;
+    }
+  }
+  .radioItem {
+    appearance: none;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &::before {
+      content: '';
+      box-sizing: border-box;
+      border: 2px solid var(--shadow-color);
+      border-radius: 50%;
+      display: inline-block;
+    }
+    &:active {
+      scale: 0.95;
+    }
+    &:checked::before {
+      content: '';
+      box-sizing: border-box;
+      display: block;
+      border-radius: 50%;
+      transition: all 0.2s ease-in-out;
+      border: 0px;
+    }
+    &:checked::after {
+      content: '';
+      text-align: center;
+      box-sizing: border-box;
+      background: var(--white-color);
+      border-radius: 50%;
+      display: block;
+      position: absolute;
+      animation-name: large;
+      animation-duration: 0.2s;
+    }
+  }
+}
+
+@keyframes large {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
