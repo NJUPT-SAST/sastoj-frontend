@@ -8,9 +8,7 @@
   font-size: 14px;
   display: flex;
   align-items: center;
-  transition:
-    border-color 0.5s,
-    box-shadow 0.5s;
+  transition: all 0.5s;
   &:hover:not(.disabled) {
     border: 0.5px solid var(--primary-color);
   }

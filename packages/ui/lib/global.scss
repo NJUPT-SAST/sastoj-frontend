@@ -18,10 +18,28 @@
   --white-color: #ffffff;
   --black-color: #121212;
   --shadow-color: rgba(128, 128, 128, 0.5);
+  --shadow-color-rgb: 128, 128, 128;
   --dark-color: rgb(30, 30, 30);
   // font variables
   --small-font-size: 12px;
   --medium-font-size: 16px;
   --large-font-size: 20px;
   font-family: sans-serif;
+}
+
+::-webkit-scrollbar {
+  all: unset;
+  width: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--shadow-color);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-track {
+  margin: 5px;
+}
+
+.stopMove {
+  overflow: hidden;
 }

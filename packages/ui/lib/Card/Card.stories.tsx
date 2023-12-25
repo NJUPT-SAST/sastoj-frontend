@@ -29,6 +29,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const defaultProps: CardProps = {
+  titleImage: undefined,
   theme: 'light',
   size: 'medium',
   header: <span>header</span>,
@@ -48,7 +49,9 @@ export const ExampleCard: Story = {
     header: (
       <>
         <h3 style={{ color: 'rgba(128, 128, 128)' }}>SAST</h3>
-        <h1>基础知识竞赛</h1>
+        <h1>
+          基础知识竞赛基础知识竞赛基础知识竞赛基础知识竞赛基础知识竞赛基础知识竞赛基础知识竞赛基础知识竞赛
+        </h1>
       </>
     ),
     content: (
@@ -95,5 +98,14 @@ export const LoginCard: Story = {
         <Button>enter</Button>
       </div>
     ),
+  },
+};
+
+export const ImageCard: Story = {
+  args: {
+    ...defaultProps,
+    titleImage: (
+      <img src="../../public/sast_test_image/sast-link.png" />
+    ) as unknown as HTMLImageElement,
   },
 };

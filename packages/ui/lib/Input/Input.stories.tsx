@@ -27,7 +27,7 @@ const defaultProps: InputProps = {
   disabled: false,
   label: null,
   mode: 'text',
-  placeholder: '',
+  placeholder: 'text',
   fontsize: 14,
 };
 

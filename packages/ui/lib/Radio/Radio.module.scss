@@ -16,11 +16,15 @@
   flex-direction: row;
   gap: 5px;
   align-items: center;
+  cursor: pointer;
   &.disabled,
   &.disabled .radioItem,
   &.disabled .radioSpan {
     cursor: not-allowed;
     opacity: 0;
+  }
+  .radioSpan {
+    cursor: pointer;
   }
   &.primary {
     .radioItem {
@@ -113,6 +117,7 @@
     }
   }
   .radioItem {
+    cursor: pointer;
     appearance: none;
     position: relative;
     transition: all 0.2s ease-in-out;

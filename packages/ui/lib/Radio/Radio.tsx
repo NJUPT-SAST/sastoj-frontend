@@ -24,17 +24,43 @@ export interface RadioProps {
   /**
    * the value of the radio
    */
-  value?: string;
+  value: string;
+  /**
+   * the checked of the radio
+   */
+  checked?: boolean;
+  /**
+   * the onchange of the radio
+   */
+  onChange?: (value: string) => void;
 }
 
 export const Radio = React.forwardRef<HTMLDivElement, RadioProps>(
-  ({ color = 'primary', size = 'medium', disabled = false, children = 'radio', ...rest }, ref) => {
+  (
+    {
+      color = 'primary',
+      size = 'medium',
+      value = '',
+      disabled = false,
+      children = 'radio',
+      checked = false,
+      onChange,
+      ...rest
+    },
+    ref,
+  ) => {
     const radioClass = classNames(
       styles['base'],
       styles[color],
       styles[size],
       styles[disabled ? 'disabled' : ''],
     );
+
+    const handleChange = () => {
+      if (onChange) {
+        onChange(value);
+      }
+    };
 
     return (
       <div
@@ -44,10 +70,12 @@ export const Radio = React.forwardRef<HTMLDivElement, RadioProps>(
       >
         <input
           type="radio"
-          value="option1"
+          value={value}
           className={styles['radioItem']}
           id={children}
           disabled={disabled}
+          checked={checked}
+          onChange={handleChange}
         />
         <label htmlFor={children}>
           <span className={styles['radioSpan']}> {children}</span>

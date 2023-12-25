@@ -4,6 +4,10 @@ import classnames from 'classnames';
 
 export interface CardProps {
   /**
+   * the image of the card
+   */
+  titleImage?: HTMLImageElement;
+  /**
    * The theme of the Card.
    */
   theme?: 'dark' | 'light';
@@ -34,22 +38,27 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
       header = <span>header</span>,
       content = <span>content</span>,
       footer = <span>footer</span>,
+      titleImage = undefined,
       ...rest
     },
     ref,
   ) => {
     const cardClass = classnames(styles['base'], styles[theme], styles[size]);
+
     return (
       <div
         ref={ref}
         className={cardClass}
         {...rest}
       >
-        <div className={styles['mainContent']}>
-          <div className={styles['header']}>{header}</div>
-          <div className={styles['content']}>{content}</div>
+        {titleImage && <div className={styles['titleImage']}>{<>{titleImage}</>}</div>}
+        <div className={styles['contentContainer']}>
+          <div className={styles['mainContent']}>
+            <div className={styles['header']}>{header}</div>
+            <div className={styles['content']}>{content}</div>
+          </div>
+          <div className={styles['footer']}>{footer}</div>
         </div>
-        <div className={styles['footer']}>{footer}</div>
       </div>
     );
   },

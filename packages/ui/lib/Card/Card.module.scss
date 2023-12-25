@@ -6,17 +6,37 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  .mainContent {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    min-height: 300px;
-    .header {
+  box-sizing: border-box;
+  .titleImage {
+    border-radius: 6px 6px 0 0;
+    overflow: hidden;
+    height: 300px;
+    width: 100%;
+    img {
       width: 100%;
+      padding: 0;
+      height: 300px;
+      object-fit: cover;
+      transition: all 0.3s ease-in-out;
+      &:hover {
+        scale: 1.1;
+      }
     }
-    .content {
-      width: 100%;
+  }
+  .contentContainer {
+    padding: 20px;
+    .mainContent {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      min-height: 100px;
+      .header {
+        width: 100%;
+      }
+      .content {
+        width: 100%;
+      }
     }
   }
   .footer {
@@ -37,13 +57,21 @@
   &.small {
     width: 300px;
     padding: 10px;
+    .image {
+      width: 300px;
+    }
   }
   &.medium {
     width: 500px;
-    padding: 20px;
+    .titleImage {
+      width: 500px;
+    }
   }
   &.large {
     width: 700px;
     padding: 30px;
+    .titleImage {
+      width: 700px;
+    }
   }
 }

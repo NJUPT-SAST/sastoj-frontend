@@ -28,6 +28,10 @@ export interface DialogProps {
    * the cancel of the dialog
    */
   cancel?: () => void;
+  /**
+   * the cancelContent of the cancel button
+   */
+  cancelContent?: string;
 }
 
 export const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
@@ -45,16 +49,11 @@ export const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
         <>
           <div style={{ display: 'flex', gap: 10, justifyContent: 'end' }}>
             <Button>enter</Button>
-            <Button
-              color="danger"
-              onClick={cancel}
-            >
-              cancel
-            </Button>
           </div>
         </>
       ),
       visible,
+      cancelContent = 'Cancel',
       ...rest
     },
     ref,
@@ -62,28 +61,48 @@ export const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
     const dialogClass = classNames(styles['base'], styles[size], styles[visible ? 'visible' : '']);
     const backgroundClass = classNames(styles['background'], styles[visible ? 'visible' : '']);
 
+    if (visible) {
+      document.body.classList.add('stopMove');
+    }
+
+    if (!visible) {
+      document.body.classList.remove('stopMove');
+    }
+
     return (
-      <div className={backgroundClass}>
-        <div
-          ref={ref}
-          className={dialogClass}
-          {...rest}
-        >
-          <div className={styles['inner']}>
-            <div className={styles['mainContent']}>
-              <div className={styles['header']}>
-                {header}
-                <div
-                  className={styles['closeButton']}
-                  onClick={cancel}
-                ></div>
+      <>
+        <div className={backgroundClass}>
+          <div
+            ref={ref}
+            className={dialogClass}
+            {...rest}
+          >
+            <div className={styles['inner']}>
+              <div className={styles['mainContent']}>
+                <div className={styles['header']}>
+                  {header}
+                  <div
+                    className={styles['closeButton']}
+                    onClick={cancel}
+                  ></div>
+                </div>
+                <div className={styles['content']}>{content}</div>
               </div>
-              <div className={styles['content']}>{content}</div>
+              {footer && (
+                <div className={styles['footer']}>
+                  {footer}
+                  <Button
+                    color="danger"
+                    onClick={cancel}
+                  >
+                    {cancelContent}
+                  </Button>
+                </div>
+              )}
             </div>
-            {footer && <div className={styles['footer']}>{footer}</div>}
           </div>
         </div>
-      </div>
+      </>
     );
   },
 );
