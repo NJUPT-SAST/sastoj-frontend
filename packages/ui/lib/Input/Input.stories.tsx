@@ -25,7 +25,7 @@ type Story = StoryObj<typeof meta>;
 const defaultProps: InputProps = {
   width: 280,
   disabled: false,
-  label: null,
+  label: 'hello',
   mode: 'text',
   placeholder: 'text',
   fontsize: 14,

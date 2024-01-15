@@ -7,44 +7,43 @@
   scale: 0.8;
   overflow: hidden;
   transition: all 0.2s ease-in;
+  padding: 15px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
   &.visible {
     opacity: 1;
     scale: 1;
   }
-  .inner {
-    .mainContent {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  .header {
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .closeButton {
+      cursor: pointer;
+      height: 30px;
+      width: 30px;
       display: flex;
-      flex-direction: column;
-      gap: 5px;
-      .header {
-        font-weight: bold;
-        font-size: 20px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        .closeButton {
-          cursor: pointer;
-          height: 30px;
-          width: 30px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          transition: all 0.2s ease-in-out;
-          &:hover {
-            border-radius: 8px;
-            rotate: 180deg;
-          }
-        }
-      }
-      .content {
-        display: flex;
-        margin-top: 10px;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        border-radius: 8px;
+        rotate: 180deg;
       }
     }
-    .footer {
-      margin-top: 10px;
-    }
+  }
+  .content {
+    display: flex;
+    margin-top: 10px;
+  }
+
+  .footer {
+    margin-top: 10px;
   }
   &.info {
     background-color: rgba(var(--primary-color-background-rgb), 1);

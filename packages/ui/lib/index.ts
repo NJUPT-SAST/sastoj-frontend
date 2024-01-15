@@ -11,3 +11,4 @@ export * from './RadioGroup';
 export * from './Select';
 export * from './Badge';
 export * from './Checkbox';
+export * from './Navbar';

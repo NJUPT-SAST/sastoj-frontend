@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import styles from './Input.module.scss';
 import classNames from 'classnames';
 
@@ -34,7 +34,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     {
       width = 280,
       disabled = false,
-      label = null,
+      label = 'hello',
       mode = 'text',
       placeholder = '',
       fontsize = 14,
@@ -42,22 +42,59 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     },
     ref,
   ) => {
-    const InputClass = classNames(styles['inputBase']);
     const mainClass = classNames(styles['base'], styles[disabled ? 'disabled' : '']);
+    const [isUpLabel, setIsUpLabel] = useState<boolean>(false);
+    const InputClass = classNames(styles['inputBase']);
+    const buttonRef = useRef<HTMLDivElement | null>(null);
+    const [value, setValue] = useState<string>('');
+
+    const upLabel = () => {
+      if (!disabled) setIsUpLabel(true);
+    };
+
+    const showPlaceholder = useMemo(() => {
+      if (isUpLabel) return placeholder;
+      else return undefined;
+    }, [isUpLabel, placeholder]);
+
+    useEffect(() => {
+      const handleClickOutside = (event: MouseEvent) => {
+        if (buttonRef.current && !buttonRef.current.contains(event.target as Node)) {
+          setIsUpLabel(false);
+        }
+      };
+
+      document.addEventListener('click', handleClickOutside);
+
+      return () => {
+        document.removeEventListener('click', handleClickOutside);
+      };
+    }, []);
+
+    const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(e.target.value);
+    };
 
     return (
       <div
+        onClick={upLabel}
         className={mainClass}
+        ref={buttonRef}
         style={{ fontSize: fontsize }}
       >
-        {label && <div className={styles['label']}>{label}</div>}
+        {label && (
+          <div className={`${styles['label']} ${isUpLabel || value ? styles['upLabel'] : ''} `}>
+            {label}
+          </div>
+        )}
         <input
           style={{ width: width }}
           ref={ref}
           className={InputClass}
           disabled={disabled}
           type={mode}
-          placeholder={placeholder}
+          onChange={handleInput}
+          placeholder={showPlaceholder}
           {...rest}
         />
       </div>

@@ -47,9 +47,6 @@ function App() {
     console.log(value);
   }, [value]);
 
-  const changeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-  };
   useEffect(() => {
     console.log(newSelect);
   }, [newSelect]);
@@ -78,7 +75,7 @@ function App() {
         <Button color="primary" onClick={show}>
           hello
         </Button>
-        <Input value={value} onChange={changeValue}></Input>
+        <Input></Input>
         <Accordion
           accordionTrigger={<span>hi</span>}
           accordionContent={<span>hello</span>}
@@ -88,6 +85,9 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
+        <div className="border">
+          {/* <span className="span">hello</span> */}
+        </div>
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
