@@ -10,9 +10,8 @@
     ├─api
     ├─assets
     ├─components
-    ├─hooks
-    │  ├─api_store    //使用swr封装的hooks
-    │  └─store      //使用zustand封装的hooks
+    ├─hooks   //使用swr封装的hooks
+    ├─store   //使用zustand封装的状态管理
     ├─pages
     ├─types   //ts类型
     └─utils   //工具函数
