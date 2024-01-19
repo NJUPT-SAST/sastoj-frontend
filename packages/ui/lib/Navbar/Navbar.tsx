@@ -4,7 +4,7 @@ import styles from './Navbar.module.scss';
 
 export interface NavbarProps {}
 
-export const Navbar = React.forwardRef<HTMLDivElement, NavbarProps>(({ ...rest }, ref) => {
+export const Navbar = React.forwardRef<HTMLDivElement, NavbarProps>(() => {
   const navbarClass = classNames(styles['navbar']);
   const mainClass = classNames(styles['base']);
 

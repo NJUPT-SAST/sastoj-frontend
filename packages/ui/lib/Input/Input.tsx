@@ -1,8 +1,8 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useState, type ChangeEvent, useEffect } from 'react';
 import styles from './Input.module.scss';
-import classNames from 'classnames';
+import classnames from 'classnames';
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps {
   /**
    * The width of the Input.
    */
@@ -27,6 +27,10 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
    * placeholder,the placeholder of the input
    */
   fontsize?: number;
+  /**
+   * function(value:string, e:event) 输入框内容变化时的回调
+   */
+  onChange: (value: string, e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -34,70 +38,62 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     {
       width = 280,
       disabled = false,
-      label = 'hello',
+      label = 'Eamil',
       mode = 'text',
-      placeholder = '',
-      fontsize = 14,
+      placeholder = 'Enter your email',
+      fontsize = 16,
+      onChange,
       ...rest
     },
     ref,
   ) => {
-    const mainClass = classNames(styles['base'], styles[disabled ? 'disabled' : '']);
-    const [isUpLabel, setIsUpLabel] = useState<boolean>(false);
-    const InputClass = classNames(styles['inputBase']);
-    const buttonRef = useRef<HTMLDivElement | null>(null);
-    const [value, setValue] = useState<string>('');
-
-    const upLabel = () => {
-      if (!disabled) setIsUpLabel(true);
-    };
-
-    const showPlaceholder = useMemo(() => {
-      if (isUpLabel) return placeholder;
-      else return undefined;
-    }, [isUpLabel, placeholder]);
-
+    //设置isUpLabel来调节Label上浮状态
+    const [isUpInputLabel, setIsUpInputLabel] = useState<boolean>(false);
+    const [inputValue, setInputValue] = useState<string>('');
+    const InputClass = classnames(styles['base'], styles[disabled ? 'disabled' : '']);
     useEffect(() => {
-      const handleClickOutside = (event: MouseEvent) => {
-        if (buttonRef.current && !buttonRef.current.contains(event.target as Node)) {
-          setIsUpLabel(false);
-        }
-      };
-
-      document.addEventListener('click', handleClickOutside);
-
-      return () => {
-        document.removeEventListener('click', handleClickOutside);
-      };
-    }, []);
-
-    const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setValue(e.target.value);
+      if (placeholder) {
+        setIsUpInputLabel(true);
+      }
+    }, [placeholder]);
+    //设置，当input框里面没有内容时，placeHolder也没有内容时，将label框拉下
+    const blurInput = () => {
+      if (!inputValue && !placeholder) {
+        setIsUpInputLabel(false);
+      }
+    };
+    const changeValue = (e: ChangeEvent<HTMLInputElement>) => {
+      setInputValue(e.target.value);
+      onChange(e.target.value, e);
     };
 
     return (
-      <div
-        onClick={upLabel}
-        className={mainClass}
-        ref={buttonRef}
-        style={{ fontSize: fontsize }}
-      >
-        {label && (
-          <div className={`${styles['label']} ${isUpLabel || value ? styles['upLabel'] : ''} `}>
-            {label}
-          </div>
-        )}
-        <input
-          style={{ width: width }}
-          ref={ref}
+      <>
+        <div
+          style={{ fontSize: `${fontsize}px` }}
           className={InputClass}
-          disabled={disabled}
-          type={mode}
-          onChange={handleInput}
-          placeholder={showPlaceholder}
-          {...rest}
-        />
-      </div>
+          onClick={() => setIsUpInputLabel(true)}
+        >
+          <input
+            id="input"
+            className={styles['input']}
+            ref={ref}
+            placeholder={placeholder}
+            type={mode}
+            disabled={disabled}
+            style={{ width: `${width}px` }}
+            {...rest}
+            onChange={changeValue}
+            onBlur={blurInput}
+          />
+          <label
+            htmlFor="input"
+            className={`${styles['inputLabel']} ${isUpInputLabel ? styles['isUpInputLabel'] : ''}`}
+          >
+            {label}
+          </label>
+        </div>
+      </>
     );
   },
 );

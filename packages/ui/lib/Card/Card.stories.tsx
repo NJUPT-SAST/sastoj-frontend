@@ -84,14 +84,7 @@ export const LoginCard: Story = {
         <h1>LOGIN</h1>
       </>
     ),
-    content: (
-      <>
-        <Radio>hello</Radio>
-        <Radio>hello</Radio>
-        <Radio>hello</Radio>
-        <Radio>hello</Radio>
-      </>
-    ),
+    content: <></>,
     footer: (
       <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 20 }}>
         <Button color="danger">cancel</Button>
