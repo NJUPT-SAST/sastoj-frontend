@@ -1,4 +1,4 @@
-@import url('./reset.css');
+@import url("./reset.css");
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -40,4 +40,26 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.border {
+  height: 200px;
+  width: 200px;
+  border: 1px solid black;
+  position: relative;
+}
+
+.border::after {
+  content: "hello";
+  position: absolute;
+  left: 5px;
+  top: -10px;
+  mask-image: linear-gradient(transparent, transparent);
+}
+
+.span {
+  position: absolute;
+  left: 5px;
+  top: -10px;
+  font-size: 16px;
 }

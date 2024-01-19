@@ -6,16 +6,22 @@
   border: none;
   cursor: pointer;
   font-size: 16px;
-  font-weight: 600;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  font-weight: 400;
   transition: all 0.15s ease-in-out;
+  &.shadow {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    &:hover {
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+    &:active {
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+  }
   &:hover {
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
     backdrop-filter: brightness(0.85);
   }
   &:active {
     transform: scale(0.98);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   }
   &.primary {
     background-color: var(--primary-color);
@@ -36,11 +42,9 @@
     filter: grayscale(1);
     cursor: not-allowed;
     &:hover {
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
       backdrop-filter: none;
     }
     &:active {
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
       transform: none;
     }
   }

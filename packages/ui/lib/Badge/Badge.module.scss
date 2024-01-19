@@ -1,0 +1,29 @@
+.base {
+  padding: 3px 10px;
+  border-radius: 5px;
+  &.info {
+    background-color: rgba(var(--primary-color-background-rgb), 1);
+    color: var(--primary-color);
+  }
+  &.success {
+    background-color: rgba(var(--success-color-background-rgb), 1);
+    color: var(--success-color);
+  }
+  &.warning {
+    background-color: rgba(var(--warning-color-background-rgb), 1);
+    color: var(--warning-color);
+  }
+  &.error {
+    background-color: rgba(var(--danger-color-background-rgb), 1);
+    color: var(--danger-color);
+  }
+  &.medium {
+    font-size: 14px;
+  }
+  &.large {
+    font-size: 18px;
+  }
+  &.small {
+    font-size: 10px;
+  }
+}

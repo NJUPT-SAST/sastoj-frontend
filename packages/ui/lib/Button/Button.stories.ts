@@ -28,6 +28,7 @@ type Story = StoryObj<typeof meta>;
 const defaultProps: ButtonProps = {
   color: 'primary',
   size: 'medium',
+  isShadow: false,
 };
 
 export const DefaultButton: Story = {

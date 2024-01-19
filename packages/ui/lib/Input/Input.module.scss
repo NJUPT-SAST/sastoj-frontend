@@ -1,33 +1,52 @@
 .base {
-  border: 0.5px solid var(--shadow-color);
-  height: fit-content;
-  border-radius: 8px;
-  max-height: 50px;
-  padding: 10px;
+  border: 2px solid var(--shadow-color) !important;
+  border-radius: 10px;
   box-sizing: border-box;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  transition:
-    border-color 0.5s,
-    box-shadow 0.5s;
-  &:hover:not(.disabled) {
-    border: 0.5px solid var(--primary-color);
+  color: var(--shadow-color);
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  cursor: text;
+  &:hover:not(&.disabled) {
+    border: 2px solid var(--primary-color) !important;
   }
-  &:focus-within {
-    box-shadow: 0px 0px 3px 0px var(--primary-color);
+  &:has(.input:focus) {
+    border: 2px solid var(--primary-color) !important;
   }
-  .label {
-    margin: 5px;
-    box-sizing: border-box;
+  .inputLabel {
+    position: absolute;
+    transition: all 0.2s ease-in-out;
+    top: 50%;
+    transform: translate(0, -50%);
+    left: 12px;
   }
-  .inputBase {
+  .isUpInputLabel {
+    top: 9px;
+    font-size: 10px;
+    transform: translate(0);
+  }
+
+  .input:focus ~ .inputLabel {
+    color: var(--primary-color) !important;
+    top: 9px;
+    font-size: 10px;
+    transform: translate(0);
+  }
+
+  .input {
     all: unset;
-    text-align: start;
+    padding: 23px 12px 13px 12px;
+    position: relative;
+    top: 0;
+    bottom: 0;
+    color: var(--black-color);
   }
   &.disabled {
+    color: var(--black-color);
     cursor: not-allowed;
     opacity: 0.4;
     background-color: var(--shadow-color);
+    .input::placeholder {
+      color: var(--black-color);
+    }
   }
 }

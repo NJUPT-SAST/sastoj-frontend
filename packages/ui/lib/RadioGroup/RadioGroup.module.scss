@@ -1,0 +1,12 @@
+.base {
+  &.vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  &.horizontal {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+  }
+}

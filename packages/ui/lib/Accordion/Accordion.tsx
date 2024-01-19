@@ -52,7 +52,9 @@ export const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
           </svg>
         </button>
         <div className={styles['accordionContentWrap']}>
-          <div className={styles['inner']}>{accordionContent}</div>
+          <div className={`${styles['inner']} ${visible ? styles['show'] : ''}`}>
+            {accordionContent}
+          </div>
         </div>
         <div className={styles['divider']}></div>
       </div>

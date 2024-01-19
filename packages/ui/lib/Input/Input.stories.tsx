@@ -25,10 +25,6 @@ type Story = StoryObj<typeof meta>;
 const defaultProps: InputProps = {
   width: 280,
   disabled: false,
-  label: null,
-  mode: 'text',
-  placeholder: '',
-  fontsize: 14,
 };
 
 export const DefaultInput: Story = {
@@ -40,7 +36,7 @@ export const DefaultInput: Story = {
 export const ExampleInput: Story = {
   args: {
     ...defaultProps,
-    label: <span>userName</span>,
+    label: <button>userName</button>,
     placeholder: 'hello',
   },
 };
