@@ -40,7 +40,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       disabled = false,
       label = 'Eamil',
       mode = 'text',
-      placeholder = 'Enter your email',
+      placeholder = '',
       fontsize = 16,
       onChange,
       ...rest
@@ -72,7 +72,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <div
           style={{ fontSize: `${fontsize}px` }}
           className={InputClass}
-          onClick={() => setIsUpInputLabel(true)}
+          onClick={() => !disabled && setIsUpInputLabel(true)}
         >
           <input
             id="input"
