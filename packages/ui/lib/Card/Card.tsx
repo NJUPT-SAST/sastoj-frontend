@@ -11,7 +11,6 @@ export interface CardProps {
    * The theme of the Card.
    */
   theme?: 'dark' | 'light';
-
   /**
    * The size of the Card.
    */

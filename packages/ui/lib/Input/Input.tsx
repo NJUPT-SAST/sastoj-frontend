@@ -28,6 +28,10 @@ export interface InputProps {
    */
   fontsize?: number;
   /**
+   * isFillFather, is ture the input fill the father
+   */
+  isFillFather?: boolean;
+  /**
    * function(value:string, e:event) 输入框内容变化时的回调
    */
   onChange: (value: string, e: ChangeEvent<HTMLInputElement>) => void;
@@ -43,6 +47,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       placeholder = '',
       fontsize = 16,
       onChange,
+      isFillFather = false,
       ...rest
     },
     ref,
@@ -50,7 +55,11 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     //设置isUpLabel来调节Label上浮状态
     const [isUpInputLabel, setIsUpInputLabel] = useState<boolean>(false);
     const [inputValue, setInputValue] = useState<string>('');
-    const InputClass = classnames(styles['base'], styles[disabled ? 'disabled' : '']);
+    const InputClass = classnames(
+      styles['base'],
+      styles[disabled ? 'disabled' : ''],
+      styles[isFillFather ? 'fill' : ''],
+    );
     useEffect(() => {
       if (placeholder) {
         setIsUpInputLabel(true);
