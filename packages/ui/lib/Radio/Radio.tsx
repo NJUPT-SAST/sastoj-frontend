@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Radio.module.scss';
 
 export interface RadioProps {
@@ -22,17 +22,21 @@ export interface RadioProps {
    */
   children?: string;
   /**
-   * the value of the radio
+   * the value of the radio,if not provide ,the value is children
    */
-  value: string;
+  value?: string;
   /**
    * the checked of the radio
    */
   checked?: boolean;
   /**
-   * the onchange of the radio
+   * the onchange of the radio (type:the type of the click(used for can cancel radio),value:string)
    */
-  onChange?: (value: string) => void;
+  onChange?: (type: 'cancel' | 'add', value: string) => void;
+  /**
+   * isCanCancel if it is true the radio can cancel
+   */
+  isCanCancel?: boolean;
 }
 
 export const Radio = React.forwardRef<HTMLDivElement, RadioProps>(
@@ -40,11 +44,12 @@ export const Radio = React.forwardRef<HTMLDivElement, RadioProps>(
     {
       color = 'primary',
       size = 'medium',
-      value = '',
       disabled = false,
       children = 'radio',
+      value = children,
       checked = false,
       onChange,
+      isCanCancel = false,
       ...rest
     },
     ref,
@@ -55,12 +60,23 @@ export const Radio = React.forwardRef<HTMLDivElement, RadioProps>(
       styles[size],
       styles[disabled ? 'disabled' : ''],
     );
+    const [isChecked, setIsChecked] = useState<boolean>(checked);
 
     const handleChange = () => {
       if (onChange) {
-        onChange(value);
+        !isChecked && onChange('add', value);
+        isChecked && onChange('cancel', value);
+      }
+      if (isCanCancel) {
+        setIsChecked(!isChecked);
+      } else {
+        setIsChecked(true);
       }
     };
+
+    useEffect(() => {
+      setIsChecked(checked);
+    }, [checked]);
 
     return (
       <div
@@ -74,8 +90,9 @@ export const Radio = React.forwardRef<HTMLDivElement, RadioProps>(
           className={styles['radioItem']}
           id={children}
           disabled={disabled}
-          checked={checked}
-          onChange={handleChange}
+          checked={isChecked}
+          onChange={function () {}}
+          onClick={handleChange}
         />
         <label htmlFor={children}>
           <span className={styles['radioSpan']}> {children}</span>

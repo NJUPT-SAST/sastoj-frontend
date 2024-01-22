@@ -40,10 +40,3 @@ export const ExampleInput: Story = {
     placeholder: 'hello',
   },
 };
-
-// export const IconInput: Story = {
-//   args: {
-//     ...defaultProps,
-//     label: <h1>hello</h1>,
-//   },
-// };

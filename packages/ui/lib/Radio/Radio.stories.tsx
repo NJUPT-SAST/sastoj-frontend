@@ -25,6 +25,7 @@ type Story = StoryObj<typeof meta>;
 const defaultProps: RadioProps = {
   size: 'medium',
   color: 'primary',
+  isCanCancel: false,
 };
 
 export const DefaultRadio: Story = {

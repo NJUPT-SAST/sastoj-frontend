@@ -172,7 +172,6 @@ export const LoginCard: Story = {
               fill="black"
             />
           </svg>
-          {/* <span style={{ fontSize: '26px', fontWeight: '700' }}>THIS IS SAST OJ</span> */}
           <span style={{ color: '#808080', fontWeight: '600', fontSize: '16px' }}>LOGIN HERE</span>
         </div>
       </>
@@ -191,15 +190,19 @@ export const LoginCard: Story = {
           }}
         >
           <Input
-            onChange={null}
+            onChange={function (value: string) {
+              console.log('昵称', value);
+            }}
             isFillFather={true}
             label="昵称"
           ></Input>
           <Input
-            onChange={null}
+            onChange={function (value: string) {
+              console.log('密码', value);
+            }}
             label="密码"
             isFillFather={true}
-            type="password"
+            mode="password"
           ></Input>
           <div style={{ width: '100%', textAlign: 'end' }}>
             <span style={{ color: '#808080', opacity: '0.5' }}>Recover Password?</span>
