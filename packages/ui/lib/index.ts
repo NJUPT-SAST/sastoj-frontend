@@ -12,3 +12,4 @@ export * from './Select';
 export * from './Badge';
 export * from './Checkbox';
 export * from './Navbar';
+export * from './Pagination';
