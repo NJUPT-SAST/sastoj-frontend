@@ -12,19 +12,19 @@ export interface RadioGroupProps {
   /**
    * the defaultvalue of the group,if you use multipe ,the defaultValue must be an array
    */
-  defaultValue?: string | string[] | null;
+  defaultValue?: string | undefined;
   /**
    * the onchange of the group
    */
-  onChange: (value: string | string[]) => void;
-  /**
-   * the isMultipe of the radioGroup
-   */
-  isMultipe?: boolean;
+  onChange: (value: string) => void;
   /**
    * the options of the radioGroup
    */
   options: RadioProps[];
+  /**
+   * value of the group
+   */
+  value?: string;
 }
 
 export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
@@ -33,33 +33,19 @@ export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
       direction = 'vertical',
       defaultValue = 'nodejs',
       onChange,
-      isMultipe = true,
       options = [
         { children: 'nodejs', value: 'nodejs' },
         { children: 'vuejs', value: 'vuejs' },
         { children: 'react', value: 'react' },
       ],
+      value,
       ...rest
     },
     ref,
   ) => {
-    const [selectedValue, setSelectedValue] = useState<string | string[]>(defaultValue || '' || []);
-    const handleRadioChange = (_: 'add' | 'cancel', value: string) => {
+    const [selectedValue, setSelectedValue] = useState<string>(defaultValue);
+    const handleRadioChange = (value: string) => {
       setSelectedValue(value);
-    };
-
-    const addRadio = (value: string) => {
-      setSelectedValue([...selectedValue, value]);
-    };
-
-    const deleteRadio = (value: string) => {
-      if (Array.isArray(selectedValue))
-        setSelectedValue(selectedValue.filter((item) => item !== value));
-    };
-
-    const handleMultipeRadioChange = (type: 'cancel' | 'add', value: string) => {
-      if (type === 'cancel') deleteRadio(value);
-      if (type === 'add') addRadio(value);
     };
 
     const radioGroupClass = classNames(styles[direction], styles['base']);
@@ -67,6 +53,10 @@ export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
     useEffect(() => {
       onChange(selectedValue);
     }, [selectedValue, onChange]);
+
+    useEffect(() => {
+      if (value) setSelectedValue(value);
+    }, [value]);
 
     return (
       <div
@@ -79,11 +69,8 @@ export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
             <Radio
               key={index}
               value={item.value}
-              onChange={isMultipe ? handleMultipeRadioChange : handleRadioChange}
-              isCanCancel={isMultipe}
-              checked={
-                isMultipe ? selectedValue.includes(`${item.value}`) : selectedValue === item.value
-              }
+              onChange={handleRadioChange}
+              checked={selectedValue === item.value}
             >
               {item.children}
             </Radio>

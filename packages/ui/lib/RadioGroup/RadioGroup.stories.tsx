@@ -24,7 +24,6 @@ const defaultProps: RadioGroupProps = {
   direction: 'vertical',
   defaultValue: '',
   onChange: () => {},
-  isMultipe: false,
   options: [
     { children: 'nodejs', value: 'nodejs' },
     { children: 'vuejs', value: 'vuejs' },
@@ -42,7 +41,6 @@ export const ExampleRadioGroup: Story = {
   args: {
     ...defaultProps,
     onChange: handleRadioChange,
-    defaultValue: ['nodejs'],
-    isMultipe: true,
+    defaultValue: 'nodejs',
   },
 };

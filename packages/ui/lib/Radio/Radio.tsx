@@ -32,11 +32,7 @@ export interface RadioProps {
   /**
    * the onchange of the radio (type:the type of the click(used for can cancel radio),value:string)
    */
-  onChange?: (type: 'cancel' | 'add', value: string) => void;
-  /**
-   * isCanCancel if it is true the radio can cancel
-   */
-  isCanCancel?: boolean;
+  onChange?: (value: string) => void;
 }
 
 export const Radio = React.forwardRef<HTMLDivElement, RadioProps>(
@@ -49,7 +45,6 @@ export const Radio = React.forwardRef<HTMLDivElement, RadioProps>(
       value = children,
       checked = false,
       onChange,
-      isCanCancel = false,
       ...rest
     },
     ref,
@@ -63,15 +58,8 @@ export const Radio = React.forwardRef<HTMLDivElement, RadioProps>(
     const [isChecked, setIsChecked] = useState<boolean>(checked);
 
     const handleChange = () => {
-      if (onChange) {
-        !isChecked && onChange('add', value);
-        isChecked && onChange('cancel', value);
-      }
-      if (isCanCancel) {
-        setIsChecked(!isChecked);
-      } else {
-        setIsChecked(true);
-      }
+      if (onChange) onChange(value);
+      setIsChecked(true);
     };
 
     useEffect(() => {
