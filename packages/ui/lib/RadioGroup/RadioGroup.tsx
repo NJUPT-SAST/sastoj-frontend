@@ -34,9 +34,9 @@ export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
       defaultValue = 'nodejs',
       onChange,
       options = [
-        { children: 'nodejs', value: 'nodejs' },
-        { children: 'vuejs', value: 'vuejs' },
-        { children: 'react', value: 'react' },
+        { children: 'nodejs', value: 'nodejs', key: 1 },
+        { children: 'vuejs', value: 'vuejs', key: 2 },
+        { children: 'react', value: 'react', key: 3 },
       ],
       value,
       ...rest
@@ -64,13 +64,17 @@ export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
         ref={ref}
         className={radioGroupClass}
       >
-        {options.map((item, index) => {
+        {options.map((item) => {
           return (
             <Radio
-              key={index}
+              key={item.key}
               value={item.value}
               onChange={handleRadioChange}
               checked={selectedValue === item.value}
+              color={item.color}
+              size={item.size}
+              disabled={item.disabled}
+              defaultChecked={item.defaultChecked}
             >
               {item.children}
             </Radio>

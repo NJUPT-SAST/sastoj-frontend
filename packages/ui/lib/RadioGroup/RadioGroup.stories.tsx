@@ -25,9 +25,9 @@ const defaultProps: RadioGroupProps = {
   defaultValue: '',
   onChange: () => {},
   options: [
-    { children: 'nodejs', value: 'nodejs' },
-    { children: 'vuejs', value: 'vuejs' },
-    { children: 'react', value: 'react' },
+    { children: 'nodejs', value: 'nodejs', color: 'danger', size: 'large' },
+    { children: 'vuejs', value: 'vuejs', color: 'warning' },
+    { children: 'react', value: 'react', size: 'small' },
   ],
 };
 
