@@ -2,6 +2,11 @@
   display: flex;
   align-items: center;
   gap: 5px;
+  cursor: pointer;
+  &.disabled {
+    opacity: 0.4;
+    cursor: not-allowed !important;
+  }
   .checkboxButton {
     all: unset;
     position: relative;
@@ -13,7 +18,7 @@
     box-sizing: border-box;
     border: 2px solid var(--shadow-color);
     border-radius: 8px;
-    cursor: pointer;
+    cursor: inherit;
     transition: all 0.2s ease-in-out;
     .checkPath {
       stroke-dasharray: 24;
@@ -43,7 +48,7 @@
   }
   .labelSpan {
     font-size: 18px;
-    cursor: pointer;
+    cursor: inherit;
   }
 }
 

@@ -39,7 +39,7 @@ export const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
     {
       size = 'medium',
       cancel,
-      header = <span>hello</span>,
+      header = <span>header</span>,
       content = (
         <span>
           this is the message <strong></strong>
@@ -52,7 +52,7 @@ export const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
           </div>
         </>
       ),
-      visible,
+      visible = true,
       cancelContent = 'Cancel',
       ...rest
     },

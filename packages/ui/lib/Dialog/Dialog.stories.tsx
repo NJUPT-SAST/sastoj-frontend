@@ -36,12 +36,13 @@ export const DefaultDialog: Story = {
 export const ExampleDialog: Story = {
   args: {
     ...defaultProps,
+    size: 'medium',
+    cancelContent: '取消',
     header: <span>考试已经结束</span>,
     content: <span>请问您还需要提交吗</span>,
     footer: (
       <div style={{ display: 'flex', gap: 10, justifyContent: 'end' }}>
-        <Button>enter</Button>
-        <Button color="danger">cancel</Button>
+        <Button>确定</Button>
       </div>
     ),
   },

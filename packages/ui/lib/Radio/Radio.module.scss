@@ -21,7 +21,7 @@
   &.disabled .radioItem,
   &.disabled .radioSpan {
     cursor: not-allowed;
-    opacity: 0;
+    opacity: 0.4;
   }
   .radioSpan {
     cursor: pointer;
@@ -51,7 +51,7 @@
     }
   }
   &.large {
-    gap: 10px;
+    gap: 7px;
     .radioItem {
       @include large();
       &::before {
@@ -120,27 +120,41 @@
     cursor: pointer;
     appearance: none;
     position: relative;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.25s ease-in-out;
     display: flex;
     justify-content: center;
     align-items: center;
-    &::before {
-      content: '';
-      box-sizing: border-box;
+    & {
       border: 2px solid var(--shadow-color);
       border-radius: 50%;
+    }
+    &::before {
+      content: '';
+      position: absolute;
+      box-sizing: border-box;
       display: inline-block;
+      border-radius: 50%;
+      transition: all 0.2s ease-in-out;
+    }
+    &::after {
+      content: '';
+      border-radius: 50%;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transition: all 0.2s ease-in-out;
     }
     &:active {
       scale: 0.95;
+    }
+    &:checked {
+      border: 0px;
     }
     &:checked::before {
       content: '';
       box-sizing: border-box;
       display: block;
       border-radius: 50%;
-      transition: all 0.2s ease-in-out;
-      border: 0px;
     }
     &:checked::after {
       content: '';
@@ -150,18 +164,6 @@
       border-radius: 50%;
       display: block;
       position: absolute;
-      animation-name: large;
-      animation-duration: 0.2s;
     }
-  }
-}
-
-@keyframes large {
-  0% {
-    transform: scale(0);
-  }
-
-  100% {
-    transform: scale(1);
   }
 }

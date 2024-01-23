@@ -2,11 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React, { useState } from 'react';
 import { RadioGroup, type RadioGroupProps } from './RadioGroup';
-import { Radio } from '../Radio/Radio';
 
-const handleRadioChange = (value: string) => {
+const handleRadioChange = (value: string | string[] | null) => {
   console.log('Selected value:', value);
-  //   setSelect(value);
 };
 const meta = {
   title: 'Components/RadioGroup',
@@ -24,8 +22,13 @@ type Story = StoryObj<typeof meta>;
 
 const defaultProps: RadioGroupProps = {
   direction: 'vertical',
-  value: '',
+  defaultValue: '',
   onChange: () => {},
+  options: [
+    { children: 'nodejs', value: 'nodejs', color: 'danger', size: 'large' },
+    { children: 'vuejs', value: 'vuejs', color: 'warning' },
+    { children: 'react', value: 'react', size: 'small' },
+  ],
 };
 
 export const DefaultRadioGroup: Story = {
@@ -38,13 +41,6 @@ export const ExampleRadioGroup: Story = {
   args: {
     ...defaultProps,
     onChange: handleRadioChange,
-    value: 'nodejs',
-    children: (
-      <>
-        <Radio value="nodejs">nodejs</Radio>
-        <Radio value="vuejs">vuejs</Radio>
-        <Radio value="react">react</Radio>
-      </>
-    ),
+    defaultValue: 'nodejs',
   },
 };

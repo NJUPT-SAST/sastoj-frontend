@@ -30,6 +30,15 @@
       scale: 1;
       opacity: 1;
     }
+    &.small {
+      width: 300px;
+    }
+    &.medium {
+      width: 400px;
+    }
+    &.large {
+      width: 500px;
+    }
     .inner {
       display: flex;
       flex-direction: column;

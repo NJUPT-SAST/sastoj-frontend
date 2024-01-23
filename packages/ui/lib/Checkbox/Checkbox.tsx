@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Checkbox.module.scss';
 import classNames from 'classnames';
 export interface CheckboxProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -11,18 +11,24 @@ export interface CheckboxProps extends React.ButtonHTMLAttributes<HTMLButtonElem
    */
   disabled?: boolean;
   /**
-   * type of the checkbox
+   * onchange of the checkbox
    */
+  onChecked?: (value: boolean) => void;
 }
 
 export const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
-  ({ label = 'SAST', disabled = false, ...rest }, ref) => {
-    const checkboxClass = classNames(styles['base']);
+  ({ label = 'SAST', disabled = false, onChecked = function () {}, ...rest }, ref) => {
+    const checkboxClass = classNames(`${styles['base']} ${styles[disabled ? 'disabled' : '']}`);
     const [isChecked, setIsChecked] = useState<boolean>(false);
 
     const handleChecked = () => {
-      if (disabled === false) setIsChecked(!isChecked);
+      setIsChecked(!isChecked);
     };
+
+    useEffect(() => {
+      onChecked(isChecked);
+    }, [isChecked, onChecked]);
+
     return (
       <div
         className={checkboxClass}
@@ -30,6 +36,7 @@ export const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
       >
         <button
           id="checkbox"
+          disabled={disabled}
           className={`${styles['checkboxButton']} ${styles[isChecked ? 'checked' : '']}`}
           ref={ref}
           {...rest}
