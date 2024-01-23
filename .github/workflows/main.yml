@@ -1,0 +1,51 @@
+name: ui deploy
+run-name: ${{ github.actor }} is Deploy 🚀
+on: 
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - README.md
+
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - README.md
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          
+      - name: Install rsync
+        run: sudo apt-get install rsync -y
+        
+      - name: install pnpm
+        uses: pnpm/action-setup@v2.4.0
+        with:
+          version: 8
+          run_install: true
+          
+      - name: pnpm i
+        run: |
+          pnpm i
+      - name: build
+        run: |
+          cd packages
+          cd ui
+          ls
+          pnpm run build
+        
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@v5.0.0
+        with: 
+          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: admin
+          SOURCE: /packages/ui/storybook-static/
+          TARGET: /home/admin/www/storybook-static
