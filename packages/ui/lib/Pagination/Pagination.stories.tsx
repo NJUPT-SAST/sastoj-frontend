@@ -30,13 +30,13 @@ const defaultProps: PaginationProps = {
   disabled: false,
 };
 
-export const DefaultNavbar: Story = {
+export const DefaultPagination: Story = {
   args: {
     ...defaultProps,
   },
 };
 
-export const ExampleNavbar: Story = {
+export const ExamplePagination: Story = {
   args: {
     ...defaultProps,
   },
