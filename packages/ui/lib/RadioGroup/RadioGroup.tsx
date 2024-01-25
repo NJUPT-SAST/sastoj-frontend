@@ -55,7 +55,7 @@ export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
     }, [selectedValue, onChange]);
 
     useEffect(() => {
-      if (value) setSelectedValue(value);
+      value && setSelectedValue(value);
     }, [value]);
 
     return (
@@ -64,10 +64,10 @@ export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
         ref={ref}
         className={radioGroupClass}
       >
-        {options.map((item) => {
+        {options.map((item, index) => {
           return (
             <Radio
-              key={item.key}
+              key={item.key || index}
               value={item.value}
               onChange={handleRadioChange}
               checked={selectedValue === item.value}
