@@ -44,10 +44,8 @@
     box-sizing: border-box;
   }
   &.disabled {
-    color: var(--black-color);
     cursor: not-allowed;
     opacity: 0.4;
-    background-color: var(--shadow-color);
     .input::placeholder {
       color: var(--black-color);
     }
