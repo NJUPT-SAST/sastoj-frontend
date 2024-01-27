@@ -1,0 +1,74 @@
+.base {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  box-sizing: border-box;
+  background-color: rgb(0, 0, 0, 0.5);
+  &.showAnimation {
+    animation: showShadow 0.4s;
+    animation-fill-mode: forwards;
+  }
+  &.hideAnimation {
+    animation: hideShadow 0.4s;
+    animation-fill-mode: forwards;
+  }
+  .sheetContent {
+    top: 0;
+    height: 100vh;
+    width: 30vw;
+    background-color: var(--white-color);
+    position: fixed;
+    z-index: 3;
+    box-sizing: border-box;
+    opacity: 1;
+    right: 0;
+    padding: 20px;
+    &.showAnimation {
+      animation: slideSheet 0.4s;
+      animation-fill-mode: forwards;
+    }
+    &.hideAnimation {
+      animation: hideSlideSheet 0.4s;
+      animation-fill-mode: forwards;
+    }
+  }
+}
+
+@keyframes showShadow {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hideShadow {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideSheet {
+  from {
+    right: -30vw;
+  }
+  to {
+    right: 0;
+  }
+}
+
+@keyframes hideSlideSheet {
+  from {
+    right: 0;
+  }
+  to {
+    right: -30vw;
+  }
+}
