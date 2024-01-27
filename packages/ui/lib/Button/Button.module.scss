@@ -32,8 +32,9 @@
     border: 1px solid var(--primary-color);
   }
   &.tertiary {
-    background-color: var(--white-color);
+    background-color: #f6f6f6;
     color: var(--primary-color);
+    font-weight: 600;
   }
   &.danger {
     background-color: var(--danger-color);

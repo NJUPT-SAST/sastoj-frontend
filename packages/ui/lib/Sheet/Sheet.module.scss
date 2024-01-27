@@ -20,7 +20,7 @@
     height: 100vh;
     width: 30vw;
     background-color: var(--white-color);
-    position: fixed;
+    position: absolute;
     z-index: 3;
     box-sizing: border-box;
     opacity: 1;
@@ -35,40 +35,51 @@
       animation: hideSlideSheet 0.4s;
       animation-fill-mode: forwards;
     }
-  }
-}
-.content {
-  background-color: white;
-  transition: all 0.2s ease-in-out;
-  border-radius: 0px;
-  width: 100vw;
-  height: 100vh;
-  &.scale {
-    scale: 0.99;
-    border-radius: 15px;
-  }
-  &.showAnimation {
-    animation: scale 0.4s;
-    animation-fill-mode: forwards;
-  }
-  &.hideAnimation {
-    animation: noScale 0.4s;
-    animation-fill-mode: forwards;
-  }
-}
-
-.sheetHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  span {
-    font-size: 18px;
-    font-weight: 700;
-  }
-  svg {
-    border: 2px solid black;
-    border-radius: 5px;
-    padding: 2px;
+    .sheetMainContent {
+      padding: 10px 0;
+      overflow-y: scroll;
+      display: flex;
+      position: relative;
+      height: calc(100vh - 32px - 60px);
+      top: 31px;
+    }
+    .sheetFooter {
+      height: 50px;
+      position: absolute;
+      bottom: 20px;
+      width: -webkit-fill-available;
+      padding-right: 20px;
+      text-align: end;
+      background-color: var(--white-color);
+    }
+    .sheetHeader {
+      height: 32px;
+      background-color: var(--white-color);
+      position: absolute;
+      display: flex;
+      width: -webkit-fill-available;
+      padding-right: 20px;
+      flex-direction: column;
+      .sheetHeaderContent {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        span {
+          font-size: 16px;
+          font-weight: 700;
+          white-space: nowrap;
+        }
+        svg {
+          cursor: pointer;
+          transition: all 0.2s ease-in-out;
+          &:hover {
+            fill: var(--black-color);
+            width: 13px;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -105,26 +116,5 @@
   }
   to {
     right: -30vw;
-  }
-}
-
-@keyframes scale {
-  from {
-    scale: 1;
-    border-radius: 0px;
-  }
-  to {
-    scale: 0.99;
-    border-radius: 15px;
-  }
-}
-@keyframes noScale {
-  from {
-    scale: 0.99;
-    border-radius: 15px;
-  }
-  to {
-    scale: 1;
-    border-radius: 0px;
   }
 }
