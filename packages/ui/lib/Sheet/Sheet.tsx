@@ -4,6 +4,7 @@ import styles from './Sheet.module.scss';
 import { Button } from '..';
 // import SheetTrigger from './SheetTrigger';
 import { SheetTrigger } from '.';
+import { SheetHeader } from '.';
 
 export interface SheetProps {
   /**
@@ -17,10 +18,15 @@ export interface SheetProps {
   /**
    * children of the sheet
    */
+  children?: React.ReactNode;
+  /**
+   * sheetChildren of the sheet
+   */
+  sheetChildren?: React.ReactNode;
 }
 
 export const Sheet = React.forwardRef<HTMLDivElement, SheetProps>(
-  ({ visible, onCancel, ...rest }, ref) => {
+  ({ visible, onCancel, children, sheetChildren, ...rest }, ref) => {
     const [innerVisible, setInnerVisible] = useState<boolean>(false);
     const [isShowAnimation, setIsShowAnimation] = useState<boolean>(false);
     const [isHideAnimation, setIsHideAnimation] = useState<boolean>(false);
@@ -34,16 +40,18 @@ export const Sheet = React.forwardRef<HTMLDivElement, SheetProps>(
         setInnerVisible(true);
         setIsShowAnimation(true);
         document.body.style.overflow = 'hidden';
+        document.body.style.backgroundColor = 'black';
         setTimeout(() => {
           setIsShowAnimation(false);
         }, 400);
       }
       if (!visible) {
         setIsHideAnimation(true);
-        document.body.style.overflow = '';
         setTimeout(() => {
           setIsHideAnimation(false);
           setInnerVisible(false);
+          document.body.style.overflow = '';
+          document.body.style.backgroundColor = '';
         }, 400);
       }
     }, [visible]);
@@ -56,7 +64,12 @@ export const Sheet = React.forwardRef<HTMLDivElement, SheetProps>(
 
     return (
       <>
-        <div>
+        <div
+          className={`${styles['content']}     ${styles[isShowAnimation ? 'showAnimation' : '']} 
+            ${styles[isHideAnimation ? 'hideAnimation' : '']}
+            ${styles[innerVisible ? 'scale' : '']}`}
+        >
+          {children}
         </div>
         {innerVisible && (
           <div
@@ -71,8 +84,7 @@ export const Sheet = React.forwardRef<HTMLDivElement, SheetProps>(
             ${styles[isHideAnimation ? 'hideAnimation' : '']}`}
               onClick={test}
             >
-              content
-              <Button>content</Button>
+              {sheetChildren}
             </div>
           </div>
         )}

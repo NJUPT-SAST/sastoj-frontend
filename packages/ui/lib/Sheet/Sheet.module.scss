@@ -6,7 +6,7 @@
   top: 0;
   z-index: 2;
   box-sizing: border-box;
-  background-color: rgb(0, 0, 0, 0.5);
+  background-color: rgb(0, 0, 0, 0.4);
   &.showAnimation {
     animation: showShadow 0.4s;
     animation-fill-mode: forwards;
@@ -26,6 +26,7 @@
     opacity: 1;
     right: 0;
     padding: 20px;
+    opacity: 1;
     &.showAnimation {
       animation: slideSheet 0.4s;
       animation-fill-mode: forwards;
@@ -36,22 +37,56 @@
     }
   }
 }
+.content {
+  background-color: white;
+  transition: all 0.2s ease-in-out;
+  border-radius: 0px;
+  width: 100vw;
+  height: 100vh;
+  &.scale {
+    scale: 0.99;
+    border-radius: 15px;
+  }
+  &.showAnimation {
+    animation: scale 0.4s;
+    animation-fill-mode: forwards;
+  }
+  &.hideAnimation {
+    animation: noScale 0.4s;
+    animation-fill-mode: forwards;
+  }
+}
+
+.sheetHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  span {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  svg {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 2px;
+  }
+}
 
 @keyframes showShadow {
   from {
-    opacity: 0;
+    background-color: rgb(0, 0, 0, 0);
   }
   to {
-    opacity: 1;
+    background-color: rgb(0, 0, 0, 0.4);
   }
 }
 
 @keyframes hideShadow {
   from {
-    opacity: 1;
+    background-color: rgb(0, 0, 0, 0.4);
   }
   to {
-    opacity: 0;
+    background-color: rgb(0, 0, 0, 0);
   }
 }
 
@@ -70,5 +105,26 @@
   }
   to {
     right: -30vw;
+  }
+}
+
+@keyframes scale {
+  from {
+    scale: 1;
+    border-radius: 0px;
+  }
+  to {
+    scale: 0.99;
+    border-radius: 15px;
+  }
+}
+@keyframes noScale {
+  from {
+    scale: 0.99;
+    border-radius: 15px;
+  }
+  to {
+    scale: 1;
+    border-radius: 0px;
   }
 }

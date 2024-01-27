@@ -7,6 +7,7 @@ import {
   RadioGroup,
   Sheet,
   SheetTrigger,
+  SheetHeader,
   // SheetTrigger,
 } from "@sast/oj-ui";
 import { useState } from "react";
@@ -16,17 +17,23 @@ function App() {
 
   return (
     <>
-      <div style={{ width: "100vw", height: "100vh" }}>
-        <Button
-          onClick={() => {
-            setVisible(true);
-          }}
-        >
-          show sheet
-        </Button>
-        <div style={{ height: "200vh" }}></div>
-      </div>
-      <Sheet visible={visible} onCancel={() => setVisible(false)}></Sheet>
+      <Sheet visible={visible} onCancel={() => setVisible(false)}>
+        <>
+          <div style={{ width: "100vw", height: "100vh" }}>
+            <Button
+              onClick={() => {
+                setVisible(true);
+              }}
+            >
+              show sheet
+            </Button>
+            <div style={{ height: "200vh" }}></div>
+          </div>
+        </>
+        <SheetHeader>
+          <span>hello</span>
+        </SheetHeader>
+      </Sheet>
       {/* <SheetTrigger></SheetTrigger> */}
     </>
   );
