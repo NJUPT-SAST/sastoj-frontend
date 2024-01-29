@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Button } from '..';
+import React, { memo, useEffect, useRef, useState } from 'react';
+import { Button, type CarouselItemProps, CarouselItem } from '..';
 import classNames from 'classnames';
 import styles from './Carousel.module.scss';
 
@@ -7,16 +7,39 @@ export interface CarouselProps {
   /**
    * width of the carousel
    */
-  width: number;
+  width?: number;
   /**
-   * number of the item
+   * height of the Carousel
    */
-  number: number;
+  height?: number;
+  /**
+   * CarouselItems of the carousel
+   */
+  CarouselItems?: CarouselItemProps[];
+  /**
+   * onChange : the onChange of the Carousel
+   */
+  onChange?: (value: number) => void;
+  /**
+   * defaultselect the defaultselect of the Carousel
+   */
+  defaultSelected?: number;
+  /**
+   * select of the Carousel
+   */
+  selected?: number;
+}
+
+interface ContentProps {
+  CarouselItems: CarouselItemProps[];
 }
 
 export const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
-  ({ width = 400, number = 4 }, ref) => {
-    const [select, setSelect] = useState<number>(0);
+  (
+    { width = 400, CarouselItems = undefined, height, onChange, defaultSelected, selected },
+    ref,
+  ) => {
+    const [select, setSelect] = useState<number>(defaultSelected || 0);
     const [startX, setStartX] = useState<number>(0);
     const [endX, setEndX] = useState<number>(0);
     const [startTime, setStartTime] = useState<number>(0);
@@ -24,15 +47,18 @@ export const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
     const [isDragging, setIsDragging] = useState<boolean>(false);
     const [difference, setDifference] = useState<number>(0);
     const [isChanged, setIsChanged] = useState<boolean>(false);
-
+    const [itemsNumber, setItemsNumber] = useState<number>(0);
     const divRef = useRef<HTMLDivElement>(null);
 
+    useEffect(() => {
+      selected && setSelect(selected);
+    }, [selected]);
     const pre = () => {
       select !== 0 && setSelect(select - 1);
     };
 
     const next = () => {
-      select !== number - 1 && setSelect(select + 1);
+      select !== itemsNumber - 1 && setSelect(select + 1);
     };
 
     const handleMouseDown = (e: React.MouseEvent) => {
@@ -51,8 +77,7 @@ export const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
     useEffect(() => {
       if (divRef.current) {
         divRef.current.style.transition = 'auto';
-        if (select === 0) divRef.current.style.transform = `translateX(${-difference}px)`;
-        else divRef.current.style.transform = `translateX(-${width * select + difference}px)`;
+        divRef.current.style.transform = `translateX(${-(width * select + difference)}px)`;
       }
     }, [difference, select, width]);
 
@@ -66,7 +91,7 @@ export const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
     const handleMouseUp = (e: React.MouseEvent) => {
       setEndX(e.clientX);
       setEndTime(Date.now());
-      if (Math.abs(difference) >= 200 && difference > 0 && select !== number - 1) {
+      if (Math.abs(difference) >= 200 && difference > 0 && select !== itemsNumber - 1) {
         setSelect(select + 1);
         setIsChanged(true);
       }
@@ -74,7 +99,12 @@ export const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
         setSelect(select - 1);
         setIsChanged(true);
       }
-      if (Math.abs(difference) < 200 && divRef.current && select === number - 1 && select === 0) {
+      if (
+        Math.abs(difference) < 200 &&
+        divRef.current &&
+        select === itemsNumber - 1 &&
+        select === 0
+      ) {
         divRef.current.style.transform = `translateX(-${width * select}px)`;
       }
       setDifference(0);
@@ -82,39 +112,79 @@ export const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
     };
 
     useEffect(() => {
+      onChange && onChange(select);
+    }, [select, onChange]);
+
+    useEffect(() => {
       if (difference === 0 && !isChanged) {
         const duration = endTime - startTime;
         const space = endX - startX;
         const v = space / duration;
-        v < -0.3 && select !== number - 1 && setSelect(select + 1);
-        v > 0.3 && select != 0 && setSelect(select - 1);
+        v < -0.5 && select !== itemsNumber - 1 && setSelect(select + 1);
+        v > 0.5 && select != 0 && setSelect(select - 1);
       }
       setIsChanged(false);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [difference]);
 
     const carouselClass = classNames(styles['base']);
 
+    useEffect(() => {
+      CarouselItems && setItemsNumber(CarouselItems.length);
+    }, [CarouselItems]);
+
+    const Content = memo(function content({ CarouselItems }: ContentProps) {
+      return (
+        <>
+          {CarouselItems?.map((item, index) => {
+            return (
+              <CarouselItem
+                key={index}
+                width={item.width || width}
+                height={item.height || height}
+              >
+                {item.children}
+              </CarouselItem>
+            );
+          })}
+        </>
+      );
+    });
+
     return (
       <>
         <div
-          className={carouselClass}
-          ref={ref}
+          style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px' }}
         >
-          <div
-            className={styles['carouselAll']}
-            ref={divRef}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
+          <Button
+            onClick={pre}
+            color="tertiary"
           >
-            <div style={{ background: 'black', height: '200px', width: '400px' }}></div>
-            <div style={{ background: 'red', height: '200px', width: '400px' }}></div>
-            <div style={{ background: 'green', height: '200px', width: '400px' }}></div>
-            <div style={{ background: 'blue', height: '200px', width: '400px' }}></div>
+            Pre
+          </Button>
+          <div
+            className={carouselClass}
+            ref={ref}
+            style={{ width: `${width}px`, height: `${height}px` }}
+          >
+            <div
+              className={styles['carouselAll']}
+              ref={divRef}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              style={{ width: `${width}px`, height: `${height}px` }}
+            >
+              {CarouselItems && <Content CarouselItems={CarouselItems}></Content>}
+            </div>
           </div>
+          <Button
+            onClick={next}
+            color="tertiary"
+          >
+            Next
+          </Button>
         </div>
-        <Button onClick={pre}>Pre</Button>
-        <Button onClick={next}>Next</Button>
       </>
     );
   },

@@ -1,15 +1,5 @@
-import { Button } from "@sast/oj-ui";
-import {
-  Checkbox,
-  Dialog,
-  Input,
-  Radio,
-  RadioGroup,
-  Sheet,
-  SheetTrigger,
-  SheetHeader,
-  // SheetTrigger,
-} from "@sast/oj-ui";
+import { Button, CarouselItem } from "@sast/oj-ui";
+import { Sheet, Carousel } from "@sast/oj-ui";
 import { useState } from "react";
 
 function App() {
@@ -37,6 +27,7 @@ function App() {
           </>
         }
       ></Sheet>
+      <Carousel number={6} width={500}></Carousel>
     </>
   );
 }

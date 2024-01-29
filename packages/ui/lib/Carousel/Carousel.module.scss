@@ -5,6 +5,13 @@
   .carouselAll {
     display: grid;
     grid-auto-flow: column;
-    transition: all 0.4s cubic-bezier(0.49, 0.1, 0.48, 0.9);
+    transition: all 0.4s cubic-bezier(0.65, 0.22, 0.27, 0.74);
+    .item {
+      width: 400px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 }
