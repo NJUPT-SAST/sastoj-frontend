@@ -91,16 +91,16 @@ export const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
     const handleMouseUp = (e: React.MouseEvent) => {
       setEndX(e.clientX);
       setEndTime(Date.now());
-      if (Math.abs(difference) >= 200 && difference > 0 && select !== itemsNumber - 1) {
+      if (Math.abs(difference) >= width / 2 && difference > 0 && select !== itemsNumber - 1) {
         setSelect(select + 1);
         setIsChanged(true);
       }
-      if (Math.abs(difference) >= 200 && difference < 0 && select !== 0) {
+      if (Math.abs(difference) >= width / 2 && difference < 0 && select !== 0) {
         setSelect(select - 1);
         setIsChanged(true);
       }
       if (
-        Math.abs(difference) < 200 &&
+        Math.abs(difference) < width / 2 &&
         divRef.current &&
         select === itemsNumber - 1 &&
         select === 0
