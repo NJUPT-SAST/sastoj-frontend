@@ -10,14 +10,13 @@ const test = (value: number) => {
 const styles = {
   width: '280px',
   height: '280px',
-  border: '1px solid black',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
   borderRadius: '10px',
   fontSize: '40px',
   fontWeight: '1000',
-  boxShadow: '0px 3px 10px #808080',
+  boxShadow: '0px 3px 10px #e3e3e6',
 };
 
 const meta = {
@@ -39,8 +38,8 @@ const defaultProps: CarouselProps = {};
 export const DefaultCarousel: Story = {
   args: {
     ...defaultProps,
-    width: 300,
-    height: 300,
+    width: 400,
+    height: 400,
     CarouselItems: [
       { children: <div style={styles}>1</div> },
       { children: <div style={styles}>2</div> },
@@ -57,5 +56,12 @@ export const DefaultCarousel: Story = {
 export const ExampleCarousel: Story = {
   args: {
     ...defaultProps,
+    CarouselItems: [
+      { children: <div>1</div> },
+      { children: <div>2</div> },
+      { children: <div>3</div> },
+      { children: <div>4</div> },
+      { children: <div>5</div> },
+    ],
   },
 };
