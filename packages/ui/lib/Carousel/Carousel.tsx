@@ -50,14 +50,17 @@ export const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
 
     useEffect(() => {
       if (divRef.current) {
+        divRef.current.style.transition = 'auto';
         if (select === 0) divRef.current.style.transform = `translateX(${-difference}px)`;
         else divRef.current.style.transform = `translateX(-${width * select + difference}px)`;
       }
     }, [difference, select, width]);
 
     useEffect(() => {
-      if (difference === 0 && divRef.current)
+      if (difference === 0 && divRef.current) {
+        divRef.current.style.transition = '';
         divRef.current.style.transform = `translateX(-${width * select}px)`;
+      }
     }, [select, width, difference]);
 
     const handleMouseUp = (e: React.MouseEvent) => {
