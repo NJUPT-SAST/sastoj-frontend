@@ -1,0 +1,10 @@
+.base {
+  height: 200px;
+  width: 400px;
+  overflow: hidden;
+  .carouselAll {
+    display: grid;
+    grid-auto-flow: column;
+    transition: all 0.4s ease-out;
+  }
+}
