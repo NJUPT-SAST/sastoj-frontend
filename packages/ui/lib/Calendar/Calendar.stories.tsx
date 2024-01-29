@@ -3,6 +3,10 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { Calendar, type CalendarProps } from './Calendar';
 
+const test = (value: Date) => {
+  console.log('select date', value);
+};
+
 const meta = {
   title: 'Components/Calendar',
   component: Calendar,
@@ -17,7 +21,11 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const defaultProps: CalendarProps = {};
+const defaultProps: CalendarProps = {
+  onChange: function () {},
+  selected: new Date(),
+  defaultSelected: new Date(),
+};
 
 export const DefaultCalendar: Story = {
   args: {
@@ -28,5 +36,7 @@ export const DefaultCalendar: Story = {
 export const ExampleCalendar: Story = {
   args: {
     ...defaultProps,
+    onChange: test,
+    selected: new Date(0),
   },
 };

@@ -1,15 +1,42 @@
-import { Checkbox, Dialog, Input, Radio, RadioGroup } from "@sast/oj-ui";
+import { Button } from "@sast/oj-ui";
+import {
+  Checkbox,
+  Dialog,
+  Input,
+  Radio,
+  RadioGroup,
+  Sheet,
+  SheetTrigger,
+  SheetHeader,
+  // SheetTrigger,
+} from "@sast/oj-ui";
+import { useState } from "react";
 
 function App() {
-  const test = (value: boolean) => {
-    console.log(value);
-  };
+  const [visible, setVisible] = useState<boolean>(false);
+
   return (
     <>
-      {/* <Input placeholder="" onChange={test}></Input> */}
-      <Checkbox onChecked={test}></Checkbox>
-      {/* <RadioGroup direction="vertical" onChange={test} defaultValue="vuejs" /> */}
-      {/* <Dialog></Dialog> */}
+      <div style={{ width: "100vw", height: "100vh" }}>
+        <Button
+          onClick={() => {
+            setVisible(true);
+          }}
+        >
+          show sheet
+        </Button>
+        <div style={{ height: "200vh" }}></div>
+      </div>
+      <Sheet
+        visible={visible}
+        onCancel={() => setVisible(false)}
+        sheetTitle="Hello World"
+        sheetFooter={
+          <>
+            <Button color="tertiary">取消</Button>
+          </>
+        }
+      ></Sheet>
     </>
   );
 }

@@ -34,8 +34,8 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     column-gap: 5px;
-    row-gap: 2px;
-    padding: 3px 10px;
+    row-gap: 3px;
+    padding: 5px 10px;
     box-sizing: border-box;
     justify-items: center;
     .calendarItem {
