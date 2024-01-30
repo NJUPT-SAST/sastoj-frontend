@@ -3,31 +3,44 @@ import styles from './Checkbox.module.scss';
 import classNames from 'classnames';
 export interface CheckboxProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
+   * value of the checkbox
+   */
+  value?: string;
+  /**
    *label of the checkbox
    */
-  label?: string;
+  label: string;
   /**
    * diabled of the checkbox
    */
   disabled?: boolean;
   /**
+   * checked of the checkbox
+   */
+  checked?: boolean;
+  /**
    * onchange of the checkbox
    */
-  onChecked?: (value: boolean) => void;
+  onChecked?: (type: 'add' | 'delete', value: string) => void;
 }
 
 export const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
-  ({ label = 'SAST', disabled = false, onChecked = function () {}, ...rest }, ref) => {
+  (
+    { value, checked, label = 'SAST', disabled = false, onChecked = function () {}, ...rest },
+    ref,
+  ) => {
     const checkboxClass = classNames(`${styles['base']} ${styles[disabled ? 'disabled' : '']}`);
     const [isChecked, setIsChecked] = useState<boolean>(false);
 
-    const handleChecked = () => {
-      setIsChecked(!isChecked);
-    };
-
     useEffect(() => {
-      onChecked(isChecked);
-    }, [isChecked, onChecked]);
+      checked && setIsChecked(checked);
+    }, [checked]);
+    const handleChecked = () => {
+      const newIsChecked = !isChecked;
+      setIsChecked(newIsChecked);
+      newIsChecked && value && onChecked('add', value || label);
+      !newIsChecked && value && onChecked('delete', value || label);
+    };
 
     return (
       <div
@@ -44,8 +57,8 @@ export const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
           {isChecked && (
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="19"
-              height="19"
+              width="16"
+              height="16"
               viewBox="0 0 24 24"
             >
               <path
