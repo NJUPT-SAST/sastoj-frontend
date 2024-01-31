@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Button, type ButtonProps } from './Button';
+import { showToast } from '..';
 
 const meta = {
   title: 'Components/Button',
@@ -43,5 +44,13 @@ export const DisabledButton: Story = {
     ...defaultProps,
     children: 'Click Me!',
     disabled: true,
+  },
+};
+
+export const ShowToastButton: Story = {
+  args: {
+    ...defaultProps,
+    children: 'Click Me!',
+    onClick: showToast,
   },
 };
