@@ -51,6 +51,6 @@ export const ShowToastButton: Story = {
   args: {
     ...defaultProps,
     children: 'Click Me!',
-    onClick: showToast,
+    onClick: () => showToast({ type: 'error' }),
   },
 };
