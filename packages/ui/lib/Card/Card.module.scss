@@ -1,3 +1,4 @@
+@use '../variables' as *;
 .base {
   height: fit-content;
   border-radius: 6px;
@@ -46,15 +47,14 @@
     width: 100%;
     display: flex;
   }
+  @include shadow;
   &.light {
     background-color: var(--white-color);
     color: var(--black-color);
-    box-shadow: 1px 1px 4px 0px var(--shadow-color);
   }
   &.dark {
     background-color: var(--dark-color);
     color: var(--white-color);
-    box-shadow: 1px 1px 4px 0px var(--dark-color);
   }
   &.small {
     width: 300px;

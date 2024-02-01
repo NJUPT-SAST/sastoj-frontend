@@ -21,6 +21,10 @@ const meta = {
       options: ['small', 'medium', 'large'],
       control: { type: 'select' },
     },
+    shadow: {
+      options: ['regular', 'small', 'medium', 'large', 'extraLarge', 'inner'],
+      control: { type: 'select' },
+    },
   },
 } satisfies Meta<typeof Card>;
 
@@ -32,6 +36,7 @@ const defaultProps: CardProps = {
   titleImage: undefined,
   theme: 'light',
   size: 'medium',
+  shadow: 'medium',
   header: <span>header</span>,
   content: <span>content</span>,
   footer: <span>footer</span>,
