@@ -12,11 +12,15 @@ const meta = {
   tags: ['autodocs'],
   argTypes: {
     color: {
-      options: ['primary', 'secondary', 'tertiary', 'danger'],
+      options: ['primary', 'secondary', 'ghost', 'danger'],
       control: { type: 'select' },
     },
     size: {
       options: ['small', 'medium', 'large'],
+      control: { type: 'select' },
+    },
+    shadow: {
+      options: ['regular', 'small', 'medium', 'large', 'extraLarge', 'inner', 'none'],
       control: { type: 'select' },
     },
   },
@@ -29,7 +33,6 @@ type Story = StoryObj<typeof meta>;
 const defaultProps: ButtonProps = {
   color: 'primary',
   size: 'medium',
-  isShadow: false,
 };
 
 export const DefaultButton: Story = {

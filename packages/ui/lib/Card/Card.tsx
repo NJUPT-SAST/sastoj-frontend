@@ -16,6 +16,10 @@ export interface CardProps {
    */
   size?: 'small' | 'medium' | 'large';
   /**
+   * The shadow of the Card.
+   */
+  shadow?: 'regular' | 'small' | 'medium' | 'large' | 'extraLarge' | 'inner';
+  /**
    * The Header of the Card.
    */
   header?: React.ReactNode;
@@ -34,6 +38,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
     {
       theme = 'light',
       size = 'medium',
+      shadow = 'medium',
       header = <span>header</span>,
       content = <span>content</span>,
       footer = <span>footer</span>,
@@ -42,7 +47,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
     },
     ref,
   ) => {
-    const cardClass = classnames(styles['base'], styles[theme], styles[size]);
+    const cardClass = classnames(styles['base'], styles[theme], styles[size], styles[`shadow-${shadow}`]);
 
     return (
       <div
