@@ -48,7 +48,9 @@ export const showToast = (props?: ToastProps) => {
     toasts.shift();
     const firstChild = toastContainer.childNodes[0];
     setTimeout(() => {
-      toastContainer.removeChild(firstChild as Node);
+      while (toastContainer.childNodes.length > 3) {
+        toastContainer.removeChild(toastContainer.firstChild!);
+      }
     }, 300);
   }
 
