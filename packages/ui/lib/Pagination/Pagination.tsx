@@ -1,6 +1,8 @@
 import React, { useEffect, useState, type ReactNode } from 'react';
 import styles from './Pagination.module.scss';
 import classNames from 'classnames';
+import { PaginationItem } from './PaginationItem';
+import { useCurrentPage } from './useCurrentPage';
 
 export interface PaginationProps {
   /**
@@ -33,7 +35,7 @@ export const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
   (
     {
       pageSize = 10,
-      total = 80,
+      total = 60,
       onChange = function () {},
       activePage,
       defaultActivePage = 1,
@@ -42,12 +44,22 @@ export const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
     },
     ref,
   ) => {
-    const [pageNumber, setPageNumber] = useState<number>(0);
     const [itemList, setItemList] = useState<ReactNode[]>();
-    const [currentPage, setCurrentPage] = useState<number>(defaultActivePage);
+    const [pageNumber, setPageNumber] = useState<number>(0);
+    const [currentPage, changeCurrentPage] = useCurrentPage((state) => [
+      state.currentPage,
+      state.changeCurrentPage,
+    ]);
+
+    //default value must be assigned initially, and cannot be assigned later.
+    useEffect(() => {
+      changeCurrentPage(defaultActivePage);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     useEffect(() => {
       const pageNumber = total / pageSize;
+      //Returns the smallest integer greater than or equal to its numeric argument.
       setPageNumber(Math.ceil(pageNumber));
     }, [total, pageSize]);
 
@@ -56,125 +68,118 @@ export const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
     }, [currentPage, onChange]);
 
     useEffect(() => {
-      if (activePage) setCurrentPage(activePage);
-    }, [activePage]);
+      if (activePage) changeCurrentPage(activePage);
+    }, [activePage, changeCurrentPage]);
 
     useEffect(() => {
       const newItems: ReactNode[] = [];
-      //当页面数小于等于7时，全部展示，没有省略
+      //When the number of pages is less than or equal to 7, all are displayed without ellipses in between
       if (pageNumber <= 7)
         for (let i = 0; i < pageNumber; i++) {
           newItems.push(
-            <div
-              className={`${styles['item']} ${styles[i + 1 === currentPage ? 'active' : '']}`}
+            <PaginationItem
+              type="select"
               key={i}
-              onClick={() => setCurrentPage(i + 1)}
+              index={i}
             >
               {i + 1}
-            </div>,
+            </PaginationItem>,
           );
         }
       else {
-        //这是currentPage出现在前三个时的省略情况
+        // This is the omission of currentPage when there are too many numbers and the currentPage appears in the first Four.
         if (currentPage <= 3) {
           for (let i = 0; i < 4; i++) {
             newItems.push(
-              <div
-                className={`${styles['item']} ${styles[i + 1 === currentPage ? 'active' : '']}`}
-                key={i}
-                onClick={() => !disabled && setCurrentPage(i + 1)}
+              <PaginationItem
+                type="select"
+                index={i}
               >
                 {i + 1}
-              </div>,
+              </PaginationItem>,
             );
           }
           newItems.push(
-            <div className={`${styles['item']} ${styles['more']}`}>
+            <PaginationItem type="none">
               <span>...</span>
-            </div>,
+            </PaginationItem>,
           );
           for (let i = pageNumber - 3; i < pageNumber; i++) {
             newItems.push(
-              <div
-                className={`${styles['item']} ${styles[i + 1 === currentPage ? 'active' : '']}`}
-                key={i}
-                onClick={() => !disabled && setCurrentPage(i + 1)}
+              <PaginationItem
+                type="select"
+                index={i}
               >
                 {i + 1}
-              </div>,
+              </PaginationItem>,
             );
           }
         }
-        //这是currentPage出现在后三个时的省略情况
+        // This is the case when currentPage is omitted in the last four occurrences.
         if (currentPage >= pageNumber - 2) {
           for (let i = 0; i < 3; i++) {
             newItems.push(
-              <div
-                className={`${styles['item']} ${styles[i + 1 === currentPage ? 'active' : '']}`}
-                key={i}
-                onClick={() => !disabled && setCurrentPage(i + 1)}
+              <PaginationItem
+                type="select"
+                index={i}
               >
                 {i + 1}
-              </div>,
+              </PaginationItem>,
             );
           }
           newItems.push(
-            <div className={`${styles['item']} ${styles['more']}`}>
+            <PaginationItem type="none">
               <span>...</span>
-            </div>,
+            </PaginationItem>,
           );
           for (let i = pageNumber - 4; i < pageNumber; i++) {
             newItems.push(
-              <div
-                className={`${styles['item']} ${styles[i + 1 === currentPage ? 'active' : '']}`}
-                key={i}
-                onClick={() => !disabled && setCurrentPage(i + 1)}
+              <PaginationItem
+                type="select"
+                index={i}
               >
                 {i + 1}
-              </div>,
+              </PaginationItem>,
             );
           }
         }
-        //这是currentPage出现在中间时的省略情况
+        //This is what happens when currentPage appears in the middle of the omission
         if (currentPage < pageNumber - 2 && currentPage > 3) {
           newItems.push(
-            <div
-              className={`${styles['item']}`}
-              key={1}
-              onClick={() => !disabled && setCurrentPage(1)}
+            <PaginationItem
+              type="select"
+              index={1}
             >
               {1}
-            </div>,
+            </PaginationItem>,
           );
           newItems.push(
-            <div className={`${styles['item']} ${styles['more']}`}>
+            <PaginationItem type="none">
               <span>...</span>
-            </div>,
+            </PaginationItem>,
           );
           for (let i = currentPage - 2; i < currentPage + 2; i++) {
             newItems.push(
-              <div
-                className={`${styles['item']} ${styles[i + 1 === currentPage ? 'active' : '']}`}
-                key={i}
-                onClick={() => !disabled && setCurrentPage(i + 1)}
+              <PaginationItem
+                type="select"
+                index={i}
               >
                 {i + 1}
-              </div>,
+              </PaginationItem>,
             );
           }
           newItems.push(
-            <div className={`${styles['item']} ${styles['more']}`}>
+            <PaginationItem type="none">
               <span>...</span>
-            </div>,
+            </PaginationItem>,
           );
           newItems.push(
-            <div
-              className={`${styles['item']}`}
-              key={pageNumber}
-              onClick={() => !disabled && setCurrentPage(pageNumber)}
+            <PaginationItem
+              type="select"
+              index={pageNumber}
             >
               {pageNumber}
-            </div>,
+            </PaginationItem>,
           );
         }
       }
@@ -190,49 +195,35 @@ export const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
           {...rest}
           className={PaginationClass}
         >
-          <div
-            className={`${styles['item']} ${styles[currentPage === 1 ? 'disabled' : '']}`}
-            onClick={() => currentPage > 1 && !disabled && setCurrentPage(currentPage - 1)}
+          <PaginationItem
+            type="delete"
+            disabled={currentPage === 1}
           >
             <svg
               width="16"
               height="16"
               viewBox="0 0 16 16"
-              fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path
-                d="M11.7267 12L12.6667 11.06L9.61341 8L12.6667 4.94L11.7267 4L7.72675 8L11.7267 12Z"
-                fill="#333333"
-              />
-              <path
-                d="M7.33344 12L8.27344 11.06L5.2201 8L8.27344 4.94L7.33344 4L3.33344 8L7.33344 12Z"
-                fill="#333333"
-              />
+              <path d="M11.7267 12L12.6667 11.06L9.61341 8L12.6667 4.94L11.7267 4L7.72675 8L11.7267 12Z" />
+              <path d="M7.33344 12L8.27344 11.06L5.2201 8L8.27344 4.94L7.33344 4L3.33344 8L7.33344 12Z" />
             </svg>
-          </div>
+          </PaginationItem>
           {itemList}
-          <div
-            className={`${styles['item']} ${styles[currentPage === pageNumber ? 'disabled' : '']}`}
-            onClick={() => currentPage < pageNumber && !disabled && setCurrentPage(currentPage + 1)}
+          <PaginationItem
+            type="add"
+            disabled={currentPage === pageNumber}
           >
             <svg
               width="16"
               height="16"
               viewBox="0 0 16 16"
-              fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path
-                d="M4.27325 4L3.33325 4.94L6.38659 8L3.33325 11.06L4.27325 12L8.27325 8L4.27325 4Z"
-                fill="black"
-              />
-              <path
-                d="M8.66656 4L7.72656 4.94L10.7799 8L7.72656 11.06L8.66656 12L12.6666 8L8.66656 4Z"
-                fill="black"
-              />
+              <path d="M4.27325 4L3.33325 4.94L6.38659 8L3.33325 11.06L4.27325 12L8.27325 8L4.27325 4Z" />
+              <path d="M8.66656 4L7.72656 4.94L10.7799 8L7.72656 11.06L8.66656 12L12.6666 8L8.66656 4Z" />
             </svg>
-          </div>
+          </PaginationItem>
         </div>
       </>
     );

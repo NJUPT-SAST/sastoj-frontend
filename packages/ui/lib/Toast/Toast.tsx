@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { useState, type ReactNode, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Toast.module.scss';
 
 export interface ToastProps {
@@ -44,8 +44,6 @@ export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
     const [visible, setVisble] = useState(true);
     const [innerVisible, setInnerVisible] = useState(true);
 
-    // console.log(close);
-
     const toastClass = classNames(
       styles['base'],
       styles[type],
@@ -54,7 +52,8 @@ export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
     );
 
     useEffect(() => {
-      if (!visible) {
+      if (!visible && close) {
+        // A delay is set here, in order to see the animation in its entirety
         setTimeout(() => {
           setInnerVisible(false);
           close();
@@ -74,7 +73,7 @@ export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
               <div className={`${styles['sider']} ${styles[`${type}Sider`]}`}></div>
               <div>
                 <div className={styles['header']}>
-                  {/* 将type一键大写，作为标题呈现 */}
+                  {/* Capitalize the TYPE one-key to present it as a headline */}
                   <div>{type.toUpperCase()}</div>
                   <div
                     className={styles['closeButton']}
