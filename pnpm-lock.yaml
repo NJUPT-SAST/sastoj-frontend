@@ -115,6 +115,9 @@ importers:
       '@types/react-transition-group':
         specifier: ^4.4.10
         version: 4.4.10
+      zustand:
+        specifier: ^4.4.7
+        version: 4.4.7(@types/react@18.2.43)(react@18.2.0)
     devDependencies:
       '@storybook/addon-actions':
         specifier: ^7.6.5

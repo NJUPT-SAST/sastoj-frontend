@@ -6,7 +6,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   /**
    * The color of the button.
    */
-  color?: 'primary' | 'secondary' | 'ghost' | 'danger';
+  color?: 'primary' | 'secondary' | 'ghost' | 'danger' | 'border';
   /**
    * The size of the button.
    */
@@ -19,10 +19,17 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
    * If `true`, the button will be disabled.
    */
   disabled?: boolean;
+  /**
+   * className of the button
+   */
+  className?: string;
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ color = 'primary', shadow = 'none', size = 'medium', disabled = false, ...rest }, ref) => {
+  (
+    { color = 'primary', shadow = 'none', size = 'medium', disabled = false, className, ...rest },
+    ref,
+  ) => {
     const btnClass = classnames(
       styles['base'],
       styles[color],
@@ -33,7 +40,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         ref={ref}
-        className={btnClass}
+        className={`${btnClass} ${className}`}
         {...rest}
         disabled={disabled}
       />

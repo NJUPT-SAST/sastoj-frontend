@@ -25,7 +25,7 @@ const defaultProps: PaginationProps = {
   total: 80,
   pageSize: 10,
   activePage: undefined,
-  defaultActivePage: 1,
+  defaultActivePage: 4,
   onChange: test,
   disabled: false,
 };
