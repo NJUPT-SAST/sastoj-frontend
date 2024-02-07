@@ -10,7 +10,7 @@ type Action = {
   changeCurrentPage: (currentPage: State['currentPage']) => void;
 };
 
-export const useCurrentPage = create<State & Action>((set) => ({
+export const useCurrentPageStore = create<State & Action>((set) => ({
   currentPage: 1,
   increaseCurrentPage: () => set((state) => ({ currentPage: state.currentPage + 1 })),
   decreaseCurrentPage: () => set((state) => ({ currentPage: state.currentPage - 1 })),
