@@ -2,7 +2,7 @@ import React, { useState, type ChangeEvent, useEffect } from 'react';
 import styles from './Input.module.scss';
 import classnames from 'classnames';
 
-export interface InputProps {
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /**
    * The width of the Input.
    */
@@ -34,7 +34,15 @@ export interface InputProps {
   /**
    * function(value:string, e:event) 输入框内容变化时的回调
    */
-  onChange: (value: string, e: ChangeEvent<HTMLInputElement>) => void;
+  onchange?: (value: string, e: ChangeEvent<HTMLInputElement>) => void;
+  /**
+   * value ,the value of the input
+   */
+  value?: string;
+  /**
+   * defaultValue, the defaultValue of the input
+   */
+  defaultValue?: string;
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -46,15 +54,17 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       mode = 'text',
       placeholder = '',
       fontsize = 16,
-      onChange,
+      onchange,
       isFillFather = false,
+      value,
+      defaultValue,
       ...rest
     },
     ref,
   ) => {
     //设置isUpLabel来调节Label上浮状态
     const [isUpInputLabel, setIsUpInputLabel] = useState<boolean>(false);
-    const [inputValue, setInputValue] = useState<string>('');
+    const [inputValue, setInputValue] = useState<string | undefined>(defaultValue);
     const InputClass = classnames(
       styles['base'],
       styles[disabled ? 'disabled' : ''],
@@ -67,20 +77,24 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     }, [placeholder]);
     //设置，当input框里面没有内容时，placeHolder也没有内容时，将label框拉下
     const blurInput = () => {
-      if (!inputValue && !placeholder) {
+      if (!inputValue && !placeholder && isUpInputLabel) {
         setIsUpInputLabel(false);
       }
     };
     const changeValue = (e: ChangeEvent<HTMLInputElement>) => {
       setInputValue(e.target.value);
-      onChange(e.target.value, e);
+      onchange && onchange(e.target.value, e);
     };
+
+    useEffect(() => {
+      value && setInputValue(value);
+    }, [value]);
 
     return (
       <>
         <div
-          style={{ fontSize: `${fontsize}px` }}
           className={InputClass}
+          style={{ width: `${width}px`, fontSize: `${fontsize}px` }}
           onClick={() => !disabled && setIsUpInputLabel(true)}
         >
           <input
@@ -90,14 +104,15 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             placeholder={placeholder}
             type={mode}
             disabled={disabled}
-            style={{ width: `${width}px` }}
-            {...rest}
             onChange={changeValue}
             onBlur={blurInput}
+            autoComplete="off"
+            value={inputValue}
+            {...rest}
           />
           <label
             htmlFor="input"
-            className={`${styles['inputLabel']} ${isUpInputLabel ? styles['isUpInputLabel'] : ''}`}
+            className={`${styles['inputLabel']} ${inputValue ? styles['isUpInputLabel'] : ''}`}
           >
             {label}
           </label>

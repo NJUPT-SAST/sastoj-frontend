@@ -26,7 +26,7 @@ export const SheetFooter = React.forwardRef<HTMLDivElement, SheetFooterProps>(
               marginBottom: '8px',
             }}
           ></div>
-          {children || <Button color="tertiary">取消</Button>}
+          {children || <Button color="ghost">取消</Button>}
         </div>
       </>
     );

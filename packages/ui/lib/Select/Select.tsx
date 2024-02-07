@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, type MouseEventHandler, useEffect } from 'react';
 import styles from './Select.module.scss';
-import classNames from 'classnames';
+import { Input } from '..';
 
-interface Option {
+export interface OptionProps {
   value: string;
   label: string;
   key: number;
 }
 
-export interface SelectProps {
+export interface SelectProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   /**
    * onChange of the select
    */
-  onChange: (value: Option) => void;
+  onchange: (value: OptionProps) => void;
   /**
    * the optionList of the select
    */
-  optionsList?: Array<Option>;
+  optionsList?: Array<OptionProps>;
   /**
    * the title of the select
    */
@@ -25,6 +25,14 @@ export interface SelectProps {
    * diabled of the select
    */
   disabled?: boolean;
+  /**
+   * defaultselectKey ,the defaultselectkey of the options
+   */
+  defaultSelectKey?: number;
+  /**
+   * selectKey, the selectKey of the options
+   */
+  selectKey?: number;
 }
 
 export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
@@ -34,79 +42,88 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
         { value: 'nextjs', label: 'nextjs', key: 3 },
         { value: 'nuxtjs', label: 'nuxtjs', key: 5 },
       ],
+      onchange,
       title = 'which framwork?',
-      onChange,
       disabled = false,
+      defaultSelectKey,
+      selectKey,
       ...rest
     },
     ref,
   ) => {
     const [visible, setVisble] = useState<boolean>(false);
-    const [selectItem, setSelectItem] = useState<Option>();
-    const selectClass = classNames(styles['base'], disabled ? styles['disabled'] : null);
+    const [selectItem, setSelectItem] = useState<OptionProps | undefined>(
+      optionsList.find((item) => item.key === defaultSelectKey),
+    );
+    const [options, setOptions] = useState<OptionProps[]>(optionsList);
 
-    const showOptions = (event: React.MouseEvent<HTMLButtonElement>) => {
-      event.stopPropagation();
+    const showOptions: MouseEventHandler = () => {
       if (!disabled) setVisble(!visible);
     };
 
-    const concealOptions = () => {
-      setVisble(false);
+    useEffect(() => {
+      setSelectItem(optionsList.find((item) => item.key === selectKey));
+    }, [selectKey, optionsList]);
+
+    function handleClick(value: OptionProps): void {
+      setSelectItem(value);
+      onchange(value);
+    }
+
+    const handleOptions = (value: string) => {
+      if (value === '') {
+        setSelectItem(undefined);
+      }
+      const results = fuzzySearch(optionsList, value);
+      setOptions(results);
     };
 
-    function handleClick(value: Option): void {
-      setSelectItem(value);
-      onChange(value);
-      setVisble(false);
+    function fuzzySearch(optionsList: OptionProps[], searchTerm: string): OptionProps[] {
+      const regex = new RegExp(searchTerm, 'i');
+      return optionsList.filter((option) => regex.test(option.label));
     }
+
+    const closeOptions = () => {
+      setTimeout(() => {
+        setVisble(false);
+      }, 100);
+    };
 
     return (
       <>
-        <button
-          {...rest}
-          className={selectClass}
-          onClick={showOptions}
-        >
-          <span
-            ref={ref}
-            className={`${styles['selectDefaultSpan']} ${
-              selectItem?.value === undefined && !visible ? '' : styles['up']
-            }`}
-          >
-            {title}
-          </span>
-          <span className={styles['selectItemSpan']}>{selectItem?.label}</span>
-          <svg
-            width={15}
-            height={15}
-            className={`${styles['icon']} ${visible ? styles['rotate'] : ''}`}
-          >
-            <path
-              d="M3.13523 6.15803C3.3241 5.95657 3.64052 5.94637 3.84197 6.13523L7.5 9.56464L11.158 6.13523C11.3595 5.94637 11.6759 5.95657 11.8648 6.15803C12.0536 6.35949 12.0434 6.67591 11.842 6.86477L7.84197 10.6148C7.64964 10.7951 7.35036 10.7951 7.15803 10.6148L3.15803 6.86477C2.95657 6.67591 2.94637 6.35949 3.13523 6.15803Z"
-              fill="currentColor"
-              fillRule="evenodd"
-              clipRule="evenodd"
-            ></path>
-          </svg>
-        </button>
-
-        <div className={`${styles['options']} ${visible ? styles['show'] : ''}`}>
-          {optionsList.map((obj) => {
-            return (
-              <div
-                key={obj.key}
-                className={styles['optionItem']}
-                onClick={() => handleClick(obj)}
-              >
-                <span className={styles['optionItemSpan']}>{obj.label}</span>
-              </div>
-            );
-          })}
-        </div>
         <div
-          className={styles[visible ? 'background' : '']}
-          onClick={concealOptions}
-        ></div>
+          ref={ref}
+          {...rest}
+        >
+          <Input
+            onClick={showOptions}
+            value={selectItem?.value}
+            onBlur={closeOptions}
+            width={280}
+            onchange={handleOptions}
+            label={title}
+          ></Input>
+          <div className={`${styles['options']} ${visible ? styles['show'] : ''}`}>
+            {!options.length ? (
+              <div className={styles['nothing-img-container']}>
+                <img src="../../public/sast_test_image/404.png" />
+                <span style={{ fontWeight: '700' }}>什么都没有检索到哦😭</span>
+              </div>
+            ) : (
+              options.map((obj) => {
+                return (
+                  <div
+                    key={obj.key}
+                    className={styles['option-item']}
+                    onClick={() => handleClick(obj)}
+                  >
+                    <span className={styles['option-item-span']}>{obj.label}</span>
+                  </div>
+                );
+              })
+            )}
+          </div>
+        </div>
       </>
     );
   },

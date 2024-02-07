@@ -1,3 +1,4 @@
+@use '../variables' as *;
 .base {
   width: fit-content;
   border: 2px solid var(--shadow-color) !important;
@@ -7,6 +8,7 @@
   position: relative;
   transition: all 0.2s ease-in-out;
   font-weight: 500;
+  background-color: var(--white-color);
   cursor: text;
   &:hover:not(&.disabled) {
     border: 2px solid var(--primary-color) !important;
@@ -37,11 +39,15 @@
   .input {
     all: unset;
     padding: 23px 12px 13px 12px;
+    width: -webkit-fill-available;
     position: relative;
     top: 0;
     bottom: 0;
     color: var(--black-color);
     box-sizing: border-box;
+    &:focus {
+      box-shadow: $shadow;
+    }
   }
   &.disabled {
     cursor: not-allowed;

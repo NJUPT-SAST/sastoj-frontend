@@ -3,6 +3,10 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { Input, type InputProps } from './Input';
 
+const test = (value: string) => {
+  console.log('change input value', value);
+};
+
 const meta = {
   title: 'Components/Input',
   component: Input,
@@ -25,6 +29,8 @@ type Story = StoryObj<typeof meta>;
 const defaultProps: InputProps = {
   width: 280,
   disabled: false,
+  onchange: test,
+  defaultValue: 'hello world!',
 };
 
 export const DefaultInput: Story = {
