@@ -34,7 +34,13 @@ const defaultProps: SelectProps = {
   selectKey: 2,
 };
 
-export const FirstSelect: Story = {
+export const DefaultButton: Story = {
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const DisabledButton: Story = {
   args: {
     ...defaultProps,
   },
