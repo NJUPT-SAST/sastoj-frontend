@@ -18,6 +18,8 @@
     transition: all 0.1s ease-in-out;
     &:hover:not(.disabled) {
       background-color: #fcfcfc;
+      text-decoration: underline;
+      transition: all 0.1s ease-in-out;
     }
     .icon {
       transition: all 0.2s ease-in-out;

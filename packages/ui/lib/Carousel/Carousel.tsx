@@ -158,7 +158,7 @@ export const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
         >
           <Button
             onClick={pre}
-            color="tertiary"
+            color="ghost"
           >
             Pre
           </Button>
@@ -180,7 +180,7 @@ export const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
           </div>
           <Button
             onClick={next}
-            color="tertiary"
+            color="ghost"
           >
             Next
           </Button>

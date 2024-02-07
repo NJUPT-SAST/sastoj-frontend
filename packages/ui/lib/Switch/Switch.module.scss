@@ -1,0 +1,106 @@
+@use '../variables' as shadow;
+//这是已经封装好的scss代码，只需要修改上面的数值，便可满足样式需求
+//Here is the encapsulated scss code, only need to modify the above values, can meet the style requirements
+$switch-size-small: 18px;
+$switch-size-medium: 24px;
+$switch-size-large: 30px;
+$animation-duration: 300ms;
+//这个是滑动的圆球和边框的距离的值
+// This is the value of the distance between the sliding sphere and the border.
+$ball-margin: 5px;
+//这个是当滑动的圆球滚动到中间时拉长的宽度的倍数
+// This is a multiple of the elongated width of the sliding orb when it rolls to the center.
+$ball-center-width: 1.3;
+
+$switch-sizes: (
+  small: $switch-size-small,
+  medium: $switch-size-medium,
+  large: $switch-size-large,
+);
+
+@mixin switch-size($size, $size-name) {
+  height: $size;
+  width: 2 * $size;
+  border-radius: calc(#{$size} / 2);
+  &::before {
+    height: calc($size - $ball-margin);
+    width: calc($size - $ball-margin);
+    border-radius: calc(#{$size} / 2);
+    animation-name: slide-checked-#{$size-name};
+  }
+  &.isChecked::before {
+    animation-name: slide-not-checked-#{$size-name};
+  }
+}
+
+@mixin animation($isChecked) {
+  animation-duration: $animation-duration;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
+
+@mixin generate-animations($sizes, $ball-margin, $ball-center-width) {
+  @each $size-name, $size-value in $sizes {
+    @keyframes slide-checked-#{$size-name} {
+      0% {
+        left: $size-value + calc($ball-margin / 2);
+      }
+      50% {
+        width: calc((#{$size-value} - #{$ball-margin}) * $ball-center-width);
+      }
+      100% {
+        left: calc($ball-margin / 2);
+      }
+    }
+
+    @keyframes slide-not-checked-#{$size-name} {
+      0% {
+        left: calc($ball-margin / 2);
+      }
+      50% {
+        width: calc((#{$size-value} - #{$ball-margin}) * #{$ball-center-width});
+      }
+      100% {
+        left: $size-value + calc($ball-margin / 2);
+      }
+    }
+  }
+}
+
+@include generate-animations($switch-sizes, $ball-margin, $ball-center-width);
+
+.base {
+  position: relative;
+  all: unset;
+  display: block;
+  background-color: var(--shadow-color);
+  box-shadow: shadow.$shadow-inner;
+  cursor: pointer;
+  transition: all $animation-duration ease-in-out;
+  &.medium {
+    $switch-size-anim: $switch-size-medium;
+    @include switch-size($switch-size-medium, 'medium');
+  }
+  &.large {
+    @include switch-size($switch-size-large, 'large');
+  }
+  &.small {
+    @include switch-size($switch-size-small, 'small');
+  }
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    background-color: var(--white-color);
+    transform: translate(0, -50%);
+    @include animation('not-checked');
+  }
+  &.isChecked::before {
+    content: '';
+    @include animation('checked');
+  }
+  &.isChecked {
+    background-color: var(--primary-color);
+    transition: all $animation-duration ease-in-out;
+  }
+}

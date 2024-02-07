@@ -2,7 +2,7 @@ import React, { useEffect, useState, type ReactNode } from 'react';
 import styles from './Pagination.module.scss';
 import classNames from 'classnames';
 import { PaginationItem } from './PaginationItem';
-import { useCurrentPage } from './useCurrentPage';
+import { useCurrentPageStore } from './useCurrentPageStore';
 
 export interface PaginationProps {
   /**
@@ -46,7 +46,7 @@ export const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
   ) => {
     const [itemList, setItemList] = useState<ReactNode[]>();
     const [pageNumber, setPageNumber] = useState<number>(0);
-    const [currentPage, changeCurrentPage] = useCurrentPage((state) => [
+    const [currentPage, changeCurrentPage] = useCurrentPageStore((state) => [
       state.currentPage,
       state.changeCurrentPage,
     ]);

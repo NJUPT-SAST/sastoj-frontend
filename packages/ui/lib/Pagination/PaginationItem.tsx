@@ -1,7 +1,7 @@
 import { type ReactNode } from 'react';
 import { Button } from '..';
 import styles from './Pagination.module.scss';
-import { useCurrentPage } from './useCurrentPage';
+import { useCurrentPageStore } from './useCurrentPageStore';
 
 export interface PaginationItemProps {
   children?: ReactNode;
@@ -16,14 +16,13 @@ export const PaginationItem = ({
   index,
   type,
 }: PaginationItemProps) => {
-  const [currentPage, increaseCurrentPage, decreaseCurrentPage, changeCurrentPage] = useCurrentPage(
-    (state) => [
+  const [currentPage, increaseCurrentPage, decreaseCurrentPage, changeCurrentPage] =
+    useCurrentPageStore((state) => [
       state.currentPage,
       state.increaseCurrentPage,
       state.decreaseCurrentPage,
       state.changeCurrentPage,
-    ],
-  );
+    ]);
 
   const handleClick = (type: 'select' | 'add' | 'delete' | 'none', index?: number) => {
     if (type === 'select' && index !== undefined) changeCurrentPage(index + 1);

@@ -1,6 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Select, type SelectProps } from './Select';
+import { OptionProps, Select, type SelectProps } from './Select';
+
+const test = (option: OptionProps) => {
+  console.log('selectOption', option);
+};
 
 const meta = {
   title: 'Components/Select',
@@ -20,19 +24,23 @@ const defaultProps: SelectProps = {
   optionsList: [
     { value: 'nextjs', label: 'nextjs', key: 1 },
     { value: 'nuxtjs', label: 'nuxtjs', key: 2 },
+    { value: 'nodejs', label: 'nodejs', key: 3 },
+    { value: 'vuejs', label: 'vuejs', key: 5 },
+    { value: 'react', label: 'react', key: 4 },
   ],
-  title: 'which framwork?',
-  onChange: function () {},
+  onchange: test,
   disabled: false,
+  defaultSelectKey: 2,
+  selectKey: 2,
 };
 
-export const DefaultButton: Story = {
+export const DefaultSelect: Story = {
   args: {
     ...defaultProps,
   },
 };
 
-export const DisabledButton: Story = {
+export const DisabledSelect: Story = {
   args: {
     ...defaultProps,
   },
