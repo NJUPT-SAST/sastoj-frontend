@@ -23,8 +23,7 @@ type Story = StoryObj<typeof meta>;
 
 const defaultProps: CalendarProps = {
   onChange: function () {},
-  selected: new Date(),
-  defaultSelected: new Date(),
+  defaultSelected: undefined,
 };
 
 export const DefaultCalendar: Story = {
@@ -37,6 +36,5 @@ export const ExampleCalendar: Story = {
   args: {
     ...defaultProps,
     onChange: test,
-    selected: new Date(0),
   },
 };

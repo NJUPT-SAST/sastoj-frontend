@@ -15,4 +15,6 @@ export * from './Navbar';
 export * from './Pagination';
 export * from './Calendar';
 export * from './Sheet';
-export * from './Carousel'
+export * from './Carousel';
+export * from './Switch';
+export * from './DatePicker';

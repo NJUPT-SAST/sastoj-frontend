@@ -4,7 +4,7 @@ import styles from './Calendar.module.scss';
 interface DayItemProps {
   index: number;
   isOtherMonth: 'pre' | 'this' | 'after';
-  selectDate: Date;
+  selectDate?: Date;
   currentDate: Date;
   onChange: (value: Date) => void;
   selectMonth: number;
@@ -32,15 +32,19 @@ const DayItem = memo(function otherMonthItem({
       break;
   }
 
-  function isSameDay(date1: Date, date2: Date) {
+  function isSameDay(date1?: Date, date2?: Date) {
     return (
-      date1.getFullYear() === date2.getFullYear() &&
-      date1.getMonth() === date2.getMonth() &&
-      date1.getDate() === date2.getDate()
+      date1?.getFullYear() === date2?.getFullYear() &&
+      date1?.getMonth() === date2?.getMonth() &&
+      date1?.getDate() === date2?.getDate()
     );
   }
 
   const thisDate = new Date(currentDate.getFullYear(), month, index);
+
+  const handleClick = () => {
+    thisDate && onChange(thisDate);
+  };
 
   return (
     <div
@@ -49,7 +53,7 @@ const DayItem = memo(function otherMonthItem({
            ${styles[isOtherMonth !== 'this' ? 'otherMonth' : '']}
            ${styles[isSameDay(thisDate, currentDate) ? 'today' : '']}          
            ${styles[isSameDay(thisDate, selectDate) ? 'select' : '']}`}
-      onClick={() => onChange(thisDate)}
+      onClick={handleClick}
     >
       {index}
     </div>

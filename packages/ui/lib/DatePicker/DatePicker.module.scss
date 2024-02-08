@@ -1,0 +1,59 @@
+@mixin animation($type) {
+  animation-name: #{$type};
+  animation-duration: 200ms;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+.date-picker-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--shadow-color) !important;
+  transition: all 0.2s ease-in-out;
+  padding: 10px 15px !important;
+  width: 280px;
+  &.select {
+    color: var(--primary-color) !important;
+    svg {
+      fill: var(--primary-color) !important;
+    }
+  }
+  svg {
+    fill: var(--shadow-color);
+    transition: all 0.2s ease-in-out;
+  }
+  &:hover {
+    color: var(--primary-color) !important;
+    svg {
+      fill: var(--primary-color);
+    }
+  }
+}
+.calendar-container {
+  position: absolute;
+  margin-top: 5px;
+  &.in {
+    @include animation(in);
+  }
+  &.hide {
+    @include animation(hide);
+  }
+}
+
+@keyframes in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hide {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

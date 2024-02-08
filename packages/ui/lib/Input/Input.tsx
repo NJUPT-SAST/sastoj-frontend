@@ -57,14 +57,14 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       onchange,
       isFillFather = false,
       value,
-      defaultValue,
+      defaultValue = '',
       ...rest
     },
     ref,
   ) => {
     //设置isUpLabel来调节Label上浮状态
     const [isUpInputLabel, setIsUpInputLabel] = useState<boolean>(false);
-    const [inputValue, setInputValue] = useState<string | undefined>(defaultValue);
+    const [inputValue, setInputValue] = useState<string>(defaultValue);
     const InputClass = classnames(
       styles['base'],
       styles[disabled ? 'disabled' : ''],

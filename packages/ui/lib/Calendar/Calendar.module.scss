@@ -1,3 +1,4 @@
+@use '../variables' as *;
 .base {
   height: fit-content;
   width: fit-content;
@@ -5,7 +6,7 @@
   border-radius: 10px;
   background-color: var(--white-color);
   color: var(--black-color);
-  box-shadow: 1px 1px 4px 0px var(--shadow-color);
+  box-shadow: $shadow;
   .calendarTitle {
     font-size: 18px;
     font-weight: 1000;
@@ -18,15 +19,16 @@
     .buttonContainer {
       display: flex;
       gap: 3px;
-      cursor: pointer;
-      svg {
-        opacity: 0.8;
-        transition: all 0.2s ease-in-out;
-      }
-      svg:hover {
-        scale: 0.95;
-        opacity: 1;
-        transition: all 0.2s ease-in-out;
+      .button {
+        height: 24px;
+        width: 24px;
+        position: relative;
+        svg {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
       }
     }
   }

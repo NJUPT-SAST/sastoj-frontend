@@ -56,6 +56,7 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
       optionsList.find((item) => item.key === defaultSelectKey),
     );
     const [options, setOptions] = useState<OptionProps[]>(optionsList);
+    const [inputValue, setInputValue] = useState<string>('');
 
     const showOptions: MouseEventHandler = () => {
       if (!disabled) setVisble(!visible);
@@ -67,15 +68,19 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
 
     function handleClick(value: OptionProps): void {
       setSelectItem(value);
-      onchange(value);
+      setInputValue(value.label);
     }
+
+    useEffect(() => {
+      selectItem && onchange(selectItem);
+      selectItem?.value && setInputValue(selectItem?.value);
+    }, [selectItem, onchange]);
 
     const handleOptions = (value: string) => {
       if (value === '') {
         setSelectItem(undefined);
       }
-      const results = fuzzySearch(optionsList, value);
-      setOptions(results);
+      setInputValue(value);
     };
 
     function fuzzySearch(optionsList: OptionProps[], searchTerm: string): OptionProps[] {
@@ -89,6 +94,10 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
       }, 100);
     };
 
+    useEffect(() => {
+      const results = fuzzySearch(optionsList, inputValue);
+      setOptions(results);
+    }, [inputValue, optionsList]);
     return (
       <>
         <div
@@ -97,7 +106,7 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
         >
           <Input
             onClick={showOptions}
-            value={selectItem?.value}
+            value={inputValue}
             onBlur={closeOptions}
             width={280}
             onchange={handleOptions}
