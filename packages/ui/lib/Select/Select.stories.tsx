@@ -34,13 +34,13 @@ const defaultProps: SelectProps = {
   selectKey: 2,
 };
 
-export const DefaultButton: Story = {
+export const DefaultSelect: Story = {
   args: {
     ...defaultProps,
   },
 };
 
-export const DisabledButton: Story = {
+export const DisabledSelect: Story = {
   args: {
     ...defaultProps,
   },

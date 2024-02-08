@@ -12,10 +12,22 @@
   transition: all 0.2s ease-in-out;
   padding: 10px 15px !important;
   width: 280px;
-  &.select {
+  height: 50px;
+  border-radius: 10px;
+  border: 2px solid var(--shadow-color) !important;
+  &.is-select-date {
+    border: 2px solid var(--primary-color) !important;
     color: var(--primary-color) !important;
+    .select-date {
+      color: var(--black-color) !important;
+    }
     svg {
       fill: var(--primary-color) !important;
+    }
+  }
+  &.have-select-date {
+    .select-date {
+      color: var(--black-color) !important;
     }
   }
   svg {
@@ -24,6 +36,7 @@
   }
   &:hover {
     color: var(--primary-color) !important;
+    border: 2px solid var(--primary-color) !important;
     svg {
       fill: var(--primary-color);
     }

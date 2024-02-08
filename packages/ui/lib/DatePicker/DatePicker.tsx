@@ -83,11 +83,10 @@ export const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
           {...rest}
         >
           <Button
-            color="ghost"
-            className={`${styles['date-picker-button']} ${
-              styles[selectDateString ? 'select' : '']
-            }`}
-            shadow="regular"
+            color="border"
+            className={`${styles['date-picker-button']} 
+            ${styles[calendarVisible ? 'is-select-date' : '']}
+             ${styles[selectDateString ? 'have-select-date' : '']}`}
             onClick={handleCalendarVisible}
           >
             <svg
@@ -106,7 +105,7 @@ export const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
             {!selectDateString ? (
               <span>Pick a date</span>
             ) : (
-              <span>{selectDate?.toDateString()}</span>
+              <span className={styles['select-date']}>{selectDate?.toDateString()}</span>
             )}
           </Button>
           {calendarVisible && (
