@@ -48,7 +48,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {
-      width = 280,
+      width = 250,
       disabled = false,
       label = 'Eamil',
       mode = 'text',

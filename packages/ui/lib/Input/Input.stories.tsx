@@ -27,7 +27,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const defaultProps: InputProps = {
-  width: 280,
+  width: 250,
   disabled: false,
   onchange: test,
   defaultValue: 'hello world!',
