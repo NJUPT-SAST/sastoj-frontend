@@ -1,3 +1,4 @@
+@use '../variables' as *;
 .options {
   position: absolute;
   width: 280px;
@@ -10,7 +11,7 @@
   font-size: 14px;
   max-height: 250px;
   overflow-y: scroll;
-  border: 2px solid var(--primary-color);
+  box-shadow: $shadow;
   border-radius: 8px;
   transform-origin: top;
   opacity: 0;

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Card.module.scss';
 import classnames from 'classnames';
 
-export interface CardProps {
+export interface CardProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   /**
    * the image of the card
    */
@@ -26,11 +26,27 @@ export interface CardProps {
   /**
    * The content of the Card.
    */
-  content?: React.ReactNode;
+  mainContent?: React.ReactNode;
   /**
    * The footer of the Card.
    */
   footer?: React.ReactNode;
+  /**
+   * the className of the Card
+   */
+  className?: string;
+  /**
+   * padding, the padding of the card
+   */
+  padding?: number;
+  /**
+   * gap , the gap between the content and the header
+   */
+  gap?: number;
+  /**
+   * width , the width of the card
+   */
+  width?: number;
 }
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
@@ -40,26 +56,40 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
       size = 'medium',
       shadow = 'medium',
       header = <span>header</span>,
-      content = <span>content</span>,
+      mainContent = <span>content</span>,
       footer = <span>footer</span>,
       titleImage = undefined,
+      className = '',
+      padding = 20,
+      gap = 8,
       ...rest
     },
     ref,
   ) => {
-    const cardClass = classnames(styles['base'], styles[theme], styles[size], styles[`shadow-${shadow}`]);
+    const cardClass = classnames(
+      styles['base'],
+      styles[theme],
+      styles[size],
+      styles[`shadow-${shadow}`],
+    );
 
     return (
       <div
         ref={ref}
-        className={cardClass}
+        className={`${cardClass} ${className}`}
         {...rest}
       >
         {titleImage && <div className={styles['titleImage']}>{<>{titleImage}</>}</div>}
-        <div className={styles['contentContainer']}>
-          <div className={styles['mainContent']}>
+        <div
+          className={styles['contentContainer']}
+          style={{ padding: `${padding}px` }}
+        >
+          <div
+            className={styles['mainContent']}
+            style={{ gap: `${gap}px` }}
+          >
             <div className={styles['header']}>{header}</div>
-            <div className={styles['content']}>{content}</div>
+            <div className={styles['content']}>{mainContent}</div>
           </div>
           <div className={styles['footer']}>{footer}</div>
         </div>

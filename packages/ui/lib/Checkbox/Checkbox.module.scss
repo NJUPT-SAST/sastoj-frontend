@@ -1,11 +1,11 @@
+@use '../variables' as *;
 .base {
   display: flex;
   align-items: center;
   gap: 5px;
   cursor: pointer;
   &.disabled {
-    opacity: 0.4;
-    cursor: not-allowed !important;
+    @include disabled;
   }
   .checkboxButton {
     all: unset;

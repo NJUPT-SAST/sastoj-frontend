@@ -12,10 +12,12 @@
   color: var(--shadow-color) !important;
   transition: all $duration-200 ease-in-out;
   padding: 10px 15px !important;
-  width: 280px;
-  height: 50px;
+  width: 250px;
+  height: 42px;
   border-radius: $radius-10;
   border: $border-1 solid var(--shadow-color) !important;
+  font-size: $font-size-14 !important;
+  padding: 11px !important;
   .select-date {
     color: var(--black-color) !important;
   }

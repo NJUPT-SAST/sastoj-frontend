@@ -22,16 +22,17 @@ type Story = StoryObj<typeof meta>;
 
 const defaultProps: SelectProps = {
   optionsList: [
-    { value: 'nextjs', label: 'nextjs', key: 1 },
-    { value: 'nuxtjs', label: 'nuxtjs', key: 2 },
-    { value: 'nodejs', label: 'nodejs', key: 3 },
-    { value: 'vuejs', label: 'vuejs', key: 5 },
-    { value: 'react', label: 'react', key: 4 },
+    { value: 'nextjs', label: 'Nextjs', key: 1 },
+    { value: 'nuxtjs', label: 'Nuxtjs', key: 2 },
+    { value: 'nodejs', label: 'Nodejs', key: 3 },
+    { value: 'vuejs', label: 'Vuejs', key: 5 },
+    { value: 'react', label: 'React', key: 4 },
   ],
   onchange: test,
   disabled: false,
   defaultSelectKey: 2,
   selectKey: 2,
+  isBorder: true,
 };
 
 export const DefaultSelect: Story = {

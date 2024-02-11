@@ -25,14 +25,12 @@
     }
   }
   .contentContainer {
-    padding: 20px;
     width: 100%;
     box-sizing: border-box;
     .mainContent {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 8px;
       min-height: 100px;
       .header {
         width: 100%;

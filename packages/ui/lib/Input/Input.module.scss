@@ -1,14 +1,13 @@
 @use '../variables' as *;
 $border-radius: $radius-8;
 $border-width: $border-1;
-$font-size-select: $font-size-15;
+$font-size-select: $font-size-14;
 $font-size-label: $font-size-8;
 $padding-left-right: 11px;
 $padding-label-top: 7px;
 $animation-duration: $duration-200;
 .base {
   width: fit-content;
-  border: $border-width solid var(--shadow-color) !important;
   border-radius: $border-radius;
   box-sizing: border-box;
   color: var(--shadow-color);
@@ -16,13 +15,16 @@ $animation-duration: $duration-200;
   transition: all $animation-duration ease-in-out;
   font-weight: 500;
   background-color: var(--white-color);
+  &.border {
+    border: $border-width solid var(--shadow-color) !important;
+    &:hover:not(&.disabled) {
+      border: $border-width solid var(--primary-color) !important;
+    }
+    &:has(.input:focus) {
+      border: $border-width solid var(--primary-color) !important;
+    }
+  }
   cursor: text;
-  &:hover:not(&.disabled) {
-    border: $border-width solid var(--primary-color) !important;
-  }
-  &:has(.input:focus) {
-    border: $border-width solid var(--primary-color) !important;
-  }
   .inputLabel {
     position: absolute;
     transition: all $animation-duration ease-in-out;

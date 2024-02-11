@@ -31,6 +31,7 @@ const defaultProps: InputProps = {
   disabled: false,
   onchange: test,
   defaultValue: 'hello world!',
+  isBorder: true,
 };
 
 export const DefaultInput: Story = {

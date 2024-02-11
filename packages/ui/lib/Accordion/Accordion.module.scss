@@ -1,3 +1,4 @@
+@use '../variables' as *;
 .base {
   display: grid;
   grid-template-rows: 0fr 0fr;
@@ -28,8 +29,7 @@
       }
     }
     &.disabled {
-      cursor: not-allowed;
-      opacity: 0.3;
+      @include disabled;
     }
   }
   .accordionContentWrap {

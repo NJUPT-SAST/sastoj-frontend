@@ -1,3 +1,4 @@
+@use '../variables' as *;
 .base {
   border-radius: 5px;
   gap: 10px;
@@ -8,7 +9,7 @@
   transition: all 0.2s ease-in;
   padding: 12px 10px 16px 20px;
   display: flex !important;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  @include shadow;
   background-color: var(--white-color);
   &.visible {
     opacity: 1;
