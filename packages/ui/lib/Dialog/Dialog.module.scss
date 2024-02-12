@@ -2,7 +2,7 @@
 @mixin animation($name) {
   animation-name: $name;
   animation-duration: 400ms;
-  animation-timing-function: ease-in-out;
+  animation-timing-function: $cubic-bezier;
   animation-fill-mode: forwards;
 }
 
@@ -13,7 +13,7 @@
   width: 100%;
   position: absolute;
   box-sizing: border-box;
-  background-color: rgba(var(--black-color-rgb), $alpha: 0.4);
+  background-color: $background-shadow-color;
   &.background-in {
     @include animation(in);
   }

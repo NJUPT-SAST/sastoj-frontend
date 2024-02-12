@@ -120,7 +120,7 @@
     cursor: pointer;
     appearance: none;
     position: relative;
-    transition: all 0.25s ease-in-out;
+    transition: all 0.25s $cubic-bezier;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -134,7 +134,7 @@
       box-sizing: border-box;
       display: inline-block;
       border-radius: 50%;
-      transition: all 0.2s ease-in-out;
+      transition: all 0.2s $cubic-bezier;
     }
     &::after {
       content: '';
@@ -142,7 +142,7 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      transition: all 0.2s ease-in-out;
+      transition: all 0.2s $cubic-bezier;
     }
     &:active {
       scale: 0.95;

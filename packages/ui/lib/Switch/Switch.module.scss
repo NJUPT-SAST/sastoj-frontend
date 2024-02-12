@@ -36,7 +36,7 @@ $switch-sizes: (
 @mixin animation($isChecked) {
   animation-duration: $animation-duration;
   animation-fill-mode: forwards;
-  animation-timing-function: ease-in-out;
+  animation-timing-function: $cubic-bezier;
 }
 
 @mixin generate-animations($sizes, $ball-margin, $ball-center-width) {
@@ -76,7 +76,7 @@ $switch-sizes: (
   background-color: var(--shadow-color);
   box-shadow: $shadow-inner;
   cursor: pointer;
-  transition: all $animation-duration ease-in-out;
+  transition: all $animation-duration $cubic-bezier;
   &.medium {
     $switch-size-anim: $switch-size-medium;
     @include switch-size($switch-size-medium, 'medium');
@@ -101,7 +101,7 @@ $switch-sizes: (
   }
   &.isChecked {
     background-color: var(--primary-color);
-    transition: all $animation-duration ease-in-out;
+    transition: all $animation-duration $cubic-bezier;
   }
   &.disabled {
     @include disabled;

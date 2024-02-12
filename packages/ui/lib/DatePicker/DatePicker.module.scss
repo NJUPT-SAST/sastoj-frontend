@@ -2,7 +2,7 @@
 @mixin animation($type) {
   animation-name: #{$type};
   animation-duration: $duration-200;
-  animation-timing-function: ease-in-out;
+  animation-timing-function: $cubic-bezier;
   animation-fill-mode: forwards;
 }
 .date-picker-button {
@@ -10,7 +10,7 @@
   align-items: center;
   gap: 10px;
   color: var(--shadow-color) !important;
-  transition: all $duration-200 ease-in-out;
+  transition: all $duration-200 $cubic-bezier;
   padding: 10px 15px !important;
   width: 250px;
   height: 42px;
@@ -30,7 +30,7 @@
   }
   svg {
     fill: var(--shadow-color);
-    transition: all $duration-200 ease-in-out;
+    transition: all $duration-200 $cubic-bezier;
   }
   &:hover {
     color: var(--primary-color) !important;
