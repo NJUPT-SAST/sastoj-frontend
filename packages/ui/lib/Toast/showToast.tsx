@@ -41,13 +41,12 @@ export const showToast = (props?: ToastProps) => {
 const moreTimeClose = (div: HTMLDivElement) => {
   setTimeout(() => {
     const ToasthideClass: string = classNames(styles['toastHide']);
-    div.className = ToasthideClass;
-
+    div.classList.add(ToasthideClass);
     setTimeout(() => {
       toastContainer?.removeChild(div);
       toasts = toasts.filter((toast) => toast !== div);
-    }, 300);
-  }, 6000);
+    }, 400);
+  }, 5000);
 };
 
 const moreThreeClose = () => {
@@ -62,7 +61,9 @@ const moreThreeClose = () => {
 };
 
 const closeToast = (div: HTMLDivElement) => {
-  div.remove();
+  setTimeout(() => {
+    div.remove();
+  }, 300);
   toasts = toasts.filter((toast) => toast !== div);
   addListener(div);
   expand(toasts);
