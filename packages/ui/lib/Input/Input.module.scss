@@ -12,7 +12,7 @@ $animation-duration: $duration-200;
   box-sizing: border-box;
   color: var(--shadow-color);
   position: relative;
-  transition: all $animation-duration ease-in-out;
+  transition: all $animation-duration $cubic-bezier;
   font-weight: 500;
   background-color: var(--white-color);
   &.border {
@@ -27,7 +27,7 @@ $animation-duration: $duration-200;
   cursor: text;
   .inputLabel {
     position: absolute;
-    transition: all $animation-duration ease-in-out;
+    transition: all $animation-duration $cubic-bezier;
     top: 50%;
     transform: translate(0, -50%);
     left: $padding-left-right;

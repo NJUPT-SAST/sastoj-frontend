@@ -5,7 +5,7 @@ $padding-left-right-distance: 20px;
 @mixin animation($name) {
   animation-name: $name;
   animation-duration: $animation-duration;
-  animation-timing-function: ease-in-out;
+  animation-timing-function: $cubic-bezier;
   animation-fill-mode: forwards;
 }
 
@@ -83,7 +83,7 @@ $padding-left-right-distance: 20px;
           align-items: center;
           justify-content: center;
           svg {
-            transition: all $animation-duration ease-in-out;
+            transition: all $animation-duration $cubic-bezier;
           }
           &:hover {
             svg {
@@ -97,10 +97,10 @@ $padding-left-right-distance: 20px;
 }
 
 .wrapper {
-  transition: all $animation-duration ease-in-out;
+  transition: all $animation-duration $cubic-bezier;
   border-radius: 15px;
   & > div {
-    transition: all $animation-duration ease-in-out;
+    transition: all $animation-duration $cubic-bezier;
   }
   &.show {
     padding: 12px;

@@ -51,7 +51,7 @@
         background-color: var(--background-blue);
         color: var(--primary-color);
         border-radius: $radius-5;
-        transition: all $duration-200 ease-in-out;
+        transition: all $duration-200 $cubic-bezier;
       }
       &.today {
         background-color: var(--background-blue);
@@ -62,7 +62,7 @@
         background-color: var(--primary-color);
         border-radius: 5px;
         color: var(--white-color);
-        transition: all 0.2s ease-in-out;
+        transition: all 0.2s $cubic-bezier;
       }
     }
   }

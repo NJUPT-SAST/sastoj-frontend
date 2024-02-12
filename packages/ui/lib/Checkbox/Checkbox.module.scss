@@ -19,7 +19,7 @@
     border: 2px solid var(--shadow-color);
     border-radius: 6px;
     cursor: inherit;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s $cubic-bezier;
     .checkPath {
       stroke-dasharray: 24;
       stroke-dashoffset: 24;
@@ -34,7 +34,7 @@
       height: 22px;
       width: 22px;
       border-radius: 8px;
-      transition: all 0.2s ease-in-out;
+      transition: all 0.2s $cubic-bezier;
     }
     &:hover::after {
       background-color: rgba(var(--shadow-color-rgb), 0.2);
@@ -42,7 +42,7 @@
     &.checked {
       background-color: var(--primary-color);
       border: unset;
-      transition: all 0.2s ease-in-out;
+      transition: all 0.2s $cubic-bezier;
     }
     &.checked:hover {
       box-shadow: 0 0px 15px rgba(var(--primary-color-rgb), 0.5);

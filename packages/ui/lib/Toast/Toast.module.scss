@@ -4,7 +4,7 @@ $border-radius: $radius-5;
 @mixin animation($name) {
   animation-name: $name;
   animation-duration: $animation-duration;
-  animation-timing-function: ease-in-out;
+  animation-timing-function: $cubic-bezier;
 }
 @mixin type($type-name) {
   color: var(--#{$type-name}-color);
@@ -21,7 +21,7 @@ $border-radius: $radius-5;
   opacity: 0;
   transform: translateY(100px);
   overflow: hidden;
-  transition: all $animation-duration ease-in-out;
+  transition: all $animation-duration $cubic-bezier;
   padding: 12px 10px 16px 20px;
   display: flex !important;
   @include shadow;
@@ -67,7 +67,7 @@ $border-radius: $radius-5;
       display: flex;
       justify-content: center;
       align-items: center;
-      transition: all $animation-duration ease-in-out;
+      transition: all $animation-duration $cubic-bezier;
       &:hover {
         scale: 1.05;
       }
@@ -125,7 +125,7 @@ $border-radius: $radius-5;
     right: 10px;
     bottom: 10px;
     @include animation(slideIn);
-    transition: all $animation-duration ease-in-out;
+    transition: all $animation-duration $cubic-bezier;
   }
   .toastHide {
     bottom: -100px;
