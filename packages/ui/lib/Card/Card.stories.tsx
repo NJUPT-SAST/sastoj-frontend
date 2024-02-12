@@ -38,7 +38,7 @@ const defaultProps: CardProps = {
   size: 'medium',
   shadow: 'medium',
   header: <span>header</span>,
-  content: <span>content</span>,
+  mainContent: <span>content</span>,
   footer: <span>footer</span>,
 };
 
@@ -59,7 +59,7 @@ export const ExampleCard: Story = {
         </h1>
       </>
     ),
-    content: (
+    mainContent: (
       <>
         <div>
           基础知识竞赛基础知识竞赛基础知识竞赛基础知识竞赛基础知识竞赛基础知识竞赛基础知识竞赛基础知识竞赛基础知识竞赛基础知识竞赛基础知识竞赛基础知识竞赛基础知识竞赛
@@ -181,7 +181,7 @@ export const LoginCard: Story = {
         </div>
       </>
     ),
-    content: (
+    mainContent: (
       <>
         <div
           style={{
@@ -195,14 +195,14 @@ export const LoginCard: Story = {
           }}
         >
           <Input
-            onChange={function (value: string) {
+            onchange={function (value: string) {
               console.log('昵称', value);
             }}
             isFillFather={true}
             label="昵称"
           ></Input>
           <Input
-            onChange={function (value: string) {
+            onchange={function (value: string) {
               console.log('密码', value);
             }}
             label="密码"

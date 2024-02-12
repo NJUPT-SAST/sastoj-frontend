@@ -19,13 +19,28 @@ export interface SwitchProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
    * onChange, the onChange of the switch
    */
   onchange?: (value: boolean) => void;
+  /**
+   * disabled, the disabled of the switch
+   */
+  disabled?: boolean;
 }
 
 export const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
-  ({ size = 'medium', checked = false, defaultChecked = false, onchange }, ref) => {
+  (
+    {
+      size = 'medium',
+      checked = false,
+      defaultChecked = false,
+      onchange,
+      disabled = false,
+      ...rest
+    },
+    ref,
+  ) => {
     const [isChecked, setIsChecked] = useState<boolean | undefined>(defaultChecked);
     const switchClass = classNames(
-      `${styles['base']} ${isChecked ? styles['isChecked'] : ''} ${styles[size]}`,
+      `${styles['base']} ${isChecked ? styles['isChecked'] : ''} ${styles[size]} 
+      ${disabled ? styles['disabled'] : ''}`,
     );
 
     useEffect(() => {
@@ -42,6 +57,8 @@ export const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
             className={switchClass}
             onClick={() => setIsChecked(!isChecked)}
             ref={ref}
+            disabled={disabled}
+            {...rest}
           />
         </div>
       </>

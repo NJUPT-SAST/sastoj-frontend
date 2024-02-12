@@ -110,7 +110,8 @@ export const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
           </Button>
           {calendarVisible && (
             <div
-              className={`${styles['calendar-container']} 
+              className={`
+              ${styles['calendar-container']} 
           ${styles[calendarVisible ? 'show' : '']}
            ${styles[calendarIn ? 'in' : '']}
            ${styles[calendarHide ? 'hide' : '']}

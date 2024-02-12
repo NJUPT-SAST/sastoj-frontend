@@ -1,10 +1,10 @@
-@use '../variables' as shadow;
+@use '../variables' as *;
 //这是已经封装好的scss代码，只需要修改上面的数值，便可满足样式需求
 //Here is the encapsulated scss code, only need to modify the above values, can meet the style requirements
 $switch-size-small: 18px;
 $switch-size-medium: 24px;
 $switch-size-large: 30px;
-$animation-duration: 300ms;
+$animation-duration: $duration-300;
 //这个是滑动的圆球和边框的距离的值
 // This is the value of the distance between the sliding sphere and the border.
 $ball-margin: 5px;
@@ -74,7 +74,7 @@ $switch-sizes: (
   all: unset;
   display: block;
   background-color: var(--shadow-color);
-  box-shadow: shadow.$shadow-inner;
+  box-shadow: $shadow-inner;
   cursor: pointer;
   transition: all $animation-duration ease-in-out;
   &.medium {
@@ -102,5 +102,8 @@ $switch-sizes: (
   &.isChecked {
     background-color: var(--primary-color);
     transition: all $animation-duration ease-in-out;
+  }
+  &.disabled {
+    @include disabled;
   }
 }

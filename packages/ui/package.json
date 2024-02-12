@@ -83,6 +83,7 @@
     "react-dom": "^18.2.0"
   },
   "dependencies": {
+    "@monaco-editor/react": "^4.6.0",
     "@types/react-transition-group": "^4.4.10",
     "zustand": "^4.4.7"
   }

@@ -36,4 +36,42 @@ $shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
   }
 }
 
-// border variables
+// border width variables
+$border-0: 0px;
+$border-1: 1px;
+$border-2: 2px;
+
+//animation-duration varibles
+$duration-100: 100ms;
+$duration-200: 200ms;
+$duration-300: 300ms;
+$duration-400: 400ms;
+$duration-800: 800ms;
+
+//border radius variables
+$radius-10: 10px;
+$radius-8: 8px;
+$radius-5: 5px;
+$radius-15: 15px;
+$radius-half: 50%;
+
+//absolute center
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+//font-size variables
+$font-size-8: 8px;
+$font-size-10: 10px;
+$font-size-12: 12px;
+$font-size-14: 14px;
+
+//disabled
+@mixin disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+

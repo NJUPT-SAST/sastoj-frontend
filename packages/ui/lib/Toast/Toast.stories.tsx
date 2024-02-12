@@ -19,6 +19,10 @@ const meta = {
       options: ['info', 'success', 'warning', 'error'],
       control: { type: 'select' },
     },
+    shadow: {
+      options: ['regular', 'small', 'medium', 'large', 'extraLarge', 'inner', 'none'],
+      control: { type: 'select' },
+    },
   },
 } satisfies Meta<typeof Toast>;
 

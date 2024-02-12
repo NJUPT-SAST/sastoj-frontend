@@ -43,12 +43,16 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
    * defaultValue, the defaultValue of the input
    */
   defaultValue?: string;
+  /**
+   * isBorder? have the border of the input
+   */
+  isBorder?: boolean;
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {
-      width = 280,
+      width = 250,
       disabled = false,
       label = 'Eamil',
       mode = 'text',
@@ -57,6 +61,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       onchange,
       isFillFather = false,
       value,
+      isBorder = true,
       defaultValue = '',
       ...rest
     },
@@ -69,6 +74,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       styles['base'],
       styles[disabled ? 'disabled' : ''],
       styles[isFillFather ? 'fill' : ''],
+      styles[isBorder ? 'border' : ''],
     );
     useEffect(() => {
       if (placeholder) {

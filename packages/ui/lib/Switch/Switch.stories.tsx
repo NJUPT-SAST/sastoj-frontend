@@ -31,6 +31,7 @@ const defaultProps: SwitchProps = {
   checked: false,
   defaultChecked: false,
   onchange: test,
+  disabled: false,
 };
 
 export const DefaultSwitch: Story = {

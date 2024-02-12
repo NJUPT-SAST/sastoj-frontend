@@ -1,13 +1,8 @@
-import classNames from 'classnames';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Dialog.module.scss';
-import { Button } from '..';
+import { Button, Card } from '..';
 
-export interface DialogProps {
-  /**
-   * The size of the Dialog.
-   */
-  size?: 'small' | 'medium' | 'large';
+export interface DialogProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   /**
    * The header of the Dialog.
    */
@@ -15,7 +10,7 @@ export interface DialogProps {
   /**
    * The content of the Dialog.
    */
-  content?: React.ReactNode;
+  mainContent?: React.ReactNode;
   /**
    * The footer of the Dialog.
    */
@@ -25,83 +20,108 @@ export interface DialogProps {
    */
   visible?: boolean;
   /**
-   * the cancel of the dialog
+   * shadow, the shadow of the dialog
    */
-  cancel?: () => void;
+  shadow?: 'regular' | 'small' | 'medium' | 'large' | 'extraLarge' | 'inner';
   /**
-   * the cancelContent of the cancel button
+   * The theme of the Card.
    */
-  cancelContent?: string;
+  theme?: 'dark' | 'light';
+  /**
+   * The size of the Card.
+   */
+  size?: 'small' | 'medium' | 'large';
+  /**
+   * cancel, the cancel callback
+   */
+  onCancel?: () => void;
+  /**
+   * onOk , the onOk callback
+   */
+  onOk?: () => void;
 }
 
 export const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
   (
     {
-      size = 'medium',
-      cancel,
-      header = <span>header</span>,
-      content = (
-        <span>
-          this is the message <strong></strong>
-        </span>
-      ),
+      header,
+      mainContent,
+      onCancel,
+      onOk,
       footer = (
         <>
-          <div style={{ display: 'flex', gap: 10, justifyContent: 'end' }}>
-            <Button>enter</Button>
+          <div style={{ display: 'flex', gap: '8px', width: '100%', justifyContent: 'end' }}>
+            <Button
+              color="ghost"
+              shadow="small"
+              onClick={onCancel}
+            >
+              取消
+            </Button>
+            <Button
+              shadow="small"
+              onClick={onOk}
+            >
+              确定
+            </Button>
           </div>
         </>
       ),
-      visible = true,
-      cancelContent = 'Cancel',
+      theme,
+      shadow = 'regular',
+      size,
+      visible = false,
       ...rest
     },
     ref,
   ) => {
-    const dialogClass = classNames(styles['base'], styles[size], styles[visible ? 'visible' : '']);
-    const backgroundClass = classNames(styles['background'], styles[visible ? 'visible' : '']);
+    const [dialogVisible, setDialogVisible] = useState<boolean>(false);
+    const [dialogIn, setDialogIn] = useState<boolean>(false);
+    const [dialogHide, setDialogHide] = useState<boolean>(false);
 
-    if (visible) {
-      document.body.classList.add('stopMove');
-    }
-
-    if (!visible) {
-      document.body.classList.remove('stopMove');
-    }
+    useEffect(() => {
+      if (visible) {
+        console.log('hello');
+        setDialogVisible(true);
+        document.body.style.overflow = 'hidden';
+        setDialogIn(true);
+        setTimeout(() => {
+          setDialogIn(false);
+        }, 200000);
+      }
+      if (!visible) {
+        console.log('hi');
+        setDialogHide(true);
+        setTimeout(() => {
+          setDialogHide(false);
+          setDialogVisible(false);
+          document.body.style.overflow = '';
+        }, 400);
+      }
+    }, [visible]);
 
     return (
       <>
-        <div className={backgroundClass}>
+        {dialogVisible && (
           <div
-            ref={ref}
-            className={dialogClass}
-            {...rest}
+            className={`${styles['background']}  ${styles[dialogIn ? 'background-in' : '']} 
+          ${styles[dialogHide ? 'background-hide' : '']}`}
           >
-            <div className={styles['inner']}>
-              <div className={styles['mainContent']}>
-                <div className={styles['header']}>
-                  {header}
-                  <div
-                    className={styles['closeButton']}
-                    onClick={cancel}
-                  ></div>
-                </div>
-                <div className={styles['content']}>{content}</div>
-              </div>
-              {footer && (
-                <div className={styles['footer']}>
-                  {footer}
-                  <Button
-                    color="danger"
-                    onClick={cancel}
-                  >
-                    {cancelContent}
-                  </Button>
-                </div>
-              )}
-            </div>
+            <Card
+              ref={ref}
+              className={`${styles['base']} 
+          ${styles[dialogIn ? 'in' : '']} 
+          ${styles[dialogHide ? 'hide' : '']}`}
+              header={header}
+              mainContent={mainContent}
+              footer={footer}
+              shadow={shadow}
+              theme={theme}
+              size={size}
+              {...rest}
+            ></Card>
           </div>
-        </div>
+        )}
       </>
     );
   },

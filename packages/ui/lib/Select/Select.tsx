@@ -12,7 +12,7 @@ export interface SelectProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   /**
    * onChange of the select
    */
-  onchange: (value: OptionProps) => void;
+  onchange?: (value: OptionProps) => void;
   /**
    * the optionList of the select
    */
@@ -33,6 +33,14 @@ export interface SelectProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
    * selectKey, the selectKey of the options
    */
   selectKey?: number;
+  /**
+   * isBorder,  the border of the select
+   */
+  isBorder?: boolean;
+  /**
+   * width, the width of the select
+   */
+  width?: number;
 }
 
 export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
@@ -47,6 +55,8 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
       disabled = false,
       defaultSelectKey,
       selectKey,
+      isBorder = true,
+      width = 280,
       ...rest
     },
     ref,
@@ -72,8 +82,8 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
     }
 
     useEffect(() => {
-      selectItem && onchange(selectItem);
-      selectItem?.value && setInputValue(selectItem?.value);
+      onchange && selectItem && onchange(selectItem);
+      selectItem?.label && setInputValue(selectItem?.label);
     }, [selectItem, onchange]);
 
     const handleOptions = (value: string) => {
@@ -98,6 +108,7 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
       const results = fuzzySearch(optionsList, inputValue);
       setOptions(results);
     }, [inputValue, optionsList]);
+
     return (
       <>
         <div
@@ -108,9 +119,10 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
             onClick={showOptions}
             value={inputValue}
             onBlur={closeOptions}
-            width={280}
+            width={width}
             onchange={handleOptions}
             label={title}
+            isBorder={isBorder}
           ></Input>
           <div className={`${styles['options']} ${visible ? styles['show'] : ''}`}>
             {!options.length ? (

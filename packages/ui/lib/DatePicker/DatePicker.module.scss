@@ -1,6 +1,7 @@
+@use '../variables' as *;
 @mixin animation($type) {
   animation-name: #{$type};
-  animation-duration: 200ms;
+  animation-duration: $duration-200;
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
 }
@@ -9,34 +10,31 @@
   align-items: center;
   gap: 10px;
   color: var(--shadow-color) !important;
-  transition: all 0.2s ease-in-out;
+  transition: all $duration-200 ease-in-out;
   padding: 10px 15px !important;
-  width: 280px;
-  height: 50px;
-  border-radius: 10px;
-  border: 2px solid var(--shadow-color) !important;
+  width: 250px;
+  height: 42px;
+  border-radius: $radius-10;
+  border: $border-1 solid var(--shadow-color) !important;
+  font-size: $font-size-14 !important;
+  padding: 11px !important;
+  .select-date {
+    color: var(--black-color) !important;
+  }
   &.is-select-date {
-    border: 2px solid var(--primary-color) !important;
+    border: $border-1 solid var(--primary-color) !important;
     color: var(--primary-color) !important;
-    .select-date {
-      color: var(--black-color) !important;
-    }
     svg {
       fill: var(--primary-color) !important;
     }
   }
-  &.have-select-date {
-    .select-date {
-      color: var(--black-color) !important;
-    }
-  }
   svg {
     fill: var(--shadow-color);
-    transition: all 0.2s ease-in-out;
+    transition: all $duration-200 ease-in-out;
   }
   &:hover {
     color: var(--primary-color) !important;
-    border: 2px solid var(--primary-color) !important;
+    border: $border-1 solid var(--primary-color) !important;
     svg {
       fill: var(--primary-color);
     }

@@ -23,6 +23,10 @@ export interface ToastProps {
    * onChange of the toast
    */
   close?: () => void;
+  /**
+   * The shadow of the button.
+   */
+  shadow?: 'regular' | 'small' | 'medium' | 'large' | 'extraLarge' | 'inner' | 'none';
 }
 
 export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
@@ -37,6 +41,7 @@ export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
       ),
       footer = null,
       close,
+      shadow = 'regular',
       ...rest
     },
     ref,
@@ -49,6 +54,7 @@ export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
       styles[type],
       styles[size],
       styles[visible ? 'visible' : ''],
+      styles[`shadow-${shadow}`],
     );
 
     useEffect(() => {
