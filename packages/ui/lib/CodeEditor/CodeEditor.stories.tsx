@@ -13,6 +13,10 @@ const testLanguage = (value: string) => {
   console.log('language', value);
 };
 
+const refreshTest = () => {
+  console.log('hello');
+};
+
 const meta = {
   title: 'Components/CodeEditor',
   component: CodeEditor,
@@ -51,6 +55,7 @@ const defaultProps: CodeEditorProps = {
  int* preorderTraversal(struct TreeNode* root, int* returnSize) {
      
  }`,
+  onRefresh: refreshTest,
 };
 
 export const DefaultCodeEditor: Story = {

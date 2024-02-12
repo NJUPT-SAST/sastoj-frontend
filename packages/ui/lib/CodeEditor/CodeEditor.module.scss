@@ -33,11 +33,10 @@ $padding: 10px;
     }
   }
   .divider {
-    height: 1px;
-    width: 100%;
+    flex-basis: 1px;
     background-color: var(--border-white);
   }
   .editor-container {
-    height: 400px;
+    flex-grow: 1;
   }
 }

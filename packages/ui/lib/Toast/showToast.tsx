@@ -47,7 +47,7 @@ const moreTimeClose = (div: HTMLDivElement) => {
       toastContainer?.removeChild(div);
       toasts = toasts.filter((toast) => toast !== div);
     }, 300);
-  }, 4000);
+  }, 6000);
 };
 
 const moreThreeClose = () => {

@@ -4,9 +4,8 @@
   gap: 10px;
   box-sizing: border-box;
   opacity: 0;
-  scale: 0.8;
   overflow: hidden;
-  transition: all 0.2s ease-in;
+  transition: all 0.3s ease-in;
   padding: 12px 10px 16px 20px;
   display: flex !important;
   @include shadow;
@@ -51,7 +50,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      transition: all 0.2s ease-in-out;
+      transition: all 0.4s ease-in-out;
       &:hover {
         scale: 1.05;
       }
@@ -130,16 +129,16 @@
   right: 10px;
   bottom: 10px;
   animation-name: slideIn;
-  animation-duration: 0.3s;
-  transition: all 0.2s linear;
+  animation-duration: 0.4s;
+  transition: all 0.4s ease-in-out;
 }
 
 .toastHide {
   position: fixed;
   right: 10px;
   bottom: 10px;
-  animation-name: slideUp;
-  animation-duration: 0.3s;
+  animation-name: slideHide;
+  animation-duration: 0.8s;
 }
 
 @keyframes slideIn {
@@ -153,12 +152,14 @@
   }
 }
 
-@keyframes slideUp {
-  from {
+@keyframes slideHide {
+  0% {
     opacity: 1;
   }
-  to {
+  50% {
     opacity: 0;
+  }
+  100% {
     transform: translateY(100%);
   }
 }

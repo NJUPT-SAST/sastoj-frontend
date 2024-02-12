@@ -5,17 +5,17 @@ import { Button, Card, Select, type OptionProps } from '..';
 
 export interface CodeEditorProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   /**
-   * width of the code-editor
+   * width of the code area
    */
   width?: number;
   /**
-   * height of the code-editor
+   * height of the code area
    */
   height?: number;
   /**
    * languageList, the languageList of the code-Editor
    */
-  languageList: OptionProps[];
+  languageList?: OptionProps[];
   /**
    * onchange , the onchange of the code-editor
    */
@@ -32,19 +32,37 @@ export interface CodeEditorProps extends React.HtmlHTMLAttributes<HTMLDivElement
    * onLanguageChange, Callbacks when the selected language changes
    */
   onLanguageChange?: (value: string) => void;
+  /**
+   * onRefresh , the refresh button click callback
+   */
+  onRefresh?: () => void;
 }
 
 export const CodeEditor = React.forwardRef<HTMLDivElement, CodeEditorProps>(
   (
     {
-      width = 600,
-      height = 700,
+      width = 400,
+      height = 500,
+      onRefresh,
       languageList = [
         { value: 'c', label: 'C', key: 3 },
         { value: 'javascript', label: 'JavaScript', key: 5 },
         { value: 'java', label: 'Java', key: 7 },
       ],
-      defaultValue,
+      defaultValue = `/**
+      * Definition for a binary tree node.
+      * struct TreeNode {
+      *     int val;
+      *     struct TreeNode *left;
+      *     struct TreeNode *right;
+      * };
+      */
+     /**
+      * Note: The returned array must be malloced, assume caller calls free().
+      */
+     int* preorderTraversal(struct TreeNode* root, int* returnSize) {
+         
+     }`,
       value,
       onchange,
       onLanguageChange,
@@ -76,6 +94,11 @@ export const CodeEditor = React.forwardRef<HTMLDivElement, CodeEditorProps>(
     useEffect(() => {
       onLanguageChange && selectLanguage && onLanguageChange(selectLanguage);
     }, [selectLanguage, onLanguageChange]);
+
+    const handleRefresh = () => {
+      setContent(defaultValue);
+      onRefresh && onRefresh();
+    };
 
     return (
       <>
@@ -115,7 +138,7 @@ export const CodeEditor = React.forwardRef<HTMLDivElement, CodeEditorProps>(
                   <Button
                     color="ghost"
                     className={styles['refresh-button']}
-                    onClick={() => setContent(defaultValue)}
+                    onClick={handleRefresh}
                   >
                     <svg
                       viewBox="0 0 512 512"

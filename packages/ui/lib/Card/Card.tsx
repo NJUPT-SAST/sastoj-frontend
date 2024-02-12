@@ -88,10 +88,10 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
             className={styles['mainContent']}
             style={{ gap: `${gap}px` }}
           >
-            <div className={styles['header']}>{header}</div>
-            <div className={styles['content']}>{mainContent}</div>
+            {header && <div className={styles['header']}>{header}</div>}
+            {mainContent && <div className={styles['content']}>{mainContent}</div>}
           </div>
-          <div className={styles['footer']}>{footer}</div>
+          {footer && <div className={styles['footer']}>{footer}</div>}{' '}
         </div>
       </div>
     );
