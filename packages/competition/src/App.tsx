@@ -1,10 +1,16 @@
-import { CodeEditor } from "../../ui/dist";
+import { useState } from "react";
+import { Button, DatePicker, Dialog, Input, showToast } from "../../ui/dist";
 import "./App.css";
 
 function App() {
+  const [visible, setVisible] = useState<boolean>(false);
   return (
     <>
-      <CodeEditor width={700} height={700}></CodeEditor>
+      <div style={{ height: "100vh", width: "100vw" }}>
+        <Button onClick={() => setVisible(true)}>test</Button>
+        <Dialog visible={visible} onCancel={() => setVisible(false)}></Dialog>
+      </div>
+      <div></div>
     </>
   );
 }

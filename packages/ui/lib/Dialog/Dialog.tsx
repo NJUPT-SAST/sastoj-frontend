@@ -83,6 +83,7 @@ export const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
       if (visible) {
         console.log('hello');
         setDialogVisible(true);
+        document.body.style.overflow = 'hidden';
         setDialogIn(true);
         setTimeout(() => {
           setDialogIn(false);
@@ -94,6 +95,7 @@ export const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
         setTimeout(() => {
           setDialogHide(false);
           setDialogVisible(false);
+          document.body.style.overflow = 'auto';
         }, 400);
       }
     }, [visible]);
