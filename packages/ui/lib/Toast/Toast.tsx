@@ -47,7 +47,6 @@ export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
     ref,
   ) => {
     const [visible, setVisble] = useState(true);
-    const [innerVisible, setInnerVisible] = useState(true);
 
     const toastClass = classNames(
       styles['base'],
@@ -58,18 +57,12 @@ export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
     );
 
     useEffect(() => {
-      if (!visible && close) {
-        // A delay is set here, in order to see the animation in its entirety
-        setTimeout(() => {
-          setInnerVisible(false);
-          close();
-        }, 300);
-      }
+      if (!visible && close) close();
     }, [visible, close]);
 
     return (
       <>
-        {innerVisible && (
+        {
           <div style={{ padding: '10px' }}>
             <div
               ref={ref}
@@ -102,7 +95,7 @@ export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
               </div>
             </div>
           </div>
-        )}
+        }
       </>
     );
   },
