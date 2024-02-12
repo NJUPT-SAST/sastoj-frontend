@@ -13,7 +13,7 @@
   width: 100%;
   position: absolute;
   box-sizing: border-box;
-  background-color: rgba(var(--black-color-rgb), $alpha: 0.4);
+  background-color: $background-shadow-color;
   &.background-in {
     @include animation(in);
   }
