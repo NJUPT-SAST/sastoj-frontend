@@ -1,16 +1,23 @@
 import { useState } from "react";
-import { Button, DatePicker, Dialog, Input, showToast } from "../../ui/dist";
+import { Button, Sheet, SheetWrapper } from "../../ui/dist";
 import "./App.css";
 
 function App() {
   const [visible, setVisible] = useState<boolean>(false);
   return (
     <>
-      <div style={{ height: "100vh", width: "100vw" }}>
-        <Button onClick={() => setVisible(true)}>test</Button>
-        <Dialog visible={visible} onCancel={() => setVisible(false)}></Dialog>
-      </div>
-      <div></div>
+      <SheetWrapper>
+        <div style={{ width: "100vw", backgroundColor: "white" }}>
+          <div style={{ height: "19900px" }}></div>
+          <Button onClick={() => setVisible(true)}>test</Button>
+          <div style={{ height: "19900px" }}></div>
+        </div>
+      </SheetWrapper>
+      <Sheet
+        visible={visible}
+        onCancel={() => setVisible(false)}
+        width={400}
+      ></Sheet>
     </>
   );
 }

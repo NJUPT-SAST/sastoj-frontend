@@ -1,14 +1,14 @@
 import { create } from 'zustand';
 
-type State = {
+interface State {
   currentPage: number;
-};
+}
 
-type Action = {
+interface Action {
   increaseCurrentPage: () => void;
   decreaseCurrentPage: () => void;
   changeCurrentPage: (currentPage: State['currentPage']) => void;
-};
+}
 
 export const useCurrentPageStore = create<State & Action>((set) => ({
   currentPage: 1,

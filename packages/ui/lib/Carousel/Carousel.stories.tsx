@@ -8,15 +8,15 @@ const test = (value: number) => {
 };
 
 const styles = {
-  width: '280px',
-  height: '280px',
+  width: '290px',
+  height: '290px',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
   borderRadius: '10px',
   fontSize: '40px',
   fontWeight: '1000',
-  boxShadow: '0px 3px 10px #e3e3e6',
+  boxShadow: '0px 1px 3px #e3e3e6',
 };
 
 const meta = {
@@ -38,8 +38,8 @@ const defaultProps: CarouselProps = {};
 export const DefaultCarousel: Story = {
   args: {
     ...defaultProps,
-    width: 400,
-    height: 400,
+    width: 300,
+    height: 300,
     CarouselItems: [
       { children: <div style={styles}>1</div> },
       { children: <div style={styles}>2</div> },

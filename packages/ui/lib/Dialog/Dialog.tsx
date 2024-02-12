@@ -95,7 +95,7 @@ export const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
         setTimeout(() => {
           setDialogHide(false);
           setDialogVisible(false);
-          document.body.style.overflow = 'auto';
+          document.body.style.overflow = '';
         }, 400);
       }
     }, [visible]);
