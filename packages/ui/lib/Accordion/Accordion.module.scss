@@ -1,9 +1,10 @@
 @use '../variables' as *;
+$animation-duration: $duration-300;
 .base {
   display: grid;
   grid-template-rows: 0fr 0fr;
   overflow: hidden;
-  transition: all 0.2s $cubic-bezier;
+  transition: all $animation-duration $cubic-bezier;
   &.show {
     grid-template-rows: 0fr 1fr;
   }
@@ -16,14 +17,14 @@
     font-size: 14px;
     padding: 16px 20px;
     font-weight: bolder;
-    transition: all 0.1s $cubic-bezier;
+    transition: all $animation-duration $cubic-bezier;
     &:hover:not(.disabled) {
-      background-color: #fcfcfc;
+      background-color: var(--pale-white);
       text-decoration: underline;
-      transition: all 0.1s $cubic-bezier;
+      transition: all $animation-duration $cubic-bezier;
     }
     .icon {
-      transition: all 0.2s $cubic-bezier;
+      transition: all $animation-duration $cubic-bezier;
       &.rotate {
         transform: rotate(180deg);
       }
@@ -39,7 +40,7 @@
     .inner {
       padding: 10px 20px;
       opacity: 0;
-      transition: all 0.2s ease-in;
+      transition: all $animation-duration ease-in;
       &.show {
         opacity: 1;
       }
@@ -48,6 +49,6 @@
   .divider {
     height: 1px;
     width: 100%;
-    background-color: #e5e5e5;
+    background-color: var(--border-white);
   }
 }

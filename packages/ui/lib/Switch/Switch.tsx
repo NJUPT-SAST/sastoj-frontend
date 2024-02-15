@@ -52,14 +52,14 @@ export const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
     }, [isChecked, onchange]);
     return (
       <>
-        <div style={{ position: 'relative' }}>
+        <div className={`${styles['background']} ${styles[size]}`}>
           <button
             className={switchClass}
             onClick={() => setIsChecked(!isChecked)}
             ref={ref}
             disabled={disabled}
             {...rest}
-          />
+          ></button>
         </div>
       </>
     );

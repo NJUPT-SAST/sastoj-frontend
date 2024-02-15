@@ -39,6 +39,10 @@ export const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
     { width = 400, CarouselItems = undefined, height, onChange, defaultSelected, selected },
     ref,
   ) => {
+    // The definition judgment of this rotating chart is determined by two factors,
+    // one is whether it has reached the halfway position,
+    // and the second is the speed of movement, when the dragging speed is greater than 0.5, it is automatically switched.
+    // 这个轮播图的界定判断由两个因素决定，一个是是否到达了一半的位置，第二个是移动的速度，当拖拽速度大于0.5时，自动进行切换。
     const [select, setSelect] = useState<number>(defaultSelected || 0);
     const [startX, setStartX] = useState<number>(0);
     const [endX, setEndX] = useState<number>(0);
@@ -88,6 +92,8 @@ export const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       }
     }, [select, width, difference]);
 
+    // This is a half-position judgment
+    // 这个是一半位置的判断
     const handleMouseUp = (e: React.MouseEvent) => {
       setEndX(e.clientX);
       setEndTime(Date.now());
@@ -120,6 +126,8 @@ export const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
         const duration = endTime - startTime;
         const space = endX - startX;
         const v = space / duration;
+        // This is a speed judgment.
+        // 这个是速度的判断
         v < -0.5 && select !== itemsNumber - 1 && setSelect(select + 1);
         v > 0.5 && select != 0 && setSelect(select - 1);
       }

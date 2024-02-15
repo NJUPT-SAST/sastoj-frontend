@@ -1,3 +1,4 @@
+@use '../variables' as *;
 .base {
   width: 400px;
   height: 200px;
@@ -5,7 +6,7 @@
   .carouselAll {
     display: grid;
     grid-auto-flow: column;
-    transition: all 0.4s cubic-bezier(0.65, 0.22, 0.27, 0.74);
+    transition: all 0.4s $cubic-bezier;
     .item {
       width: 400px;
       height: 200px;
