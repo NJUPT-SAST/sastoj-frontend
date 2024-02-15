@@ -10,7 +10,7 @@ $animation-duration: $duration-300;
 $ball-margin: 5px;
 //这个是当滑动的圆球滚动到中间时拉长的宽度的倍数
 // This is a multiple of the elongated width of the sliding orb when it rolls to the center.
-$ball-center-width: 1.3;
+$ball-center-width: 1.1;
 
 $switch-sizes: (
   small: $switch-size-small,
@@ -22,6 +22,19 @@ $switch-sizes: (
   height: $size;
   width: 2 * $size;
   border-radius: calc(#{$size} / 2);
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -$size;
+    border-radius: 50%;
+    height: $size;
+    width: $size;
+    transform: translateY(-50%);
+    background-color: var(--primary-color);
+    z-index: 0;
+    transition: all $animation-duration $cubic-bezier;
+  }
   &::before {
     height: calc($size - $ball-margin);
     width: calc($size - $ball-margin);
@@ -30,6 +43,13 @@ $switch-sizes: (
   }
   &.isChecked::before {
     animation-name: slide-not-checked-#{$size-name};
+  }
+  &.isChecked::after {
+    content: '';
+    height: $size * 2;
+    width: $size * 2;
+    left: 0px;
+    transition: all $animation-duration $cubic-bezier;
   }
 }
 
@@ -69,41 +89,58 @@ $switch-sizes: (
 
 @include generate-animations($switch-sizes, $ball-margin, $ball-center-width);
 
-.base {
+@mixin background-size($size) {
+  border-radius: calc(#{$size} / 2);
+}
+
+.background {
   position: relative;
-  all: unset;
-  display: block;
-  background-color: var(--shadow-color);
-  box-shadow: $shadow-inner;
-  cursor: pointer;
-  transition: all $animation-duration $cubic-bezier;
+  overflow: hidden;
   &.medium {
     $switch-size-anim: $switch-size-medium;
-    @include switch-size($switch-size-medium, 'medium');
+    @include background-size($switch-size-medium);
   }
   &.large {
-    @include switch-size($switch-size-large, 'large');
+    @include background-size($switch-size-large);
   }
   &.small {
-    @include switch-size($switch-size-small, 'small');
+    @include background-size($switch-size-small);
   }
-  &::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    background-color: var(--white-color);
-    transform: translate(0, -50%);
-    @include animation('not-checked');
-  }
-  &.isChecked::before {
-    content: '';
-    @include animation('checked');
-  }
-  &.isChecked {
-    background-color: var(--primary-color);
+  .base {
+    position: relative;
+    all: unset;
+    display: block;
+    background-color: var(--shadow-color);
+    z-index: -1;
+    box-shadow: $shadow-inner;
+    cursor: pointer;
     transition: all $animation-duration $cubic-bezier;
-  }
-  &.disabled {
-    @include disabled;
+    &.medium {
+      $switch-size-anim: $switch-size-medium;
+      @include switch-size($switch-size-medium, 'medium');
+    }
+    &.large {
+      @include switch-size($switch-size-large, 'large');
+    }
+    &.small {
+      @include switch-size($switch-size-small, 'small');
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      background-color: var(--white-color);
+      transform: translate(0, -50%);
+      @include animation('not-checked');
+      z-index: 1;
+    }
+    &.isChecked::before {
+      content: '';
+      @include animation('checked');
+    }
+    &.disabled {
+      @include disabled;
+    }
   }
 }

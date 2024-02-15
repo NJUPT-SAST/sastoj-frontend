@@ -1,4 +1,5 @@
 @use '../variables' as *;
+$animation-duration: $duration-300;
 @mixin medium {
   width: 20px;
   height: 20px;
@@ -10,6 +11,44 @@
 @mixin small {
   width: 16px;
   height: 16px;
+}
+@mixin size-radio-content($size-name) {
+  @if $size-name == 'small' {
+    @include small();
+  }
+  @if $size-name == 'medium' {
+    @include medium();
+  }
+  @if $size-name == 'large' {
+    @include large();
+  }
+}
+
+@mixin size-radio($size-name) {
+  .radioItem {
+    @include size-radio-content($size-name);
+
+    &::before {
+      @include size-radio-content($size-name);
+    }
+
+    &::after {
+      @include size-radio-content($size-name);
+    }
+
+    &:checked::before {
+      @include size-radio-content($size-name);
+    }
+  }
+}
+
+@mixin color-radio($color-name) {
+  .radioItem {
+    &:checked::before {
+      background-color: var(--#{$color-name}-color);
+      box-shadow: 0 0px 6px rgba(var(--#{$color-name}-color-rgb), 0.4);
+    }
+  }
 }
 
 .base {
@@ -27,42 +66,18 @@
     cursor: pointer;
   }
   &.primary {
-    .radioItem {
-      &:checked::before {
-        background-color: var(--primary-color);
-        box-shadow: 0 0px 6px rgba(var(--primary-color-rgb), 0.4);
-      }
-    }
+    @include color-radio(primary);
   }
   &.warning {
-    .radioItem {
-      &:checked::before {
-        background-color: var(--warning-color);
-        box-shadow: 0 0px 6px rgba(var(--warning-color-rgb), 0.4);
-      }
-    }
+    @include color-radio(warning);
   }
   &.danger {
-    .radioItem {
-      &:checked::before {
-        background-color: var(--danger-color);
-        box-shadow: 0 0px 6px rgba(var(--danger-color-rgb), 0.4);
-      }
-    }
+    @include color-radio(danger);
   }
   &.large {
     gap: 7px;
+    @include size-radio(large);
     .radioItem {
-      @include large();
-      &::before {
-        @include large();
-      }
-      &::after {
-        @include large();
-      }
-      &:checked::before {
-        @include large();
-      }
       &:checked::after {
         width: 10px;
         height: 10px;
@@ -74,17 +89,8 @@
   }
   &.medium {
     gap: 5px;
+    @include size-radio(medium);
     .radioItem {
-      @include medium();
-      &::before {
-        @include medium();
-      }
-      &::after {
-        @include medium();
-      }
-      &:checked::before {
-        @include medium();
-      }
       &:checked::after {
         width: 8px;
         height: 8px;
@@ -96,17 +102,8 @@
   }
   &.small {
     gap: 3px;
+    @include size-radio(small);
     .radioItem {
-      @include small();
-      &::before {
-        @include small();
-      }
-      &::after {
-        @include small();
-      }
-      &:checked::before {
-        @include small();
-      }
       &:checked::after {
         width: 6px;
         height: 6px;
@@ -120,7 +117,7 @@
     cursor: pointer;
     appearance: none;
     position: relative;
-    transition: all 0.25s $cubic-bezier;
+    transition: all $animation-duration $cubic-bezier;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -134,7 +131,7 @@
       box-sizing: border-box;
       display: inline-block;
       border-radius: 50%;
-      transition: all 0.2s $cubic-bezier;
+      transition: all $animation-duration $cubic-bezier;
     }
     &::after {
       content: '';
@@ -142,7 +139,7 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      transition: all 0.2s $cubic-bezier;
+      transition: all $animation-duration $cubic-bezier;
     }
     &:active {
       scale: 0.95;

@@ -1,21 +1,22 @@
+@mixin color-badge($color-name) {
+  background-color: rgba(var(--#{$color-name}-color-background-rgb), 1);
+  color: var(--#{$color-name}-color);
+}
+
 .base {
   padding: 3px 10px;
   border-radius: 5px;
   &.info {
-    background-color: rgba(var(--primary-color-background-rgb), 1);
-    color: var(--primary-color);
+    @include color-badge(primary);
   }
   &.success {
-    background-color: rgba(var(--success-color-background-rgb), 1);
-    color: var(--success-color);
+    @include color-badge(success);
   }
   &.warning {
-    background-color: rgba(var(--warning-color-background-rgb), 1);
-    color: var(--warning-color);
+    @include color-badge(warning);
   }
   &.error {
-    background-color: rgba(var(--danger-color-background-rgb), 1);
-    color: var(--danger-color);
+    @include color-badge(danger);
   }
   &.medium {
     font-size: 14px;

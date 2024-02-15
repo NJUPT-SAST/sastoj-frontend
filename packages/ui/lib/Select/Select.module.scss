@@ -1,4 +1,5 @@
 @use '../variables' as *;
+$animation-duration: $duration-300;
 .options {
   position: absolute;
   width: 280px;
@@ -17,7 +18,7 @@
   opacity: 0;
   transform: scaleY(0);
   background-color: var(--white-color);
-  transition: all 0.2s $cubic-bezier;
+  transition: all $animation-duration $cubic-bezier;
   display: flex;
   .nothing-img-container {
     margin: 15px;
@@ -38,7 +39,7 @@
     height: 35px;
     display: flex;
     align-items: center;
-    transition: all 0.3s $cubic-bezier;
+    transition: all $animation-duration $cubic-bezier;
     &:hover {
       background-color: rgba(var(--shadow-color-rgb), 0.1);
       padding: 0 0 0 4px;

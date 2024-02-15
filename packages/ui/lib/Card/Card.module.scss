@@ -1,7 +1,8 @@
 @use '../variables' as *;
+$radius: $radius-8;
 .base {
   height: fit-content;
-  border-radius: 6px;
+  border-radius: $radius;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -9,7 +10,7 @@
   align-items: flex-start;
   box-sizing: border-box;
   .titleImage {
-    border-radius: 6px 6px 0 0;
+    border-radius: $radius $radius 0 0;
     overflow: hidden;
     height: 300px;
     width: 100% !important;
@@ -18,7 +19,7 @@
       padding: 0;
       height: 300px;
       object-fit: cover;
-      transition: all 0.3s $cubic-bezier;
+      transition: all $duration-300 $cubic-bezier;
       &:hover {
         scale: 1.1;
       }
