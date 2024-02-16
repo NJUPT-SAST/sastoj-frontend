@@ -54,7 +54,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     {
       width = 250,
       disabled = false,
-      label = 'Eamil',
+      label = '昵称',
       mode = 'text',
       placeholder = '',
       fontsize = 16,

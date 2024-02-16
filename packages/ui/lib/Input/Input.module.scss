@@ -2,9 +2,9 @@
 $border-radius: $radius-8;
 $border-width: $border-1;
 $font-size-select: $font-size-14;
-$font-size-label: $font-size-8;
+$font-size-label: $font-size-10;
 $padding-left-right: 11px;
-$padding-label-top: 7px;
+$padding-label-top: 8px;
 $animation-duration: $duration-200;
 .base {
   width: fit-content;
@@ -48,7 +48,7 @@ $animation-duration: $duration-200;
 
   .input {
     all: unset;
-    padding: 18px $padding-left-right 8px $padding-left-right;
+    padding: 22px $padding-left-right 8px $padding-left-right;
     width: -webkit-fill-available;
     position: relative;
     top: 0;
@@ -61,7 +61,7 @@ $animation-duration: $duration-200;
     @include disabled;
   }
   &.fill {
-    width: 100%;
+    width: 100% !important;
     .input {
       width: 100% !important;
     }

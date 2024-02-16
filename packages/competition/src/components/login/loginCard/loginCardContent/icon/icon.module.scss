@@ -1,0 +1,30 @@
+@use "../../../../../variables" as *;
+$animation-duration: 300ms;
+$animation-delay: 500ms;
+@mixin svg-animation($delay) {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  animation: draw-success-icon $animation-duration linear forwards;
+  animation-delay: $delay;
+}
+.icon {
+  @include absolute-center;
+  .success {
+    @include svg-animation($animation-delay);
+  }
+  .cross1 {
+    @include svg-animation($animation-delay);
+  }
+  .cross2 {
+    @include svg-animation($animation-delay * 2);
+  }
+}
+
+@keyframes draw-success-icon {
+  50% {
+    stroke-dashoffset: 18;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
