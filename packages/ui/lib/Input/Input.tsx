@@ -113,6 +113,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             onChange={changeValue}
             onBlur={blurInput}
             autoComplete="off"
+            autoSave="off"
             value={inputValue}
             {...rest}
           />
