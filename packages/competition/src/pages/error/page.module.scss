@@ -1,0 +1,47 @@
+@use "../../variables" as *;
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap");
+@mixin font() {
+  font-family: "Roboto Mono", monospace;
+  font-weight: bolder;
+}
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100vw;
+  margin-top: 35px;
+  .error-span-1 {
+    @include font();
+    font-size: 60px;
+  }
+  .error-span-2 {
+    @include font();
+    font-size: 20px;
+  }
+  .error-img-container {
+    width: 500px;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+    img {
+      @include absolute-center();
+      width: 800px;
+    }
+  }
+  .error-button {
+    margin-top: 25px;
+    @include flex-center();
+    gap: 8px;
+    svg {
+      path {
+        stroke: var(--primary-color);
+      }
+    }
+    span {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
+}

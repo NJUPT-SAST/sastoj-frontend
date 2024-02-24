@@ -54,7 +54,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     {
       width = 250,
       disabled = false,
-      label = 'Eamil',
+      label = '昵称',
       mode = 'text',
       placeholder = '',
       fontsize = 16,
@@ -93,7 +93,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     };
 
     useEffect(() => {
-      value && setInputValue(value);
+      value !== undefined && setInputValue(value);
     }, [value]);
 
     return (
@@ -113,12 +113,15 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             onChange={changeValue}
             onBlur={blurInput}
             autoComplete="off"
+            autoSave="off"
             value={inputValue}
             {...rest}
           />
           <label
             htmlFor="input"
-            className={`${styles['inputLabel']} ${inputValue ? styles['isUpInputLabel'] : ''}`}
+            className={`${styles['inputLabel']} ${
+              inputValue || placeholder ? styles['isUpInputLabel'] : ''
+            }`}
           >
             {label}
           </label>

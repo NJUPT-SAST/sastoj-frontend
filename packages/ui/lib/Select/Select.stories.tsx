@@ -30,9 +30,8 @@ const defaultProps: SelectProps = {
   ],
   onchange: test,
   disabled: false,
-  defaultSelectKey: 2,
-  selectKey: 2,
   isBorder: true,
+  placeHolder: '',
 };
 
 export const DefaultSelect: Story = {

@@ -1,0 +1,45 @@
+.card {
+  background-color: transparent !important;
+  background: linear-gradient(to bottom right, var(--white-color), transparent);
+  background-position: 50% 50%;
+  background-size: 2000% 2000%;
+  box-shadow:
+    inset -5px -5px 240px 0px rgba(255, 255, 255, 0.02),
+    inset 5px 5px 4px 0px rgba(255, 255, 255, 0.35) !important;
+  backdrop-filter: blur(42px);
+  border: 1px solid var(--divider-color);
+  .header-container {
+    display: flex;
+    flex-direction: column;
+    font-weight: bolder;
+    gap: 10px;
+    font-size: 16px;
+    color: var(--shadow-color);
+  }
+  .footer-container {
+    width: 100%;
+    .divider-container {
+      padding: 12px 0;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 12px;
+      color: var(--shadow-color);
+      div {
+        flex-grow: 1;
+        height: 1px;
+        background-color: var(--divider-color);
+      }
+    }
+    .other-way-container {
+      display: flex;
+      flex-direction: row;
+      gap: 50px;
+      button {
+        flex-grow: 1;
+        height: 50px;
+        font-weight: 1000;
+      }
+    }
+  }
+}
