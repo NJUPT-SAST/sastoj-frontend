@@ -14,7 +14,7 @@ const LoginCardContent = () => {
     //这里模仿实际的请求，在2000ms之后登录失败
     setTimeout(() => {
       setIsSignError(true);
-      showToast({ type: "error", content: "昵称或者密码错误" });
+      // showToast({ type: "error", content: "昵称或者密码错误" });
       setTimeout(() => {
         setIsSignError(false);
         setIsClicked(false);
@@ -27,8 +27,13 @@ const LoginCardContent = () => {
   };
   return (
     <div className={styles["main-content-container"]}>
-      <Input label="昵称" isFillFather={true}></Input>
-      <Input type="password" label="密码" isFillFather={true}></Input>
+      <Input label="昵称" isFillFather={true} id="userName"></Input>
+      <Input
+        type="password"
+        label="密码"
+        isFillFather={true}
+        id="password"
+      ></Input>
       <div className={styles["button-container"]}>
         <Button
           className={`${styles["sign-in-button"]} 
@@ -36,8 +41,10 @@ const LoginCardContent = () => {
       ${styles[isSignError ? "error" : ""]}
       ${styles[isSignSuccess ? "success" : ""]}`}
           onClick={test}
+          disabled={isClicked}
+          disabledShadow={false}
         >
-          {!isSignSuccess && !isSignError && <span>Sign In</span>}
+          {!isClicked && <span>Sign In</span>}
           {isSignSuccess && <Success />}
           {isSignError && <Error />}
         </Button>

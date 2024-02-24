@@ -41,6 +41,10 @@ export interface SelectProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
    * width, the width of the select
    */
   width?: number;
+  /**
+   * placeHolder of the select
+   */
+  placeHolder?: string;
 }
 
 export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
@@ -57,6 +61,7 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
       selectKey,
       isBorder = true,
       width = 280,
+      placeHolder = '',
       ...rest
     },
     ref,
@@ -67,6 +72,11 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
     );
     const [options, setOptions] = useState<OptionProps[]>(optionsList);
     const [inputValue, setInputValue] = useState<string>('');
+    const [selectPlaceHolder, setSelectPlaceHolder] = useState<string>('');
+
+    useEffect(() => {
+      setSelectPlaceHolder(placeHolder);
+    }, [placeHolder]);
 
     const showOptions: MouseEventHandler = () => {
       if (!disabled) setVisble(!visible);
@@ -78,12 +88,15 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
 
     function handleClick(value: OptionProps): void {
       setSelectItem(value);
-      setInputValue(value.label);
+      setSelectPlaceHolder(value.label);
+      setTimeout(() => {
+        setInputValue('');
+      }, 300);
     }
 
     useEffect(() => {
       onchange && selectItem && onchange(selectItem);
-      selectItem?.label && setInputValue(selectItem?.label);
+      selectItem?.label && setInputValue('');
     }, [selectItem, onchange]);
 
     const handleOptions = (value: string) => {
@@ -105,6 +118,7 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
     };
 
     useEffect(() => {
+      console.log(inputValue);
       const results = fuzzySearch(optionsList, inputValue);
       setOptions(results);
     }, [inputValue, optionsList]);
@@ -117,12 +131,13 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
         >
           <Input
             onClick={showOptions}
-            value={inputValue}
             onBlur={closeOptions}
+            value={inputValue}
             width={width}
             onchange={handleOptions}
             label={title}
             isBorder={isBorder}
+            placeholder={selectPlaceHolder}
           ></Input>
           <div className={`${styles['options']} ${visible ? styles['show'] : ''}`}>
             {!options.length ? (

@@ -93,7 +93,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     };
 
     useEffect(() => {
-      value && setInputValue(value);
+      value !== undefined && setInputValue(value);
     }, [value]);
 
     return (
@@ -119,7 +119,9 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           />
           <label
             htmlFor="input"
-            className={`${styles['inputLabel']} ${inputValue ? styles['isUpInputLabel'] : ''}`}
+            className={`${styles['inputLabel']} ${
+              inputValue || placeholder ? styles['isUpInputLabel'] : ''
+            }`}
           >
             {label}
           </label>

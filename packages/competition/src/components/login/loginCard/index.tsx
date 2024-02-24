@@ -1,4 +1,4 @@
-import { Card, Button } from "@sast/oj-ui";
+import { Button, Card } from "@sast/oj-ui";
 import Logo from "../../logo";
 import styles from "./index.module.scss";
 import LoginCardContent from "./loginCardContent";

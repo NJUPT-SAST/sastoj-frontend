@@ -43,14 +43,16 @@
     background-color: var(--danger-color);
   }
   &.disabled {
-    @include disabled;
-    filter: grayscale(1);
+    cursor: not-allowed;
     &:hover {
       backdrop-filter: none;
     }
     &:active {
       transform: none;
     }
+  }
+  &.disabledShadow {
+    filter: grayscale(1);
   }
   &.small {
     padding: 5px;
