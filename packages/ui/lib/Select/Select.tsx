@@ -96,7 +96,9 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
 
     useEffect(() => {
       onchange && selectItem && onchange(selectItem);
-      selectItem?.label && setInputValue('');
+      console.log(selectItem?.label);
+
+      selectItem?.label && setSelectPlaceHolder(selectItem.label);
     }, [selectItem, onchange]);
 
     const handleOptions = (value: string) => {
@@ -138,6 +140,7 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
             label={title}
             isBorder={isBorder}
             placeholder={selectPlaceHolder}
+            disabled={disabled}
           ></Input>
           <div className={`${styles['options']} ${visible ? styles['show'] : ''}`}>
             {!options.length ? (

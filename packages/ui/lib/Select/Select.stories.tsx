@@ -31,6 +31,7 @@ const defaultProps: SelectProps = {
   onchange: test,
   disabled: false,
   isBorder: true,
+  defaultSelectKey: 1,
   placeHolder: '',
 };
 
