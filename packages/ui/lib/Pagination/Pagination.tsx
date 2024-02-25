@@ -81,6 +81,7 @@ export const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
               type="select"
               key={i}
               index={i}
+              disabled={disabled}
             >
               {i + 1}
             </PaginationItem>,
@@ -94,6 +95,7 @@ export const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
               <PaginationItem
                 type="select"
                 index={i}
+                disabled={disabled}
               >
                 {i + 1}
               </PaginationItem>,
@@ -109,6 +111,7 @@ export const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
               <PaginationItem
                 type="select"
                 index={i}
+                disabled={disabled}
               >
                 {i + 1}
               </PaginationItem>,
@@ -122,6 +125,7 @@ export const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
               <PaginationItem
                 type="select"
                 index={i}
+                disabled={disabled}
               >
                 {i + 1}
               </PaginationItem>,
@@ -137,6 +141,7 @@ export const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
               <PaginationItem
                 type="select"
                 index={i}
+                disabled={disabled}
               >
                 {i + 1}
               </PaginationItem>,
@@ -148,7 +153,8 @@ export const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
           newItems.push(
             <PaginationItem
               type="select"
-              index={1}
+              index={0}
+              disabled={disabled}
             >
               {1}
             </PaginationItem>,
@@ -163,6 +169,7 @@ export const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
               <PaginationItem
                 type="select"
                 index={i}
+                disabled={disabled}
               >
                 {i + 1}
               </PaginationItem>,
@@ -176,7 +183,8 @@ export const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
           newItems.push(
             <PaginationItem
               type="select"
-              index={pageNumber}
+              index={pageNumber - 1}
+              disabled={disabled}
             >
               {pageNumber}
             </PaginationItem>,
@@ -197,7 +205,7 @@ export const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
         >
           <PaginationItem
             type="delete"
-            disabled={currentPage === 1}
+            disabled={currentPage === 1 || disabled}
           >
             <svg
               width="16"
@@ -212,7 +220,7 @@ export const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
           {itemList}
           <PaginationItem
             type="add"
-            disabled={currentPage === pageNumber}
+            disabled={currentPage === pageNumber || disabled}
           >
             <svg
               width="16"
