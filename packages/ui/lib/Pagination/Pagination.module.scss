@@ -1,7 +1,11 @@
+@use '../variables' as *;
 .base {
   display: flex;
   flex-direction: row;
   gap: 5px;
+  &.disabled {
+    @include disabled;
+  }
   .pagination-item {
     width: 32px;
     height: 32px;

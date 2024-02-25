@@ -4,8 +4,26 @@
     radial-gradient(circle at 65% 35%, #ffce20, transparent),
     radial-gradient(circle at 25% 85%, #ff8b20, transparent),
     radial-gradient(circle at 65% 100%, #20ffd7, transparent);
-  background-blend-mode: screen;  position: relative;
+  background-blend-mode: screen;
+  position: relative;
   height: 100vh;
   width: 100vw;
   @include flex-center();
+  .login-card-container {
+    animation-name: login-card-show;
+    animation-duration: 1s;
+    animation-timing-function: $cubic-bezier;
+    animation-fill-mode: forwards;
+  }
+}
+
+@keyframes login-card-show {
+  from {
+    opacity: 0.8;
+    scale: 0.9;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
 }
