@@ -9,7 +9,7 @@ const meta = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
+  // tags: ['autodocs'],
   argTypes: {},
 } satisfies Meta<typeof Sheet>;
 
