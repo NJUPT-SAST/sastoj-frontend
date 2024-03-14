@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@sast/oj-ui": "workspace:^",
+    "@sast/oj-ui-universal": "workspace:^",
     "axios": "^1.6.7",
     "localforage": "^1.10.0",
     "react": "^18.2.0",
