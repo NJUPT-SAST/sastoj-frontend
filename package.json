@@ -14,6 +14,8 @@
     "ui:lint": "pnpm --filter @sast/oj-ui lint",
     "ui:format": "pnpm --filter @sast/oj-ui format",
     "ui:test": "pnpm --filter @sast/oj-ui test",
+    "ui-uni:dev": "pnpm --filter @sast/oj-ui-universal dev",
+    "ui-uni:build": "pnpm --filter @sast/oj-ui-universal build",
     "competition:dev": "pnpm --filter @sast/oj-competition dev",
     "competition:build": "pnpm --filter @sast/oj-competition build:lib",
     "competition:lint": "pnpm --filter @sast/oj-competition lint",
