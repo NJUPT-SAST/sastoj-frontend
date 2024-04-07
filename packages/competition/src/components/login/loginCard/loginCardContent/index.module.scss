@@ -1,4 +1,4 @@
-@use "../../../../variables" as *;
+@use "@/_variables" as *;
 $rotate-duration: 1000ms;
 $transition-duration: 200ms;
 .main-content-container {
@@ -16,7 +16,7 @@ $transition-duration: 200ms;
       position: relative;
       transition: all $transition-duration $cubic-bezier;
       &.clicked {
-        background-color: var(--white-color);
+        background-color: $white-color;
         height: 40px;
         width: 40px;
         border-radius: 50%;
@@ -31,7 +31,7 @@ $transition-duration: 200ms;
         height: 100%;
         border: 6px solid;
         border-radius: 50%;
-        border-color: transparent transparent var(--primary-color) transparent;
+        border-color: transparent transparent $primary-color transparent;
         animation-name: rotate;
         animation-duration: $rotate-duration;
         animation-timing-function: $cubic-bezier;
@@ -41,12 +41,12 @@ $transition-duration: 200ms;
       &.error::before {
         border: unset;
         animation: none;
-        background-color: var(--danger-color);
+        background-color: $danger-color;
       }
       &.success::before {
         border: unset;
         animation: none;
-        background-color: var(--success-color);
+        background-color: $success-color;
       }
     }
   }

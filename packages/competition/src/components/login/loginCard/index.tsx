@@ -22,7 +22,7 @@ const LoginCard = () => {
             <span>Or continue with</span>
             <div />
           </div>
-          <div className={styles["other-way-container"]}>
+          <div className={styles["other-ways-container"]}>
             <Button color="border">
               <span>Link</span>
             </Button>
@@ -35,7 +35,7 @@ const LoginCard = () => {
           </div>
         </div>
       }
-    ></Card>
+    />
   );
 };
 

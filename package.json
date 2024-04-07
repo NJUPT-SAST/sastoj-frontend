@@ -13,7 +13,7 @@
     "competition:lint": "pnpm --filter @sast/oj-competition lint",
     "docs:dev": "pnpm --filter @sast/oj-docs dev",
     "docs:build": "pnpm --filter @sast/oj-docs build",
-    "commit": "git add .;pnpm lint-staged -p false && pnpm cz"
+    "commit": "git add .&&pnpm lint-staged -p false && pnpm cz"
   },
   "engines": {
     "node": ">=18",
