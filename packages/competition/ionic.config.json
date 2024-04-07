@@ -1,7 +1,0 @@
-{
-  "name": "@sast/oj-competition",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "custom"
-}
