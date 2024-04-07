@@ -10,16 +10,14 @@ interface LogoProps {
 
 const Logo = ({ width, height, className, style }: LogoProps) => {
   return (
-    <>
-      <img
-        src={logo}
-        alt="logo"
-        width={width}
-        height={height}
-        className={className}
-        style={{ objectFit: "contain", ...style }}
-      ></img>
-    </>
+    <img
+      src={logo}
+      alt="logo"
+      width={width}
+      height={height}
+      className={className}
+      style={{ objectFit: "contain", ...style }}
+    ></img>
   );
 };
 

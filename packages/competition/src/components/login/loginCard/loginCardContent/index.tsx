@@ -1,4 +1,4 @@
-import { Input, Button, showToast } from "@sast/oj-ui";
+import { Input, Button, showToast } from "@ui-aurora/react";
 import styles from "./index.module.scss";
 import { useState } from "react";
 import Success from "./icon/success";

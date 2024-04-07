@@ -1,6 +1,6 @@
 import styles from "./page.module.scss";
 import error404 from "../../assets/404.png";
-import { Button } from "@sast/oj-ui";
+import { Button } from "@ui-aurora/react";
 import { useNavigate } from "react-router-dom";
 const Error = () => {
   const navigate = useNavigate();
