@@ -17,7 +17,7 @@ const Logo = ({ width, height, className, style }: LogoProps) => {
       height={height}
       className={className}
       style={{ objectFit: "contain", ...style }}
-    ></img>
+    />
   );
 };
 

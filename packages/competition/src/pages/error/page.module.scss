@@ -12,6 +12,9 @@
   gap: 10px;
   width: 100vw;
   margin-top: 35px;
+  height: 100vh;
+  box-sizing: border-box;
+  margin: 0;
   .error-span-1 {
     @include font();
     font-size: 60px;
@@ -36,11 +39,11 @@
     gap: 8px;
     svg {
       path {
-        stroke: var(--primary-color);
+        stroke: $primary-color;
       }
     }
     span {
-      font-size: 20px;
+      font-size: 16px;
       font-weight: bold;
     }
   }
