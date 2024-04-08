@@ -1,4 +1,4 @@
-@use "../../../../../variables" as *;
+@use "@/variables" as *;
 $animation-duration: 300ms;
 $animation-delay: 500ms;
 @mixin svg-animation($delay) {

@@ -1,4 +1,4 @@
-@use "../../variables" as *;
+@use "@/variables" as *;
 
 @mixin animation($name, $time, $count) {
   animation-name: $name;

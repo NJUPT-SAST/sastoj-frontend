@@ -1,4 +1,4 @@
-@use "../../variables" as *;
+@use "@/variables" as *;
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap");
 @mixin font() {
   font-family: "Roboto Mono", monospace;
