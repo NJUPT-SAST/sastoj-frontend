@@ -3,6 +3,7 @@ import error404 from "../../assets/404.png";
 import { Button } from "@ui-aurora/react";
 import { useNavigate } from "react-router-dom";
 import { ArrowBigLeft } from "lucide-react";
+
 const Error = () => {
   const navigate = useNavigate();
   return (
