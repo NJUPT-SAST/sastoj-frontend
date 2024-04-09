@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      "@/variables": "./src/_variables.scss",
+      "@/variables": `${__dirname}/src/_variables.scss`,
     },
   },
 });

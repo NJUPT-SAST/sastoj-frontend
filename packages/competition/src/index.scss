@@ -1,3 +1,5 @@
+@use "@/variables" as *;
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -11,6 +13,11 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("./assets/fonts/JetBrainsMono-Regular.ttf") format("truetype");
 }
 
 a {
@@ -42,4 +49,35 @@ h1 {
   button {
     background-color: #f9f9f9;
   }
+}
+
+svg {
+  fill: none !important;
+}
+
+code {
+  border-radius: 3px;
+  background-color: rgb($shadow-color, 0.1) !important;
+  span {
+    font-family: "JetBrains Mono" !important;
+  }
+}
+
+table {
+  border-spacing: 0 !important;
+  border-radius: 3px !important;
+  border: solid 2px rgb($shadow-color, 0.1);
+}
+
+table th,
+table td {
+  padding: 6px 20px;
+  text-align: left;
+  background-color: rgb($shadow-color, 0.1);
+  color: $black-color;
+}
+
+table th {
+  // background-color: rgb(#8fbf9f, 0.15);
+  color: #00668c;
 }
