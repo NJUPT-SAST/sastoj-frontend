@@ -1,8 +1,9 @@
 import { Marked } from "marked";
 import { markedHighlight } from "marked-highlight";
 import hljs from "highlight.js";
-import renderer from "./renderer";
 import "highlight.js/styles/base16/atelier-cave-light.css";
+
+import renderer from "./renderer";
 
 export const marked = new Marked(
   {
