@@ -26,7 +26,6 @@ export async function convertMarkdownToHtml(markdown: string): Promise<string> {
     const html: string = await marked.parse(markdown);
     return html;
   } catch (error) {
-    console.log(error);
-    throw new Error("Convert markdown to html error");
+    throw new Error(error as string);
   }
 }
