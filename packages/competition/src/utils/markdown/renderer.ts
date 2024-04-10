@@ -1,4 +1,5 @@
 import { RendererObject } from "marked";
+
 import styles from "./renderer.module.scss";
 
 const renderer: RendererObject = {
