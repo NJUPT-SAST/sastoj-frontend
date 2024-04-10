@@ -1,0 +1,49 @@
+@use "@/variables" as *;
+
+.header-link {
+  color: $black-color;
+  font-weight: bold;
+}
+
+.block-quote {
+  margin: 0;
+  padding: 8px 25px;
+  border-left: 5px solid $shadow-color;
+  border-radius: $radius-3;
+  background-color: rgb($shadow-color, 0.05);
+  font-style: italic;
+  font-weight: bold;
+}
+
+.a-link {
+  color: $primary-color;
+  transition: all 300ms $cubic-bezier;
+}
+
+.table {
+  border-spacing: 0px !important;
+  border-radius: 3px !important;
+  border: solid 2px rgb($shadow-color, 0.05);
+  th,
+  td {
+    padding: 6px 20px;
+    text-align: left;
+    background-color: rgb($shadow-color, 0.05);
+    color: $black-color;
+  }
+  th {
+    color: #00668c;
+  }
+}
+
+.list {
+  padding-left: 28px;
+}
+
+code {
+  border-radius: 3px;
+  background-color: rgb($shadow-color, 0.05) !important;
+  span {
+    font-family: "JetBrains Mono" !important;
+  }
+}
