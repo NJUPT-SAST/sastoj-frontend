@@ -11,6 +11,9 @@
     "competition:dev": "pnpm --filter @sast/oj-competition dev",
     "competition:build": "pnpm --filter @sast/oj-competition build:lib",
     "competition:lint": "pnpm --filter @sast/oj-competition lint",
+    "management:dev": "pnpm --filter @sast/oj-management dev",
+    "management:build": "pnpm --filter @sast/oj-management build",
+    "management:lint": "pnpm --filter @sast/oj-management lint",
     "docs:dev": "pnpm --filter @sast/oj-docs dev",
     "docs:build": "pnpm --filter @sast/oj-docs build",
     "commit": "git add .&&pnpm lint-staged -p false && pnpm cz"
@@ -30,16 +33,16 @@
   "devDependencies": {
     "@stylexjs/eslint-plugin": "^0.3.0",
     "@stylexjs/stylex": "^0.3.0",
-    "classnames": "^2.3.2",
+    "classnames": "^2.5.1",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog-zh": "^0.0.2",
-    "eslint": "^8.55.0",
-    "eslint-plugin-react": "^7.33.2",
-    "husky": "^8.0.0",
-    "lint-staged": "^15.2.0",
-    "sass": "^1.69.5",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.2",
+    "sass": "^1.74.1",
     "styleq": "^0.1.3",
-    "typescript": "^5.3.3",
-    "vite-plugin-stylex": "^0.4.0"
+    "typescript": "^5.4.5",
+    "vite-plugin-stylex": "^0.4.1"
   }
 }
