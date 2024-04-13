@@ -1,0 +1,37 @@
+@use "@/variables" as *;
+
+.footer-container {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .divider {
+    background-color: $divider-color;
+    height: 1px;
+    width: 100%;
+  }
+  .footer-content {
+    margin: 20px 0px;
+    padding: 0px 10px;
+    max-width: $max-width;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    .footer-left-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+    .footer-svg-container {
+      a {
+        color: $black-color;
+      }
+    }
+  }
+}

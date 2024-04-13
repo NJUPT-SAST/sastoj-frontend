@@ -4,6 +4,7 @@ import { Home as HomeIcon, LayoutList, Award } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 import Logo from "../../components/logo";
+import Footer from "../../components/footer";
 import styles from "./page.module.scss";
 
 interface HomeLayoutProps {
@@ -11,7 +12,7 @@ interface HomeLayoutProps {
 }
 
 const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
-  const [selectedRoute, setSelectedRoute] = useState<string>("");
+  const [selectedRoute, setSelectedRoute] = useState<string>("About");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,7 +23,7 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
   const headerItems: NavbarItemProps[] = [
     {
       icon: <HomeIcon size={20} />,
-      itemKey: "",
+      itemKey: "About",
       text: "首页",
     },
     {
@@ -37,7 +38,7 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
     },
   ];
   return (
-    <>
+    <div className={styles["page-container"]}>
       <Navbar
         header={<Logo height={36} />}
         items={headerItems}
@@ -46,7 +47,8 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
         className={styles.navbar}
       />
       {children}
-    </>
+      <Footer />
+    </div>
   );
 };
 
