@@ -1,28 +1,31 @@
 {
-  "name": "@sast/oj-management",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "lint": "eslint ."
-  },
-  "dependencies": {
-    "@mdi/font": "^7.4.47",
-    "nuxt": "^3.11.2",
-    "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
-  },
-  "devDependencies": {
-    "@nuxt/eslint-config": "^0.3.4",
-    "@pinia/nuxt": "^0.5.1",
-    "eslint": "^8.57.0",
-    "typescript": "^5.4.5",
-    "vite-plugin-vuetify": "^2.0.3",
-    "vuetify": "^3.5.15",
-    "vuetify-nuxt-module": "^0.13.2"
-  }
+    "name": "@sast/oj-management",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "nuxt build",
+        "dev": "nuxt dev",
+        "generate": "nuxt generate",
+        "preview": "nuxt preview",
+        "postinstall": "nuxt prepare",
+        "lint": "eslint .",
+        "prettier": "npx prettier .  --write"
+    },
+    "dependencies": {
+        "@mdi/font": "^7.4.47",
+        "nuxt": "^3.11.2",
+        "vue": "^3.4.21",
+        "vue-router": "^4.3.0"
+    },
+    "devDependencies": {
+        "@nuxt/eslint-config": "^0.3.4",
+        "@pinia/nuxt": "^0.5.1",
+        "eslint": "^8.57.0",
+        "eslint-config-prettier": "^9.1.0",
+        "prettier": "3.2.5",
+        "typescript": "^5.4.5",
+        "vite-plugin-vuetify": "^2.0.3",
+        "vuetify": "^3.5.15",
+        "vuetify-nuxt-module": "^0.13.2"
+    }
 }

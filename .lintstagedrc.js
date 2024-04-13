@@ -7,6 +7,7 @@ export default {
   "./packages/management/**/**.{js,cjs,ts,json,css,scss,tsx,sass,vue}": () => [
     "pnpm --filter @sast/oj-management lint",
     "pnpm --filter @sast/oj-management build",
+    "pnpm --filter @sast/oj-management prettier",
     "git add .",
   ],
 };
