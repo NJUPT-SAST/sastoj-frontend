@@ -1,8 +1,6 @@
 <template>
-    <img src="/Logo.svg" alt="Logo" />
+  <CatLogo />
 </template>
-<script setup>
-// const props = defineProps({
-//   width: Number,
-// });
+<script setup lang="ts">
+import CatLogo from "~/assets/imgs/Logo.svg";
 </script>
