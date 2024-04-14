@@ -33,6 +33,7 @@
   "devDependencies": {
     "@stylexjs/eslint-plugin": "^0.3.0",
     "@stylexjs/stylex": "^0.3.0",
+    "@types/node": "18",
     "classnames": "^2.5.1",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog-zh": "^0.0.2",

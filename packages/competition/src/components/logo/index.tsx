@@ -1,14 +1,14 @@
-import { CSSProperties } from "react";
+import { ButtonHTMLAttributes, CSSProperties } from "react";
 import logo from "../../assets/logo.svg";
 
-interface LogoProps {
+interface LogoProps extends ButtonHTMLAttributes<HTMLImageElement> {
   width?: number;
   height?: number;
   className?: string;
   style?: CSSProperties;
 }
 
-const Logo = ({ width, height, className, style }: LogoProps) => {
+const Logo = ({ width, height, className, style, ...rest }: LogoProps) => {
   return (
     <img
       src={logo}
@@ -17,6 +17,7 @@ const Logo = ({ width, height, className, style }: LogoProps) => {
       height={height}
       className={className}
       style={{ objectFit: "contain", ...style }}
+      {...rest}
     />
   );
 };
