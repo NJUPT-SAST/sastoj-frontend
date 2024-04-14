@@ -3,6 +3,12 @@
 import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 
 export default defineNuxtConfig({
+  app: {
+    head: {
+      title: "SAST OJ MANAGEMENT",
+      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.svg" }],
+    },
+  },
   alias: {
     variables: "@/_variables.scss",
   },
@@ -19,6 +25,12 @@ export default defineNuxtConfig({
   modules: [
     "@pinia/nuxt",
     "nuxt-svgo",
+    [
+      "@nuxtjs/google-fonts",
+      {
+        families: { "Fira Mono": true },
+      },
+    ],
     async (_options, nuxt) => {
       nuxt.hooks.hook("vite:extendConfig", (config) => {
         config.plugins?.push(vuetify({ autoImport: true }));
