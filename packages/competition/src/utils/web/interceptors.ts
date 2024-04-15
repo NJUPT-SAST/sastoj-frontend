@@ -1,12 +1,12 @@
 import { AxiosError, AxiosResponse } from "axios";
 
-import service from "./request";
+import REQUEST from "./request";
 import { RequestCanceler } from "./Canceler";
 import { HTTP_STATUS } from "./status";
 
 const canceler = new RequestCanceler();
 
-service.interceptors.request.use((config) => {
+REQUEST.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   token && (config.headers.Authorization = token);
 
@@ -18,7 +18,7 @@ service.interceptors.request.use((config) => {
   return config;
 });
 
-service.interceptors.response.use(
+REQUEST.interceptors.response.use(
   (response) => {
     //成功则返回response里有用的data
     return response.data as AxiosResponse;
