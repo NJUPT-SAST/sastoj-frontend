@@ -38,11 +38,6 @@ $transition-duration: 200ms;
         animation-iteration-count: infinite;
         animation-delay: $transition-duration;
       }
-      &.error::before {
-        border: unset;
-        animation: none;
-        background-color: $danger-color;
-      }
       &.success::before {
         border: unset;
         animation: none;
