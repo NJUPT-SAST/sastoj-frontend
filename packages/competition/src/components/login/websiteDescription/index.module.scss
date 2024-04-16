@@ -1,0 +1,22 @@
+@mixin font() {
+  font-weight: bolder;
+  font-family: "Consolas";
+}
+.website-description {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  .title {
+    font-size: 35px;
+    @include font();
+  }
+  .svg-container {
+    display: flex;
+    align-items: end;
+    justify-content: end;
+  }
+  .footer {
+    font-size: 25px;
+    @include font();
+  }
+}

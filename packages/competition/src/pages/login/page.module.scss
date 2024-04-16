@@ -36,6 +36,7 @@
   height: 100vh;
   width: 100vw;
   @include flex-center();
+  align-items: flex-start;
   background: radial-gradient(
       circle at var(--blue-position) 30%,
       #20afff,
@@ -46,6 +47,12 @@
     radial-gradient(circle at 65% var(--green-position), #20ffd7, transparent);
   @include animation(background-animation, 5s, infinite);
   .login-card-container {
+    padding: 1.5rem;
+    margin-top: 12vh;
+    gap: 10vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     @include animation(login-card-show, 1s, 1);
   }
 }

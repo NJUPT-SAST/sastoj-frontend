@@ -1,7 +1,7 @@
 import { Input, Button } from "@ui-aurora/react";
 import styles from "./index.module.scss";
 import { useState } from "react";
-import { useLogin } from "../../../../hooks/useLoginStatus";
+import { useLogin } from "../../../../hooks/useLogin";
 
 const LoginCardContent = () => {
   const [username, setUsername] = useState<string>("");
