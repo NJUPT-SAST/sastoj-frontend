@@ -20,3 +20,9 @@
     @include font();
   }
 }
+
+@media screen and (max-width: 900px) {
+  .website-description {
+    display: none;
+  }
+}

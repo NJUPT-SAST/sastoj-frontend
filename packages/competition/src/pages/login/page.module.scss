@@ -8,28 +8,28 @@
   animation-iteration-count: $count;
 }
 
-@property --blue-position {
-  syntax: "<percentage>";
-  inherits: false;
-  initial-value: 35%;
-}
+// @property --blue-position {
+//   syntax: "<percentage>";
+//   inherits: false;
+//   initial-value: 35%;
+// }
 
-@property --yellow-position {
-  syntax: "<percentage>";
-  inherits: false;
-  initial-value: 65%;
-}
+// @property --yellow-position {
+//   syntax: "<percentage>";
+//   inherits: false;
+//   initial-value: 65%;
+// }
 
-@property --orange-position {
-  syntax: "<percentage>";
-  inherits: false;
-  initial-value: 25%;
-}
-@property --green-position {
-  syntax: "<percentage>";
-  inherits: false;
-  initial-value: 100%;
-}
+// @property --orange-position {
+//   syntax: "<percentage>";
+//   inherits: false;
+//   initial-value: 25%;
+// }
+// @property --green-position {
+//   syntax: "<percentage>";
+//   inherits: false;
+//   initial-value: 100%;
+// }
 .login-background {
   background-blend-mode: screen;
   position: relative;
@@ -37,15 +37,17 @@
   width: 100vw;
   @include flex-center();
   align-items: flex-start;
-  background: radial-gradient(
-      circle at var(--blue-position) 30%,
-      #20afff,
-      transparent
-    ),
-    radial-gradient(circle at var(--yellow-position) 35%, #ffce20, transparent),
-    radial-gradient(circle at var(--orange-position) 85%, #ff8b20, transparent),
-    radial-gradient(circle at 65% var(--green-position), #20ffd7, transparent);
-  @include animation(background-animation, 5s, infinite);
+  background-color: $background-color;
+  // background: radial-gradient(
+  //     circle at var(--blue-position) 30%,
+  //     #20afff,
+  //     transparent
+  //   ),
+  //   radial-gradient(circle at var(--yellow-position) 35%, #ffce20, transparent),
+  //   radial-gradient(circle at var(--orange-position) 85%, #ff8b20, transparent),
+  //   radial-gradient(circle at 65% var(--green-position), #20ffd7, transparent);
+  // @include animation(background-animation, 5s, infinite);
+  background-color: $background-color;
   .login-card-container {
     padding: 1.5rem;
     margin-top: 12vh;
@@ -68,11 +70,11 @@
   }
 }
 
-@keyframes background-animation {
-  50% {
-    --blue-position: 45%;
-    --yellow-position: 55%;
-    --orange-position: 35%;
-    --green-position: 120%;
-  }
-}
+// @keyframes background-animation {
+//   50% {
+//     --blue-position: 45%;
+//     --yellow-position: 55%;
+//     --orange-position: 35%;
+//     --green-position: 120%;
+//   }
+// }

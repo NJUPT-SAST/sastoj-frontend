@@ -9,7 +9,6 @@ export const useLogin = () => {
       showToast({
         type: "error",
         content: <>请输入用户名</>,
-        size: "small",
       });
     } else if (!password) {
       showToast({

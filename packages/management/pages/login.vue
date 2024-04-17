@@ -22,8 +22,9 @@
 </template>
 <style scoped lang="scss">
 .login-container {
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,7 +34,10 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 150px;
+    align-items: center;
+    gap: 5vw;
+    padding: 20px;
+    box-sizing: border-box;
     .logo {
       width: 700px;
       height: fit-content;
@@ -41,6 +45,7 @@
     .divider {
       width: 2px;
       background-color: $divider-color;
+      height: 15rem;
     }
     .login-input-container {
       .instruct-span {
@@ -55,6 +60,18 @@
         flex-direction: row-reverse;
         gap: 10px;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .login-content {
+    flex-direction: column !important;
+    .logo {
+      width: 400px !important;
+    }
+    .divider {
+      display: none;
     }
   }
 }
