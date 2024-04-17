@@ -12,7 +12,7 @@
     "ionic:serve": "npm run dev"
   },
   "dependencies": {
-    "@ui-aurora/react": "^0.0.2",
+    "@ui-aurora/react": "^0.0.5",
     "axios": "^1.6.7",
     "highlight.js": "^11.9.0",
     "localforage": "^1.10.0",

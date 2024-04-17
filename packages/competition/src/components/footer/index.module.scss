@@ -14,8 +14,8 @@
     width: 100%;
   }
   .footer-content {
-    margin: 20px 0px;
-    padding: 0px 10px;
+    margin: 1rem 0px;
+    padding: 0px 0.625rem;
     max-width: $max-width;
     box-sizing: border-box;
     width: 100%;
@@ -26,7 +26,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 5px;
+      gap: 0.3rem;
     }
     .footer-svg-container {
       a {

@@ -1,6 +1,7 @@
 @use "@/variables" as *;
 @mixin font() {
   font-weight: bolder;
+  font-family: "Consolas";
 }
 .error-container {
   display: flex;
