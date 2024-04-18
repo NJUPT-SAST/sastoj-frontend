@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // axios二次封装
-const devBaseURL = "在开发环境下接口的baseURL";
+const devBaseURL = "https://swr.vercel.app/zh-CN/docs/api";
 const proBaseURL = "在生产环境下接口的baseURL";
 //在vue的config文件夹下可以看开发环境和生产环境的名称,通常为development和production
 const BASE_URL =
