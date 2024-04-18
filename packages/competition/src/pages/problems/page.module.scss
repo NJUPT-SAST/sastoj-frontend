@@ -1,0 +1,13 @@
+@use "@/variables" as *;
+.page-container {
+  max-width: 100vw;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  .navbar {
+    position: relative;
+    height: 55px;
+    max-height: 55px;
+  }
+}
