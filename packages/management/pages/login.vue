@@ -1,3 +1,11 @@
+<script setup lang="ts">
+// import httpRequest from "~/server";
+const login = async () => {
+  // const data = await httpRequest.get("hello");
+  // console.log(data);
+};
+</script>
+
 <template>
   <div class="login-container">
     <div class="login-content">
@@ -13,7 +21,7 @@
           :width="400"
         />
         <div class="buttons-container">
-          <VBtn color="#0078d4">SIGN IN</VBtn>
+          <VBtn color="#0078d4" @click="login">SIGN IN</VBtn>
           <VBtn>LINK</VBtn>
         </div>
       </div>
