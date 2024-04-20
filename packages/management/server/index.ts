@@ -1,3 +1,5 @@
+//这是被抛弃的 useFetch 的封装。
+
 // import { UseFetchOptions, useFetch } from "nuxt/app";
 
 // type Methods = "GET" | "POST" | "DELETE" | "PUT";
