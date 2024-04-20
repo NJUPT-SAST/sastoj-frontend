@@ -8,7 +8,7 @@ export const useProblems = () => {
     state.setProblems,
   ]);
 
-  if (problems.length) {
+  if (!problems.length) {
     const isLoading = false;
     return { problems, isLoading };
   }

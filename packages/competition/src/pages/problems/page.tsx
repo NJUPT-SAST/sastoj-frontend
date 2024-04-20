@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
+import ProblemLayout from "./layout";
 
 const Problems = () => {
   return (
-    <>
-      this is problems
+    <ProblemLayout>
       <Outlet></Outlet>
-    </>
+    </ProblemLayout>
   );
 };
 

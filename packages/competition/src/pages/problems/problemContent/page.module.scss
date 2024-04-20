@@ -1,0 +1,46 @@
+.problem-content-container {
+  width: 100%;
+  flex-basis: 300px;
+  flex-grow: 1;
+  flex-shrink: 1;
+  position: relative;
+  padding: 5px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 10px - 55px);
+  .markdown-show-container {
+    width: 50% !important;
+    height: 100%;
+    overflow: hidden;
+    div {
+      height: 100%;
+    }
+    .markdown-content {
+      height: 100%;
+      overflow: scroll;
+    }
+  }
+  .problem-show {
+    width: 50%;
+    padding-left: 5px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    .monaco {
+      width: 100%;
+      height: 70%;
+      .monaco-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+    .code-status-information {
+      width: 100%;
+      height: 30%;
+    }
+  }
+}
