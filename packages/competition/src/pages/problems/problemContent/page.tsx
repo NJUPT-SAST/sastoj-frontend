@@ -32,33 +32,33 @@ const ProblemContent = () => {
           defaultSelectKey={1}
           isBorder
           // onchange={function Ya() {}}
-          optionsList={[
-            {
-              key: 1,
-              label: "Nextjs",
-              value: "nextjs",
-            },
-            {
-              key: 2,
-              label: "Nuxtjs",
-              value: "nuxtjs",
-            },
-            {
-              key: 3,
-              label: "Nodejs",
-              value: "nodejs",
-            },
-            {
-              key: 5,
-              label: "Vuejs",
-              value: "vuejs",
-            },
-            {
-              key: 4,
-              label: "React",
-              value: "react",
-            },
-          ]}
+          // optionsList={[
+          //   {
+          //     key: 1,
+          //     label: "Nextjs",
+          //     value: "nextjs",
+          //   },
+          //   {
+          //     key: 2,
+          //     label: "Nuxtjs",
+          //     value: "nuxtjs",
+          //   },
+          //   {
+          //     key: 3,
+          //     label: "Nodejs",
+          //     value: "nodejs",
+          //   },
+          //   {
+          //     key: 5,
+          //     label: "Vuejs",
+          //     value: "vuejs",
+          //   },
+          //   {
+          //     key: 4,
+          //     label: "React",
+          //     value: "react",
+          //   },
+          // ]}
           placeHolder=""
         />
         <Card className={styles["code-status-information"]}></Card>
