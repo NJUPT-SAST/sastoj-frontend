@@ -1,5 +1,7 @@
+import CodeEditor from "../../components/codeEditor";
+
 const About = () => {
-  return <>this is About!</>;
+  return <CodeEditor></CodeEditor>;
 };
 
 export default About;

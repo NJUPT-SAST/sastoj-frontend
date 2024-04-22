@@ -1,17 +1,17 @@
-import { create } from "zustand";
-import { Problem } from "../types/problem";
+// import { create } from "zustand";
+// import { Problem } from "../types/problem";
 
-export interface ProblemsState {
-  problems: Problem[];
-}
+// export interface ProblemsState {
+//   problems: Problem[];
+// }
 
-interface ProblemsAction {
-  setProblems: (value: Problem[]) => void;
-}
+// interface ProblemsAction {
+//   setProblems: (value: Problem[]) => void;
+// }
 
-const useProblemsStore = create<ProblemsState & ProblemsAction>((set) => ({
-  problems: [],
-  setProblems: (value: Problem[]) => set(() => ({ problems: value })),
-}));
+// const useProblemsStore = create<ProblemsState & ProblemsAction>((set) => ({
+//   problems: [],
+//   setProblems: (value: Problem[]) => set(() => ({ problems: value })),
+// }));
 
-export default useProblemsStore;
+// export default useProblemsStore;

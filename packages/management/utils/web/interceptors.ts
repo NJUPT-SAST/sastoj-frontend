@@ -40,5 +40,5 @@ REQUEST.interceptors.response.use(
     } else {
       return Promise.reject({ desc: `发生错误， 错误码${response?.status}` });
     }
-  }
+  },
 );

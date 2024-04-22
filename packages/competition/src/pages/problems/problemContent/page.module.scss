@@ -1,3 +1,5 @@
+@use "@/variables" as *;
+
 .problem-content-container {
   width: 100%;
   flex-basis: 300px;
@@ -10,9 +12,14 @@
   flex-direction: row;
   height: calc(100vh - 10px - 55px);
   .markdown-show-container {
-    width: 50% !important;
+    width: 50%;
     height: 100%;
-    overflow: hidden;
+    // overflow: hidden;
+    // resize: horizontal;
+    // overflow: scroll;
+    &.full-screen {
+      display: none;
+    }
     div {
       height: 100%;
     }
@@ -28,10 +35,19 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-    .monaco {
+    flex-grow: 1;
+    .codeEditor {
       width: 100%;
       height: 70%;
-      .monaco-header {
+      overflow-y: scroll;
+      position: relative;
+      flex-grow: 1;
+      .codeEditor-header {
+        span {
+          font-weight: bold;
+        }
+        top: 0px;
+        position: sticky;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -41,6 +57,9 @@
     .code-status-information {
       width: 100%;
       height: 30%;
+      &.full-screen {
+        display: none;
+      }
     }
   }
 }

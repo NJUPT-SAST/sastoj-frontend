@@ -1,0 +1,25 @@
+@use "@/variables" as *;
+
+.status-card-container {
+  .status-card-header {
+    display: flex;
+    flex-direction: row;
+    font-size: 14px;
+    font-weight: bold;
+    gap: 5px;
+    z-index: 1;
+    padding: 5px 5px 1px;
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .divider {
+    width: 100%;
+    height: 1px;
+    background-color: $divider-color;
+  }
+  .status-card-content {
+  }
+}

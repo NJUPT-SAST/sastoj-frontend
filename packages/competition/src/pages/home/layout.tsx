@@ -46,7 +46,7 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
         onchange={(value: string) => setSelectedRoute(value)}
         className={styles.navbar}
       />
-      {children}
+      <div className={styles.slot}>{children}</div>
       <Footer />
     </div>
   );
