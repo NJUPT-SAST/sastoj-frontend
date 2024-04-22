@@ -12,8 +12,19 @@
     "ionic:serve": "npm run dev"
   },
   "dependencies": {
-    "@ui-aurora/react": "^0.0.5",
+    "@codemirror/commands": "^6.5.0",
+    "@codemirror/lang-cpp": "^6.0.2",
+    "@codemirror/lang-go": "^6.0.0",
+    "@codemirror/lang-java": "^6.0.1",
+    "@codemirror/lang-javascript": "^6.2.2",
+    "@codemirror/lang-python": "^6.1.5",
+    "@codemirror/lang-rust": "^6.0.1",
+    "@codemirror/state": "^6.4.1",
+    "@codemirror/view": "^6.26.3",
+    "@replit/codemirror-lang-csharp": "^6.2.0",
+    "@ui-aurora/react": "^0.0.7",
     "axios": "^1.6.8",
+    "codemirror": "^6.0.1",
     "highlight.js": "^11.9.0",
     "localforage": "^1.10.0",
     "lucide-react": "^0.365.0",
@@ -24,6 +35,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3",
     "swr": "^2.2.5",
+    "thememirror": "^2.0.1",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
