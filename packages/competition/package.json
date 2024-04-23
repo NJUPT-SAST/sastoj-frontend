@@ -22,7 +22,7 @@
     "@codemirror/state": "^6.4.1",
     "@codemirror/view": "^6.26.3",
     "@replit/codemirror-lang-csharp": "^6.2.0",
-    "@ui-aurora/react": "^0.0.7",
+    "@ui-aurora/react": "^0.0.10",
     "axios": "^1.6.8",
     "codemirror": "^6.0.1",
     "highlight.js": "^11.9.0",

@@ -1,0 +1,16 @@
+@mixin self-test-area {
+  width: 50%;
+  height: 100%;
+  overflow: scroll;
+}
+.self-test-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  .self-test-code {
+    @include self-test-area();
+  }
+  .self-test-result-show {
+    @include self-test-area();
+  }
+}
