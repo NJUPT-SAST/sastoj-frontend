@@ -19,7 +19,7 @@ export const marked = new Marked(
       const language = hljs.getLanguage(lang) ? lang : "plaintext";
       return hljs.highlight(code, { language }).value;
     },
-  })
+  }),
 );
 
 export async function convertMarkdownToHtml(markdown: string): Promise<string> {

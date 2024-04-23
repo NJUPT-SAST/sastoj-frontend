@@ -2,7 +2,7 @@ import REQUEST from "../utils/web/request";
 
 export const login = (
   url: string,
-  { arg }: { arg: { username: string; password: string } }
+  { arg }: { arg: { username: string; password: string } },
 ) => {
   const formData = new FormData();
   formData.append("username", arg.username);

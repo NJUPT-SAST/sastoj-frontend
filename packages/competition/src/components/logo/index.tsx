@@ -1,7 +1,6 @@
 import { ButtonHTMLAttributes, CSSProperties } from "react";
 import logo from "../../assets/imgs/logo.svg";
 
-
 interface LogoProps extends ButtonHTMLAttributes<HTMLImageElement> {
   width?: number;
   height?: number;
