@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode } from "react";
 import { Navbar, NavbarItemProps } from "@ui-aurora/react";
 import { Home as HomeIcon, LayoutList, Award } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -12,14 +12,8 @@ interface HomeLayoutProps {
 }
 
 const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
-  const [selectedRoute, setSelectedRoute] = useState<string>("About");
   const location = useLocation();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    navigate(selectedRoute);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedRoute]);
 
   const headerItems: NavbarItemProps[] = [
     {
@@ -44,7 +38,7 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
         header={<Logo height={36} />}
         items={headerItems}
         selectedKey={location.pathname.replace("/", "")}
-        onchange={(value: string) => setSelectedRoute(value)}
+        onchange={navigate}
         className={styles.navbar}
       />
       <div className={styles.slot}>{children}</div>
