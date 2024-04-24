@@ -1,0 +1,21 @@
+.btn-box {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+
+  // .confirm-box {
+  //     width: 30%;
+  // }
+}
+
+.main-content {
+  overflow: auto;
+  max-height: 130px;
+}
+
+p {
+  line-height: 1.2;
+  font-size: 12px;
+  font-weight: light;
+  // color: antiquewhite;
+}

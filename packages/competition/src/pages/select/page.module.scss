@@ -8,7 +8,8 @@
   flex-direction: column;
 
   .select-content {
-    padding: 2% 0;
+    box-sizing: border-box;
+    padding: 1rem 0;
     flex-grow: 1;
     background-color: #f5f5f5;
     display: flex;
