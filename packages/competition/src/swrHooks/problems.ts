@@ -5,7 +5,7 @@ export const useSwrGetProblems = (contestId: number) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { data, isLoading, error, mutate } = useSWR(
     `/user/contest/${contestId}/problems`,
-    getProblems
+    getProblems,
   );
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

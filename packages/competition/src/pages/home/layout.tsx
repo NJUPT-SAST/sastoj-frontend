@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import { Navbar, NavbarItemProps } from "@ui-aurora/react";
 import { Home as HomeIcon, LayoutList, Award } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import Logo from "../../components/logo";
 import Footer from "../../components/footer";
@@ -13,6 +13,7 @@ interface HomeLayoutProps {
 
 const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
   const [selectedRoute, setSelectedRoute] = useState<string>("About");
+  const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,7 +43,7 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
       <Navbar
         header={<Logo height={36} />}
         items={headerItems}
-        selectedKey={selectedRoute}
+        selectedKey={location.pathname.replace("/", "")}
         onchange={(value: string) => setSelectedRoute(value)}
         className={styles.navbar}
       />
