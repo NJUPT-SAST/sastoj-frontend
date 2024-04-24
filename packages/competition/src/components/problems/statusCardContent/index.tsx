@@ -8,8 +8,8 @@ import { EvaluationRecord } from "./evaluationRecord";
 // TODO: Carousel 封装的有问题，临时用野蛮方法解决。
 
 export const StatusCardContent = () => {
-  const [selected, setSelected] = useState<number>(0);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const [selected, setSelected] = useState<number>(0);
   const [carouselWidth, setCarouselWidth] = useState<number>();
   const [carouselHeight, setCarouselHeight] = useState<number>();
 

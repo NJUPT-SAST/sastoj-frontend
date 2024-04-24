@@ -1,12 +1,16 @@
-import { AxiosError, type AxiosResponse } from "axios";
+import {
+  AxiosError,
+  InternalAxiosRequestConfig,
+  type AxiosResponse,
+} from "axios";
 
-import REQUEST from "./request";
 import { RequestCanceler } from "./Canceler";
 import { HTTP_STATUS } from "./status";
 
 const canceler = new RequestCanceler();
 
-REQUEST.interceptors.request.use((config) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const beforeRequest = (config: InternalAxiosRequestConfig<any>) => {
   const token = localStorage.getItem("token");
   token && (config.headers.Authorization = token);
 
@@ -16,29 +20,28 @@ REQUEST.interceptors.request.use((config) => {
   canceler.addPendingRequest(config);
 
   return config;
-});
+};
 
-REQUEST.interceptors.response.use(
-  (response) => {
-    //成功则返回response里有用的data
-    return response.data as AxiosResponse;
-  },
-  //失败则进行统一的错误处理
-  (error) => {
-    const { response } = error as AxiosError;
+export const responseSuccess = (response: AxiosResponse) => {
+  //成功则返回response里有用的data
+  return response.data as AxiosResponse;
+};
 
-    if (response?.status === HTTP_STATUS.NOT_FOUND) {
-      return Promise.reject({ desc: "请求资源不存在" });
-    } else if (response?.status === HTTP_STATUS.BAD_GATEWAY) {
-      return Promise.reject({ desc: "服务端出现了问题" });
-    } else if (response?.status === HTTP_STATUS.FORBIDDEN) {
-      return Promise.reject({ desc: "没有权限访问" });
-    } else if (response?.status === HTTP_STATUS.AUTHENTICATE) {
-      return Promise.reject({ desc: "需要鉴权" });
-    } else if (response?.status === HTTP_STATUS.SERVER_ERROR) {
-      return Promise.reject({ desc: "服务器错误" });
-    } else {
-      return Promise.reject({ desc: `发生错误， 错误码${response?.status}` });
-    }
+//失败则进行统一的错误处理
+export const responseFailed = (error: AxiosError) => {
+  const { response } = error;
+
+  if (response?.status === HTTP_STATUS.NOT_FOUND) {
+    return Promise.reject({ desc: "请求资源不存在" });
+  } else if (response?.status === HTTP_STATUS.BAD_GATEWAY) {
+    return Promise.reject({ desc: "服务端出现了问题" });
+  } else if (response?.status === HTTP_STATUS.FORBIDDEN) {
+    return Promise.reject({ desc: "没有权限访问" });
+  } else if (response?.status === HTTP_STATUS.AUTHENTICATE) {
+    return Promise.reject({ desc: "需要鉴权" });
+  } else if (response?.status === HTTP_STATUS.SERVER_ERROR) {
+    return Promise.reject({ desc: "服务器错误" });
+  } else {
+    return Promise.reject({ desc: `发生错误， 错误码${response?.status}` });
   }
-);
+};

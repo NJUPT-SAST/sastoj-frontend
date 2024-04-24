@@ -1,3 +1,5 @@
+@use "@/variables" as *;
+
 @mixin self-test-area {
   width: 50%;
   height: 100%;
@@ -12,5 +14,10 @@
   }
   .self-test-result-show {
     @include self-test-area();
+  }
+  .divider {
+    height: 100%;
+    width: 1px;
+    background-color: $divider-color;
   }
 }

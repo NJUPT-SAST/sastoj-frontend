@@ -6,6 +6,7 @@ export const SelfTest = () => {
       <div className={styles["self-test-code"]}>
         <CodeEditor />
       </div>
+      <div className={styles.divider} />
       <div className={styles["self-test-result-show"]}>
         <span></span>
       </div>

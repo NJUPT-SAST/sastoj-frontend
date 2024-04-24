@@ -18,6 +18,7 @@ export interface ProblemsStatusState {
   changeContent: (key: string, newContent: string) => void;
 }
 
+// 这个storage是为persist map对象创建的一个存储local storage的一个中间件
 const storage: PersistStorage<ProblemsStatusState> = {
   getItem: (name: string) => {
     const str = localStorage.getItem(name);

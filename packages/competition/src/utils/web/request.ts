@@ -1,7 +1,8 @@
 import axios from "axios";
+import { beforeRequest, responseFailed, responseSuccess } from "./interceptors";
 
 // axios二次封装
-const devBaseURL = "https://swr.vercel.app/zh-CN/docs/api";
+const devBaseURL = "http://127.0.0.1:4523/m1/3794358-0-default";
 const proBaseURL = "在生产环境下接口的baseURL";
 //在vue的config文件夹下可以看开发环境和生产环境的名称,通常为development和production
 const BASE_URL =
@@ -15,5 +16,9 @@ const REQUEST = axios.create({
   baseURL: BASE_URL,
   timeout: TIMEOUT_MILLISECONDS,
 });
+
+REQUEST.interceptors.request.use(beforeRequest);
+
+REQUEST.interceptors.response.use(responseSuccess, responseFailed);
 
 export default REQUEST;
