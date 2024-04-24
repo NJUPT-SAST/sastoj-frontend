@@ -12,8 +12,8 @@ interface HomeLayoutProps {
 }
 
 const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
-  const [selectedRoute, setSelectedRoute] = useState<string>("About");
   const location = useLocation();
+  const [selectedRoute, setSelectedRoute] = useState<string>(location.pathname.replace("/", "") || "About");
   const navigate = useNavigate();
 
   useEffect(() => {
