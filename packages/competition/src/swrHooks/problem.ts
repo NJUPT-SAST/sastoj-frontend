@@ -7,7 +7,7 @@ import { getProblem } from "../apis/user";
 export const useSwrGetProblem = (contestId: number, problemId: number) => {
   const { data, isLoading, error, mutate } = useSWR(
     [contestId, problemId],
-    ([contestId, problemId]) => getProblem(contestId, problemId)
+    ([contestId, problemId]) => getProblem(contestId, problemId),
   );
 
   return { data, isLoading, error, mutate };

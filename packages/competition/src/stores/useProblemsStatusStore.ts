@@ -1,6 +1,3 @@
- 
- 
- 
 // TODO: 在使用superjson的时候出现一系列 eslint any 报错
 import { create } from "zustand";
 import { PersistStorage, persist, StorageValue } from "zustand/middleware";
@@ -23,9 +20,7 @@ const storage: PersistStorage<ProblemsStatusState> = {
   getItem: (name: string) => {
     const str = localStorage.getItem(name);
     if (!str) return null;
-    return superjson.parse<StorageValue<ProblemsStatusState>>(
-      str
-    );
+    return superjson.parse<StorageValue<ProblemsStatusState>>(str);
   },
   setItem: (name, value) => {
     localStorage.setItem(name, superjson.stringify(value));
@@ -69,6 +64,6 @@ export const useProblemsStatusStore = create<ProblemsStatusState>()(
     {
       name: "problemsStatusStore",
       storage,
-    }
-  )
+    },
+  ),
 );

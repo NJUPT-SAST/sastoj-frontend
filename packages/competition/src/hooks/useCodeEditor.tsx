@@ -6,7 +6,7 @@ export const useCodeEditor = () => {
   const { problemId } = useParams();
 
   const [problemsStatus, initProblem, changeContent] = useProblemsStatusStore(
-    (state) => [state.problemsStatus, state.initProblem, state.changeContent]
+    (state) => [state.problemsStatus, state.initProblem, state.changeContent],
   );
 
   const handleCodeEditor = (value: string) => {
