@@ -9,7 +9,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --fix",
     "preview": "vite preview",
     "ionic:build": "npm run build",
-    "ionic:serve": "npm run dev"
+    "ionic:serve": "npm run dev",
+    "prettier": "npx prettier .  --write"
   },
   "dependencies": {
     "@codemirror/commands": "^6.5.0",
@@ -22,7 +23,7 @@
     "@codemirror/state": "^6.4.1",
     "@codemirror/view": "^6.26.3",
     "@replit/codemirror-lang-csharp": "^6.2.0",
-    "@ui-aurora/react": "^0.0.10",
+    "@ui-aurora/react": "^0.0.11",
     "axios": "^1.6.8",
     "codemirror": "^6.0.1",
     "highlight.js": "^11.9.0",
@@ -40,6 +41,7 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@types/qs": "^6.9.15",
     "@types/react": "^18.2.79",
     "@types/react-dom": "^18.2.25",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
@@ -48,6 +50,7 @@
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
+    "prettier": "3.2.5",
     "typescript": "^5.4.5",
     "vite": "^5.2.10"
   }

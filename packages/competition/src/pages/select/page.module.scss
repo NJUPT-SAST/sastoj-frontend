@@ -1,0 +1,70 @@
+@use "@/variables" as *;
+
+.select-page {
+  max-width: 100vw;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  .select-content {
+    position: relative;
+    box-sizing: border-box;
+    padding: 1rem 0;
+    flex-grow: 1;
+    background-color: $background-color;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-basis: auto;
+    .select-boxes {
+      height: 100%;
+      max-width: $max-width;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0 1.5rem;
+      box-sizing: border-box;
+      justify-content: space-between;
+      gap: 1.5rem 1rem;
+      .select-item {
+        box-sizing: border-box;
+        background-color: $white-color;
+        display: flex;
+        flex-direction: column;
+        width: 48%;
+        flex-grow: 1;
+        .btn-box {
+          width: 100%;
+          display: flex;
+          flex-direction: row-reverse;
+          margin-top: 1rem;
+        }
+        .item-title {
+          display: flex;
+          flex-direction: column;
+          color: $shadow-color;
+          width: fit-content;
+          .competition-title {
+            width: fit-content;
+            font-size: 18px !important;
+            color: $black-color;
+            font-weight: bold;
+            border-bottom: 1.5px solid $divider-color;
+            display: inline-block;
+            padding-bottom: 0.1px;
+            box-sizing: content-box;
+          }
+        }
+      }
+    }
+  }
+  .navbar {
+    position: sticky;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    backdrop-filter: blur(8px);
+    z-index: 3;
+    background-color: rgba($white-color, 0.9);
+  }
+}
