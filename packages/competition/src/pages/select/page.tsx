@@ -1,4 +1,4 @@
-import { Button, Card } from "@ui-aurora/react";
+import { Card } from "@ui-aurora/react";
 
 import SelectLayout from "./layout";
 import styles from "./page.module.scss";
@@ -45,13 +45,7 @@ const Select = () => {
           }
           footer={
             <div className={styles["btn-box"]}>
-              <Button
-                className={styles["enter-btn"]}
-                color="secondary"
-                size="small"
-              >
-                进入比赛
-              </Button>
+              <EnterButton competitionId={2} />
             </div>
           }
           mainContent={
@@ -75,13 +69,7 @@ const Select = () => {
           }
           footer={
             <div className={styles["btn-box"]}>
-              <Button
-                className={styles["enter-btn"]}
-                color="secondary"
-                size="small"
-              >
-                进入比赛
-              </Button>
+              <EnterButton competitionId={3} />
             </div>
           }
           mainContent={
@@ -105,13 +93,7 @@ const Select = () => {
           }
           footer={
             <div className={styles["btn-box"]}>
-              <Button
-                className={styles["enter-btn"]}
-                color="secondary"
-                size="small"
-              >
-                进入比赛
-              </Button>
+              <EnterButton competitionId={4} />
             </div>
           }
           mainContent={
