@@ -3,6 +3,7 @@ import CodeEditor from "../../codeEditor";
 import styles from "./index.module.scss";
 import { Scan } from "lucide-react";
 import React from "react";
+import { useCodeEditor } from "../../../hooks/useCodeEditor";
 
 interface CodeEditorCardContentProps {
   setIsFullScreen: () => void;
@@ -10,6 +11,8 @@ interface CodeEditorCardContentProps {
 export const CodeEditorCardContent: React.FC<CodeEditorCardContentProps> = ({
   setIsFullScreen,
 }) => {
+  const { handleCodeEditor, defaultValue } = useCodeEditor();
+
   return (
     <div className={styles["code-editor-container"]}>
       <div className={styles["code-editor-header"]}>
@@ -23,7 +26,11 @@ export const CodeEditorCardContent: React.FC<CodeEditorCardContentProps> = ({
           <Scan size={16} />
         </Button>
       </div>
-      <CodeEditor className={styles["code-editor"]}></CodeEditor>
+      <CodeEditor
+        className={styles["code-editor"]}
+        defaultValue={defaultValue}
+        onUpdate={handleCodeEditor}
+      />
     </div>
   );
 };
