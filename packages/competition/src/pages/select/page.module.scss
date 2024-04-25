@@ -8,39 +8,42 @@
   flex-direction: column;
 
   .select-content {
+    position: relative;
     box-sizing: border-box;
     padding: 1rem 0;
     flex-grow: 1;
-    background-color: #f5f5f5;
-    display: flex;
+    background-color: $background-color;
     align-items: center;
     justify-content: center;
-
-    .select-boxs {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(auto-fill, 1fr);
-      grid-row-gap: 6vh;
-      grid-column-gap: 8vw;
-      padding: 0 5%;
+    display: flex;
+    flex-basis: auto;
+    .select-boxes {
+      height: 100%;
+      max-width: $max-width;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0 1.5rem;
       box-sizing: border-box;
-      // position: sticky;
-      overflow-y: scroll;
-
+      justify-content: space-between;
+      gap: 1.5rem 1rem;
       .select-item {
-        position: relative;
         box-sizing: border-box;
         background-color: $white-color;
         display: flex;
         flex-direction: column;
-        width: 100%;
-
+        width: 48%;
+        flex-grow: 1;
+        .btn-box {
+          width: 100%;
+          display: flex;
+          flex-direction: row-reverse;
+          margin-top: 1rem;
+        }
         .item-title {
           display: flex;
           flex-direction: column;
           color: $shadow-color;
           width: fit-content;
-
           .competition-title {
             width: fit-content;
             font-size: 18px !important;
@@ -52,31 +55,16 @@
             box-sizing: content-box;
           }
         }
-
-        .item-content {
-          margin-top: 0.5rem;
-          line-height: 12px;
-          font-size: 11px;
-          height: 30%;
-          overflow: scroll;
-          height: 5rem;
-        }
-
-        .btn-box {
-          width: 100%;
-          display: flex;
-          flex-direction: row-reverse;
-        }
       }
     }
   }
-
   .navbar {
-    z-index: 2;
     position: sticky;
-    top: 0;
-    left: 0;
-    height: 55px;
-    max-height: 55px;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    backdrop-filter: blur(8px);
+    z-index: 3;
+    background-color: rgba($white-color, 0.9);
   }
 }
