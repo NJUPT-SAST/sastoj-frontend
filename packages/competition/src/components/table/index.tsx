@@ -42,7 +42,6 @@ export const OjTable = <TData,>({
     pageIndex: 0,
     pageSize: pageSize,
   });
-  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
@@ -61,8 +60,8 @@ export const OjTable = <TData,>({
   });
 
   useEffect(() => {
-    table.setPageIndex(currentPage - 1);
-  }, [currentPage, table]);
+    console.log(pagination);
+  }, [pagination]);
 
   return (
     <div className={styles.table}>
@@ -115,12 +114,14 @@ export const OjTable = <TData,>({
           ))}
         </Tbody>
       </Table>
-      <Pagination
-        total={data.length}
-        pageSize={pagination.pageSize}
-        activePage={currentPage}
-        onChange={setCurrentPage}
-      />
+      <div className={styles.pagination}>
+        <Pagination
+          total={table.getPageCount() * pageSize}
+          pageSize={pagination.pageSize}
+          activePage={pagination.pageIndex}
+          onChange={(page) => table.setPageIndex(page - 1)}
+        />
+      </div>
     </div>
   );
 };

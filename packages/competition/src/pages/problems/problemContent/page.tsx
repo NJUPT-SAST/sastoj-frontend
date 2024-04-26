@@ -18,7 +18,6 @@ const ProblemContent = () => {
     setIsFullScreen(!isFullScreen);
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { data, isLoading } = useSwrGetProblem(1, 2);
 
   console.log(data, isLoading);
