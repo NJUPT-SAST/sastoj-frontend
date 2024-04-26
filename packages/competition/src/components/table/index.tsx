@@ -118,7 +118,7 @@ export const OjTable = <TData,>({
         <Pagination
           total={table.getPageCount() * pageSize}
           pageSize={pagination.pageSize}
-          activePage={pagination.pageIndex}
+          activePage={pagination.pageIndex + 1}
           onChange={(page) => table.setPageIndex(page - 1)}
         />
       </div>
