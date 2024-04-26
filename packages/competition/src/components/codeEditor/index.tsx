@@ -18,10 +18,16 @@ import { useLanguageStore } from "../../stores/useLanguageStore";
 
 interface CodeEditorProps {
   className?: string;
+  defaultValue?: string;
+  onUpdate?: (value: string) => void;
 }
 
 //TODO: ban search panel
-const CodeEditor: React.FC<CodeEditorProps> = ({ className }) => {
+const CodeEditor: React.FC<CodeEditorProps> = ({
+  className,
+  defaultValue,
+  onUpdate,
+}) => {
   const editorRef = useRef(null);
   const language = useLanguageStore((state) => state.language);
 
@@ -64,19 +70,23 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ className }) => {
         break;
     }
     const state = EditorState.create({
-      doc: "hello world!",
+      doc: defaultValue,
       extensions: [
         keymap.of(defaultKeymap),
         basicSetup,
         languageExtension,
         ayuLight,
         myTheme,
+        EditorView.updateListener.of((v) => {
+          onUpdate && onUpdate(v.state.doc.toString());
+        }),
       ],
     });
 
     const view = new EditorView({
       state: state,
       parent: editorRef.current!,
+      extensions: [],
     });
 
     return () => {

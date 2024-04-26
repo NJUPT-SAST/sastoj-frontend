@@ -3,12 +3,12 @@ import { persist } from "zustand/middleware";
 
 import { LanguageType } from "../types/language";
 
-export interface languageState {
+export interface LanguageState {
   language: LanguageType;
   setLanguage: (value: LanguageType) => void;
 }
 
-export const useLanguageStore = create<languageState>()(
+export const useLanguageStore = create<LanguageState>()(
   persist(
     (set) => ({
       language: "javascript",
