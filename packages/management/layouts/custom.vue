@@ -1,15 +1,13 @@
 <script setup lang="ts">
-export interface selectItem {
+const route = useRoute();
+const router = useRouter();
+
+const handleSelect = (value: {
   id: unknown;
   value: boolean;
   path: unknown[];
-}
-const routeStore = useRouteStore();
-
-const { route } = storeToRefs(routeStore);
-
-const handleRoute = (value: selectItem) => {
-  routeStore.setRoute(value.id as unknown as string);
+}) => {
+  router.push(value.id as string);
 };
 </script>
 
@@ -34,43 +32,43 @@ const handleRoute = (value: selectItem) => {
         <v-list
           density="compact"
           nav
-          :selected="[route]"
-          @click:select="handleRoute"
+          :selected="[route.path]"
+          @click:select="handleSelect"
         >
           <v-list-item
             prepend-icon="mdi-account-multiple"
             title="Group"
-            value="/Group"
+            value="/group"
           ></v-list-item>
           <v-list-item
             prepend-icon="mdi-account "
             title="User"
-            value="/User"
+            value="/user"
           ></v-list-item>
           <v-list-item
             prepend-icon="mdi-head-question "
             title="Problem"
-            value="/Problem"
+            value="/problem"
           ></v-list-item>
           <v-list-item
             prepend-icon="mdi-code-not-equal-variant"
             title="Case"
-            value="/Case"
+            value="/case"
           ></v-list-item>
           <v-list-item
             prepend-icon="mdi-gavel "
             title="Judge"
-            value="/Judge"
+            value="/judge"
           ></v-list-item>
           <v-list-item
             prepend-icon="mdi-trophy"
             title="Contest"
-            value="/Contest"
+            value="/contest"
           ></v-list-item>
           <v-list-item
             prepend-icon="mdi-account-school"
             title="Judger"
-            value="/Judger"
+            value="/judger"
           ></v-list-item>
         </v-list>
       </v-navigation-drawer>
