@@ -28,6 +28,8 @@ interface OjTableProps<TData> {
   filterKeyWord?: string;
   caption?: string;
   pageSize?: number;
+  className?: string;
+  isSearch?: boolean;
 }
 
 export const OjTable = <TData,>({
@@ -36,6 +38,8 @@ export const OjTable = <TData,>({
   filterKeyWord,
   caption,
   pageSize = 10,
+  className,
+  isSearch = false,
 }: OjTableProps<TData>) => {
   const data = useMemo(() => dataSource, [dataSource]);
   const [pagination, setPagination] = useState<PaginationState>({
@@ -64,26 +68,28 @@ export const OjTable = <TData,>({
   }, [pagination]);
 
   return (
-    <div className={styles.table}>
+    <div className={`${styles.table} ${className}`}>
       <div className={styles.caption}>
         <h2 className={styles["caption-span"]}>{caption}</h2>
         {/* 这是检索信息的输入框 */}
-        <Input
-          label={filterKeyWord}
-          isBorder={false}
-          value={
-            table
-              .getHeaderGroups()[0]
-              .headers.find((header) => header.id === filterKeyWord)
-              ?.column.getFilterValue() as string
-          }
-          onchange={(value) =>
-            table
-              .getHeaderGroups()[0]
-              .headers.find((header) => header.id === filterKeyWord)
-              ?.column.setFilterValue(value)
-          }
-        ></Input>
+        {isSearch && (
+          <Input
+            label={filterKeyWord}
+            isBorder={false}
+            value={
+              table
+                .getHeaderGroups()[0]
+                .headers.find((header) => header.id === filterKeyWord)
+                ?.column.getFilterValue() as string
+            }
+            onchange={(value) =>
+              table
+                .getHeaderGroups()[0]
+                .headers.find((header) => header.id === filterKeyWord)
+                ?.column.setFilterValue(value)
+            }
+          ></Input>
+        )}
       </div>
       <Table>
         <Thead>

@@ -1,0 +1,26 @@
+@use "@/variables" as *;
+
+.table-container {
+  position: relative;
+  height: 100%;
+  margin: 20px;
+  padding: 30px;
+  background-color: $white-color;
+  width: fit-content;
+  height: fit-content;
+
+  .question-table {
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.header-div {
+  display: flex;
+  justify-content: center;
+}
+
+.span-font {
+  font-weight: bolder;
+}
