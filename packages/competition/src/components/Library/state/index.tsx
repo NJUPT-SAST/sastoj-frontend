@@ -10,7 +10,7 @@ const stateType = (value: string) => {
 const State = ({ value }: { value: string }) => {
   return (
     <>
-      <Badge type={stateType(value)} content={value} size="small" />
+      <Badge type={stateType(value)} content={value} size="medium" />
     </>
   );
 };
