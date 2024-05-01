@@ -23,6 +23,7 @@ const EnterButton: React.FC<EnterButtonProps> = ({ competitionId }) => {
     } else {
       navigate("/About");
       localStorage.setItem("competitionId", competitionId.toString());
+      setVisible(false);
     }
   };
 
