@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Logo from "../../components/logo";
 import Footer from "../../components/footer";
 import styles from "./page.module.scss";
+import Avatar from "../../components/Avatar";
 
 interface HomeLayoutProps {
   children: ReactNode;
@@ -36,6 +37,7 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
     <div className={styles["page-container"]}>
       <Navbar
         header={<Logo height={36} />}
+        footer={<Avatar height={36} />}
         items={headerItems}
         selectedKey={location.pathname.replace("/", "")}
         onchange={navigate}

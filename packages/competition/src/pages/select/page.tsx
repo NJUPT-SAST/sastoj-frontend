@@ -105,13 +105,7 @@ const Select = () => {
           }
           footer={
             <div className={styles["btn-box"]}>
-              <Button
-                className={styles["enter-btn"]}
-                color="secondary"
-                size="small"
-              >
-                进入比赛
-              </Button>
+              <EnterButton competitionId={4} />
             </div>
           }
           mainContent={
