@@ -10,35 +10,27 @@
   .select-content {
     position: relative;
     box-sizing: border-box;
-    // padding: 1rem 0;
     flex-grow: 1;
     background-color: $background-color;
     align-items: center;
     justify-content: center;
     display: flex;
-    // flex-basis: auto;
-
     .select-boxes {
       height: 100%;
       display: grid;
       box-sizing: border-box;
       max-width: $max-width;
-      grid-template-columns: repeat(auto-fit, minmax(29vw, 1fr));
-      // grid-template-rows: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(2, 48%);
       grid-auto-rows: auto;
       padding: 1rem 1.5rem;
-      grid-gap: 1.5rem 1.5rem;
-
+      grid-gap: 1.5rem 4%;
       .select-item {
         box-sizing: border-box;
         background-color: $white-color;
         display: flex;
         flex-direction: column;
-        width: 100%;
+        width: unset;
         height: 100%;
-        // width: 48%;
-        // flex-grow: 1;
-
         .btn-box {
           width: 100%;
           display: flex;

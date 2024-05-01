@@ -9,4 +9,13 @@
   padding: 0 1.5rem;
   box-sizing: border-box;
   flex-grow: 1;
+  .questions-table-container {
+    position: relative;
+    box-sizing: border-box;
+    background-color: $white-color;
+    height: fit-content;
+    max-width: $max-width;
+    width: 100% !important;
+    margin: 0.8rem 0;
+  }
 }

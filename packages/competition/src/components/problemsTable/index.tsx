@@ -1,10 +1,9 @@
-import { Button } from "@ui-aurora/react";
+import { Badge, Button } from "@ui-aurora/react";
 import { useNavigate } from "react-router-dom";
-import { OjTable } from "../../table";
+import { OjTable } from "../table";
 import { createColumnHelper } from "@tanstack/react-table";
-import more from "../../../assets/more.svg";
 import styles from "./index.module.scss";
-import State from "../state";
+import { Ellipsis } from "lucide-react";
 
 interface Question {
   id: number;
@@ -141,19 +140,27 @@ const ProblemsTable = () => {
       id: "state",
       cell: (info) => (
         <div style={{ textAlign: "center" }}>
-          <State value={info.getValue()} />
+          <Badge
+            type={
+              info.getValue().toLowerCase() as "success" | "error" | "warning"
+            }
+            content={info.getValue()}
+            size="small"
+          />
         </div>
       ),
       header: () => <span className={styles["header-div"]}>STATE</span>,
       footer: (info) => info.column.id,
     }),
     columnHelper.accessor("operation", {
-      cell: () => (
+      cell: (info) => (
         <div className={styles["header-div"]}>
           <Button
             onClick={() => {
-              navigate("/problem");
+              navigate(`/problems/${info.getValue()}`);
             }}
+            color="border"
+            size="small"
           >
             Enter
           </Button>
@@ -161,21 +168,18 @@ const ProblemsTable = () => {
       ),
       header: () => (
         <div className={styles["header-div"]}>
-          <img src={more} />
+          <Ellipsis />
         </div>
       ),
-      footer: (info) => info.column.id,
     }),
   ];
   return (
-    <div className={styles["table-container"]}>
-      <OjTable
-        className={styles["question-table"]}
-        columns={columns}
-        dataSource={data}
-        caption="新生杯"
-      />
-    </div>
+    <OjTable
+      columns={columns}
+      dataSource={data}
+      caption="Fresh Cup"
+      className={styles["questions-table"]}
+    />
   );
 };
 

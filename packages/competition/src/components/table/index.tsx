@@ -18,7 +18,7 @@ import {
   Thead,
   Tr,
 } from "@ui-aurora/react";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import styles from "./index.module.scss";
 
 interface OjTableProps<TData> {
@@ -63,12 +63,8 @@ export const OjTable = <TData,>({
     onPaginationChange: setPagination,
   });
 
-  useEffect(() => {
-    console.log(pagination);
-  }, [pagination]);
-
   return (
-    <div className={`${styles.table} ${className}`}>
+    <div className={`${styles["table-container"]} ${className}`}>
       <div className={styles.caption}>
         <h2 className={styles["caption-span"]}>{caption}</h2>
         {/* 这是检索信息的输入框 */}
@@ -91,7 +87,7 @@ export const OjTable = <TData,>({
           ></Input>
         )}
       </div>
-      <Table>
+      <Table className={styles["oj-table"]} style={{ width: "100%" }}>
         <Thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <Tr key={headerGroup.id}>
