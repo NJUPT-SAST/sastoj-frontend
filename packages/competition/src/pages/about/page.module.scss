@@ -1,7 +1,40 @@
 @use "@/variables" as *;
 
+@mixin about-card {
+  width: 100%;
+  padding: 1rem 1.5rem;
+}
+
 .about-container {
   background-color: $background-color;
   height: 100%;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  .about-content {
+    width: 100%;
+    max-width: $max-width;
+    display: grid;
+    grid-template-columns: 64% 35%;
+    gap: 1%;
+    padding: 1rem;
+    box-sizing: border-box;
+    .announcement-card {
+      @include about-card();
+      min-height: 100%;
+    }
+    .right-area {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      .information-card {
+        @include about-card();
+        padding: 1rem;
+      }
+      .time-card {
+        @include about-card();
+        padding: 1rem;
+      }
+    }
+  }
 }

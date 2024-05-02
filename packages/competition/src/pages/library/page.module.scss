@@ -1,6 +1,6 @@
 @use "@/variables" as *;
 
-.library-page {
+.library-container {
   background-color: $background-color;
   height: 100%;
   display: flex;
@@ -9,14 +9,18 @@
   padding: 0 1.5rem;
   box-sizing: border-box;
   flex-grow: 1;
-  .questions-table-container {
-    position: relative;
-    box-sizing: border-box;
-    background-color: $white-color;
-    height: fit-content;
+  .library-content {
+    width: 100%;
     max-width: $max-width;
-    width: 100% !important;
-    margin: 0.8rem 0;
-    border-radius: 0.4rem;
+    box-sizing: border-box;
+    padding: 1rem;
+    .questions-table-container {
+      position: relative;
+      box-sizing: border-box;
+      background-color: $white-color;
+      height: fit-content;
+      width: 100% !important;
+      border-radius: 0.4rem;
+    }
   }
 }
