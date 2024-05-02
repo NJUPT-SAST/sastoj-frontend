@@ -1,6 +1,6 @@
 import { Card } from "@ui-aurora/react";
-import ProblemsTable from "../../components/problemsTable";
 import styles from "./page.module.scss";
+import ProblemsTable from "../../components/library/problemsTable";
 
 const Library = () => {
   return (

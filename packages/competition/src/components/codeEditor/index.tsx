@@ -30,7 +30,6 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
 }) => {
   const editorRef = useRef(null);
   const language = useLanguageStore((state) => state.language);
-
   const myTheme = EditorView.theme({
     ".cm-content": {
       fontFamily: "Consolas",
@@ -93,7 +92,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
       view.destroy();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [language]);
+  }, [language, defaultValue]);
 
   return <div ref={editorRef} className={className} />;
 };

@@ -1,6 +1,7 @@
 import { Sheet } from "@ui-aurora/react";
 import React from "react";
-import { useSwrGetProblems } from "../../../swrHooks/problems";
+import { ProblemsList } from "./problemsList";
+import { useNavigate } from "react-router-dom";
 
 interface ProblemsSheetProps {
   visible: boolean;
@@ -11,15 +12,20 @@ export const ProblemsSheet: React.FC<ProblemsSheetProps> = ({
   visible,
   onCancel,
 }) => {
-  const { data } = useSwrGetProblems(1);
-  console.log(data);
-
+  const navigate = useNavigate();
+  const handleSelect = (problemId: string) => {
+    onCancel && onCancel();
+    navigate(`/problems/${problemId}`);
+  };
   return (
     <Sheet
       visible={visible}
       onCancel={onCancel}
       width={500}
+      mainContent={<ProblemsList handleSelect={handleSelect} />}
       sheetFooter={null}
-    ></Sheet>
+      sheetTitle="题目列表"
+      placement="left"
+    />
   );
 };

@@ -1,6 +1,6 @@
 import { Badge, Button } from "@ui-aurora/react";
 import { useNavigate } from "react-router-dom";
-import { OjTable } from "../table";
+import { OjTable } from "../../table";
 import { createColumnHelper } from "@tanstack/react-table";
 import styles from "./index.module.scss";
 import { Ellipsis } from "lucide-react";
