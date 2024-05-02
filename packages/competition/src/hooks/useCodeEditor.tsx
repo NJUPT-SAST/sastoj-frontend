@@ -15,13 +15,15 @@ export const useCodeEditor = () => {
         initProblem?.(problemId);
       }
       changeContent?.(problemId, value);
+    } else {
+      throw new Error("题目ID不存在");
     }
   };
 
   const defaultValue: string | undefined = useMemo(() => {
     if (problemId && problemsStatus.get(problemId)) {
       return problemsStatus.get(problemId)?.content;
-    } else return "Write some code here !!!";
+    } else return `Problem: ${problemId} \n Write some code here !!!`;
   }, [problemId, problemsStatus]);
 
   return { handleCodeEditor, defaultValue };
