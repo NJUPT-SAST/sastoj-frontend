@@ -3,7 +3,12 @@ import styles from "./page.module.scss";
 import Announcement from "../../components/about/announcement";
 import Information from "../../components/about/information";
 import Time from "../../components/about/time";
+import { useSwrGetContest } from "../../swrHooks/contest";
 const About = () => {
+  const { data } = useSwrGetContest(1);
+
+  console.log(data);
+
   return (
     <div className={styles["about-container"]}>
       <div className={styles["about-content"]}>
@@ -13,7 +18,12 @@ const About = () => {
           header={null}
           footer={null}
           padding={0}
-          mainContent={<Announcement />}
+          mainContent={
+            <Announcement
+              title={data?.contest?.title}
+              description={data?.contest?.description}
+            />
+          }
         />
         <div className={styles["right-area"]}>
           <Card

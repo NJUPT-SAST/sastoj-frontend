@@ -3,7 +3,7 @@ import Footer from "../../components/footer";
 import Logo from "../../components/logo";
 import styles from "./page.module.scss";
 import { Navbar } from "@ui-aurora/react";
-import Avatar from "../../components/Avatar";
+import Avatar from "../../components/avatar";
 
 interface SelectLayoutProps {
   children: ReactNode;
