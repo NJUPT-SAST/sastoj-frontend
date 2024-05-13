@@ -6,6 +6,7 @@ import {
 
 import { RequestCanceler } from "./Canceler";
 import { HTTP_STATUS } from "./status";
+import { ResponseError } from "../../types/responseError";
 
 const canceler = new RequestCanceler();
 
@@ -28,20 +29,22 @@ export const responseSuccess = (response: AxiosResponse) => {
 };
 
 //失败则进行统一的错误处理
-export const responseFailed = (error: AxiosError) => {
+export const responseFailed = (error: AxiosError): Promise<never> => {
   const { response } = error;
 
   if (response?.status === HTTP_STATUS.NOT_FOUND) {
-    return Promise.reject({ desc: "请求资源不存在" });
+    return Promise.reject({ desc: "请求资源不存在" } as ResponseError);
   } else if (response?.status === HTTP_STATUS.BAD_GATEWAY) {
-    return Promise.reject({ desc: "服务端出现了问题" });
+    return Promise.reject({ desc: "服务端出现了问题" } as ResponseError);
   } else if (response?.status === HTTP_STATUS.FORBIDDEN) {
-    return Promise.reject({ desc: "没有权限访问" });
+    return Promise.reject({ desc: "没有权限访问" } as ResponseError);
   } else if (response?.status === HTTP_STATUS.AUTHENTICATE) {
-    return Promise.reject({ desc: "需要鉴权" });
+    return Promise.reject({ desc: "需要鉴权" } as ResponseError);
   } else if (response?.status === HTTP_STATUS.SERVER_ERROR) {
-    return Promise.reject({ desc: "服务器错误" });
+    return Promise.reject({ desc: "服务器错误" } as ResponseError);
   } else {
-    return Promise.reject({ desc: `发生错误， 错误码${response?.status}` });
+    return Promise.reject({
+      desc: `发生错误， 错误码${response?.status}`,
+    } as ResponseError);
   }
 };

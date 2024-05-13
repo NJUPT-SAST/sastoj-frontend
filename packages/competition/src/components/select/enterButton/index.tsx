@@ -6,10 +6,10 @@ import { useState } from "react";
 import styles from "./index.module.scss";
 
 interface EnterButtonProps {
-  competitionId: number;
+  contestId: number;
 }
 
-const EnterButton: React.FC<EnterButtonProps> = ({ competitionId }) => {
+const EnterButton: React.FC<EnterButtonProps> = ({ contestId }) => {
   const [visible, setVisible] = useState<boolean>(false);
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const EnterButton: React.FC<EnterButtonProps> = ({ competitionId }) => {
       });
     } else {
       navigate("/About");
-      localStorage.setItem("competitionId", competitionId.toString());
+      localStorage.setItem("contestId", contestId.toString());
       setVisible(false);
     }
   };
