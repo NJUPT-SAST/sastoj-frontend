@@ -34,10 +34,14 @@ export const selfTest = (url: string): Promise<SelfTestProps> => {
   });
 };
 
+interface SubmitProps {
+  submitId: string;
+}
+
 export const submitCode = (
   url: string,
   { arg }: { arg: { code: string; language: string } },
-) => {
+): Promise<SubmitProps> => {
   const data = JSON.stringify({
     code: arg.code,
     language: arg.language,

@@ -19,7 +19,7 @@ import { useLanguageStore } from "../../stores/useLanguageStore";
 interface CodeEditorProps {
   className?: string;
   defaultValue?: string;
-  onUpdate?: (value: string) => void;
+  onUpdate?: (value: string, language: string) => void;
 }
 
 //TODO: ban search panel
@@ -77,7 +77,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
         ayuLight,
         myTheme,
         EditorView.updateListener.of((v) => {
-          onUpdate && onUpdate(v.state.doc.toString());
+          onUpdate && onUpdate(v.state.doc.toString(), language);
         }),
       ],
     });

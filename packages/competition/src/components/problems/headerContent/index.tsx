@@ -4,10 +4,11 @@ import { Button } from "@ui-aurora/react";
 import { ProblemsSheet } from "../problemsSheet";
 import { useState } from "react";
 import { useSelfTest } from "../../../hooks/useSelfTest";
-// import { useSelfTest } from "../../../swrHooks/selfTest";
+import { useSubmit } from "../../../hooks/useSubmit";
 export const HeaderContent = () => {
   const [sheetVisible, setSheetVisible] = useState<boolean>(false);
   const selfTest = useSelfTest();
+  const submit = useSubmit();
 
   return (
     <div className={styles["header-content-container"]}>
@@ -30,7 +31,12 @@ export const HeaderContent = () => {
           <CirclePlay />
           <span>自测</span>
         </Button>
-        <Button className={styles["run-button"]} size="small" color="border">
+        <Button
+          className={styles["run-button"]}
+          size="small"
+          color="border"
+          onClick={() => submit()}
+        >
           <Send />
           <span>提交</span>
         </Button>

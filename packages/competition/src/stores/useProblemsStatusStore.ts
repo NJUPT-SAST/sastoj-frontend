@@ -5,14 +5,15 @@ import superjson from "superjson";
 
 export interface ProblemStatus {
   status: "finished" | "unfinished";
-  content: string;
+  code: string;
+  language: string;
 }
 
 export interface ProblemsStatusState {
   problemsStatus: Map<string, ProblemStatus>;
   initProblem: (key: string) => void;
   finishProblem: (key: string) => void;
-  changeContent: (key: string, newContent: string) => void;
+  changeContent: (key: string, newContent: string, language: string) => void;
 }
 
 // 这个storage是为persist map对象创建的一个存储local storage的一个中间件
@@ -36,7 +37,8 @@ export const useProblemsStatusStore = create<ProblemsStatusState>()(
         set((state) => ({
           problemsStatus: state.problemsStatus.set(key, {
             status: "unfinished",
-            content: "",
+            code: "",
+            language: "",
           }),
         })),
 
@@ -50,12 +52,13 @@ export const useProblemsStatusStore = create<ProblemsStatusState>()(
           return { ...state };
         }),
 
-      changeContent: (key: string, newContent: string) =>
+      changeContent: (key: string, newContent: string, language: string) =>
         set((state) => {
           const problemStatus = state.problemsStatus.get(key);
 
           if (problemStatus) {
-            problemStatus.content = newContent;
+            problemStatus.code = newContent;
+            problemStatus.language = language;
             state.problemsStatus.set(key, problemStatus);
           }
           return { ...state };

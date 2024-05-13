@@ -4,6 +4,7 @@ import { Button, Carousel } from "@ui-aurora/react";
 import { SelfTest } from "./selfTest";
 import { useEffect, useRef, useState } from "react";
 import { EvaluationRecord } from "./evaluationRecord";
+import { useSubmitStore } from "../../../stores/useSubmitStore";
 
 // TODO: Carousel 封装的有问题，临时用野蛮方法解决。
 
@@ -12,6 +13,7 @@ export const StatusCardContent = () => {
   const [selected, setSelected] = useState<number>(0);
   const [carouselWidth, setCarouselWidth] = useState<number>();
   const [carouselHeight, setCarouselHeight] = useState<number>();
+  const submitState = useSubmitStore((state) => state.submitState);
 
   useEffect(() => {
     const width = carouselRef.current?.offsetWidth;
@@ -20,6 +22,10 @@ export const StatusCardContent = () => {
     setCarouselWidth(width);
     setCarouselHeight(height);
   }, []);
+
+  useEffect(() => {
+    submitState === "submitting" && setSelected(1);
+  }, [submitState]);
 
   return (
     <div className={styles["status-card-container"]}>
