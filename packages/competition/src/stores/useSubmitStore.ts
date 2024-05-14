@@ -1,13 +1,18 @@
 import { create } from "zustand";
 
-type SubmitType = "submitting" | "submitted";
+type SubmitType = "Submitting" | "UnSubmitted";
 
 interface SubmitStore {
+  submitId: string | undefined;
   submitState: SubmitType;
-  setSubmitState: (value: SubmitType) => void;
+  setSubmitState: (state: SubmitType, Id: string) => void;
+  endSubmit: () => void;
 }
 
 export const useSubmitStore = create<SubmitStore>((set) => ({
-  submitState: "submitted",
-  setSubmitState: (value: SubmitType) => set({ submitState: value }),
+  submitId: undefined,
+  submitState: "UnSubmitted",
+  setSubmitState: (state: SubmitType, Id: string) =>
+    set({ submitState: state, submitId: Id }),
+  endSubmit: () => set({ submitState: "UnSubmitted" }),
 }));

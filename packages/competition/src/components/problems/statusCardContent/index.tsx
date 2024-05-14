@@ -24,7 +24,7 @@ export const StatusCardContent = () => {
   }, []);
 
   useEffect(() => {
-    submitState === "submitting" && setSelected(1);
+    submitState === "Submitting" && setSelected(1);
   }, [submitState]);
 
   return (
