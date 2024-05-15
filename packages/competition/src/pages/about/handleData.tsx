@@ -6,12 +6,13 @@ type statusMapping = Record<
 
 export const getType = (typeValue: number | undefined) => {
   const type: TypeMapping = {
-    1: "SAST-OJ",
-    2: "SAST-IOI",
-    3: "SAST-ACM",
+    1: "IOI",
+    2: "ACM",
+    3: "乐多",
+    4: 'OI'
   };
 
-  return type[typeValue!] || "SAST-OJ";
+  return type[typeValue!] || "OTHER";
 };
 
 export const getStatus = (
