@@ -16,6 +16,7 @@ const LoginCardContent = () => {
         id="userName"
         value={username}
         onchange={(value) => setUsername(value)}
+        size="medium"
       ></Input>
       <Input
         mode="password"
@@ -24,6 +25,7 @@ const LoginCardContent = () => {
         value={password}
         onchange={(value) => setPassword(value)}
         id="password"
+        size="medium"
       ></Input>
       <div className={styles["button-container"]}>
         <Button

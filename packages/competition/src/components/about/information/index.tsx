@@ -1,5 +1,6 @@
 import { Badge } from "@ui-aurora/react";
 import styles from "./index.module.scss";
+
 import {
   getType,
   getStatus,
@@ -37,6 +38,7 @@ const Information = (data: InformationProps) => {
       <div>
         <span>比赛类型</span>
         <div>
+
           <Badge content={typeValue} />
         </div>
       </div>
@@ -48,6 +50,7 @@ const Information = (data: InformationProps) => {
       </div>
       <div>
         <span>开始时间</span>
+
         <span>{start_Time}</span>
       </div>
       <div>
