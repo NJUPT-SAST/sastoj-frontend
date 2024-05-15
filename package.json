@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install",
     "competition:dev": "pnpm --filter @sast/oj-competition dev",
-    "competition:build": "pnpm --filter @sast/oj-competition build:lib",
+    "competition:build": "pnpm --filter @sast/oj-competition build",
     "competition:lint": "pnpm --filter @sast/oj-competition lint",
     "management:dev": "pnpm --filter @sast/oj-management dev",
     "management:build": "pnpm --filter @sast/oj-management build",

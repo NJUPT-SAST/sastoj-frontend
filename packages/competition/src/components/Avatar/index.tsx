@@ -12,7 +12,7 @@ const Avatar = ({ width, height, className, style, ...rest }: AvatarProps) => {
   return (
     <img
       src={ojcat}
-      alt="avatar"
+      alt="avatar1"
       width={width}
       height={height}
       className={className}
