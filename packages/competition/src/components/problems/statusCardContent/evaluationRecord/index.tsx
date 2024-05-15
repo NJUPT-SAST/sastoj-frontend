@@ -1,20 +1,21 @@
-// import { useDetailStore } from "../../../../stores/useDetailStore";
+import { useDetailStore } from "../../../../stores/useDetailStore";
 import styles from "./index.module.scss";
 
 export const EvaluationRecord = () => {
-  // const detail = useDetailStore((state) => state.detail);
+  const detail = useDetailStore((state) => state.detail);
   return (
     <div className={styles["evaluation-record-container"]}>
-      <div className={styles["evaluation-record-item"]}>
-        <span>#id</span>
-        <span>state:right</span>
-        <span>point:19</span>
-        <span>time:20</span>
-        <span>memory:290mb</span>
-      </div>
-      {/* {detail.map((item, index) => {
-          // return <span key={index}>{item.maxMemory}</span>;
-        })} */}
+      {detail.map((item, index) => {
+        return (
+          <div className={styles["evaluation-record-item"]} key={index}>
+            <span>#id:{item.id}</span>
+            <span>status:{item.status}</span>
+            <span>point:{item.point}</span>
+            <span>time:{item.totalTime}</span>
+            <span>memory:{item.maxMemory}</span>
+          </div>
+        );
+      })}
     </div>
   );
 };

@@ -90,8 +90,8 @@ importers:
         specifier: ^8.16.0
         version: 8.16.0(react-dom@18.2.0)(react@18.2.0)
       '@ui-aurora/react':
-        specifier: ^0.0.13
-        version: 0.0.13(@emotion/is-prop-valid@1.2.2)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^0.0.14
+        version: 0.0.14(@emotion/is-prop-valid@1.2.2)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0)
       axios:
         specifier: ^1.6.8
         version: 1.6.8
@@ -5546,7 +5546,7 @@ packages:
   /@types/hast@3.0.4:
     resolution: {integrity: sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==}
     dependencies:
-      '@types/unist': 2.0.10
+      '@types/unist': 3.0.2
     dev: false
 
   /@types/html-minifier-terser@7.0.0:
@@ -5989,8 +5989,8 @@ packages:
       eslint-visitor-keys: 3.4.3
     dev: true
 
-  /@ui-aurora/react@0.0.13(@emotion/is-prop-valid@1.2.2)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-nSAl5TyIjY/4j89NqZ7FoRCGKUFewqqiuPmZtWkG+wep1s+xht/8fv9Cm4+kwmuEPc23FT0APc3+1pk6b8VTwg==}
+  /@ui-aurora/react@0.0.14(@emotion/is-prop-valid@1.2.2)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-+pTxqQ5EVsruQHWqZMHTXJmQSNTIhJ+foMhDJjIAwatd3bxYCcsfWgUoy9ORtKeXM22HMXfyPAV9MdTTSawZGQ==}
     peerDependencies:
       react: ^18.2.0
       react-dom: ^18.2.0

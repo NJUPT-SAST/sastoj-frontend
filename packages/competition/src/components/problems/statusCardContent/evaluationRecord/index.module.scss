@@ -1,11 +1,14 @@
+@use "@/variables" as *;
 .evaluation-record-container {
   height: 100%;
   width: 100%;
+  overflow: scroll;
   .evaluation-record-item {
     width: 100%;
     display: flex;
     justify-content: space-between;
     padding: 5px 10px;
     box-sizing: border-box;
+    border-bottom: 1px solid $divider-color;
   }
 }
