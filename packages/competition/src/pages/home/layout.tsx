@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Logo from "../../components/logo";
 import Footer from "../../components/footer";
 import styles from "./page.module.scss";
-import Avatar from "../../components/Avatar";
+import Avatar from "../../components/avatar";
 
 interface HomeLayoutProps {
   children: ReactNode;

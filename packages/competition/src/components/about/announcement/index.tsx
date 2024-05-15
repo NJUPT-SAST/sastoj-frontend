@@ -1,9 +1,18 @@
-const Announcement = () => {
+import React from "react";
+
+export interface AnnouncementProps {
+  title?: string;
+  description?: string;
+}
+
+const Announcement: React.FC<AnnouncementProps> = ({ title, description }) => {
   return (
     <>
+      <h2>{title}</h2>
       <h2>比赛公告💻</h2>
       <span>
-        本场比赛为『STAOI』G - Round 5，也是 STAOI 的第 5 场公开赛。
+        {/* 本场比赛为『STAOI』G - Round 5，也是 STAOI 的第 5 场公开赛。
+
         <br />
         本场比赛的组织者是 STA_Morlin。
         <br />
@@ -23,7 +32,8 @@ const Announcement = () => {
           若前三名（同分按提交时间排序）中有未 AK 者，则： Rank 1 可获得 20 元。
           Rank 2 可获得 12 元。 Rank 3 可获得 7 元。 对于题目首 A，获得第 𝑥 x
           题首 A 的用户将获得 𝑥 x 元。
-        </span>
+        </span> */}
+        {description}
       </span>
     </>
   );

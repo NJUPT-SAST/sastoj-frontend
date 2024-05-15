@@ -17,8 +17,6 @@ export const StatusCardContent = () => {
     const width = carouselRef.current?.offsetWidth;
     const height = carouselRef.current?.offsetHeight;
 
-    // console.log(width, height);
-
     setCarouselWidth(width);
     setCarouselHeight(height);
   }, []);

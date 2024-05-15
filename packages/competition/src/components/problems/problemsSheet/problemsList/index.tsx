@@ -1,10 +1,10 @@
-import { Checkbox } from "@ui-aurora/react";
+// import { Checkbox } from "@ui-aurora/react
 import { useSwrGetProblems } from "../../../../swrHooks/problems";
 import styles from "./index.module.scss";
 import React from "react";
 
 interface ProblemsListProps {
-  handleSelect: (problemId: string) => void;
+  handleSelect: (problemId: number) => void;
 }
 
 export const ProblemsList: React.FC<ProblemsListProps> = ({ handleSelect }) => {
@@ -19,7 +19,9 @@ export const ProblemsList: React.FC<ProblemsListProps> = ({ handleSelect }) => {
             className={styles["list-item"]}
             onClick={() => handleSelect(item.id)}
           >
-            <Checkbox label={`${item.id}. ${item.title}`} fontsize={12} />
+            <span>
+              {item.id}. {item.title}
+            </span>
             <span>Point: {item.point}</span>
           </div>
         );
