@@ -1,4 +1,4 @@
-// import { Checkbox } from "@ui-aurora/react";
+// import { Checkbox } from "@ui-aurora/react
 import { useSwrGetProblems } from "../../../../swrHooks/problems";
 import styles from "./index.module.scss";
 import React from "react";

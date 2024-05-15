@@ -121,6 +121,7 @@ const columnHelper = createColumnHelper<Question>();
 // ];
 
 const ProblemsTable = (data: GetProblemsProps) => {
+
   const navigate = useNavigate();
   const columns = [
     columnHelper.accessor("id", {
