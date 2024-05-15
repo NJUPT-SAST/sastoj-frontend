@@ -84,7 +84,6 @@ import { useParams } from "react-router-dom";
 //   `const ProblemContent = () => {
 //     const html = useMarkdown(markdown);
 
-
 //     const [isFullScreen, setIsFullScreen] = useState<boolean>(false);
 
 //     const handleFullScreen = () => {

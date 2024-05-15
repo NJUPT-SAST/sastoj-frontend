@@ -5,7 +5,6 @@ import Information from "../../components/about/information";
 import Time from "../../components/about/time";
 import { useSwrGetContest } from "../../swrHooks/contest";
 
-
 const About = () => {
   const contestId = Number(localStorage.getItem("contestId"));
   const { data } = useSwrGetContest(contestId);
@@ -21,7 +20,6 @@ const About = () => {
           footer={null}
           padding={0}
           mainContent={
-
             <Announcement title={data?.title} description={data?.description} />
           }
         />

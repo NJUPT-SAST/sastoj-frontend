@@ -38,7 +38,6 @@ const Information = (data: InformationProps) => {
       <div>
         <span>比赛类型</span>
         <div>
-
           <Badge content={typeValue} />
         </div>
       </div>
