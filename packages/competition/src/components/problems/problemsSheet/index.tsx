@@ -14,6 +14,7 @@ export const ProblemsSheet: React.FC<ProblemsSheetProps> = ({
 }) => {
   const navigate = useNavigate();
   const handleSelect = (problemId: string) => {
+
     onCancel && onCancel();
     navigate(`/problems/${problemId}`);
   };

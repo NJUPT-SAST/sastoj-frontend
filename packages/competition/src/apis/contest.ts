@@ -13,7 +13,15 @@ export const getContests = (): Promise<GetContestsProps> => {
 };
 
 interface GetContestProps {
-  contest: Contest;
+  description?: string;
+  endTime: string;
+  extraTime: number;
+  id: number;
+  language?: string;
+  startTime: string;
+  status: number;
+  title: string;
+  type: number;
 }
 
 export const getContest = (contestId: number): Promise<GetContestProps> => {
