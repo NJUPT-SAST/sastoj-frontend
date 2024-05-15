@@ -5,9 +5,9 @@ import {
   getStatus,
   handleDate,
   getDuration,
-} from "../../../pages/about/handleData";
+} from "../../../utils/aboutHandleData";
 
-export interface InformationsProps {
+export interface InformationProps {
   endTime?: string;
   extraTime?: number;
   startTime?: string;
@@ -15,7 +15,7 @@ export interface InformationsProps {
   type?: number;
 }
 
-const Information = (data: InformationsProps) => {
+const Information = (data: InformationProps) => {
   const typeValue = getType(data?.type);
   const stateValue = getStatus(data?.status);
 

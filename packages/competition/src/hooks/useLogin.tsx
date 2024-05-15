@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export const useLogin = () => {
   const { trigger } = useSwrLogin();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const login = (username: string, password: string) => {
     if (!username) {
@@ -20,16 +20,15 @@ export const useLogin = () => {
     } else {
       trigger({ username, password })
         .then((response) => {
-          console.log(response)
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-          localStorage.setItem('token', response?.token)  
+          console.log(response);
+          localStorage.setItem("token", response?.token ?? undefined);
           showToast({
             type: "success",
             content: <>登录成功</>,
           });
           setTimeout(() => {
-            navigate('/select')
-          }, 500)     
+            navigate("/select");
+          }, 500);
         })
         .catch((error) => {
           console.log(error);

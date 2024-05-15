@@ -9,7 +9,7 @@ export const getType = (typeValue: number | undefined) => {
     1: "IOI",
     2: "ACM",
     3: "乐多",
-    4: 'OI'
+    4: "OI",
   };
 
   return type[typeValue!] || "OTHER";
@@ -25,7 +25,7 @@ export const getStatus = (
     4: ["已取消", "error"],
   };
 
-  return status[statusValue!] || ["未开始", "ghost"];
+  return status[statusValue!] ?? ["未开始", "ghost"];
 };
 
 export const handleDate = (date: string | undefined): string => {

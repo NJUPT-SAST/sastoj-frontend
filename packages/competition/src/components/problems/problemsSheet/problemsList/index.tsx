@@ -4,7 +4,7 @@ import styles from "./index.module.scss";
 import React from "react";
 
 interface ProblemsListProps {
-  handleSelect: (problemId: string) => void;
+  handleSelect: (problemId: number) => void;
 }
 
 export const ProblemsList: React.FC<ProblemsListProps> = ({ handleSelect }) => {

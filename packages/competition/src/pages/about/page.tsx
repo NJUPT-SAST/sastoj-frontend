@@ -8,6 +8,7 @@ import { useSwrGetContest } from "../../swrHooks/contest";
 const About = () => {
   const contestId = Number(localStorage.getItem("contestId"));
   const { data } = useSwrGetContest(contestId);
+  console.log("contest information", data);
 
   return (
     <div className={styles["about-container"]}>
