@@ -1,8 +1,10 @@
 import { useSwrLogin } from "../swrHooks/auth";
 import { showToast } from "@ui-aurora/react";
+import { useNavigate } from "react-router-dom";
 
 export const useLogin = () => {
   const { trigger } = useSwrLogin();
+  const navigate = useNavigate()
 
   const login = (username: string, password: string) => {
     if (!username) {
@@ -18,11 +20,16 @@ export const useLogin = () => {
     } else {
       trigger({ username, password })
         .then((response) => {
-          console.log(response);
+          console.log(response)
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+          localStorage.setItem('token', response?.token)  
           showToast({
             type: "success",
             content: <>登录成功</>,
           });
+          setTimeout(() => {
+            navigate('/select')
+          }, 500)     
         })
         .catch((error) => {
           console.log(error);
