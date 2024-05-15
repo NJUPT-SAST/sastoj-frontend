@@ -9,13 +9,13 @@ export default defineConfig({
       "@/variables": `${__dirname}/src/_variables.scss`,
     },
   },
-  // server: {
-  //   proxy: {
-  //     "/api": {
-  //       target: "http://192.168.1.61",
-  //       changeOrigin: true,
-  //       rewrite: (path) => path.replace(/^\/api/, ""),
-  //     },
-  //   },
-  // },
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://192.168.1.61",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
+  },
 });

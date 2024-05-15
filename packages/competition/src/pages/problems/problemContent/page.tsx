@@ -5,6 +5,7 @@ import { CodeEditorCardContent } from "../../../components/problems/codeEditorCa
 import { useState } from "react";
 import { StatusCardContent } from "../../../components/problems/statusCardContent";
 import { useSwrGetProblem } from "../../../swrHooks/problem";
+import { useParams } from "react-router-dom";
 
 // const markdown =
 //   "# Markdown Sample\n" +
@@ -137,12 +138,16 @@ import { useSwrGetProblem } from "../../../swrHooks/problem";
 
 const ProblemContent = () => {
   const [isFullScreen, setIsFullScreen] = useState<boolean>(false);
-
+  const contestId = localStorage.getItem("contestId");
+  const { problemId } = useParams();
   const handleFullScreen = () => {
     setIsFullScreen(!isFullScreen);
   };
 
-  const { data, isLoading } = useSwrGetProblem(1, 2);
+  const { data, isLoading } = useSwrGetProblem(
+    contestId as unknown as number,
+    problemId as unknown as number,
+  );
 
   const html = useMarkdown(data?.content ?? "");
 
