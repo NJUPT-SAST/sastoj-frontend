@@ -25,7 +25,7 @@ const ProblemsTable = (data: GetProblemsProps) => {
     }),
     columnHelper.accessor((row) => row.title, {
       id: "title",
-      cell: (info) => <i className={styles["span-font"]}>{info.getValue()}</i>,
+      cell: (info) => <i className={styles["span-description"]}>{info.getValue()}</i>,
       header: () => <span>TITLE</span>,
     }),
     columnHelper.accessor((row) => row.point, {
@@ -41,8 +41,8 @@ const ProblemsTable = (data: GetProblemsProps) => {
             onClick={() => {
               navigate(`/problems/${info.getValue()}`);
             }}
-            color="border"
-            size="small"
+            color="secondary"
+            size="medium"
           >
             Enter
           </Button>
