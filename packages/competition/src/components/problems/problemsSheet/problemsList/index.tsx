@@ -1,4 +1,4 @@
-// import { Checkbox } from "@ui-aurora/react
+// import { Checkbox } from "@ui-aurora/react";
 import { useSwrGetProblems } from "../../../../swrHooks/problems";
 import styles from "./index.module.scss";
 import React from "react";
@@ -8,7 +8,9 @@ interface ProblemsListProps {
 }
 
 export const ProblemsList: React.FC<ProblemsListProps> = ({ handleSelect }) => {
-  const { data } = useSwrGetProblems(1);
+  const contestId = localStorage.getItem("contestId");
+
+  const { data } = useSwrGetProblems(contestId as unknown as number);
 
   return (
     <div className={styles["list-container"]}>
