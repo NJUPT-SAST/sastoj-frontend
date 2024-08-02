@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import { Navbar, NavbarItemProps } from "@ui-aurora/react";
 import { Home as HomeIcon, LayoutList, Award } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { LogOut } from 'lucide-react';
 
 import Logo from "../../components/logo";
 import Footer from "../../components/footer";
@@ -37,7 +38,12 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
     <div className={styles["page-container"]}>
       <Navbar
         header={<Logo height={36} />}
-        footer={<Avatar height={36} />}
+        footer={
+          <>
+            <Avatar style={{ marginRight: 0 }} height={36} />
+            <LogOut onClick={() => { localStorage.clear(); navigate('/login', { replace: true }) }} />
+          </>
+        }
         items={headerItems}
         selectedKey={location.pathname.replace("/", "")}
         onchange={navigate}
