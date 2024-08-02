@@ -13,7 +13,7 @@ export const ProblemsSheet: React.FC<ProblemsSheetProps> = ({
   onCancel,
 }) => {
   const navigate = useNavigate();
-  const handleSelect = (problemId: string) => {
+  const handleSelect = (problemId: number) => {
 
     onCancel && onCancel();
     navigate(`/problems/${problemId}`);
