@@ -18,7 +18,7 @@ const routes = [
   },
   {
     path: "/",
-    // redirect: "/about",
+    redirect: "/about",
     element: <Home />,
     errorElement: <Error />,
     loader: loader,
