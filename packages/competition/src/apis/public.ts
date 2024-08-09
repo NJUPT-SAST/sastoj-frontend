@@ -8,12 +8,12 @@ export const login = (
   url: string,
   { arg }: { arg: { username: string; password: string } },
 ): Promise<LoginProps> => {
-  const formData = new FormData();
-  formData.append("username", arg.username);
-  formData.append("password", arg.password);
+  // const formData = new FormData();
+  // formData.append("username", arg.username);
+  // formData.append("password", arg.password);
   return REQUEST({
     url: url,
     method: "POST",
-    data: formData,
+    data: arg,
   });
 };

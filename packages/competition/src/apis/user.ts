@@ -21,3 +21,18 @@ export const getProblem = (
     method: "GET",
   });
 };
+
+interface GetHistoryProps {
+  id: string;
+  language: string;
+  point: number;
+  status: number;
+  createdAt: string;
+}
+
+export const historySubmits = ({ contest_id, problem_id }: { contest_id: string, problem_id: string }): Promise<GetHistoryProps[]> => {
+  return REQUEST({
+    url: `/user/contests/${contest_id}/problems/${problem_id}/submission`,
+    method: 'GET'
+  })
+}
