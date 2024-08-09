@@ -30,9 +30,9 @@ interface GetHistoryProps {
   createdAt: string;
 }
 
-export const historySubmits = ({ contest_id, problem_id }: { contest_id: string, problem_id: string }): Promise<GetHistoryProps[]> => {
+export const historySubmits = ({ contest_id, problem_id }: { contest_id: string, problem_id: string }): Promise<{ submissions: GetHistoryProps[] }> => {
   return REQUEST({
-    url: `/user/contests/${contest_id}/problems/${problem_id}/submission`,
+    url: `/user/contests/${contest_id}/problems/${problem_id}/submissions`,
     method: 'GET'
   })
 }
