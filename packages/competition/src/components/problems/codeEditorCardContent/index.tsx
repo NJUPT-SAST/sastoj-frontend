@@ -13,15 +13,60 @@ interface CodeEditorCardContentProps {
 
 const optionsList: OptionProps[] = [
   {
-    value: "java",
-    label: "java",
+    value: 'C',
+    label: 'C',
+    key: 0,
+  },
+  // {
+  //   value: "java",
+  //   label: "java",
+  //   key: 3,
+  // },
+  {
+    value: "C++",
+    label: "C++",
+    key: 1,
+  },
+  {
+    value: "C++98",
+    label: "C++98",
+    key: 2,
+  },
+  {
+    value: "C++11",
+    label: "C++11",
     key: 3,
   },
   {
-    value: "cpp",
-    label: "cpp",
+    value: "C++11(O2)",
+    label: "C++11(O2)",
+    key: 4,
+  },
+  {
+    value: "C++14",
+    label: "C++14",
     key: 5,
   },
+  {
+    value: "C++14(O2)",
+    label: "C++14(O2)",
+    key: 6,
+  },
+  {
+    value: "C++17",
+    label: "C++17",
+    key: 7,
+  },
+  {
+    value: "C++17(O2)",
+    label: "C++17(O2)",
+    key: 8,
+  },
+  {
+    value: "Bash",
+    label: "Bash",
+    key: 9,
+  }
 ];
 export const CodeEditorCardContent: React.FC<CodeEditorCardContentProps> = ({
   setIsFullScreen,

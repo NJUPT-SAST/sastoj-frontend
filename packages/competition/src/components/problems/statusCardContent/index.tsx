@@ -10,7 +10,7 @@ import { useSubmitStore } from "../../../stores/useSubmitStore";
 
 export const StatusCardContent = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
-  const [selected, setSelected] = useState<number>(0);
+  const [selected, setSelected] = useState<number>(1);
   const [carouselWidth, setCarouselWidth] = useState<number>();
   const [carouselHeight, setCarouselHeight] = useState<number>();
   const submitState = useSubmitStore((state) => state.submitState);
