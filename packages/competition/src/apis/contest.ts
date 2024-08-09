@@ -31,6 +31,16 @@ export const getContest = (contestId: number): Promise<GetContestProps> => {
   });
 };
 
+interface GetHistoryProps {
+  id: string;
+  language: string;
+  point: number;
+  status: number;
+  createdAt: string;
+}
+
+// export const historySubmit=({contestId: number, language: string})
+
 interface SelfTestProps {
   pretestId: string;
 }
