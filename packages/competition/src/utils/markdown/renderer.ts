@@ -1,6 +1,32 @@
 import { RendererObject } from "marked";
-
+import katex from "katex";
+import 'katex/dist/katex.min.css';
 import styles from "./renderer.module.scss";
+
+// 预处理公式
+export const processMath = (markdown: string) => {
+  // 替换块级公式
+  let html = markdown.replace(/\$\$(.*?)\$\$/gs, (match, p1) => {
+    try {
+      return `<div class="katex">${katex.renderToString(p1, { displayMode: true })}</div>`;
+    } catch (e) {
+      console.error("KaTeX Error:", e);
+      return match;
+    }
+  });
+
+  // 替换行内公式
+  html = html.replace(/\$(.*?)\$/g, (match, p1) => {
+    try {
+      return `<span class="katex">${katex.renderToString(p1, { displayMode: false })}</span>`;
+    } catch (e) {
+      console.error("KaTeX Error:", e);
+      return match;
+    }
+  });
+
+  return html;
+};
 
 const renderer: RendererObject = {
   heading(text: string, level: number) {
@@ -27,7 +53,7 @@ const renderer: RendererObject = {
   tablerow(content: string) {
     return `<tr class="">\n${content}</tr>\n`;
   },
-  tablecell(content: string, flags) {
+  tablecell(content: string, flags: any) {
     const tag = flags.header ? "th" : "td";
     const attributes = flags.align ? ` align="${flags.align}"` : "";
     return `<${tag}${attributes}>${content}</${tag}>\n`;
@@ -36,7 +62,7 @@ const renderer: RendererObject = {
     const tag = ordered ? "ol" : "ul";
     const startAttribute = ordered && start !== null ? ` start="${start}"` : "";
     return `<${tag} ${startAttribute} class=${styles.list}>\n${body}</${tag}>\n`;
-  },
+  }
 };
 
 export default renderer;
