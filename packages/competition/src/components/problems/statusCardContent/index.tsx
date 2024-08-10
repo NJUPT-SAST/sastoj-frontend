@@ -10,7 +10,7 @@ import { useSubmitStore } from "../../../stores/useSubmitStore";
 
 export const StatusCardContent = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
-  const [selected, setSelected] = useState<number>(1);
+  const [selected, setSelected] = useState<number>(0);
   const [carouselWidth, setCarouselWidth] = useState<number>();
   const [carouselHeight, setCarouselHeight] = useState<number>();
   const submitState = useSubmitStore((state) => state.submitState);
@@ -31,12 +31,12 @@ export const StatusCardContent = () => {
     <div className={styles["status-card-container"]}>
       <div className={styles["status-card-header"]}>
         <Button size="small" color="ghost" onClick={() => setSelected(0)}>
-          <PencilLine size={16} />
-          <span>自测记录</span>
-        </Button>
-        <Button size="small" color="ghost" onClick={() => setSelected(1)}>
           <Flag size={16} />
           <span>评测记录</span>
+        </Button>
+        <Button size="small" color="ghost" onClick={() => setSelected(1)}>
+          <PencilLine size={16} />
+          <span>自测记录</span>
         </Button>
       </div>
       <div className={styles.divider}></div>
@@ -48,10 +48,10 @@ export const StatusCardContent = () => {
           height={carouselHeight}
           CarouselItems={[
             {
-              children: <SelfTest />,
+              children: <EvaluationRecord />,
             },
             {
-              children: <EvaluationRecord />,
+              children: <SelfTest />,
             },
           ]}
           selected={selected}
