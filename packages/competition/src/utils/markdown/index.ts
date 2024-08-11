@@ -3,7 +3,7 @@ import { markedHighlight } from "marked-highlight";
 import hljs from "highlight.js";
 import "highlight.js/styles/base16/atelier-cave-light.css";
 import renderer, { processMath } from "./renderer";
-import katex from "katex";
+
 
 export const marked = new Marked(
   {
