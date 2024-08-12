@@ -55,3 +55,18 @@ export const getDuration = (
   const hourDiff = Math.abs(date2.getTime() - date1.getTime()) / 36e5;
   return hourDiff.toFixed(2) || "loading...";
 };
+
+/**
+ * 根据指定属性对对象数组进行排序。
+ * @param {Array<any>} array - 要排序的对象数组。
+ * @param {string} key - 用于排序的对象属性名。
+ * @param {boolean} [ascending=true] - 是否按升序排序。默认为升序。
+ * @returns {Array<Object>} 排序后的对象数组。
+ */
+
+export const sortByKey = (array: any[], key: string, ascending: boolean = true): any[] => {
+  if (!array || !Array.isArray(array) || array.some(item => item[key] === undefined)) {
+    return array; // 如果未找到属性，返回原数组
+  }
+  return array.slice().sort((a, b) => ascending ? a[key] - b[key] : b[key] - a[key])
+}
