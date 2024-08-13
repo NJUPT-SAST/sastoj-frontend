@@ -1,4 +1,4 @@
-import { Flag, PencilLine } from "lucide-react";
+import { Flag } from "lucide-react";
 import styles from "./index.module.scss";
 import { Button, Carousel } from "@ui-aurora/react";
 import { useEffect, useRef, useState } from "react";
