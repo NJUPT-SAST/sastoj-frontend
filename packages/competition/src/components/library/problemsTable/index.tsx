@@ -1,4 +1,3 @@
-
 import { Button } from "@ui-aurora/react";
 import { useNavigate } from "react-router-dom";
 import { OjTable } from "../../table";

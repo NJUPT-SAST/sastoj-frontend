@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useSubmitStore } from "../stores/useSubmitStore";
 import { Detail, useDetailStore } from "../stores/useDetailStore";
 
-const devBaseURL = "http://localhost:3000";
+const devBaseURL = "/api";
 
 let SSEInstance: EventSource | undefined;
 
