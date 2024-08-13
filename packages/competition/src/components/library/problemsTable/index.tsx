@@ -4,6 +4,7 @@ import { OjTable } from "../../table";
 import { createColumnHelper } from "@tanstack/react-table";
 import styles from "./index.module.scss";
 import { Ellipsis } from "lucide-react";
+import { sortByKey } from "../../../utils/aboutHandleData";
 
 import { Problem } from "../../../types/problem";
 
@@ -57,7 +58,7 @@ const ProblemsTable = (data: GetProblemsProps) => {
   return (
     <OjTable
       columns={columns}
-      dataSource={data.problems}
+      dataSource={sortByKey(data.problems, 'index')}
       caption="Fresh Cup"
       className={styles["questions-table"]}
     />

@@ -1,5 +1,6 @@
 // import { Checkbox } from "@ui-aurora/react";
 import { useSwrGetProblems } from "../../../../swrHooks/problems";
+import { sortByKey } from "../../../../utils/aboutHandleData";
 import styles from "./index.module.scss";
 import React from "react";
 
@@ -11,10 +12,10 @@ export const ProblemsList: React.FC<ProblemsListProps> = ({ handleSelect }) => {
   const contestId = localStorage.getItem("contestId");
 
   const { data } = useSwrGetProblems(contestId as unknown as number);
-
+  const problems = sortByKey(data?.problems as object[], 'index')
   return (
     <div className={styles["list-container"]}>
-      {data?.problems.map((item) => {
+      {problems?.map((item) => {
         return (
           <div
             key={`${item.id}${item.title}`}
