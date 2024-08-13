@@ -1,14 +1,39 @@
 @use "@/variables" as *;
+
 .evaluation-record-container {
   height: 100%;
   width: 100%;
+  padding: 2rem;
   overflow: scroll;
+
   .evaluation-record-item {
-    width: 100%;
+    width: 80%;
     display: flex;
-    justify-content: space-between;
-    padding: 5px 10px;
-    box-sizing: border-box;
-    border-bottom: 1px solid $divider-color;
+    flex-direction: column;
+    padding: 1rem 0.5rem;
+    border-bottom: 2px solid silver;
+    // width: fit-content;
+    margin-left: 2rem;
+
+    .submit-time {
+      letter-spacing: 3px;
+      font-weight: 300;
+      padding-bottom: 4px;
+    }
+
+    .submit-description {
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+      gap: 20px;
+      width: 100%;
+      overflow: hidden;
+      white-space:nowrap;
+    }
+
+    // justify-content: space-between;
+    // padding: 10px 10px;
+    // box-sizing: border-box;
+    // border-bottom: 1px solid $divider-color;
   }
 }

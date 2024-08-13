@@ -9,7 +9,15 @@
   justify-content: center;
 }
 
+.span-description {
+  font-weight: 500;
+  letter-spacing: 3px;
+  font-size: 20px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .span-font {
-  font-weight: bolder;
+  font-weight: bold;
   font-size: 18px;
 }

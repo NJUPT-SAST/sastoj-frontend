@@ -2,8 +2,8 @@ import { Marked } from "marked";
 import { markedHighlight } from "marked-highlight";
 import hljs from "highlight.js";
 import "highlight.js/styles/base16/atelier-cave-light.css";
+import renderer, { processMath } from "./renderer";
 
-import renderer from "./renderer";
 
 export const marked = new Marked(
   {
@@ -24,7 +24,8 @@ export const marked = new Marked(
 
 export async function convertMarkdownToHtml(markdown: string): Promise<string> {
   try {
-    const html: string = await marked.parse(markdown);
+    const processedMarkdown = processMath(markdown);
+    const html: string = await marked.parse(processedMarkdown);
     return html;
   } catch (error) {
     throw new Error(error as string);

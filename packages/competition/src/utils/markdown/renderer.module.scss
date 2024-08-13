@@ -1,5 +1,29 @@
 @use "@/variables" as *;
 
+p {
+  font-size: 1rem;
+}
+
+.h-title {
+  position: relative;
+  padding-bottom: 0.5rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 95%;
+    height: 1px;
+    transform: scale(1, 0.5);
+    background-color: opacify($color: #474747, $amount: 0.1);
+  }
+}
+
+.mykatex {
+  font: 1rem KaTeX_Main, Times New Roman, serif;
+}
+
 .header-link {
   color: $black-color;
   font-weight: bold;
@@ -7,12 +31,17 @@
 
 .block-quote {
   margin: 0;
-  padding: 8px 25px;
+  padding: 1px 10px;
   border-left: 5px solid $shadow-color;
   border-radius: $radius-3;
   background-color: rgb($shadow-color, 0.05);
   font-style: italic;
-  font-weight: bold;
+  font-weight: bolder;
+
+  p {
+    font-size: 13px;
+    line-height: 0.7;
+  }
 }
 
 .a-link {
@@ -24,6 +53,7 @@
   border-spacing: 0px !important;
   border-radius: 3px !important;
   border: solid 2px rgb($shadow-color, 0.05);
+
   th,
   td {
     padding: 6px 20px;
@@ -31,6 +61,7 @@
     background-color: rgb($shadow-color, 0.05);
     color: $black-color;
   }
+
   th {
     color: #00668c;
   }
@@ -38,12 +69,25 @@
 
 .list {
   padding-left: 28px;
+  font-size: 0.9rem;
+  // font-size: 1.2rem;
 }
 
 code {
   border-radius: 3px;
   background-color: rgb($shadow-color, 0.05) !important;
+
   span {
     font-family: "Consolas" !important;
   }
+}
+
+code {
+  width: 95%;
+}
+
+hr {
+  width: 95%;
+  margin: 0;
+  transform: skewY(0.5);
 }

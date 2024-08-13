@@ -31,6 +31,7 @@ export const getContest = (contestId: number): Promise<GetContestProps> => {
   });
 };
 
+
 interface SelfTestProps {
   pretestId: string;
 }
@@ -50,13 +51,16 @@ export const submitCode = (
   url: string,
   { arg }: { arg: { code: string; language: string } },
 ): Promise<SubmitProps> => {
-  const data = JSON.stringify({
-    code: arg.code,
-    language: arg.language,
-  });
+  // const formData = new FormData();
+  // formData.append('code', arg.code)
+  // formData.append('language', arg.language)
+  // const data = JSON.stringify({
+  //   code: arg.code,
+  //   language: arg.language,
+  // });
   return REQUEST({
     url: url,
     method: "POST",
-    data: data,
+    data: arg,
   });
 };

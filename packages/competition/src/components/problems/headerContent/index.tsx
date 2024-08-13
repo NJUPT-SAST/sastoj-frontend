@@ -12,9 +12,10 @@ export const HeaderContent = () => {
 
   return (
     <div className={styles["header-content-container"]}>
+
       <Button
         className={styles["run-button"]}
-        size="small"
+        size="medium"
         color="border"
         onClick={() => setSheetVisible(true)}
       >
