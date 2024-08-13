@@ -1,14 +1,16 @@
-import { CirclePlay, ListCollapse, Send } from "lucide-react";
+import { ListCollapse, Send } from "lucide-react";
 import styles from "./index.module.scss";
 import { Button } from "@ui-aurora/react";
 import { ProblemsSheet } from "../problemsSheet";
 import { useState } from "react";
-import { useSelfTest } from "../../../hooks/useSelfTest";
-import { useSubmit } from "../../../hooks/useSubmit";
+import { useSubmited } from "../../../hooks/useSubmit";
+
+// import { useSelfTest } from "../../../hooks/useSelfTest";
+
 export const HeaderContent = () => {
   const [sheetVisible, setSheetVisible] = useState<boolean>(false);
-  const selfTest = useSelfTest();
-  const submit = useSubmit();
+  // const selfTest = useSelfTest();
+  const submit = useSubmited();
 
   return (
     <div className={styles["header-content-container"]}>
