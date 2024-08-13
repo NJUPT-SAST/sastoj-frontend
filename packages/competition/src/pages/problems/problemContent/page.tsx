@@ -148,14 +148,14 @@ const ProblemContent = () => {
     setIsFullScreen(!isFullScreen);
   };
 
-  const { data, isLoading } = useSwrGetProblem(
+  const { data } = useSwrGetProblem(
     contestId as unknown as number,
     problemId as unknown as number,
   );
 
   const html = useMarkdown(markdown ?? "");
 
-  console.log("content", data, isLoading);
+  // console.log("content", data, isLoading);
 
   return (
     <div className={styles["problem-content-container"]}>

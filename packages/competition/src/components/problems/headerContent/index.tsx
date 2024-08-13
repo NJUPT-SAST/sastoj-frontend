@@ -23,7 +23,7 @@ export const HeaderContent = () => {
         <span>题目列表</span>
       </Button>
       <div className={styles["run-buttons-container"]}>
-        <Button
+        {/* <Button
           className={styles["run-button"]}
           size="small"
           color="border"
@@ -31,7 +31,7 @@ export const HeaderContent = () => {
         >
           <CirclePlay />
           <span>自测</span>
-        </Button>
+        </Button> */}
         <Button
           className={styles["run-button"]}
           size="small"
