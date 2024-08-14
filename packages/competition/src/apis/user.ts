@@ -22,7 +22,7 @@ export const getProblem = (
   });
 };
 
-interface GetHistoryProps {
+export interface GetHistoryProps {
   id: string;
   language: string;
   point: number;
