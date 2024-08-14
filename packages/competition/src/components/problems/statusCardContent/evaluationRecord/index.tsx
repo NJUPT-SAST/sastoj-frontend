@@ -1,16 +1,17 @@
-import { useParams } from "react-router-dom";
-// import { useDetailStore } from "../../../../stores/useDetailStore";
 import styles from "./index.module.scss";
-import { useSwrHistorySubmits } from "../../../../swrHooks/problem";
 import { Badge } from "@ui-aurora/react";
+import { useSubmissons } from "../../../../hooks/useSubmissions";
+
 
 export const EvaluationRecord = () => {
-  // const detail = useDetailStore((state) => state.detail);
-  const contestId = localStorage.getItem("contestId");
-  const { problemId } = useParams();
-  const { data } = useSwrHistorySubmits(contestId as unknown as string, problemId as unknown as string)
-
-
+  const data = useSubmissons()
+  if (!data) {
+    return (
+      <div className={styles["loading-container"]}>
+        <div className={styles["loading-spinner"]}></div>
+      </div>
+    );
+  }
   return (
     <div className={styles["evaluation-record-container"]}>
       {data?.submissions ? data?.submissions.map((item, index) => {

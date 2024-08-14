@@ -24,7 +24,6 @@ export const useSubmited = () => {
         .then((response) => {
           console.log(response);
           mutate().then(res => {
-            console.log(res?.submissions[0]?.id)
             setSubmitState("Submitting", res?.submissions[0]?.id||'0');
           })
         })
