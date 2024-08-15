@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 
 import Home from "../../pages/home/page";
 import Library from "../../pages/library/page";
@@ -18,11 +18,15 @@ const routes = [
   },
   {
     path: "/",
-    redirect: "/about",
+    replace: "/about",
     element: <Home />,
     errorElement: <Error />,
     loader: loader,
     children: [
+      {
+        index: true, // This sets the default child route
+        element: <Navigate to="/About" />
+      },
       {
         path: "/about",
         element: <About />,
