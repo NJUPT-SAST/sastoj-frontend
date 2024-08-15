@@ -1,15 +1,14 @@
-import { ListCollapse, Send } from "lucide-react";
+import { CirclePlay, ListCollapse, Send } from "lucide-react";
 import styles from "./index.module.scss";
 import { Button } from "@ui-aurora/react";
 import { ProblemsSheet } from "../problemsSheet";
 import { useState } from "react";
 import { useSubmited } from "../../../hooks/useSubmit";
-
-// import { useSelfTest } from "../../../hooks/useSelfTest";
+import { useSelfTest } from "../../../hooks/useSelfTest";
 
 export const HeaderContent = () => {
   const [sheetVisible, setSheetVisible] = useState<boolean>(false);
-  // const selfTest = useSelfTest();
+  const selfTest = useSelfTest();
   const submit = useSubmited();
 
   return (
@@ -25,7 +24,7 @@ export const HeaderContent = () => {
         <span>题目列表</span>
       </Button>
       <div className={styles["run-buttons-container"]}>
-        {/* <Button
+        <Button
           className={styles["run-button"]}
           size="small"
           color="border"
@@ -33,7 +32,7 @@ export const HeaderContent = () => {
         >
           <CirclePlay />
           <span>自测</span>
-        </Button> */}
+        </Button>
         <Button
           className={styles["run-button"]}
           size="small"

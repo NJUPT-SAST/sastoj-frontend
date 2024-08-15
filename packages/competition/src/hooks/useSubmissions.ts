@@ -11,10 +11,7 @@ export const useSubmissons = () => {
     const { problemId } = useParams();
     const { data: swrData } = useSwrHistorySubmits(contestId as unknown as string, problemId as unknown as string)
     useEffect(() => {
-        if (submitState === "UnSubmitted" && contestId && problemId) {
-            // 当 submitState 为 "UnSubmitted" 时，设置数据
-            console.log('<<<<<<<<<<<<<<<<<<<<<<<');
-            console.log('重新请求了数据');
+        if (submitState && contestId && problemId) {
             setData(swrData);
         } else {
             // 如果不满足请求条件，则清除数据

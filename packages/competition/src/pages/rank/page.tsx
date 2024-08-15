@@ -1,5 +1,20 @@
+import { Card } from "@ui-aurora/react";
+import styles from './page.module.scss';
+
 const Rank = () => {
-  return <>This is Rank!</>;
+  return (
+    <div className={styles["rank-container"]}>
+      <div className={styles["rank-content"]}>
+        <Card
+          header={null}
+          footer={null}
+          mainContent={'This is Rank (todo)!'}
+          className={styles["rank-lists-container"]}
+          shadow="regular"
+        ></Card>
+      </div>
+    </div>
+  );
 };
 
 export default Rank;
