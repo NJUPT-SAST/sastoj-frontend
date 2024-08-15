@@ -31,11 +31,11 @@ export const StatusCardContent = () => {
   return (
     <div className={styles["status-card-container"]}>
       <div className={styles["status-card-header"]}>
-        <Button size="small" color="ghost" onClick={() => setSelected(0)}>
+        <Button className={`${selected === 0 ? styles.active : ''}`} size="medium" color="ghost" onClick={() => setSelected(0)}>
           <Flag size={16} />
           <span>评测记录</span>
         </Button>
-        <Button size="small" color="ghost" onClick={() => setSelected(1)}>
+        <Button  className={`${selected === 1 ? styles.active : ''}`} size="medium" color="ghost" onClick={() => setSelected(1)}>
           <PencilLine size={16} />
           <span>自测记录</span>
         </Button>
