@@ -5,30 +5,55 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
+
   .status-card-header {
     display: flex;
     flex-direction: row;
-    font-size: 14px;
+    font-size: 1rem;
     font-weight: bold;
     gap: 5px;
     z-index: 1;
-    padding: 5px 5px 1px;
+    padding: 8px 7px 8px;
+
     button {
       display: flex;
       align-items: center;
       justify-content: center;
+      filter: grayscale(70%);
+      // &:first-child {
+      //   position: relative;
+
+      //   &::after {
+      //     content: "";
+      //     position: absolute;
+      //     right: 0px;
+      //     /* 调整这个值以控制下划线的位置 */
+      //     bottom: 0;
+      //     height: 2px;
+      //     /* 下划线的厚度 */
+      //     width: 100%;
+      //     background-color: currentColor;
+      //   }
+      // }
     }
+    .active {
+      filter: grayscale(0);
+    }
+
   }
+
   .divider {
     width: 100%;
     height: 1px;
     background-color: $divider-color;
   }
+
   .status-card-container {
     flex-grow: 1;
     width: 100%;
     // TODO: 奇怪的bug🤔，当没有设置这个height具体的值时，当这个小于200时，会出现bug
     height: 0px;
+
     .carousel {
       width: 100% !important;
       height: 100%;

@@ -8,6 +8,7 @@ import Logo from "../../components/logo";
 import Footer from "../../components/footer";
 import styles from "./page.module.scss";
 import Avatar from "../../components/avatar";
+import { RouteLayout } from "../../components/route/RouteLayout";
 
 interface HomeLayoutProps {
   children: ReactNode;
@@ -41,7 +42,7 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
         footer={
           <>
             <Avatar style={{ marginRight: 0 }} height={36} />
-            <LogOut onClick={() => { localStorage.clear(); navigate('/login', { replace: true }) }} />
+            <RouteLayout/>
           </>
         }
         items={headerItems}
