@@ -1,6 +1,7 @@
 import styles from "./index.module.scss";
 import { Badge } from "@ui-aurora/react";
 import { useSubmissons } from "../../../../hooks/useSubmissions";
+import { StatusTag } from "../../statusTag";
 
 
 export const EvaluationRecord = () => {
@@ -22,7 +23,7 @@ export const EvaluationRecord = () => {
             </div>
             <div className={styles['submit-description']}>
               {/* <span>#id:{item.id}</span> */}
-              <span>状态：{item.status}</span>
+              <span>状态：<StatusTag status={item?.status} /></span>
               <span>分数：<Badge content={item.point.toString()} size="medium" type="info" shadow="small" /></span>
               <span>语言:{item.language}</span>
             </div>
