@@ -6,6 +6,7 @@ import { Scan } from "lucide-react";
 import { useCodeEditor } from "../../../hooks/useCodeEditor";
 import { useLanguageStore } from "../../../stores/useLanguageStore";
 import { LanguageType } from "../../../types/language";
+import { useSelfTestStatusStore } from "../../../stores/useSelfTestStore";
 
 interface CodeEditorCardContentProps {
   setIsFullScreen: () => void;
@@ -68,11 +69,17 @@ const optionsList: OptionProps[] = [
     key: 9,
   }
 ];
+
+const findKeyByValue = (value: string): number => {
+  const option = optionsList.find(option => option.value === value);
+  return option ? option.key : 0; // 如果找不到匹配项，返回 null
+};
 export const CodeEditorCardContent: React.FC<CodeEditorCardContentProps> = ({
   setIsFullScreen,
 }) => {
-  const { handleCodeEditor, defaultValue } = useCodeEditor();
+  const { handleCodeEditor, defaultValue } = useCodeEditor(useSelfTestStatusStore);
   const setLanguage = useLanguageStore((state) => state.setLanguage);
+  const language = useLanguageStore((state) => state.language)
 
   const handleChange = (value: OptionProps) => {
     setLanguage(value.value as LanguageType);
@@ -83,6 +90,7 @@ export const CodeEditorCardContent: React.FC<CodeEditorCardContentProps> = ({
       <div className={styles["code-editor-header"]}>
         <Select
           optionsList={optionsList}
+          defaultSelectKey={findKeyByValue(language)}
           size="small"
           title="语言"
           placeHolder="请选择你的语言"

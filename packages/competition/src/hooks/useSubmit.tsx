@@ -4,7 +4,6 @@ import { useProblemsStatusStore } from "../stores/useProblemsStatusStore";
 import { useParams } from "react-router-dom";
 import { useSubmitStore } from "../stores/useSubmitStore";
 import { useDetailpolling } from "./useDetailpolling";
-import { useSwrHistorySubmits } from "../swrHooks/problem";
 // import { useDetailSSE } from "./useDetailSSE";
 
 export const useSubmited = () => {

@@ -2,7 +2,6 @@ import React, { ReactNode } from "react";
 import { Navbar, NavbarItemProps } from "@ui-aurora/react";
 import { Home as HomeIcon, LayoutList, Award } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { LogOut } from 'lucide-react';
 
 import Logo from "../../components/logo";
 import Footer from "../../components/footer";
