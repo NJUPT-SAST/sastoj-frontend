@@ -1,12 +1,16 @@
 import { useParams } from "react-router-dom";
-import { useProblemsStatusStore } from "../stores/useProblemsStatusStore";
+import { ProblemsStatusState} from "../stores/useProblemsStatusStore";
 import { useMemo } from "react";
 import { showToast } from "@ui-aurora/react";
 
-export const useCodeEditor = () => {
+export const useCodeEditor =<T extends ProblemsStatusState>(
+  useStore: (selector: (state: T) => any) => any
+) => {
   const { problemId } = useParams();
 
-  const [problemsStatus, initProblem, changeContent] = useProblemsStatusStore(
+
+
+  const [problemsStatus, initProblem, changeContent] = useStore(
     (state) => [state.problemsStatus, state.initProblem, state.changeContent],
   );
 

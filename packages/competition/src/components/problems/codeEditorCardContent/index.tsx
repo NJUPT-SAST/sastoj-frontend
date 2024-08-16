@@ -6,6 +6,7 @@ import { Scan } from "lucide-react";
 import { useCodeEditor } from "../../../hooks/useCodeEditor";
 import { useLanguageStore } from "../../../stores/useLanguageStore";
 import { LanguageType } from "../../../types/language";
+import { useSelfTestStatusStore } from "../../../stores/useSelfTestStore";
 
 interface CodeEditorCardContentProps {
   setIsFullScreen: () => void;
@@ -76,7 +77,7 @@ const findKeyByValue = (value: string): number => {
 export const CodeEditorCardContent: React.FC<CodeEditorCardContentProps> = ({
   setIsFullScreen,
 }) => {
-  const { handleCodeEditor, defaultValue } = useCodeEditor();
+  const { handleCodeEditor, defaultValue } = useCodeEditor(useSelfTestStatusStore);
   const setLanguage = useLanguageStore((state) => state.setLanguage);
   const language = useLanguageStore((state) => state.language)
 

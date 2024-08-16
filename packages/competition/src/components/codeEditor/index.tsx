@@ -42,8 +42,8 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
   useEffect(() => {
     let languageExtension;
     switch (language) {
-      case "cpp":
-      case "c":
+      case "C++":
+      case "C":
         languageExtension = cpp();
         break;
       case "javascript":
@@ -52,7 +52,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
       case "python3":
         languageExtension = python();
         break;
-      case "go":
+      case "Go":
         languageExtension = go();
         break;
       case "rust":
@@ -65,7 +65,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
         languageExtension = csharp();
         break;
       default:
-        languageExtension = javascript();
+        languageExtension = cpp();
         break;
     }
     const state = EditorState.create({
