@@ -2,7 +2,8 @@ import axios from "axios";
 import { beforeRequest, responseFailed, responseSuccess } from "./interceptors";
 
 // axios二次封装
-const devBaseURL = "http://127.0.0.1:4523/m1/3794358-0-default";
+// const devBaseURL = "http://127.0.0.1:4523/m1/3794358-0-default";
+const devBaseURL = "https://acm.sast.fun/api";
 const proBaseURL = "https://acm.sast.fun/api";
 //在vue的config文件夹下可以看开发环境和生产环境的名称,通常为development和production
 export const BASE_URL =

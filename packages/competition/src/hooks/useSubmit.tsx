@@ -10,10 +10,10 @@ import { useSwrHistorySubmits } from "../swrHooks/problem";
 export const useSubmited = () => {
   const { trigger } = useSwrSubmit();
   const { problemsStatus } = useProblemsStatusStore();
-  const contestId = localStorage.getItem('contestId');
+  // const contestId = localStorage.getItem('contestId');
   const { problemId } = useParams();
   const setSubmitState = useSubmitStore((state) => state.setSubmitState);
-  const { mutate } = useSwrHistorySubmits(contestId as unknown as string, problemId as unknown as string)
+  // const { mutate } = useSwrHistorySubmits(contestId as unknown as string, problemId as unknown as string)
 
   // useDetailSSE();
   useDetailpolling()
@@ -22,10 +22,10 @@ export const useSubmited = () => {
       const { code, language } = problemsStatus.get(problemId!)!;
       trigger({ code, language })
         .then((response) => {
-          console.log(response);
-          mutate().then(res => {
-            setSubmitState("Submitting", res?.submissions[0]?.id||'0');
-          })
+          setSubmitState("Submitting",response?.uuid)
+          // mutate().then(res => {
+          //   setSubmitState("Submitting", res?.submissions[0]?.id||'0');
+          // })
         })
         .catch((error) => {
           console.log(error);
