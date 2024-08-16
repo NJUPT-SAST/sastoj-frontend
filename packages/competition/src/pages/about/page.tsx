@@ -2,12 +2,16 @@ import { Card } from "@ui-aurora/react";
 import styles from "./page.module.scss";
 import Announcement from "../../components/about/announcement";
 import Information from "../../components/about/information";
-import Time from "../../components/about/time";
+// import Time from "../../components/about/time";
+import { useMsg } from "../../stores/useMsg";
 import { useSwrGetContest } from "../../swrHooks/contest";
+import { RoutetoLibrary } from "../../components/route/RoutetoLibrary/RoutetoLibrary";
 
 const About = () => {
   const contestId = Number(localStorage.getItem("contestId"));
   const { data } = useSwrGetContest(contestId);
+  const setTitle = useMsg(state => state.setTitle)
+  data&&setTitle(data?.title)
   console.log("contest information", data);
 
   return (
@@ -17,7 +21,7 @@ const About = () => {
           className={styles["announcement-card"]}
           shadow="regular"
           header={null}
-          footer={null}
+          footer={<RoutetoLibrary />}
           padding={0}
           mainContent={
             <Announcement title={data?.title} description={data?.description} />
@@ -32,14 +36,14 @@ const About = () => {
             footer={null}
             mainContent={<Information {...data} />}
           />
-          <Card
+          {/* <Card
             className={styles["time-card"]}
             shadow="regular"
             padding={0}
             header={null}
             footer={null}
             mainContent={<Time />}
-          />
+          /> */}
         </div>
       </div>
     </div>

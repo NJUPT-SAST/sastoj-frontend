@@ -28,8 +28,9 @@ export const useDetailpolling = () => {
             const fetchDetails = async () => {
                 try {
                     const response = await fetch(url, {
+                        //@ts-ignore
                         headers: {
-                            'Authorization': `Bearer ${token}`
+                            Token: token
                         }
                     });
                     if (response.ok) {

@@ -8,8 +8,8 @@ export interface AnnouncementProps {
 const Announcement: React.FC<AnnouncementProps> = ({ title, description }) => {
   return (
     <>
-      <h2>{title}</h2>
-      <h2>比赛公告💻</h2>
+      <h1>{title}</h1>
+      {/* <h2>比赛公告💻</h2> */}
       <span>
         {/* 本场比赛为『STAOI』G - Round 5，也是 STAOI 的第 5 场公开赛。
 

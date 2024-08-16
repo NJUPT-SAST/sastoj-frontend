@@ -6,7 +6,7 @@ const Time = () => {
 
   return (
     <strong>
-      距离比赛开始还有{timeRemaining.days}天{timeRemaining.hours}小时
+      距离比赛结束还有{timeRemaining.days}天{timeRemaining.hours}小时
       {timeRemaining.minutes}分钟{timeRemaining.seconds}秒
     </strong>
   );

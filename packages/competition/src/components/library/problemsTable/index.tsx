@@ -7,6 +7,7 @@ import { Ellipsis } from "lucide-react";
 import { sortByKey } from "../../../utils/aboutHandleData";
 
 import { Problem } from "../../../types/problem";
+import { useMsg } from "../../../stores/useMsg";
 
 interface GetProblemsProps {
   problems: Problem[];
@@ -16,6 +17,7 @@ const columnHelper = createColumnHelper<Problem>();
 
 const ProblemsTable = (data: GetProblemsProps) => {
   const navigate = useNavigate();
+  const title = useMsg((state) => state.title)
   const columns = [
     columnHelper.accessor("id", {
       header: () => <span>#ID</span>,
@@ -59,7 +61,7 @@ const ProblemsTable = (data: GetProblemsProps) => {
     <OjTable
       columns={columns}
       dataSource={sortByKey(data.problems, 'index')}
-      caption="Fresh Cup"
+      caption={title || "Fresh Cup"}
       className={styles["questions-table"]}
     />
   );
