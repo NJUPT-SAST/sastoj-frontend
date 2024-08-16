@@ -21,7 +21,7 @@ const ProblemLayout: React.FC<ProblemsLayoutProps> = ({ children }) => {
         }
         className={styles.navbar}
         mainContent={<HeaderContent />}
-        footer={<>李＋⭐</>}
+        footer={null}
       />
       {children}
     </div>

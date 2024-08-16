@@ -44,7 +44,7 @@ export const selfTest = (url: string): Promise<SelfTestProps> => {
 };
 
 interface SubmitProps {
-  submitId: string;
+  uuid: string;
 }
 
 export const submitCode = (

@@ -70,3 +70,20 @@ export const sortByKey = (array: any[], key: string, ascending: boolean = true):
   }
   return array.slice().sort((a, b) => ascending ? a[key] - b[key] : b[key] - a[key])
 }
+
+export function debounce<T extends (...args: any[]) => any>(
+  func: T,
+  wait: number
+): (...args: Parameters<T>) => void {
+  let timeout: ReturnType<typeof setTimeout>;
+
+  return function (...args: Parameters<T>) {
+    //@ts-ignore
+    const context = this;
+    clearTimeout(timeout);
+
+    timeout = setTimeout(() => {
+      func.apply(context, args);
+    }, wait);
+  };
+}

@@ -11,6 +11,7 @@ import Problems from "../../pages/problems/page";
 import ProblemContent from "../../pages/problems/problemContent/page";
 import loader from "./loader";
 
+
 const routes = [
   {
     path: "/login",
@@ -18,7 +19,7 @@ const routes = [
   },
   {
     path: "/",
-    replace: "/about",
+    // replace: "/about",
     element: <Home />,
     errorElement: <Error />,
     loader: loader,

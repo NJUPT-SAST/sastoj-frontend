@@ -2,10 +2,13 @@ import styles from "./index.module.scss";
 import { Badge } from "@ui-aurora/react";
 import { useSubmissons } from "../../../../hooks/useSubmissions";
 import { StatusTag } from "../../statusTag";
+import moment from 'moment';
 
 
 export const EvaluationRecord = () => {
   const data = useSubmissons()
+  console.log('data', data);
+
   if (!data) {
     return (
       <div className={styles["loading-container"]}>
@@ -19,7 +22,7 @@ export const EvaluationRecord = () => {
         return (
           <div className={styles["evaluation-record-item"]} key={index}>
             <div className={styles['submit-time']}>
-              提交时间:{item.createdAt}
+              提交时间:{moment(item.createdAt).format('YYYY-MM-DD HH:mm:ss')}
             </div>
             <div className={styles['submit-description']}>
               {/* <span>#id:{item.id}</span> */}

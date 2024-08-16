@@ -116,6 +116,9 @@ importers:
       marked-highlight:
         specifier: ^2.1.1
         version: 2.1.1(marked@12.0.2)
+      moment:
+        specifier: ^2.30.1
+        version: 2.30.1
       qs:
         specifier: ^6.12.1
         version: 6.12.1
@@ -6370,6 +6373,9 @@ packages:
 
   mlly@1.6.1:
     resolution: {integrity: sha512-vLgaHvaeunuOXHSmEbZ9izxPx3USsk8KCQ8iC+aTlp5sKRSoZvwhHh5L9VbKSaVC6sJDqbyohIS76E2VmHIPAA==}
+
+  moment@2.30.1:
+    resolution: {integrity: sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==}
 
   mri@1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
@@ -16932,6 +16938,8 @@ snapshots:
       pathe: 1.1.2
       pkg-types: 1.0.3
       ufo: 1.5.3
+
+  moment@2.30.1: {}
 
   mri@1.2.0: {}
 
