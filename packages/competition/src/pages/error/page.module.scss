@@ -1,8 +1,10 @@
 @use "@/variables" as *;
+
 @mixin font() {
   font-weight: bolder;
-  font-family: "Consolas";
+  font-family: "Consolas, monospace";
 }
+
 .error-container {
   display: flex;
   flex-direction: column;
@@ -14,33 +16,40 @@
   height: 100vh;
   box-sizing: border-box;
   margin: 0;
+
   .error-span-1 {
     @include font();
     font-size: 60px;
   }
+
   .error-span-2 {
     @include font();
     font-size: 20px;
   }
+
   .error-img-container {
     width: 500px;
     height: 400px;
     position: relative;
     overflow: hidden;
+
     img {
       @include absolute-center();
       width: 800px;
     }
   }
+
   .error-button {
     margin-top: 25px;
     @include flex-center();
     gap: 8px;
+
     svg {
       path {
         stroke: $primary-color;
       }
     }
+
     span {
       font-size: 16px;
       font-weight: bold;

@@ -32,7 +32,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
   const language = useLanguageStore((state) => state.language);
   const myTheme = EditorView.theme({
     ".cm-content": {
-      fontFamily: "Consolas",
+      fontFamily: "Consolas, monospace",
     },
     ".cm-panels-bottom": {
       display: "none",

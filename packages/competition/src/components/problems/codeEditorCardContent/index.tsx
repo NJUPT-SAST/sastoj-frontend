@@ -68,11 +68,17 @@ const optionsList: OptionProps[] = [
     key: 9,
   }
 ];
+
+const findKeyByValue = (value: string): number => {
+  const option = optionsList.find(option => option.value === value);
+  return option ? option.key : 0; // 如果找不到匹配项，返回 null
+};
 export const CodeEditorCardContent: React.FC<CodeEditorCardContentProps> = ({
   setIsFullScreen,
 }) => {
   const { handleCodeEditor, defaultValue } = useCodeEditor();
   const setLanguage = useLanguageStore((state) => state.setLanguage);
+  const language = useLanguageStore((state) => state.language)
 
   const handleChange = (value: OptionProps) => {
     setLanguage(value.value as LanguageType);
@@ -83,6 +89,7 @@ export const CodeEditorCardContent: React.FC<CodeEditorCardContentProps> = ({
       <div className={styles["code-editor-header"]}>
         <Select
           optionsList={optionsList}
+          defaultSelectKey={findKeyByValue(language)}
           size="small"
           title="语言"
           placeHolder="请选择你的语言"

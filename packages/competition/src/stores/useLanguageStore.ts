@@ -11,7 +11,7 @@ export interface LanguageState {
 export const useLanguageStore = create<LanguageState>()(
   persist(
     (set) => ({
-      language: "javascript",
+      language: "C",
       setLanguage: (value: LanguageType) => set(() => ({ language: value })),
     }),
     { name: "language" },
