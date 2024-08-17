@@ -7,16 +7,21 @@ const LoginCardContent = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const login = useLogin();
+  
+
+
 
   return (
     <div className={styles["main-content-container"]}>
       <Input
         label="昵称"
         isFillFather={true}
-        id="userName"
+        id={`userName-${Math.random()}`}
+        name={`userName-${Math.random()}`}
         value={username}
         onchange={(value) => setUsername(value)}
         size={'medium'}
+        autoComplete="off"
       ></Input>
       <Input
         mode="password"
@@ -24,8 +29,10 @@ const LoginCardContent = () => {
         isFillFather={true}
         value={password}
         onchange={(value) => setPassword(value)}
-        id="password"
+        id={`password-${Math.random()}`}
+        name={`password-${Math.random()}`}
         size={'medium'}
+        autoComplete="off"
       ></Input>
       <div className={styles["button-container"]}>
         <Button
