@@ -56,6 +56,7 @@
     align-items: center;
     justify-content: center;
     @include animation(login-card-show, 1s, 1);
+    color: $login-desciption;
   }
 }
 

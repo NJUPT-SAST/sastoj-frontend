@@ -32,7 +32,7 @@ export const useCodeEditor =<T extends ProblemsStatusState>(
   const defaultValue: string | undefined = useMemo(() => {
     if (problemId && problemsStatus.get(problemId)) {
       return problemsStatus.get(problemId)?.code;
-    } else return `Problem: ${problemId} \n Write some code here !!!`;
+    } else return ` Write some code here !!!`;
   }, [problemId, problemsStatus]);
 
   return { handleCodeEditor, defaultValue };

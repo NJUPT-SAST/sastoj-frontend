@@ -29,7 +29,7 @@ export const responseSuccess = (response: AxiosResponse) => {
 };
 
 //失败则进行统一的错误处理
-export const responseFailed = (error: AxiosError): Promise<never> => {
+export const responseFailed = (error: AxiosError): Promise<never> | void => {
   const { response } = error;
 
   if (response?.status === HTTP_STATUS.NOT_FOUND) {
@@ -39,7 +39,9 @@ export const responseFailed = (error: AxiosError): Promise<never> => {
   } else if (response?.status === HTTP_STATUS.FORBIDDEN) {
     return Promise.reject({ desc: "没有权限访问" } as ResponseError);
   } else if (response?.status === HTTP_STATUS.AUTHENTICATE) {
-    return Promise.reject({ desc: "需要鉴权" } as ResponseError);
+    window.location.href = '/login';
+    localStorage.clearAll()
+    // return Promise.reject({ desc: "需要鉴权" } as ResponseError);
   } else if (response?.status === HTTP_STATUS.SERVER_ERROR) {
     return Promise.reject({ desc: "服务器错误" } as ResponseError);
   } else {

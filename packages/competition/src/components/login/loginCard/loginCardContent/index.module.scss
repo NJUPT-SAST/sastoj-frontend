@@ -1,26 +1,31 @@
 @use "@/variables" as *;
 $rotate-duration: 1000ms;
 $transition-duration: 200ms;
+
 .main-content-container {
   margin-top: 30px !important;
   display: flex;
   flex-direction: column;
   gap: 12px;
+
   .button-container {
     display: flex;
     flex-direction: row-reverse;
+
     .sign-in-button {
       width: 100%;
       margin-top: 15px;
       height: 40px;
       position: relative;
       transition: all $transition-duration $cubic-bezier;
+
       &.clicked {
         background-color: $white-color;
         height: 40px;
         width: 40px;
         border-radius: 50%;
       }
+
       &.clicked::before {
         content: "";
         box-sizing: border-box;
@@ -38,6 +43,7 @@ $transition-duration: 200ms;
         animation-iteration-count: infinite;
         animation-delay: $transition-duration;
       }
+
       &.success::before {
         border: unset;
         animation: none;
@@ -51,6 +57,7 @@ $transition-duration: 200ms;
   from {
     transform: rotate(0);
   }
+
   to {
     transform: rotate(360deg);
   }
