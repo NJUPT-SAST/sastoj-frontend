@@ -77,7 +77,7 @@ const findKeyByValue = (value: string): number => {
 export const CodeEditorCardContent: React.FC<CodeEditorCardContentProps> = ({
   setIsFullScreen,
 }) => {
-  const { handleCodeEditor, defaultValue } = useCodeEditor(useSelfTestStatusStore);
+  const { handleCodeEditor, defaultValue } = useCodeEditor(useSelfTestStatusStore,'Write some code here !!!');
   const setLanguage = useLanguageStore((state) => state.setLanguage);
   const language = useLanguageStore((state) => state.language)
 

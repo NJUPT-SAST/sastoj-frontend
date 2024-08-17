@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
-import { ProblemsStatusState} from "../stores/useProblemsStatusStore";
+import { ProblemsStatusState } from "../stores/useProblemsStatusStore";
 import { useMemo } from "react";
 import { showToast } from "@ui-aurora/react";
 
-export const useCodeEditor =<T extends ProblemsStatusState>(
-  useStore: (selector: (state: T) => any) => any
+export const useCodeEditor = <T extends ProblemsStatusState>(
+  useStore: (selector: (state: T) => any) => any, defaultMsg: string
 ) => {
   const { problemId } = useParams();
 
@@ -32,7 +32,7 @@ export const useCodeEditor =<T extends ProblemsStatusState>(
   const defaultValue: string | undefined = useMemo(() => {
     if (problemId && problemsStatus.get(problemId)) {
       return problemsStatus.get(problemId)?.code;
-    } else return ` Write some code here !!!`;
+    } else return defaultMsg;
   }, [problemId, problemsStatus]);
 
   return { handleCodeEditor, defaultValue };

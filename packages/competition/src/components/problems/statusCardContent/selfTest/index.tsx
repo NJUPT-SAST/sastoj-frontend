@@ -3,7 +3,7 @@ import { useProblemsStatusStore } from "../../../../stores/useProblemsStatusStor
 import CodeEditor from "../../../codeEditor";
 import styles from "./index.module.scss";
 export const SelfTest = () => {
-  const { handleCodeEditor, defaultValue } = useCodeEditor(useProblemsStatusStore)
+  const { handleCodeEditor, defaultValue } = useCodeEditor(useProblemsStatusStore,'Write some tests here !!!')
   return (
     <div className={styles["self-test-container"]}>
       <div className={styles["self-test-code"]}>
