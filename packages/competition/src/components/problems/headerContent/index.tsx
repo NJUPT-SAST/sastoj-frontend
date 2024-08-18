@@ -44,7 +44,7 @@ export const HeaderContent = () => {
     } else {
       setSelfLoading(false)
     }
-  }, [selfLoading])
+  }, [selfState])
 
   return (
     <div className={styles["header-content-container"]}>

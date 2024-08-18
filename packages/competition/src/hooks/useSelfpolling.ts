@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 // import { useSubmitStore } from "../stores/useSubmitStore";
 import { useSelfStore } from "../stores/useSelfSotre";
 import { BASE_URL } from "../utils/web/request";
+import { useSelfDetail } from "../stores/useSelfDetail";
 
 const POLLING_INTERVAL = 1000;
 
@@ -14,6 +15,7 @@ export const useSelefpolling = () => {
 
     const endSelf = useSelfStore((state) => state.endSelf);
     const selfId = useSelfStore((state) => state.selfId);
+    const setSelfDetail = useSelfDetail((state) => state.setSelfDetail)
 
     //存储返回的结果
     // const setDetailState = useDetailStore((state) => state.setDetailState);
@@ -38,11 +40,9 @@ export const useSelefpolling = () => {
                     if (response.ok) {
                         const data = await response.json();
                         // setDetailState(data);
-                        console.log(data);
-                        console.log('自测的结果《《《《《《《《《《《');
-
-                        clearInterval(intervalId);
+                        setSelfDetail(data)
                         endSelf();
+                        clearInterval(intervalId);
                     } else {
                         console.error("请求失败", response);
                     }
