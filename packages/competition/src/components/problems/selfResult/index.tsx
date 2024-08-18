@@ -17,6 +17,6 @@ export const SelfResult = () => {
 
     if (!detail) {
         return <></>
-    } else if (detail?.isCompiled) return <SelfSuccess time={detail?.time} memory={detail?.memory} />
+    } else if (detail?.isCompiled) return <SelfSuccess time={detail?.time} memory={detail?.memory} stdout={detail?.stdout}/>
     else return <SelfFailed complieMsg={detail?.complieMsg} stderr={detail?.stderr} stdout={detail?.stdout} />
 }
