@@ -1,7 +1,9 @@
 
 import { useSelfEditor } from "../../../../hooks/useSelfEditor";
 import CodeEditor from "../../../codeEditor";
+import { SelfResult } from "../../selfResult";
 import styles from "./index.module.scss";
+
 export const SelfTest = () => {
   const { handleCodeEditor, defaultValue } = useSelfEditor()
   return (
@@ -14,7 +16,7 @@ export const SelfTest = () => {
       </div>
       <div className={styles.divider} />
       <div className={styles["self-test-result-show"]}>
-        <span></span>
+        <SelfResult />
       </div>
     </div>
   );

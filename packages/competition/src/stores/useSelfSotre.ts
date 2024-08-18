@@ -7,6 +7,7 @@ interface SelfStore {
     selfState: SelfType;
     setSelfState: (state: SelfType, Id: string) => void;
     endSelf: () => void;
+    startSelf: () => void
 }
 
 export const useSelfStore = create<SelfStore>((set) => ({
@@ -14,5 +15,6 @@ export const useSelfStore = create<SelfStore>((set) => ({
     selfState: "UnSelfed",
     setSelfState: (state: SelfType, Id: string) =>
         set({ selfState: state, selfId: Id }),
+    startSelf: () => set({ selfState: 'Selfing' }),
     endSelf: () => set({ selfState: "UnSelfed" }),
 }));
