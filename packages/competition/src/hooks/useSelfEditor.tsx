@@ -7,15 +7,14 @@ export const useSelfEditor = () => {
     const { problemId } = useParams();
 
 
-
-    const [problemsStatus, initProblem, changeContent] = useSelfTestStatusStore(
-        (state) => [state.problemsStatus, state.initProblem, state.changeContent],
+    const [SelfsStatus, initSelf, changeContent] = useSelfTestStatusStore(
+        (state) => [state.SelfsStatus, state.initSelf, state.changeContent],
     );
 
     const handleCodeEditor = (value: string, language: string) => {
         if (problemId) {
-            if (!problemsStatus.get(problemId)) {
-                initProblem?.(problemId);
+            if (!SelfsStatus.get(problemId)) {
+                initSelf?.(problemId);
             }
             changeContent?.(problemId, value, language);
         } else {
@@ -28,10 +27,10 @@ export const useSelfEditor = () => {
     };
 
     const defaultValue: string | undefined = useMemo(() => {
-        if (problemId && problemsStatus.get(problemId)) {
-            return problemsStatus.get(problemId)?.code;
-        } else return `Problem: ${problemId} \n 'Write some tests here !!!'`;
-    }, [problemId, problemsStatus]);
+        if (problemId && SelfsStatus.get(problemId)) {
+            return SelfsStatus.get(problemId)?.code;
+        } else return `Problem: ${problemId} \n 'write tests here'`;
+    }, [problemId, SelfsStatus]);
 
     return { handleCodeEditor, defaultValue };
 };

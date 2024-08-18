@@ -8,16 +8,27 @@ import { useSelfTest } from "../../../hooks/useSelfTest";
 import { useSubmitStore } from "../../../stores/useSubmitStore";
 import { SumbitLoading } from "../../loading/sumbitLoading";
 import { debounce } from "../../../utils/aboutHandleData";
+import { useSelfStore } from "../../../stores/useSelfSotre";
 
 
 
 export const HeaderContent = () => {
   const [sheetVisible, setSheetVisible] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false)
-  const submitState = useSubmitStore((state) => state.submitState)
+  const [selfLoading, setSelfLoading] = useState<boolean>(false)
+  // const submitState = useSubmitStore((state) => state.submitState)
+  const { submitState, startSubmit } = useSubmitStore((state) => ({
+    submitState: state.submitState,
+    startSubmit: state.startSubmit
+  }))
+  const { selfState, startSelf } = useSelfStore((state) => ({
+    selfState: state.selfState,
+    startSelf: state.startSelf,
+  }));
   const selfTest = useSelfTest();
   const submit = useSubmited();
   const handlesubmit = debounce(submit, 100)
+  const handleself = debounce(selfTest, 100)
 
   useEffect(() => {
     if (submitState == 'Submitting') {
@@ -26,6 +37,14 @@ export const HeaderContent = () => {
       setLoading(false)
     }
   }, [submitState])
+
+  useEffect(() => {
+    if (selfState == 'Selfing') {
+      setSelfLoading(true)
+    } else {
+      setSelfLoading(false)
+    }
+  }, [selfLoading])
 
   return (
     <div className={styles["header-content-container"]}>
@@ -44,16 +63,25 @@ export const HeaderContent = () => {
           className={styles["run-button"]}
           size="small"
           color="border"
-          onClick={() => selfTest()}
+          onClick={() => {
+            startSelf()
+            setSelfLoading(true)
+            handleself()
+          }}
+          disabled={selfLoading}
         >
-          <CirclePlay />
-          <span>自测</span>
+          {!selfLoading ? <CirclePlay /> : <SumbitLoading />}
+          <span>{!selfLoading ? '自测' : '自测中'}</span>
         </Button>
         <Button
           className={styles["run-button"]}
           size="small"
           color="border"
-          onClick={() => handlesubmit()}
+          onClick={() => {
+            startSubmit()
+            setLoading(true)
+            handlesubmit()
+          }}
           disabled={loading}
         >
           {!loading ? <Send /> : <SumbitLoading />}

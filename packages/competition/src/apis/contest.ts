@@ -33,13 +33,14 @@ export const getContest = (contestId: number): Promise<GetContestProps> => {
 
 
 interface SelfTestProps {
-  pretestId: string;
+  uuid: string;
 }
 
-export const selfTest = (url: string): Promise<SelfTestProps> => {
+export const selfTest = (url: string, { arg }: { arg: { code: string; language: string; input: string } }): Promise<SelfTestProps> => {
   return REQUEST({
     url: url,
-    method: "GET",
+    method: "POST",
+    data: arg
   });
 };
 
