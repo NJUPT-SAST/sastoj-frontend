@@ -1,9 +1,9 @@
-import { useCodeEditor } from "../../../../hooks/useCodeEditor";
-import { useProblemsStatusStore } from "../../../../stores/useProblemsStatusStore";
+
+import { useSelfEditor } from "../../../../hooks/useSelfEditor";
 import CodeEditor from "../../../codeEditor";
 import styles from "./index.module.scss";
 export const SelfTest = () => {
-  const { handleCodeEditor, defaultValue } = useCodeEditor(useProblemsStatusStore)
+  const { handleCodeEditor, defaultValue } = useSelfEditor()
   return (
     <div className={styles["self-test-container"]}>
       <div className={styles["self-test-code"]}>
