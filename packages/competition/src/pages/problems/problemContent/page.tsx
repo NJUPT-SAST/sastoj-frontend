@@ -153,7 +153,7 @@ const ProblemContent = () => {
   );
 
   const html = useMarkdown(data?.content ?? "");
-  console.log("content", data);
+  // console.log("content", data);
 
   // console.log("content", data, isLoading);
 

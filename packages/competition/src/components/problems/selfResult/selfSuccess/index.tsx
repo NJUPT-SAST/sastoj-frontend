@@ -17,7 +17,7 @@ const handleTime = (value: number): string => {
 export const SelfSuccess = ({ time, memory, stdout }: { time: number | undefined, memory: number | undefined, stdout: string | undefined }) => {
     return (
         <div className={styles.resultContainer}>
-            <div className={styles.statusHeader}>通过</div>
+            <div className={styles.statusHeader}>编译通过</div>
             <div className={styles.resultContent}>
                 <p>执行用时: <span>{time ? `${handleTime(time)} ms` : 'N/A'}</span></p>
                 <p>内存占用: <span>{`${handleMemory(memory)} mb` || 'N/A'}</span></p>

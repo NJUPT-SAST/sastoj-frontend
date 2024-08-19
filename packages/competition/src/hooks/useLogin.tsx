@@ -20,7 +20,7 @@ export const useLogin = () => {
     } else {
       trigger({ username, password })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           localStorage.setItem("token", response?.token ?? undefined);
           showToast({
             type: "success",

@@ -7,7 +7,7 @@ export const useSubmissons = () => {
     const submitState = useSubmitStore((state) => state.submitState);
     const contestId = localStorage.getItem("contestId");
     const { problemId } = useParams();
-    const { data: swrData, mutate } = useSwrHistorySubmits(contestId as string, problemId as unknown as string)
+    const { data: swrData, mutate } = useSwrHistorySubmits(contestId!, problemId as unknown as string)
     useEffect(() => {
         if (submitState && contestId && problemId) {
             mutate();
