@@ -66,6 +66,36 @@ const optionsList: OptionProps[] = [
     value: "Bash",
     label: "Bash",
     key: 9,
+  },
+  {
+    label: 'Java',
+    value: 'Java',
+    key: 10
+  },
+  {
+    label: 'Golang',
+    value: 'Golang',
+    key: 11
+  },
+  {
+    label: 'NodeJS',
+    value: 'NodeJS',
+    key: 12
+  },
+  {
+    label: 'PHP',
+    value: 'PHP',
+    key: 13
+  },
+  {
+    label: 'Python3',
+    value: 'Python3',
+    key: 14
+  },
+  {
+    label: "Ruby",
+    value: 'Ruby',
+    key: 15
   }
 ];
 
@@ -92,6 +122,7 @@ export const CodeEditorCardContent: React.FC<CodeEditorCardContentProps> = ({
           defaultSelectKey={findKeyByValue(language)}
           size="small"
           title="语言"
+          id='select-language'
           placeHolder="请选择你的语言"
           onchange={handleChange}
         />
