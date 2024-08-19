@@ -122,6 +122,7 @@ export const CodeEditorCardContent: React.FC<CodeEditorCardContentProps> = ({
           defaultSelectKey={findKeyByValue(language)}
           size="small"
           title="语言"
+          id='select-language'
           placeHolder="请选择你的语言"
           onchange={handleChange}
         />

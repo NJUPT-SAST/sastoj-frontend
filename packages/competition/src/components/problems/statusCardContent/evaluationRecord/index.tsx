@@ -5,6 +5,12 @@ import { StatusTag } from "../../statusTag";
 import moment from "moment";
 import { Empty } from "../../../empty";
 
+const getPointColor = (value: number): 'error' | 'success' | 'warning' => {
+  if (value == 0) return 'error'
+  else if (value == 100) return 'success'
+  return 'warning'
+}
+
 export const EvaluationRecord = () => {
   const data = useSubmissons();
 
@@ -45,7 +51,7 @@ export const EvaluationRecord = () => {
                   <Badge
                     content={item.point.toString()}
                     size="medium"
-                    type="info"
+                    type={getPointColor(item?.point)}
                     shadow="small"
                   />
                 </div>

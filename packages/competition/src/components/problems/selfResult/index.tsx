@@ -6,7 +6,8 @@ import { useEffect, useState } from "react";
 export const SelfResult = () => {
     const SelfDetail = useSelfDetail((state) => state.SelfDetail)
     const [detail, setDetail] = useState<SelfDetailType | null>(null);
-    // const detail = SelfDetail as SelfDetail;
+    console.log(SelfDetail);
+    console.log('<<<<<<<<<<<<');
     useEffect(() => {
         if (SelfDetail && 'isCompiled' in SelfDetail) {
             setDetail(SelfDetail);
@@ -17,6 +18,6 @@ export const SelfResult = () => {
 
     if (!detail) {
         return <></>
-    } else if (detail?.isCompiled) return <SelfSuccess time={detail?.time} memory={detail?.memory} stdout={detail?.stdout}/>
+    } else if (detail?.isCompiled) return <SelfSuccess time={detail?.time} memory={detail?.memory} stdout={detail?.stdout} />
     else return <SelfFailed complieMsg={detail?.complieMsg} stderr={detail?.stderr} stdout={detail?.stdout} />
 }
