@@ -3,10 +3,10 @@ import { Badge } from "@ui-aurora/react";
 import { useSubmissons } from "../../../../hooks/useSubmissions";
 import { StatusTag } from "../../statusTag";
 import moment from "moment";
+import { Empty } from "../../../empty";
 
 export const EvaluationRecord = () => {
   const data = useSubmissons();
-  console.log("data", data);
 
   if (!data) {
     return (
@@ -23,7 +23,7 @@ export const EvaluationRecord = () => {
         <div>语言</div>
         <div>分数</div>
       </div>
-      {data?.submissions
+      {data?.submissions.length
         ? data?.submissions.map((item, index) => {
             return (
               <div
@@ -53,7 +53,9 @@ export const EvaluationRecord = () => {
               </div>
             );
           })
-        : ""}
+        : (
+        <Empty />
+      )}
     </div>
   );
 };
