@@ -17,14 +17,15 @@ export const EvaluationRecord = () => {
   }
   return (
     <div className={styles["evaluation-record-container"]}>
-      <div className={styles["evaluation-record-header"]}>
-        <div>状态</div>
-        <div>提交时间</div>
-        <div>语言</div>
-        <div>分数</div>
-      </div>
-      {data?.submissions.length
-        ? data?.submissions.map((item, index) => {
+      {data?.submissions.length ? (
+        <>
+          <div className={styles["evaluation-record-header"]}>
+            <div>状态</div>
+            <div>提交时间</div>
+            <div>语言</div>
+            <div>分数</div>
+          </div>
+          {data?.submissions.map((item, index) => {
             return (
               <div
                 className={styles["evaluation-record-item"]}
@@ -52,8 +53,9 @@ export const EvaluationRecord = () => {
             <span>memory:{item.maxMemory}</span> */}
               </div>
             );
-          })
-        : (
+          })}
+        </>
+      ) : (
         <Empty />
       )}
     </div>
