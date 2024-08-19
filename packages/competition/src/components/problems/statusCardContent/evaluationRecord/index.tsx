@@ -2,12 +2,11 @@ import styles from "./index.module.scss";
 import { Badge } from "@ui-aurora/react";
 import { useSubmissons } from "../../../../hooks/useSubmissions";
 import { StatusTag } from "../../statusTag";
-import moment from 'moment';
-
+import moment from "moment";
 
 export const EvaluationRecord = () => {
-  const data = useSubmissons()
-  console.log('data', data);
+  const data = useSubmissons();
+  console.log("data", data);
 
   if (!data) {
     return (
@@ -18,23 +17,43 @@ export const EvaluationRecord = () => {
   }
   return (
     <div className={styles["evaluation-record-container"]}>
-      {data?.submissions ? data?.submissions.map((item, index) => {
-        return (
-          <div className={styles["evaluation-record-item"]} key={index}>
-            <div className={styles['submit-time']}>
-              提交时间:{moment(item.createdAt).format('YYYY-MM-DD HH:mm:ss')}
-            </div>
-            <div className={styles['submit-description']}>
-              {/* <span>#id:{item.id}</span> */}
-              <span>状态：<StatusTag status={item?.status} /></span>
-              <span>分数：<Badge content={item.point.toString()} size="medium" type="info" shadow="small" /></span>
-              <span>语言:{item.language}</span>
-            </div>
-            {/* <span>time:{item.totalTime}</span>
+      <div className={styles["evaluation-record-header"]}>
+        <div>状态</div>
+        <div>提交时间</div>
+        <div>语言</div>
+        <div>分数</div>
+      </div>
+      {data?.submissions
+        ? data?.submissions.map((item, index) => {
+            return (
+              <div
+                className={styles["evaluation-record-item"]}
+                key={index}
+                style={{
+                  backgroundColor: index % 2 !== 0 ? "#f5f5f5" : "#fff",
+                }}
+              >
+                <div>
+                  <StatusTag status={item?.status} />
+                </div>
+                <div>
+                  {moment(item.createdAt).format("YYYY-MM-DD HH:mm:ss")}
+                </div>
+                <div>{item.language}</div>
+                <div>
+                  <Badge
+                    content={item.point.toString()}
+                    size="medium"
+                    type="info"
+                    shadow="small"
+                  />
+                </div>
+                {/* <span>time:{item.totalTime}</span>
             <span>memory:{item.maxMemory}</span> */}
-          </div>
-        );
-      }) : ''}
+              </div>
+            );
+          })
+        : ""}
     </div>
   );
 };

@@ -3,37 +3,58 @@
 .evaluation-record-container {
   height: 90%;
   width: 100%;
-  padding: 2rem;
   overflow: auto;
   display: flex;
   align-items: center;
   flex-direction: column;
+  box-sizing: border-box;
+
+  .evaluation-record-header {
+    position: sticky;
+    top: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    box-sizing: border-box;
+    color: #979797;
+    border-bottom: 1px solid #d5d5d5;
+    padding-bottom: 10px;
+    background: #fff;
+  }
 
   .evaluation-record-item {
     box-sizing: border-box;
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    padding: 1rem 1rem;
-    border-bottom: 2px solid silver;
-    // width: fit-content;
-    margin-left: 0.5rem;
+    width: 100%;
+    display: grid;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    grid-template-columns: repeat(4, 1fr);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 0.85rem;
 
-    .submit-time {
-      letter-spacing: 3px;
-      font-weight: 300;
-      padding-bottom: 2px;
-    }
-
-    .submit-description {
+    * {
       display: flex;
       align-items: center;
-      font-size: 1.2rem;
-      gap: 12px;
-      width: 100%;
-      // overflow: auto;
-      white-space: nowrap;
     }
+
+    // .submit-time {
+    //   letter-spacing: 3px;
+    //   font-weight: 300;
+    //   padding-bottom: 2px;
+    // }
+
+    // .submit-description {
+    //   display: flex;
+    //   align-items: center;
+    //   font-size: 1.2rem;
+    //   gap: 12px;
+    //   width: 100%;
+    //   // overflow: auto;
+    //   white-space: nowrap;
+    // }
 
     // justify-content: space-between;
     // padding: 10px 10px;
@@ -71,23 +92,21 @@
 
 @media (max-width: 820px) {
   .evaluation-record-container {
-    padding: 1rem;
-
     .evaluation-record-item {
       width: 100%; // 让项目宽度适应容器宽度
       margin-left: 0; // 去除左边距以利用全部可用宽度
+      font-size: 0.8rem;
+      // .submit-time {
+      //   letter-spacing: 1px;
+      //   font-weight: 300;
+      //   padding-bottom: 2px;
+      //   white-space: nowrap;
+      // }
 
-      .submit-time {
-        letter-spacing: 1px;
-        font-weight: 300;
-        padding-bottom: 2px;
-        white-space: nowrap;
-      }
-
-      .submit-description {
-        font-size: 1rem; // 减小字体大小以适应较小的屏幕
-        gap: 8px; // 减少图标和文本之间的间距
-      }
+      // .submit-description {
+      //   font-size: 1rem; // 减小字体大小以适应较小的屏幕
+      //   gap: 8px; // 减少图标和文本之间的间距
+      // }
     }
   }
 }
