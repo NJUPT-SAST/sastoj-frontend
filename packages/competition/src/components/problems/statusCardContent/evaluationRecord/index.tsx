@@ -2,12 +2,11 @@ import styles from "./index.module.scss";
 import { Badge } from "@ui-aurora/react";
 import { useSubmissons } from "../../../../hooks/useSubmissions";
 import { StatusTag } from "../../statusTag";
-import moment from 'moment';
-
+import moment from "moment";
+import { Empty } from "../../../empty";
 
 export const EvaluationRecord = () => {
-  const data = useSubmissons()
-  console.log('data', data);
+  const data = useSubmissons();
 
   if (!data) {
     return (
@@ -18,23 +17,39 @@ export const EvaluationRecord = () => {
   }
   return (
     <div className={styles["evaluation-record-container"]}>
-      {data?.submissions ? data?.submissions.map((item, index) => {
-        return (
-          <div className={styles["evaluation-record-item"]} key={index}>
-            <div className={styles['submit-time']}>
-              提交时间:{moment(item.createdAt).format('YYYY-MM-DD HH:mm:ss')}
-            </div>
-            <div className={styles['submit-description']}>
-              {/* <span>#id:{item.id}</span> */}
-              <span>状态：<StatusTag status={item?.status} /></span>
-              <span>分数：<Badge content={item.point.toString()} size="medium" type="info" shadow="small" /></span>
-              <span>语言:{item.language}</span>
-            </div>
-            {/* <span>time:{item.totalTime}</span>
+      {data?.submissions.length ? (
+        data?.submissions.map((item, index) => {
+          return (
+            <div className={styles["evaluation-record-item"]} key={index}>
+              <div className={styles["submit-time"]}>
+                提交时间:
+                {moment(item.createdAt).format("YYYY-MM-DD HH:mm:ss")}
+              </div>
+              <div className={styles["submit-description"]}>
+                {/* <span>#id:{item.id}</span> */}
+                <span>
+                  状态：
+                  <StatusTag status={item?.status} />
+                </span>
+                <span>
+                  分数：
+                  <Badge
+                    content={item.point.toString()}
+                    size="medium"
+                    type="info"
+                    shadow="small"
+                  />
+                </span>
+                <span>语言:{item.language}</span>
+              </div>
+              {/* <span>time:{item.totalTime}</span>
             <span>memory:{item.maxMemory}</span> */}
-          </div>
-        );
-      }) : ''}
+            </div>
+          );
+        })
+      ) : (
+        <Empty />
+      )}
     </div>
   );
 };
