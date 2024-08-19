@@ -34,8 +34,10 @@
 
 ::-webkit-scrollbar {
   all: unset;
+  height: 4px !important;
   width: 4px;
 }
+
 ::-webkit-scrollbar-thumb {
   // background: var(--shadow-color);
   border-radius: 2px;
