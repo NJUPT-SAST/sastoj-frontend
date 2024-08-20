@@ -1,6 +1,7 @@
 import { Card } from "@ui-aurora/react";
 import styles from "./page.module.scss";
 import Announcement from "../../components/about/announcement";
+import { AnnouncementSkelecton } from "../../components/skelecton/about";
 import Information from "../../components/about/information";
 // import Time from "../../components/about/time";
 import { useMsg } from "../../stores/useMsg";
@@ -11,8 +12,7 @@ const About = () => {
   const contestId = Number(localStorage.getItem("contestId"));
   const { data } = useSwrGetContest(contestId);
   const setTitle = useMsg(state => state.setTitle)
-  data&&setTitle(data?.title)
-  console.log("contest information", data);
+  data && setTitle(data?.title)
 
   return (
     <div className={styles["about-container"]}>
@@ -24,7 +24,7 @@ const About = () => {
           footer={<RoutetoLibrary />}
           padding={0}
           mainContent={
-            <Announcement title={data?.title} description={data?.description} />
+            (data ? <Announcement title={data?.title} description={data?.description} /> : <AnnouncementSkelecton />)
           }
         />
         <div className={styles["right-area"]}>

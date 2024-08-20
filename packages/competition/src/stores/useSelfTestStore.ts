@@ -1,4 +1,3 @@
-// TODO: 将类型申明抽离
 import { create } from "zustand";
 import { PersistStorage, persist, StorageValue } from "zustand/middleware";
 import superjson from "superjson";

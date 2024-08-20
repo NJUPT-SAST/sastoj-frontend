@@ -17,9 +17,6 @@ export const useSelefpolling = () => {
     const selfId = useSelfStore((state) => state.selfId);
     const setSelfDetail = useSelfDetail((state) => state.setSelfDetail)
 
-    //存储返回的结果
-    // const setDetailState = useDetailStore((state) => state.setDetailState);
-    // const clearHistory = useDetailStore((state) => state.clearHistory);
 
     useEffect(() => {
         selfId && setUrl(`${BASE_URL}/user/contests/${contestId}/self-tests/${selfId}`);

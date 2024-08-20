@@ -2,6 +2,7 @@ import { Card } from "@ui-aurora/react";
 import styles from "./page.module.scss";
 import ProblemsTable from "../../components/library/problemsTable";
 import { useSwrGetProblems } from "../../swrHooks/problems";
+import LibrarySkelecton from "../../components/skelecton/library/librarytable";
 
 const Library = () => {
   const contestId = Number(localStorage.getItem("contestId"));
@@ -14,7 +15,9 @@ const Library = () => {
         <Card
           header={null}
           footer={null}
-          mainContent={<ProblemsTable problems={data?.problems ?? []} />}
+          mainContent={
+            (data?.problems ? <ProblemsTable problems={data?.problems ?? []} /> : <LibrarySkelecton />)
+          }
           className={styles["questions-table-container"]}
           shadow="regular"
         ></Card>
