@@ -1,0 +1,36 @@
+@use "@/variables" as *;
+
+.questions-table {
+    width: 100%;
+}
+
+.header-div {
+    display: flex;
+    justify-content: center;
+}
+
+.box {
+    display: flex;
+    justify-content: center;
+    .header-button {
+        height: 1.5rem !important;
+        width: 50%;
+        @include skeleton-loading();
+        display: block;
+    }
+}
+
+
+.span-description {
+    height: 1.5rem !important;
+    width: 90%;
+    @include skeleton-loading();
+    display: block;
+}
+
+.span-font {
+    height: 1.5rem !important;
+    width: 40%;
+    @include skeleton-loading();
+    display: block;
+}
