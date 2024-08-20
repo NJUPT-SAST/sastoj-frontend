@@ -49,7 +49,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
       case "javascript":
         languageExtension = javascript();
         break;
-      case "python3":
+      case "Python3":
         languageExtension = python();
         break;
       case "Go":
@@ -58,7 +58,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
       case "rust":
         languageExtension = rust();
         break;
-      case "java":
+      case "Java":
         languageExtension = java();
         break;
       case "csharp":

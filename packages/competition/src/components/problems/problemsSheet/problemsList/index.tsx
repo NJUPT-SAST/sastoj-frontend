@@ -1,6 +1,7 @@
 // import { Checkbox } from "@ui-aurora/react";
 import { useSwrGetProblems } from "../../../../swrHooks/problems";
 import { sortByKey } from "../../../../utils/aboutHandleData";
+import { SheetSkelecton } from "../../../skelecton/problems/sheet";
 import styles from "./index.module.scss";
 import React from "react";
 
@@ -13,6 +14,7 @@ export const ProblemsList: React.FC<ProblemsListProps> = ({ handleSelect }) => {
 
   const { data } = useSwrGetProblems(contestId as unknown as number);
   const problems = sortByKey(data?.problems as object[], 'index')
+  if (!problems) return <SheetSkelecton />
   return (
     <div className={styles["list-container"]}>
       {problems?.map((item) => {
@@ -23,7 +25,7 @@ export const ProblemsList: React.FC<ProblemsListProps> = ({ handleSelect }) => {
             onClick={() => handleSelect(item.id)}
           >
             <span>
-              {item.id}. {item.title}
+              {item.index}. {item.title}
             </span>
             <span>Point: {item.point}</span>
           </div>

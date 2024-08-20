@@ -6,6 +6,7 @@ import { useState } from "react";
 import { StatusCardContent } from "../../../components/problems/statusCardContent";
 import { useSwrGetProblem } from "../../../swrHooks/problem";
 import { useParams } from "react-router-dom";
+import { ContentSkeleton } from "../../../components/skelecton/problems/content";
 
 // const markdown =
 //   "# Markdown Sample\n" +
@@ -156,17 +157,16 @@ const ProblemContent = () => {
   // console.log("content", data);
 
   // console.log("content", data, isLoading);
-
   return (
     <div className={styles["problem-content-container"]}>
       <Card
         className={`${styles["markdown-show-container"]} ${isFullScreen ? styles["full-screen"] : ""}`}
         header={null}
         mainContent={
-          <div
+          (html?<div
             dangerouslySetInnerHTML={{ __html: html }}
             className={styles["markdown-content"]}
-          />
+          />:<ContentSkeleton />)
         }
         footer={null}
         padding={10}
