@@ -64,7 +64,7 @@ export const getDuration = (
  * @returns {Array<Object>} 排序后的对象数组。
  */
 
-export const sortByKey = (array: any[], key: string, ascending: boolean = true): any[] => {
+export const sortByKey = (array: any[], key: string, ascending = true): any[] => {
   if (!array || !Array.isArray(array) || array.some(item => item[key] === undefined)) {
     return array; // 如果未找到属性，返回原数组
   }

@@ -19,7 +19,7 @@ const ProblemsTable = (data: GetProblemsProps) => {
   const navigate = useNavigate();
   const title = useMsg((state) => state.title)
   const columns = [
-    columnHelper.accessor("id", {
+    columnHelper.accessor("index", {
       header: () => <span>#ID</span>,
       cell: (info) => (
         <span className={styles["span-font"]}>{info.getValue()}</span>

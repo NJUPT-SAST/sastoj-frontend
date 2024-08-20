@@ -6,7 +6,7 @@ import { useSwrGetProblems } from "../../swrHooks/problems";
 const Library = () => {
   const contestId = Number(localStorage.getItem("contestId"));
   const { data } = useSwrGetProblems(contestId);
-  console.log("library information", data);
+  // console.log("library information", data);
 
   return (
     <div className={styles["library-container"]}>

@@ -4,7 +4,7 @@ import styles from './index.module.scss'
 
 export const SumbitLoading = () => {
     return (
-        <RotateCw className={styles['rotate']} />
+        <RotateCw className={styles.rotate} />
     );
 };
 

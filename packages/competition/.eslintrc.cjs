@@ -24,5 +24,6 @@ module.exports = {
       { allowConstantExport: true },
     ],
     "@stylexjs/valid-styles": ["error"],
+    "no-console": ["error", { "allow": ["warn", "error"] }]
   },
 };
