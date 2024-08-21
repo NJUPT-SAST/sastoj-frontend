@@ -8,7 +8,7 @@ import { useState } from "react";
 import { useCases } from "../../../../hooks/useCases";
 
 
-const getPointColor = (value: number): 'error' | 'success' | 'warning' => {
+export const getPointColor = (value: number): 'error' | 'success' | 'warning' => {
   if (value == 0) return 'error'
   else if (value == 100) return 'success'
   return 'warning'
