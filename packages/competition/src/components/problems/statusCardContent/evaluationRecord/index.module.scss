@@ -35,6 +35,10 @@
     padding-right: 1rem;
     font-size: 0.85rem;
 
+    :hover {
+      cursor: pointer;
+    }
+
     * {
       display: flex;
       align-items: center;

@@ -29,7 +29,6 @@ export const HeaderContent = () => {
   const handlesubmit = debounce(submit, 100)
   const handleself = debounce(selfTest, 100)
 
-
   useEffect(() => {
     if (submitState == 'Submitting') {
       setLoading(true)
