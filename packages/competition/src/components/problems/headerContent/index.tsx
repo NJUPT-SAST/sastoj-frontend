@@ -16,7 +16,6 @@ export const HeaderContent = () => {
   const [sheetVisible, setSheetVisible] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false)
   const [selfLoading, setSelfLoading] = useState<boolean>(false)
-  // const submitState = useSubmitStore((state) => state.submitState)
   const { submitState, startSubmit } = useSubmitStore((state) => ({
     submitState: state.submitState,
     startSubmit: state.startSubmit
@@ -29,6 +28,7 @@ export const HeaderContent = () => {
   const submit = useSubmited();
   const handlesubmit = debounce(submit, 100)
   const handleself = debounce(selfTest, 100)
+
 
   useEffect(() => {
     if (submitState == 'Submitting') {

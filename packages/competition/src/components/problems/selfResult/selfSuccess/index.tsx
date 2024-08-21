@@ -1,7 +1,7 @@
 import styles from './index.module.scss'
 
 
-const handleMemory = <T extends number | undefined>(value: T): T extends number ? string : undefined => {
+export const handleMemory = <T extends number | undefined>(value: T): T extends number ? string : undefined => {
     if (value) {
         const memory = value * 8 / 1000000
         return memory.toFixed(2) as T extends number ? string : undefined;
@@ -9,7 +9,7 @@ const handleMemory = <T extends number | undefined>(value: T): T extends number 
     return undefined as T extends number ? string : undefined;
 }
 
-const handleTime = (value: number): string => {
+export const handleTime = (value: number): string => {
     const time = value / 1000000
     return time.toFixed(2)
 }
