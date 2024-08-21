@@ -4,8 +4,11 @@ import { useSubmissons } from "../../../../hooks/useSubmissions";
 import { StatusTag } from "../../statusTag";
 import moment from "moment";
 import { Empty } from "../../../empty";
+import { useState } from "react";
+import { useCases } from "../../../../hooks/useCases";
 
-const getPointColor = (value: number): 'error' | 'success' | 'warning' => {
+
+export const getPointColor = (value: number): 'error' | 'success' | 'warning' => {
   if (value == 0) return 'error'
   else if (value == 100) return 'success'
   return 'warning'
@@ -13,7 +16,8 @@ const getPointColor = (value: number): 'error' | 'success' | 'warning' => {
 
 export const EvaluationRecord = () => {
   const data = useSubmissons();
-
+  const [id, setID] = useState<string | null>()
+  useCases(id as string)
   if (!data) {
     return (
       <div className={styles["loading-container"]}>
@@ -39,6 +43,7 @@ export const EvaluationRecord = () => {
                 style={{
                   backgroundColor: index % 2 !== 0 ? "#f5f5f5" : "#fff",
                 }}
+                onClick={() => { setID(item.id) }}
               >
                 <div>
                   <StatusTag status={item?.status} />

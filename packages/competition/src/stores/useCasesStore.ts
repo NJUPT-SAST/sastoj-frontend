@@ -4,27 +4,27 @@ import { persist } from "zustand/middleware";
 export interface SingleCase {
     index: number;
     point: number;
-    state: 1 | 0;
+    state: number;
     time: string;
-    memorry: string;
+    memory: string;
 }
 
 export interface CasesType {
-    id: number;
+    id: string;
     singleCases: SingleCase[];
 }
 
 export interface CasesStore {
-    cases: Map<number, CasesType[]>;
-    setCases: (problemId: number, value: SingleCase[], id: number) => void;
+    cases: Map<string, CasesType[]>;
+    setCases: (problemId: string, value: SingleCase[], id: string) => void;
 }
 
 
 export const useCasesStore = create<CasesStore>()(
     persist(
         (set) => ({
-            cases: new Map<number, CasesType[]>(),
-            setCases: (problemId: number, value: SingleCase[], id: number) =>
+            cases: new Map<string, CasesType[]>(),
+            setCases: (problemId: string, value: SingleCase[], id: string) =>
                 set((state) => {
                     const updatedCases = new Map(state.cases);
                     if (updatedCases.has(problemId)) {
@@ -43,7 +43,7 @@ export const useCasesStore = create<CasesStore>()(
                 const mergedCases = new Map(currentState.cases);
 
                 if (persistedState?.cases) {
-                    const persistedCases = persistedState.cases as [number, CasesType[]][];
+                    const persistedCases = persistedState.cases as [string, CasesType[]][];
                     persistedCases.forEach(([problemId, casesArray]) => {
                         if (mergedCases.has(problemId)) {
                             const existedCasesArray = mergedCases.get(problemId);

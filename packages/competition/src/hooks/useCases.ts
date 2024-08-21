@@ -1,31 +1,35 @@
-import { useEffect, useRef } from "react"
-import { useSubmitStore } from "../stores/useSubmitStore";
+import { useEffect } from "react"
+import { useGetCases } from "../swrHooks/problem";
 import { useParams } from "react-router-dom";
+import { useCasesStore } from "../stores/useCasesStore";
+import { useCaseMoreStore } from "../stores/useCaseMoreStore";
 
-export const useCases = () => {
-    const { submitState } = useSubmitStore((state) => (
-        {
-            submitId: state.submitId,
-            submitState: state.submitState
-        }));
+export const useCases = (CaseId: string) => {
     const contestId = localStorage.getItem("contestId")
+    const setCaseId = useCaseMoreStore(state => state.setCaseId)
+    const { cases, setCases } = useCasesStore(state => ({ cases: state.cases, setCases: state.setCases }))
+
     const { problemId } = useParams();
-    const prevSubmitState = useRef(submitState);
-    // const { data: swrData, mutate } = useSwrHistorySubmits(contestId!, problemId as unknown as string)
+    const { mutate } = useGetCases(contestId!, CaseId)
+    const fetchdata = async () => {
+        const casesValue = cases.get(problemId!)
+        const casesBoolean = casesValue?.some(item => item.id == CaseId)
+        if (cases.has(problemId!) && casesBoolean) {
+            return
+        } else {
+            const data = await mutate()
+            console.log(data);
+            if (data?.cases && problemId) {
+                setCases(problemId, data?.cases, CaseId)
+            }
+        }
+    }
 
     useEffect(() => {
-        //submitState的值由Submitting转为UnSubmitted时,发起请求
-        if (
-            prevSubmitState.current === "Submitting" &&
-            submitState === "UnSubmitted"
-            && contestId && problemId
-        ) {
-            console.log('发起了一下请求哦');
-            console.log(prevSubmitState.current);
-            console.log(submitState);
-
+        if (CaseId && contestId && problemId) {
+            fetchdata()
+            setCaseId(CaseId)
         }
-        prevSubmitState.current = submitState;
-    }, [submitState])
+    }, [CaseId])
 
 }

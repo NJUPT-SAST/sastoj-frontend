@@ -36,3 +36,19 @@ export const historySubmits = ({ contest_id, problem_id }: { contest_id: string,
     method: 'GET'
   })
 }
+
+export interface CasesProps {
+  index: number;
+  point: number;
+  state: number;
+  time: string;
+  memory: string;
+}
+
+
+export const getCases = ({ contest_id, submission_id }: { contest_id: string, submission_id: string }): Promise<{ cases: CasesProps[] }> => {
+  return REQUEST({
+    url: `/user/contests/${contest_id}/submissions/${submission_id}/cases`,
+    method: 'GET'
+  })
+}
