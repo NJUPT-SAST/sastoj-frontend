@@ -27,7 +27,7 @@ export const ProblemsList: React.FC<ProblemsListProps> = ({ handleSelect }) => {
             <span>
               {item.index}. {item.title}
             </span>
-            <span>Point: {item.point}</span>
+            <span style={{ whiteSpace: 'nowrap' }}>Point: {item.point}</span>
           </div>
         );
       })}

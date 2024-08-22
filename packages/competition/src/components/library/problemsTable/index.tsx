@@ -35,8 +35,8 @@ const ProblemsTable = (data: GetProblemsProps) => {
       cell: (info) => <i className={styles["span-font"]}>{info.getValue()}</i>,
       header: () => <span>POINT</span>,
     }),
-    columnHelper.accessor((row) => row.index, {
-      id: "index",
+    columnHelper.accessor((row) => row.id, {
+      id: "id",
       cell: (info) => (
         <div className={styles["header-div"]}>
           <Button
