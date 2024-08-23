@@ -5,6 +5,7 @@ import styles from "./renderer.module.scss";
 
 // 预处理公式
 export const processMath = (markdown: string) => {
+  markdown = markdown.replace(/\\s/g, '\\,');
   // 替换块级公式
   let html = markdown.replace(/\$\$(.*?)\$\$/gs, (match, p1: string) => {
     try {

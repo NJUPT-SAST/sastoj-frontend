@@ -1,4 +1,5 @@
 import { Badge } from "@ui-aurora/react";
+import styles from './index.module.scss'
 
 const StatusDescriptions = (status: number): [string, "ghost" | "success" | "error" | "warning" | "info" | undefined] => {
     switch (status) {
@@ -20,6 +21,6 @@ export const StatusTag = ({ status }: { status: number }) => {
 
     const [content, type] = StatusDescriptions(status)
     return (
-        <Badge type={type} content={content} />
+        <Badge className={styles.badge} type={type} content={content} />
     )
 }

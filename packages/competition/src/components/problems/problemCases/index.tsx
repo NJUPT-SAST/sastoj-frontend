@@ -16,20 +16,20 @@ export const ProblemCases = () => {
     const cases = useCasesStore(state => state.cases)
     const casesArr = cases.get(problemId!)
     const casesValue = casesArr?.find(item => item.id == CaseId)
-    console.log(casesValue);
+    // console.log(casesValue);
 
     if (casesValue?.singleCases.length) {
         return (
             <>
-                <ArrowLeft style={{ marginBottom: 16 }} size={30} onClick={() => clearCaseId()} />
+                <span className={styles.icon} ><ArrowLeft onClick={() => clearCaseId()} /></span>
                 <div className={styles["cases-container"]}>
                     <>
                         <div className={styles["cases-header"]}>
                             <div>节点</div>
                             <div>状态</div>
-                            <div>分数</div>
                             <div>时间</div>
                             <div>内存</div>
+                            <div>分数</div>
                         </div>
                         {casesValue?.singleCases?.map((item, index) => {
                             return (
@@ -41,20 +41,21 @@ export const ProblemCases = () => {
                                     }}
                                 >
                                     <span className={styles.id} >
-                                        {item.index}
+                                        {item.index + 1}
                                     </span>
                                     <div>
                                         <StatusTag status={item?.state} />
                                     </div>
+                                    <div className={styles.font}>{`${handleTime(Number(item.time))} ms`}</div>
+                                    <div className={styles.font}>{`${handleMemory(Number(item.memory))} mb`}</div>
                                     <div>
                                         <Badge
+                                            className={styles.badge}
                                             content={item.point.toString()}
-                                            size="medium"
+                                            size="small"
                                             type={item.point == 0 ? 'error' : 'info'}
                                             shadow="small"
                                         /></div>
-                                    <div className={styles.font}>{`${handleTime(Number(item.time))} ms`}</div>
-                                    <div className={styles.font}>{`${handleMemory(Number(item.memory))} mb`}</div>
                                 </div>
                             );
                         })}

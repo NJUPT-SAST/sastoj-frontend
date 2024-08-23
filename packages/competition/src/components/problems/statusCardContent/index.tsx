@@ -37,7 +37,7 @@ export const StatusCardContent = () => {
         </Button>
         <Button  className={`${selected === 1 ? styles.active : ''}`} size="medium" color="ghost" onClick={() => setSelected(1)}>
           <PencilLine size={16} />
-          <span>自测记录</span>
+          <span>案例自测</span>
         </Button>
       </div>
       <div className={styles.divider}></div>
