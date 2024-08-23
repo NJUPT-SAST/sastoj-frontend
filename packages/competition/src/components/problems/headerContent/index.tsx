@@ -26,14 +26,14 @@ export const HeaderContent = () => {
   }));
   const selfTest = useSelfTest();
   const submit = useSubmited();
-  const handlesubmit = debounce(submit, 100)
-  const handleself = debounce(selfTest, 100)
+  const handlesubmit = debounce(submit, 300)
+  const handleself = debounce(selfTest, 300)
 
   useEffect(() => {
     if (submitState == 'Submitting') {
       setLoading(true)
     } else {
-      setLoading(false)
+      setTimeout(() => setLoading(false), 500)
     }
   }, [submitState])
 
@@ -41,7 +41,7 @@ export const HeaderContent = () => {
     if (selfState == 'Selfing') {
       setSelfLoading(true)
     } else {
-      setSelfLoading(false)
+      setTimeout(() => setSelfLoading(false), 500)
     }
   }, [selfState])
 
