@@ -18,7 +18,6 @@ export const useCases = (CaseId: string) => {
             return
         } else {
             const data = await mutate()
-            console.log(data);
             if (data?.cases && problemId) {
                 setCases(problemId, data?.cases, CaseId)
             }

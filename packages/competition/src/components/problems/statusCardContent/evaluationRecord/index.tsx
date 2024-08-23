@@ -31,7 +31,7 @@ export const EvaluationRecord = () => {
         <>
           <div className={styles["evaluation-record-header"]}>
             <div>状态</div>
-            <div>提交时间</div>
+            <div>时间</div>
             <div>语言</div>
             <div>分数</div>
           </div>

@@ -43,7 +43,7 @@ export const responseFailed = (error: AxiosError): Promise<never> | void => {
     localStorage.clearAll()
     // return Promise.reject({ desc: "需要鉴权" } as ResponseError);
   } else if (response?.status === HTTP_STATUS.SERVER_ERROR) {
-    return Promise.reject({ desc: "服务器错误" } as ResponseError);
+    return Promise.reject({ desc: "服务器错误", state: response?.status } as ResponseError);
   } else {
     return Promise.reject({
       desc: `发生错误， 错误码${response?.status}`,

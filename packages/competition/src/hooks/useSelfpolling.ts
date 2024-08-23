@@ -33,10 +33,10 @@ export const useSelefpolling = () => {
                         headers: {
                             Token: token
                         }
-                    });
+                    })
+
                     if (response.ok) {
                         const data = await response.json();
-                        // setDetailState(data);
                         setSelfDetail(data)
                         endSelf();
                         clearInterval(intervalId);
@@ -44,10 +44,13 @@ export const useSelefpolling = () => {
                         console.error("请求失败", response);
                     }
                 } catch (err) {
-                    console.error("请求出错", err);
+                    clearInterval(intervalId)
+                    endSelf();
                 }
             }
+
             const intervalId = setInterval(fetchDetails, POLLING_INTERVAL);
+
             return () => {
                 clearInterval(intervalId)
                 endSelf();
