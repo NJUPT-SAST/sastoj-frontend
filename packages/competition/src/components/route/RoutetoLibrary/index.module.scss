@@ -4,6 +4,12 @@
     align-items: center;
     // border: 2px solid blue;
     border-radius: 1.2rem;
+
+    :hover {
+        cursor: pointer;
+        
+    }
+
     span {
         padding-right: 1rem;
         white-space: nowrap;
