@@ -1,16 +1,17 @@
 .icon {
-    height: 2rem;
-    width: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  height: 2rem;
+  width: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 
-    svg {
-        height: 90%;
-        width: 90%;
-    }
+  svg {
+    height: 90%;
+    width: 90%;
+  }
 
-    :hover {
-        cursor: pointer;
-    }
+  :hover {
+    cursor: pointer;
+  }
 }
