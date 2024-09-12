@@ -1,17 +1,14 @@
 .route-botton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    // border: 2px solid blue;
-    border-radius: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    :hover {
-        cursor: pointer;
-        
-    }
+  :hover {
+    cursor: pointer;
+  }
 
-    span {
-        padding-right: 1rem;
-        white-space: nowrap;
-    }
+  span {
+    padding-right: 0.5rem;
+    white-space: nowrap;
+  }
 }

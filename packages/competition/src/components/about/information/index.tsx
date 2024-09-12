@@ -27,36 +27,31 @@ const Information = (data: InformationProps) => {
 
   return (
     <div className={styles["information-container"]}>
-      {/* <div>
-        <span>比赛编号</span>
-        <span>3902810</span>
-      </div> */}
-      <div>
+      <div style={{ height: "2rem", display: "flex", alignItems: "center" }}>
         <span>举办者</span>
         <span>SASTOJ</span>
       </div>
-      <div>
+      <div style={{ height: "2rem", display: "flex", alignItems: "center" }}>
         <span>比赛类型</span>
         <div>
           <Badge content={typeValue} />
         </div>
       </div>
-      <div>
+      <div style={{ height: "2rem", display: "flex", alignItems: "center" }}>
         <span>比赛状态</span>
         <div>
           <Badge content={stateValue[0]} type={stateValue[1]} />
         </div>
       </div>
-      <div>
+      <div style={{ height: "2rem", display: "flex", alignItems: "center" }}>
         <span>开始时间</span>
-
         <span>{start_Time}</span>
       </div>
-      <div>
+      <div style={{ height: "2rem", display: "flex", alignItems: "center" }}>
         <span>结束时间</span>
         <span>{end_Time}</span>
       </div>
-      <div>
+      <div style={{ height: "2rem", display: "flex", alignItems: "center" }}>
         <span>比赛时间</span>
         <span>{duration}h</span>
       </div>

@@ -1,6 +1,5 @@
 import { Card } from "@ui-aurora/react";
 import styles from "./page.module.scss";
-import Announcement from "../../components/about/announcement";
 import { AnnouncementSkelecton } from "../../components/skelecton/about";
 import Information from "../../components/about/information";
 // import Time from "../../components/about/time";
@@ -11,8 +10,8 @@ import { RoutetoLibrary } from "../../components/route/RoutetoLibrary/RoutetoLib
 const About = () => {
   const contestId = Number(localStorage.getItem("contestId"));
   const { data } = useSwrGetContest(contestId);
-  const setTitle = useMsg(state => state.setTitle)
-  data && setTitle(data?.title)
+  const setTitle = useMsg((state) => state.setTitle);
+  data && setTitle(data?.title);
 
   return (
     <div className={styles["about-container"]}>
@@ -20,30 +19,30 @@ const About = () => {
         <Card
           className={styles["announcement-card"]}
           shadow="regular"
-          header={null}
-          footer={<RoutetoLibrary />}
-          padding={0}
-          mainContent={
-            (data ? <Announcement title={data?.title} description={data?.description} /> : <AnnouncementSkelecton />)
+          header={<h2>{data?.title}</h2>}
+          footer={
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "row-reverse",
+              }}
+            >
+              <RoutetoLibrary />
+            </div>
+          }
+          content={
+            data ? <span>{data?.description}</span> : <AnnouncementSkelecton />
           }
         />
         <div className={styles["right-area"]}>
           <Card
             className={styles["information-card"]}
             shadow="regular"
-            padding={0}
             header={null}
             footer={null}
-            mainContent={<Information {...data} />}
+            content={<Information {...data} />}
           />
-          {/* <Card
-            className={styles["time-card"]}
-            shadow="regular"
-            padding={0}
-            header={null}
-            footer={null}
-            mainContent={<Time />}
-          /> */}
         </div>
       </div>
     </div>
