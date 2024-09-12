@@ -9,13 +9,13 @@
   align-items: center;
   flex-direction: column;
   .divider {
-    background-color: $divider-color;
+    background-color: $black-color;
     height: 1px;
     width: 100%;
   }
   .footer-content {
     margin: 1rem 0px;
-    padding: 0px 0.625rem;
+    padding: 0px 1rem;
     max-width: $max-width;
     box-sizing: border-box;
     width: 100%;
