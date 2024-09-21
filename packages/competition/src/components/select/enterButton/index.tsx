@@ -37,10 +37,11 @@ const EnterButton: React.FC<EnterButtonProps> = ({ contestId }) => {
       <Dialog
         className={styles.dialog}
         visible={visible}
+        onCancel={() => setVisible(false)}
         onOk={handleOk}
         size="large"
         color="secondary"
-        header={<span className={styles["dialog-title"]}>比赛准则</span>}
+        header={<h2 className={styles["dialog-title"]}>比赛准则</h2>}
         content={
           <div className={styles["dialog-content"]}>
             <span>

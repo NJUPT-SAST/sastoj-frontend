@@ -19,19 +19,19 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
 
   const headerItems: NavbarItemProps[] = [
     {
-      icon: <HomeIcon size={20} />,
-      itemKey: "About",
-      text: "首页",
+      navbarItemIcon: <HomeIcon size={20} />,
+      navbarItemKey: "About",
+      navbarItemContent: "首页",
     },
     {
-      icon: <LayoutList size={20} />,
-      itemKey: "Library",
-      text: "题库",
+      navbarItemIcon: <LayoutList size={20} />,
+      navbarItemKey: "Library",
+      navbarItemContent: "题库",
     },
     {
-      icon: <Award size={20} />,
-      itemKey: "Rank",
-      text: "排名",
+      navbarItemIcon: <Award size={20} />,
+      navbarItemKey: "Rank",
+      navbarItemContent: "排名",
     },
   ];
   return (
@@ -39,14 +39,14 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
       <Navbar
         header={<Logo height={36} />}
         footer={
-          <>
-            <Avatar style={{ marginRight: 0 }} height={36} />
-            <RouteLayout/>
-          </>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            <Avatar style={{ marginRight: 0 }} height={28} />
+            {/* <RouteLayout /> */}
+          </div>
         }
-        items={headerItems}
+        contentItems={headerItems}
         selectedKey={location.pathname.replace("/", "")}
-        onchange={navigate}
+        onChange={navigate}
         className={styles.navbar}
       />
       <div className={styles.slot}>{children}</div>

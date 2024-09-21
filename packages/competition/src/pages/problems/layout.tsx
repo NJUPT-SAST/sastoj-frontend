@@ -15,13 +15,12 @@ const ProblemLayout: React.FC<ProblemsLayoutProps> = ({ children }) => {
       <Navbar
         header={
           <>
-            <RouteBack route={'/Library'} />
+            {/* <RouteBack route={"/Library"} /> */}
             <Logo height={36} />
           </>
         }
         className={styles.navbar}
-        mainContent={<HeaderContent />}
-        footer={null}
+        content={<HeaderContent />}
       />
       {children}
     </div>
