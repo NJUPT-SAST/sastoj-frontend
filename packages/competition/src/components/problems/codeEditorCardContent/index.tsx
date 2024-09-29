@@ -6,6 +6,7 @@ import { Scan } from "lucide-react";
 import { useCodeEditor } from "../../../hooks/useCodeEditor";
 import { useLanguageStore } from "../../../stores/useLanguageStore";
 import { LanguageType } from "../../../types/language";
+import { MonacoEditor } from "../../monacoEditor";
 
 interface CodeEditorCardContentProps {
   setIsFullScreen: () => void;
@@ -13,8 +14,8 @@ interface CodeEditorCardContentProps {
 
 const optionsList: OptionProps[] = [
   {
-    value: 'C',
-    label: 'C',
+    value: "C",
+    label: "C",
     key: 0,
   },
   // {
@@ -68,24 +69,24 @@ const optionsList: OptionProps[] = [
     key: 9,
   },
   {
-    label: 'Java',
-    value: 'Java',
-    key: 10
+    label: "Java",
+    value: "Java",
+    key: 10,
   },
   {
-    label: 'Golang',
-    value: 'Golang',
-    key: 11
+    label: "Golang",
+    value: "Golang",
+    key: 11,
   },
   {
-    label: 'NodeJS',
-    value: 'NodeJS',
-    key: 12
+    label: "NodeJS",
+    value: "NodeJS",
+    key: 12,
   },
   {
-    label: 'PHP',
-    value: 'PHP',
-    key: 13
+    label: "PHP",
+    value: "PHP",
+    key: 13,
   },
   // {
   //   label: 'Python3',
@@ -94,13 +95,13 @@ const optionsList: OptionProps[] = [
   // },
   {
     label: "Ruby",
-    value: 'Ruby',
-    key: 15
-  }
+    value: "Ruby",
+    key: 15,
+  },
 ];
 
 const findKeyByValue = (value: string): number => {
-  const option = optionsList.find(option => option.value === value);
+  const option = optionsList.find((option) => option.value === value);
   return option ? option.key : 0; // 如果找不到匹配项，返回 null
 };
 export const CodeEditorCardContent: React.FC<CodeEditorCardContentProps> = ({
@@ -108,9 +109,10 @@ export const CodeEditorCardContent: React.FC<CodeEditorCardContentProps> = ({
 }) => {
   const { handleCodeEditor, defaultValue } = useCodeEditor();
   const setLanguage = useLanguageStore((state) => state.setLanguage);
-  const language = useLanguageStore((state) => state.language)
+  const language = useLanguageStore((state) => state.language);
 
   const handleChange = (value: OptionProps) => {
+    console.log(value);
     setLanguage(value.value as LanguageType);
   };
 
@@ -122,24 +124,23 @@ export const CodeEditorCardContent: React.FC<CodeEditorCardContentProps> = ({
           defaultSelectKey={findKeyByValue(language)}
           size="small"
           title="语言"
-          id='select-language'
+          id="select-language"
           placeHolder="请选择你的语言"
-          onchange={handleChange}
+          onChange={handleChange}
         />
-        <Button
-          size="small"
-          color="ghost"
+        <div
           className={styles["full-screen"]}
           onClick={() => setIsFullScreen()}
         >
-          <Scan size={16} />
-        </Button>
+          <Scan size={18} />
+        </div>
       </div>
-      <CodeEditor
+      {/* <CodeEditor
         className={styles["code-editor"]}
         defaultValue={defaultValue}
         onUpdate={handleCodeEditor}
-      />
+      /> */}
+      <MonacoEditor></MonacoEditor>
     </div>
   );
 };

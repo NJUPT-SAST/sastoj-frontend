@@ -15,9 +15,10 @@
     flex-direction: row;
     justify-content: space-between;
     z-index: 2;
+    align-items: center;
     .full-screen {
       display: flex;
-      padding: 3px;
+      cursor: pointer;
     }
   }
   .code-editor {
