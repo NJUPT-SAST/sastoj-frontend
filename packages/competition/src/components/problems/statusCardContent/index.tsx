@@ -1,19 +1,13 @@
 import { Flag, PencilLine } from "lucide-react";
 import styles from "./index.module.scss";
 import { Button, Carousel } from "@ui-aurora/react";
-import { useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { EvaluationRecord } from "./evaluationRecord";
 import { SelfTest } from "./selfTest";
 
 export const StatusCardContent = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [selected, setSelected] = useState<number>(0);
-  const carouselWidth = useMemo(() => {
-    return carouselRef.current?.offsetWidth;
-  }, [window.innerWidth]);
-  const carouselHeight = useMemo(() => {
-    return carouselRef.current?.offsetHeight;
-  }, [window.innerHeight]);
 
   // useEffect(() => {
   //   const width = carouselRef.current?.offsetWidth;
@@ -51,9 +45,7 @@ export const StatusCardContent = () => {
         <Carousel
           ref={carouselRef}
           className={styles.carousel}
-          width={carouselWidth}
-          height={carouselHeight}
-          CarouselItems={[
+          carouselItems={[
             {
               children: <EvaluationRecord />,
             },
@@ -61,7 +53,7 @@ export const StatusCardContent = () => {
               children: <SelfTest />,
             },
           ]}
-          selected={selected}
+          selectedIndex={selected}
           isSliding={true}
         />
       </div>
