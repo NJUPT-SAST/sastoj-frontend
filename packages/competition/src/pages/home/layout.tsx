@@ -37,7 +37,7 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
   return (
     <div className={styles["page-container"]}>
       <Navbar
-        header={<Logo height={36} />}
+        header={<Logo height={36} onClick={() => navigate("/About")} />}
         footer={
           <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
             <Avatar style={{ marginRight: 0 }} height={28} />

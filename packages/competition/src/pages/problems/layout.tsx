@@ -3,6 +3,7 @@ import { Navbar } from "@ui-aurora/react";
 import Logo from "../../components/logo";
 import styles from "./page.module.scss";
 import { HeaderContent } from "../../components/problems/headerContent";
+import { useNavigate } from "react-router-dom";
 // import { RouteBack } from "../../components/route/RouteBack";
 
 interface ProblemsLayoutProps {
@@ -10,13 +11,13 @@ interface ProblemsLayoutProps {
 }
 
 const ProblemLayout: React.FC<ProblemsLayoutProps> = ({ children }) => {
+  const navigate = useNavigate();
   return (
     <div className={styles["page-container"]}>
       <Navbar
         header={
           <>
-            {/* <RouteBack route={"/Library"} /> */}
-            <Logo height={36} />
+            <Logo height={36} onClick={() => navigate("/About")} />
           </>
         }
         className={styles.navbar}
