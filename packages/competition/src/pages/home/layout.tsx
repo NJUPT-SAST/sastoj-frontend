@@ -7,7 +7,7 @@ import Logo from "../../components/logo";
 import Footer from "../../components/footer";
 import styles from "./page.module.scss";
 import Avatar from "../../components/avatar";
-import { RouteLayout } from "../../components/route/RouteLayout";
+// import { RouteLayout } from "../../components/route/RouteLayout";
 
 interface HomeLayoutProps {
   children: ReactNode;

@@ -8,10 +8,11 @@ export const RoutetoLibrary = () => {
   return (
     <Button
       className={styles["route-botton"]}
-      color="ghost"
+      color="border"
       onClick={() => {
         navigate("/Library");
       }}
+      shadow="none"
     >
       <span>前往题库</span>
       <ArrowRight size={18} />

@@ -3,7 +3,7 @@ import { Navbar } from "@ui-aurora/react";
 import Logo from "../../components/logo";
 import styles from "./page.module.scss";
 import { HeaderContent } from "../../components/problems/headerContent";
-import { RouteBack } from "../../components/route/RouteBack";
+// import { RouteBack } from "../../components/route/RouteBack";
 
 interface ProblemsLayoutProps {
   children: ReactNode;

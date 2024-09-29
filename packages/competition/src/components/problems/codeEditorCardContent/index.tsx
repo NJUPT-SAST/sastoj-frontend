@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Select, type OptionProps } from "@ui-aurora/react";
-import CodeEditor from "../../codeEditor";
+// import CodeEditor from "../../codeEditor";
 import styles from "./index.module.scss";
 import { Scan } from "lucide-react";
 import { useCodeEditor } from "../../../hooks/useCodeEditor";

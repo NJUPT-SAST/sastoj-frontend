@@ -5,7 +5,7 @@ export interface AnnouncementProps {
   description?: string;
 }
 
-const Announcement: React.FC<AnnouncementProps> = ({ title, description }) => {
+const Announcement: React.FC<AnnouncementProps> = ({ description }) => {
   return (
     <>
       <span>{description}</span>
