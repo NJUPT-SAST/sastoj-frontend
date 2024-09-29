@@ -128,19 +128,26 @@ export const CodeEditorCardContent: React.FC<CodeEditorCardContentProps> = ({
           placeHolder="请选择你的语言"
           onChange={handleChange}
         />
-        <div
+        <Button
+          size="small"
+          color="border"
           className={styles["full-screen"]}
           onClick={() => setIsFullScreen()}
+          shadow="none"
         >
-          <Scan size={18} />
-        </div>
+          <Scan size={16} />
+        </Button>
       </div>
       {/* <CodeEditor
         className={styles["code-editor"]}
         defaultValue={defaultValue}
         onUpdate={handleCodeEditor}
       /> */}
-      <MonacoEditor></MonacoEditor>
+      <MonacoEditor
+        defaultValue={defaultValue}
+        onUpdate={handleCodeEditor}
+        className={styles["code-editor"]}
+      />
     </div>
   );
 };
