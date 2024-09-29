@@ -31,18 +31,18 @@ const EnterButton: React.FC<EnterButtonProps> = ({ contestId }) => {
     <>
       <div className={styles["btn-box"]}>
         <Button onClick={() => setVisible(true)} size="small" color="secondary">
-          进入比赛
+          <strong>进入比赛</strong>
         </Button>
       </div>
       <Dialog
         className={styles.dialog}
         visible={visible}
-        onOk={handleOk}
         onCancel={() => setVisible(false)}
-        size="medium"
+        onOk={handleOk}
+        size="large"
         color="secondary"
-        header={<span className={styles["dialog-title"]}>比赛准则</span>}
-        mainContent={
+        header={<h2 className={styles["dialog-title"]}>比赛准则</h2>}
+        content={
           <div className={styles["dialog-content"]}>
             <span>
               欢迎你参加本次比赛！在参加考试前，考生请务必查阅具体的考试规则和要求，以确保您能准确了解和遵守相关规定。在确认同意后方可进入比赛，祝您考试顺利！
@@ -73,7 +73,12 @@ const EnterButton: React.FC<EnterButtonProps> = ({ contestId }) => {
                 value === "add" ? setIsChecked(true) : setIsChecked(false);
               }}
             />
-            <Button onClick={handleOk}>进入比赛</Button>
+            <div style={{ display: "flex", gap: "1rem" }}>
+              <Button color="secondary" onClick={() => setVisible(false)}>
+                取消
+              </Button>
+              <Button onClick={handleOk}>进入比赛</Button>
+            </div>
           </div>
         }
       />

@@ -11,11 +11,12 @@ const LoginCard = () => {
       header={
         <div className={styles["header-container"]}>
           <Logo width={300}></Logo>
-          <span>LOGIN HERE</span>
+          <span>Login here</span>
         </div>
       }
-      mainContent={<LoginCardContent />}
+      content={<LoginCardContent />}
       footer={null}
+      shadow="regular"
     />
   );
 };

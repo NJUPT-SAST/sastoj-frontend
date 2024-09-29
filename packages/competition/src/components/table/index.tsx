@@ -71,14 +71,13 @@ export const OjTable = <TData,>({
         {isSearch && (
           <Input
             label={filterKeyWord}
-            isBorder={false}
             value={
               table
                 .getHeaderGroups()[0]
                 .headers.find((header) => header.id === filterKeyWord)
                 ?.column.getFilterValue() as string
             }
-            onchange={(value) =>
+            onChange={(value) =>
               table
                 .getHeaderGroups()[0]
                 .headers.find((header) => header.id === filterKeyWord)

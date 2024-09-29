@@ -15,14 +15,21 @@
     flex-direction: row;
     justify-content: space-between;
     z-index: 2;
+    align-items: center;
     .full-screen {
+      padding: unset;
+      height: 30px;
+      width: 30px;
       display: flex;
-      padding: 3px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
     }
   }
   .code-editor {
     flex-grow: 1;
     z-index: 1;
     position: relative;
+    font-family: monospace;
   }
 }
