@@ -5,14 +5,16 @@ import { AnnouncementSkelecton } from "../../components/skelecton/about";
 import Information from "../../components/about/information";
 // import Time from "../../components/about/time";
 import { useMsg } from "../../stores/useMsg";
-import { useSwrGetContest } from "../../swrHooks/contest";
+import { useCasedata } from "../../hooks/useCasedata";
 import { RoutetoLibrary } from "../../components/route/RoutetoLibrary/RoutetoLibrary";
 
 const About = () => {
-  const contestId = Number(localStorage.getItem("contestId"));
-  const { data } = useSwrGetContest(contestId);
+  const contestId = localStorage.getItem("contestId");
+  const data = contestId ? useCasedata(contestId) : null;
   const setTitle = useMsg(state => state.setTitle)
   data && setTitle(data?.title)
+  
+  
 
   return (
     <div className={styles["about-container"]}>

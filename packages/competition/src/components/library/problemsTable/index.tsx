@@ -30,8 +30,8 @@ const ProblemsTable = (data: GetProblemsProps) => {
       cell: (info) => <i className={styles["span-description"]}>{info.getValue()}</i>,
       header: () => <span>TITLE</span>,
     }),
-    columnHelper.accessor((row) => row.point, {
-      id: "point",
+    columnHelper.accessor((row) => row.score, {
+      id: "score",
       cell: (info) => <i className={styles["span-font"]}>{info.getValue()}</i>,
       header: () => <span>POINT</span>,
     }),
@@ -61,7 +61,7 @@ const ProblemsTable = (data: GetProblemsProps) => {
     <OjTable
       columns={columns}
       dataSource={sortByKey(data.problems, 'index')}
-      caption={title || "Fresh Cup"}
+      caption={title}
       className={styles["questions-table"]}
     />
   );
