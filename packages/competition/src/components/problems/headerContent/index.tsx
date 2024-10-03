@@ -10,49 +10,47 @@ import { SumbitLoading } from "../../loading/sumbitLoading";
 import { debounce } from "../../../utils/aboutHandleData";
 import { useSelfStore } from "../../../stores/useSelfSotre";
 
-
-
 export const HeaderContent = () => {
   const [sheetVisible, setSheetVisible] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false)
-  const [selfLoading, setSelfLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
+  const [selfLoading, setSelfLoading] = useState<boolean>(false);
   const { submitState, startSubmit } = useSubmitStore((state) => ({
     submitState: state.submitState,
-    startSubmit: state.startSubmit
-  }))
+    startSubmit: state.startSubmit,
+  }));
   const { selfState, startSelf } = useSelfStore((state) => ({
     selfState: state.selfState,
     startSelf: state.startSelf,
   }));
   const selfTest = useSelfTest();
   const submit = useSubmited();
-  const handlesubmit = debounce(submit, 300)
-  const handleself = debounce(selfTest, 300)
+  const handlesubmit = debounce(submit, 300);
+  const handleself = debounce(selfTest, 300);
 
   useEffect(() => {
-    if (submitState == 'Submitting') {
-      setLoading(true)
+    if (submitState == "Submitting") {
+      setLoading(true);
     } else {
-      setTimeout(() => setLoading(false), 500)
+      setTimeout(() => setLoading(false), 500);
     }
-  }, [submitState])
+  }, [submitState]);
 
   useEffect(() => {
-    if (selfState == 'Selfing') {
-      setSelfLoading(true)
+    if (selfState == "Selfing") {
+      setSelfLoading(true);
     } else {
-      setTimeout(() => setSelfLoading(false), 500)
+      setTimeout(() => setSelfLoading(false), 500);
     }
-  }, [selfState])
+  }, [selfState]);
 
   return (
     <div className={styles["header-content-container"]}>
-
       <Button
         className={styles["run-button"]}
-        size="medium"
+        size="small"
         color="border"
         onClick={() => setSheetVisible(true)}
+        shadow="none"
       >
         <ListCollapse />
         <span>题目列表</span>
@@ -63,28 +61,30 @@ export const HeaderContent = () => {
           size="small"
           color="border"
           onClick={() => {
-            startSelf()
-            setSelfLoading(true)
-            handleself()
+            startSelf();
+            setSelfLoading(true);
+            handleself();
           }}
           disabled={selfLoading}
+          shadow="none"
         >
           {!selfLoading ? <CirclePlay /> : <SumbitLoading />}
-          <span>{!selfLoading ? '自测' : '自测中'}</span>
+          <span>{!selfLoading ? "自测" : "自测中"}</span>
         </Button>
         <Button
           className={styles["run-button"]}
           size="small"
           color="border"
           onClick={() => {
-            startSubmit()
-            setLoading(true)
-            handlesubmit()
+            startSubmit();
+            setLoading(true);
+            handlesubmit();
           }}
           disabled={loading}
+          shadow="none"
         >
           {!loading ? <Send /> : <SumbitLoading />}
-          <span>{!loading ? '提交' : '评测中'}</span>
+          <span>{!loading ? "提交" : "评测中"}</span>
         </Button>
         <ProblemsSheet
           visible={sheetVisible}

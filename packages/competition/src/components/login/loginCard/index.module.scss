@@ -1,13 +1,11 @@
 @use "@/variables" as *;
 .card {
+  padding: 20px !important;
   padding-top: 30px !important;
   background-color: transparent !important;
   background: linear-gradient(to bottom right, $white-color, transparent);
   background-position: 50% 50%;
   background-size: 2000% 2000%;
-  box-shadow:
-    inset -5px -5px 240px 0px rgba(255, 255, 255, 0.02),
-    inset 5px 5px 4px 0px rgba(255, 255, 255, 0.35) !important;
   backdrop-filter: blur(42px);
   // border: 1px solid $divider-color;
 

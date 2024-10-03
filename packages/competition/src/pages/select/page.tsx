@@ -17,7 +17,6 @@ const Select = () => {
           return (
             <Card
               key={item.title + item.id}
-              padding={15}
               className={styles["select-item"]}
               header={
                 <div className={styles["item-title"]}>
@@ -32,12 +31,12 @@ const Select = () => {
                   <EnterButton contestId={item.id} />
                 </div>
               }
-              mainContent={
+              content={
                 <div className={styles["item-content"]}>
                   <span>{item.description}</span>
                 </div>
               }
-            ></Card>
+            />
           );
         })}
       </div>

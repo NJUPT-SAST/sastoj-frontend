@@ -7,7 +7,7 @@ import Logo from "../../components/logo";
 import Footer from "../../components/footer";
 import styles from "./page.module.scss";
 import Avatar from "../../components/avatar";
-import { RouteLayout } from "../../components/route/RouteLayout";
+// import { RouteLayout } from "../../components/route/RouteLayout";
 
 interface HomeLayoutProps {
   children: ReactNode;
@@ -19,34 +19,34 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
 
   const headerItems: NavbarItemProps[] = [
     {
-      icon: <HomeIcon size={20} />,
-      itemKey: "About",
-      text: "首页",
+      navbarItemIcon: <HomeIcon size={20} />,
+      navbarItemKey: "About",
+      navbarItemContent: "首页",
     },
     {
-      icon: <LayoutList size={20} />,
-      itemKey: "Library",
-      text: "题库",
+      navbarItemIcon: <LayoutList size={20} />,
+      navbarItemKey: "Library",
+      navbarItemContent: "题库",
     },
     {
-      icon: <Award size={20} />,
-      itemKey: "Rank",
-      text: "排名",
+      navbarItemIcon: <Award size={20} />,
+      navbarItemKey: "Rank",
+      navbarItemContent: "排名",
     },
   ];
   return (
     <div className={styles["page-container"]}>
       <Navbar
-        header={<Logo height={36} />}
+        header={<Logo height={36} onClick={() => navigate("/About")} />}
         footer={
-          <>
-            <Avatar style={{ marginRight: 0 }} height={36} />
-            <RouteLayout/>
-          </>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            <Avatar style={{ marginRight: 0 }} height={28} />
+            {/* <RouteLayout /> */}
+          </div>
         }
-        items={headerItems}
+        contentItems={headerItems}
         selectedKey={location.pathname.replace("/", "")}
-        onchange={navigate}
+        onChange={navigate}
         className={styles.navbar}
       />
       <div className={styles.slot}>{children}</div>
