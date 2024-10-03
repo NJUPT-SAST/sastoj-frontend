@@ -7,6 +7,8 @@ import { useSwrGetContests } from "../../swrHooks/contests";
 
 const Select = () => {
   const { data } = useSwrGetContests();
+  data&&localStorage.setItem('contests', JSON.stringify(data?.contests));
+  
 
   return (
     <SelectLayout>
