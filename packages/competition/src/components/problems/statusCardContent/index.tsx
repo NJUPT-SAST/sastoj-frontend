@@ -1,11 +1,11 @@
 import { Flag, PencilLine } from "lucide-react";
 import styles from "./index.module.scss";
 import { Button, Carousel } from "@ui-aurora/react";
-import { useRef, useState } from "react";
+import { memo, useRef, useState } from "react";
 import { EvaluationRecord } from "./evaluationRecord";
 import { SelfTest } from "./selfTest";
 
-export const StatusCardContent = () => {
+export const StatusCardContentComponent = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [selected, setSelected] = useState<number>(0);
 
@@ -54,9 +54,10 @@ export const StatusCardContent = () => {
             },
           ]}
           selectedIndex={selected}
-          isSliding={true}
+          isSliding={false}
         />
       </div>
     </div>
   );
 };
+export const StatusCardContent = memo(StatusCardContentComponent);

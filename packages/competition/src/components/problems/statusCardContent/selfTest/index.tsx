@@ -1,10 +1,11 @@
+import { memo } from "react";
 import { useSelfEditor } from "../../../../hooks/useSelfEditor";
 // import CodeEditor from "../../../codeEditor";
 import { MonacoEditor } from "../../../monacoEditor";
 import { SelfResult } from "../../selfResult";
 import styles from "./index.module.scss";
 
-export const SelfTest = () => {
+export const SelfTestComponent = () => {
   const { handleCodeEditor, defaultValue } = useSelfEditor();
   return (
     <div className={styles["self-test-container"]}>
@@ -25,3 +26,5 @@ export const SelfTest = () => {
     </div>
   );
 };
+
+export const SelfTest = memo(SelfTestComponent);
