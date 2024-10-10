@@ -14,8 +14,6 @@ export const ProblemsList: React.FC<ProblemsListProps> = ({ handleSelect }) => {
   const { data } = useSwrGetProblems(contestId as unknown as number);
   const problems = sortByKey(data?.problems as object[], 'index')
   if (!problems) return <SheetSkelecton />
-  console.log(problems);
-  console.log('<<<<<');
   
 
   return (
