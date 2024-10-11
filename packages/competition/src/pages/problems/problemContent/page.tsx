@@ -1,4 +1,4 @@
-import { Card,CheckboxGroup} from "@ui-aurora/react";
+import { Badge, Card, CheckboxGroup, RadioGroup } from "@ui-aurora/react";
 import styles from "./page.module.scss";
 import useMarkdown from "../../../hooks/useMarkdown";
 import { CodeEditorCardContent } from "../../../components/problems/codeEditorCardContent";
@@ -8,6 +8,7 @@ import { useSwrGetProblem } from "../../../swrHooks/problem";
 import { useParams } from "react-router-dom";
 import { useMonitorCaseId } from "../../../hooks/useMonitorCaseId";
 import { ProblemContentResult } from "../../../components/problems/problemContent";
+import { SingleQuestion } from "../../../components/problems/SingleQuestions";
 
 
 const ProblemContent = () => {
@@ -55,31 +56,12 @@ const ProblemContent = () => {
         </div>
       </div>
     );
-  }else {
-    return (<CheckboxGroup
-      defaultValue={[
-        'node'
-      ]}
-      direction="column"
-      onChange={()=>{console.log('checkbox');}}
-      options={[
-        {
-          key: 1,
-          label: 'nodejs',
-          value: 'node'
-        },
-        {
-          key: 2,
-          label: 'nestjs',
-          value: 'nest'
-        },
-        {
-          key: 3,
-          label: 'nextjs',
-          value: 'next'
-        }
-      ]}
-    />)
+  } else {
+    return (
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 1, flexDirection: 'column' }}>
+        <SingleQuestion/>
+      </div>
+    )
   }
 };
 
