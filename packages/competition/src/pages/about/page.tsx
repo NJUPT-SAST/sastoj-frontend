@@ -22,17 +22,17 @@ const About = () => {
           className={styles["announcement-card"]}
           shadow="regular"
           header={<h2>{data?.title}</h2>}
-          footer={
-            <div
-              style={{
-                width: "100%",
-                display: "flex",
-                flexDirection: "row-reverse",
-              }}
-            >
-              <RoutetoLibrary />
-            </div>
-          }
+          // footer={
+          //   <div
+          //     style={{
+          //       width: "100%",
+          //       display: "flex",
+          //       flexDirection: "row-reverse",
+          //     }}
+          //   >
+          //     <RoutetoLibrary />
+          //   </div>
+          // }
           content={
             data ? <span>{data?.description}</span> : <AnnouncementSkelecton />
           }

@@ -11,7 +11,6 @@ import Problems from "../../pages/problems/page";
 import ProblemContent from "../../pages/problems/problemContent/page";
 import loader from "./loader";
 
-
 const routes = [
   {
     path: "/login",
@@ -26,7 +25,7 @@ const routes = [
     children: [
       {
         index: true, // This sets the default child route
-        element: <Navigate to="/About" />
+        element: <Navigate to="/About" />,
       },
       {
         path: "/about",
