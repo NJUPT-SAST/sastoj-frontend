@@ -13,7 +13,7 @@ export default function OJSider() {
           console.log(itemKey);
 
           if (itemKey === "back") {
-            navigate("/admin/competition");
+            navigate("/admin/contest");
           } else {
             navigate(itemKey.toString());
           }

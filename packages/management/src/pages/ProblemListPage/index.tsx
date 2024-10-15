@@ -1,19 +1,18 @@
 import { Layout } from "@douyinfe/semi-ui";
-import OJSider from "../../components/Sider";
 import { Outlet } from "react-router-dom";
+import OJSider from "../../components/Sider";
 
-const { Sider, Content } = Layout;
+export const ProblemListPage = () => {
+  const { Sider, Content } = Layout;
 
-const ProblemList = () => {
   return (
-    <>
+    <Layout>
       <Sider>
         <OJSider />
       </Sider>
       <Content>
         <Outlet />
       </Content>
-    </>
+    </Layout>
   );
 };
-export default ProblemList;

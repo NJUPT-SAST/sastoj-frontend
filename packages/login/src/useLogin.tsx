@@ -21,8 +21,9 @@ export const useLogin = () => {
       //@ts-ignore
       trigger({ username, password })
         .then((response) => {
-          // console.log(response);
+          console.log(response);
           localStorage.setItem("token", response?.token ?? undefined);
+          localStorage.setItem("username", username ?? undefined);
           showToast({
             type: "success",
             content: <>登录成功</>,

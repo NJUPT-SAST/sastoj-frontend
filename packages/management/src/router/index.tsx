@@ -7,7 +7,8 @@ import App from "../App";
 import QuestionManagement from "../components/QuestionManagement";
 import StudentManagement from "../components/StudentManagement";
 import NotFound from "../components/NotFound";
-import ContestList from "../pages/ContestList";
+import ContestListPage from "../pages/ContestListPage";
+import AdminPage from "../pages/AdminPage";
 const Router = () => {
   const routes = createBrowserRouter([
     {
@@ -16,23 +17,38 @@ const Router = () => {
       children: [
         {
           path: "admin",
-          element: <ContestList />,
+          element: <AdminPage />,
           children: [
             {
               index: true, // 设置默认子路由
-              element: <Navigate to="/contest" />, // 访问 / 时重定向
+              element: <Navigate to="/admin/contest" />, // 访问 / 时重定向
             },
             {
               path: "contest",
-              element: <ContestList />,
-            },
-            {
-              path: "student",
-              element: <StudentManagement />,
-            },
-            {
-              path: "question",
-              element: <QuestionManagement />,
+              children: [
+                {
+                  index: true,
+                  element: <ContestListPage />,
+                },
+                {
+                  path: ":contestId", // 动态路由
+                  element: <AdminPage />,
+                  children: [
+                    {
+                      index: true,
+                      element: <QuestionManagement />,
+                    },
+                    {
+                      path: "question",
+                      element: <QuestionManagement />,
+                    },
+                    {
+                      path: "student",
+                      element: <StudentManagement />,
+                    },
+                  ],
+                },
+              ],
             },
           ],
         },
