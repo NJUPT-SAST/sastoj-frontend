@@ -1,0 +1,13 @@
+@use "../../variable.scss" as *;
+.contests-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+.contest {
+  border: 1px solid $border;
+}
+.pagination {
+  // margin-top: 20px;
+  margin: 0 auto;
+}

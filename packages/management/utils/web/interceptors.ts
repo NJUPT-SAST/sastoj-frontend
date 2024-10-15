@@ -7,8 +7,8 @@ import { HTTP_STATUS } from "./status";
 const canceler = new RequestCanceler();
 
 REQUEST.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
-  token && (config.headers.Authorization = token);
+  // const token = localStorage.getItem("token");
+  // token && (config.headers.Authorization = token);
 
   // 检查是否存在重复请求，若存在则取消已发的请求
   canceler.removePendingRequest(config);
