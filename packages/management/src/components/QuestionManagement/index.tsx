@@ -3,6 +3,7 @@ import { Button, Popconfirm, Table, Tag} from "@douyinfe/semi-ui";
 import { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";
 import { getProblemList } from "../../api/admin";
+import EditModal from "../EditModal";
 import "./index.scss";
 
 interface Problem {
@@ -15,10 +16,29 @@ interface Problem {
   index: number; //题目编号
   config: string; //题目配置
 }
-
+export interface ProblemDetail {
+  new: boolean;
+  id: number;
+  problemName: string;
+  description: string;
+  type: number;
+  score: number;
+  answer: string[];
+}
 export default function QuestionManagement() {
   const [problems, setProblems] = useState<Problem[]>([]);
-
+  const [visible, setVisible] = useState(false);
+  const [problemDetail, setProblemDetail] = useState<ProblemDetail>({
+    new: false,
+    id: 0,
+    problemName: "",
+    description: "",
+    type: 0,
+    score: 0,
+    answer: [],
+  });
+  
+  
   useEffect(() => {
     getProblemList(1, 10).then((res) => {
       // console.log(res);
@@ -65,6 +85,7 @@ export default function QuestionManagement() {
             <Button
               theme="solid"
               onClick={() => {
+                setVisible(true);
                 // 获取题目详细信息
               }}
             >
@@ -99,6 +120,7 @@ export default function QuestionManagement() {
     <>
       <Button className="question-button">新增题目</Button>
       <Table columns={columns} dataSource={problems} pagination={false}></Table>
+      <EditModal visible={visible} setVisible={setVisible} problemDetail={problemDetail} setProblemDetail = {setProblemDetail}/>
     </>
   );
 }

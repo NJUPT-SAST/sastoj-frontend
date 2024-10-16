@@ -24,3 +24,11 @@ export const getContestList = (pageNum: number, pageSize: number) => {
     params: { currency: pageNum, size: pageSize },
   });
 };
+
+/**
+ * 添加题目
+ * 
+ */
+export const addProblem = (problemData: any) => {
+  return
+ }
