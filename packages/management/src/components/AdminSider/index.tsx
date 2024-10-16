@@ -2,16 +2,15 @@ import { IconChevronLeft, IconIdCard, IconSetting } from "@douyinfe/semi-icons";
 import { Nav } from "@douyinfe/semi-ui";
 import { useNavigate } from "react-router-dom";
 
-export default function OJSider() {
+export default function AdminSider() {
   const navigate = useNavigate();
   return (
     <>
       <Nav
-        style={{ height: "100%" }}
+        style={{ maxWidth: 220, height: "100%" }}
         className="sidebar"
         onSelect={({ itemKey }) => {
-          console.log(itemKey);
-
+          // console.log(itemKey);
           if (itemKey === "back") {
             navigate("/admin/contest");
           } else {

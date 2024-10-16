@@ -1,14 +1,14 @@
 import { Layout } from "@douyinfe/semi-ui";
 import { Outlet } from "react-router-dom";
-import OJSider from "../../components/Sider";
+import JudgerSider from "../../components/JudgerSider";
 
-export const ProblemListPage = () => {
+const JudgerPage = () => {
   const { Sider, Content } = Layout;
 
   return (
     <Layout>
       <Sider>
-        <OJSider />
+        <JudgerSider />
       </Sider>
       <Content>
         <Outlet />
@@ -16,3 +16,4 @@ export const ProblemListPage = () => {
     </Layout>
   );
 };
+export default JudgerPage;
