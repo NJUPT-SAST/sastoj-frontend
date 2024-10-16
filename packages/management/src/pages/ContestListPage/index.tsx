@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getContestList } from "../../api/admin";
 import "./index.scss";
 import { Card, Pagination, Spin, Typography } from "@douyinfe/semi-ui";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 interface Contest {
   id: string;
   title: string; //比赛标题
@@ -29,10 +29,13 @@ const ContestListPage = () => {
   });
   const navigate = useNavigate();
   const { Text } = Typography;
+  const location = useLocation(); // 获取当前路径
+  const pathSegments = location.pathname.split('/'); // 按 `/` 分割路径
 
   const handleClick = (id: string) => {
     console.log("查看");
-    navigate("/admin/contest/" + id);
+    if(pathSegments.includes("admin")) navigate("/admin/contest/" + id);
+    else if(pathSegments.includes("judger"))navigate("/judger/contest/" + id);
   };
 
   useEffect(() => {

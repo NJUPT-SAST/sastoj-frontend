@@ -3,12 +3,15 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
-import App from "../App";
 import QuestionManagement from "../components/QuestionManagement";
 import StudentManagement from "../components/StudentManagement";
 import NotFound from "../components/NotFound";
 import ContestListPage from "../pages/ContestListPage";
-import AdminPage from "../pages/AdminPage";
+import LayoutPage from "../pages/LayoutPage";
+import { AdminPage } from "../pages/AdminPage";
+import App from "../App";
+import JudgerPage from "../pages/JudgerPage";
+import JudgeableProblems from "../components/JudgableProblems";
 const Router = () => {
   const routes = createBrowserRouter([
     {
@@ -16,8 +19,12 @@ const Router = () => {
       element: <App />,
       children: [
         {
+          index: true, //测试用
+          element: <Navigate to="/admin" />,
+        },
+        {
           path: "admin",
-          element: <AdminPage />,
+          element: <LayoutPage />,
           children: [
             {
               index: true, // 设置默认子路由
@@ -53,6 +60,32 @@ const Router = () => {
         },
         {
           path: "judger",
+          element: <LayoutPage />,
+          children: [
+            {
+              index: true,
+              element: <Navigate to="/judger/contest" />,
+            },
+            {
+              path: "contest",
+              children: [
+                {
+                  index: true,
+                  element: <ContestListPage />,
+                },
+                {
+                  path: ":contestId", 
+                  element: <JudgerPage />,
+                  children: [
+                    {
+                      index: true,
+                      element: <JudgeableProblems />,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
         },
         {
           path: "*",

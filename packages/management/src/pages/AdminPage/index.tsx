@@ -1,19 +1,18 @@
 import { Layout } from "@douyinfe/semi-ui";
 import { Outlet } from "react-router-dom";
-import OJHeader from "../../components/Header";
+import AdminSider from "../../components/AdminSider";
 
-const { Header } = Layout;
+export const AdminPage = () => {
+  const { Sider, Content } = Layout;
 
-const AdminPage = () => {
   return (
-    <>
-      <Layout className="layout">
-        <Header>
-          <OJHeader text="SASTOJ管理系统" logout={true} />
-        </Header>
+    <Layout>
+      <Sider>
+        <AdminSider />
+      </Sider>
+      <Content>
         <Outlet />
-      </Layout>
-    </>
+      </Content>
+    </Layout>
   );
 };
-export default AdminPage;
