@@ -4,39 +4,29 @@ import { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";
 import { getProblemList } from "../../api/admin";
 import EditModal from "../EditModal";
+import { ProblemData } from "../../types/ProblemTypes";
 import "./index.scss";
 
-interface Problem {
-  id: string;
-  title: string; //题目名称
-  content: string; //题目内容
-  point: number; //题目分值
-  contestId: string; //比赛id
-  caseVersion: number; //题目版本
-  index: number; //题目编号
-  config: string; //题目配置
-}
-export interface ProblemDetail {
-  new: boolean;
-  id: number;
-  problemName: string;
-  description: string;
-  type: number;
-  score: number;
-  answer: string[];
-}
+
+
 export default function QuestionManagement() {
-  const [problems, setProblems] = useState<Problem[]>([]);
+  const [problems, setProblems] = useState<ProblemData[]>([]);
   const [visible, setVisible] = useState(false);
-  const [problemDetail, setProblemDetail] = useState<ProblemDetail>({
-    new: false,
-    id: 0,
-    problemName: "",
-    description: "",
-    type: 0,
-    score: 0,
-    answer: [],
+  const [problemData, setProblemData] = useState<ProblemData>({
+    id: '',
+    typeId: '',
+    title: '',
+    content: '',
+    point: 1,
+    contestId: '',
+    caseVersion: 1,
+    index: 1,
+    config: '',
+    ownerId: 1,
+    visability: 1,
+    metadata: {}
   });
+  const [isNew, setIsNew] = useState(false);
   
   
   useEffect(() => {
@@ -86,6 +76,7 @@ export default function QuestionManagement() {
               theme="solid"
               onClick={() => {
                 setVisible(true);
+                setIsNew(false);
                 // 获取题目详细信息
               }}
             >
@@ -118,9 +109,9 @@ export default function QuestionManagement() {
 
   return (
     <>
-      <Button className="question-button">新增题目</Button>
+      <Button className="question-button" onClick={() => {setIsNew(true)}}>新增题目</Button>
       <Table columns={columns} dataSource={problems} pagination={false}></Table>
-      <EditModal visible={visible} setVisible={setVisible} problemDetail={problemDetail} setProblemDetail = {setProblemDetail}/>
+      <EditModal visible={visible} setVisible={setVisible} problemData={problemData} setProblemData = {setProblemData} isNew={isNew}/>
     </>
   );
 }
