@@ -12,6 +12,7 @@ import { AdminPage } from "../pages/AdminPage";
 import App from "../App";
 import JudgerPage from "../pages/JudgerPage";
 import JudgeableProblems from "../components/JudgableProblems";
+import SubmissionList from "../components/SubmissionList";
 const Router = () => {
   const routes = createBrowserRouter([
     {
@@ -75,12 +76,16 @@ const Router = () => {
                   element: <ContestListPage />,
                 },
                 {
-                  path: ":contestId", 
+                  path: ":contestId",
                   element: <JudgerPage />,
                   children: [
                     {
                       index: true,
                       element: <JudgeableProblems />,
+                    },
+                    {
+                      path: "problem/:problemId",
+                      element: <SubmissionList />,
                     },
                   ],
                 },
