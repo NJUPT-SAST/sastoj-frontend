@@ -14,6 +14,7 @@ export const ProblemsList: React.FC<ProblemsListProps> = ({ handleSelect }) => {
   const { data } = useSwrGetProblems(contestId as unknown as number);
   const problems = sortByKey(data?.problems as object[], 'index')
   if (!problems) return <SheetSkelecton />
+  
 
   return (
     <div className={styles["list-container"]}>
@@ -27,7 +28,7 @@ export const ProblemsList: React.FC<ProblemsListProps> = ({ handleSelect }) => {
             <span>
               {item.index}. {item.title}
             </span>
-            <span style={{ whiteSpace: 'nowrap' }}>Point: {item.point}</span>
+            <span style={{ whiteSpace: 'nowrap' }}>Point: {item.score}</span>
           </div>
         );
       })}

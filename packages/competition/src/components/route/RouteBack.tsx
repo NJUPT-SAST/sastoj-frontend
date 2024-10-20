@@ -5,7 +5,7 @@ import styles from "./index.module.scss";
 export const RouteBack = ({ route }: { route: string }) => {
   const navigate = useNavigate();
   return (
-    <span className={styles["icon"]}>
+    <span className={styles.icon}>
       <ChevronLeft
         size={24}
         onClick={() => {

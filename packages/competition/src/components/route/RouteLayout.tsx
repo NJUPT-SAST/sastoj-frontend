@@ -1,18 +1,18 @@
-import { LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import styles from "./index.module.scss";
 
-export const RouteLayout = () => {
+export const RouteLayout = ({children}:{children:React.ReactNode}) => {
   const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/login", { replace: true });
+  };
   return (
-    <span className={styles["icon"]}>
-      <LogOut
-        size={24}
-        onClick={() => {
-          localStorage.clear();
-          navigate("/login", { replace: true });
-        }}
-      />
-    </span>
+    <div
+    className={styles.icon}
+    onClick={() => handleLogout()}
+    >
+      {children}
+    </div>
   );
 };
