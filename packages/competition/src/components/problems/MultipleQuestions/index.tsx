@@ -33,7 +33,7 @@ export const MultipleQuestions = () => {
   const handleSave = () => {
     if (selected.length > 0) {
       const problemsInfo = localStorage.getItem("problems-info");
-      let currentProblemsInfo: ProblemInfo[] = [
+      const currentProblemsInfo: ProblemInfo[] = [
         { key: "hi", select: selected },
       ];
 

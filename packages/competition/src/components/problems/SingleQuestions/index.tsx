@@ -72,7 +72,7 @@ export const SingleQuestion = () => {
           onClick={() => {
             if (selected) {
               const problemsInfo = localStorage.getItem("problems-info");
-              let currentProblemsInfo: ProblemInfo[] = [
+              const currentProblemsInfo: ProblemInfo[] = [
                 { key: "hello", select: selected },
               ];
 

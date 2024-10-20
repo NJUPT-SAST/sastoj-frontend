@@ -34,7 +34,7 @@ export const InputQuestions = () => {
   const handleSave = () => {
     if (inputValue.trim()) {
       const problemsInfo = localStorage.getItem("problems-info");
-      let currentProblemsInfo: ProblemInfo[] = [
+      const currentProblemsInfo: ProblemInfo[] = [
         { key: "hi", answer: inputValue },
       ];
 
