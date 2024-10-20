@@ -9,7 +9,8 @@ import { useParams } from "react-router-dom";
 import { useMonitorCaseId } from "../../../hooks/useMonitorCaseId";
 import { ProblemContentResult } from "../../../components/problems/problemContent";
 import { SingleQuestion } from "../../../components/problems/SingleQuestions";
-
+import { MultipleQuestions } from "../../../components/problems/MultipleQuestions";
+import { InputQuestions } from "../../../components/problems/InputQuestions";
 
 const ProblemContent = () => {
   const [isFullScreen, setIsFullScreen] = useState<boolean>(false);
@@ -27,11 +28,10 @@ const ProblemContent = () => {
   );
 
   console.log(data);
-  console.log('<<<<<<');
-
+  console.log("<<<<<<");
 
   const html = useMarkdown(data?.content ?? "");
-  if (data?.type !== 'Classic-Algo') {
+  if (data?.type !== "Classic-Algo") {
     return (
       <div className={styles["problem-content-container"]}>
         <Card
@@ -44,7 +44,9 @@ const ProblemContent = () => {
           <Card
             className={styles.codeEditor}
             header={null}
-            content={<CodeEditorCardContent setIsFullScreen={handleFullScreen} />}
+            content={
+              <CodeEditorCardContent setIsFullScreen={handleFullScreen} />
+            }
             footer={null}
           ></Card>
           <Card
@@ -58,10 +60,18 @@ const ProblemContent = () => {
     );
   } else {
     return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 1, flexDirection: 'column' }}>
-        <SingleQuestion/>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flex: 1,
+          flexDirection: "column",
+        }}
+      >
+        <InputQuestions />
       </div>
-    )
+    );
   }
 };
 
