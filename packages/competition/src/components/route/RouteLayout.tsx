@@ -5,7 +5,7 @@ import styles from "./index.module.scss";
 export const RouteLayout = () => {
   const navigate = useNavigate();
   return (
-    <span className={styles["icon"]}>
+    <span className={styles.icon}>
       <LogOut
         size={24}
         onClick={() => {

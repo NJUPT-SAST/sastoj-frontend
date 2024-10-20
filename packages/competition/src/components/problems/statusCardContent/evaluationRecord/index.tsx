@@ -17,7 +17,7 @@ export const getPointColor = (value: number): 'error' | 'success' | 'warning' =>
 export const EvaluationRecord = () => {
   const data = useSubmissons();
   const [id, setID] = useState<string | null>()
-  useCases(id as string)
+  useCases(id!)
   if (!data) {
     return (
       <div className={styles["loading-container"]}>

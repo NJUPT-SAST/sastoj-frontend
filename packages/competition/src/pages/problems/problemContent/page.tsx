@@ -1,4 +1,4 @@
-import { Badge, Card, CheckboxGroup, RadioGroup } from "@ui-aurora/react";
+import { Card} from "@ui-aurora/react";
 import styles from "./page.module.scss";
 import useMarkdown from "../../../hooks/useMarkdown";
 import { CodeEditorCardContent } from "../../../components/problems/codeEditorCardContent";
@@ -8,9 +8,8 @@ import { useSwrGetProblem } from "../../../swrHooks/problem";
 import { useParams } from "react-router-dom";
 import { useMonitorCaseId } from "../../../hooks/useMonitorCaseId";
 import { ProblemContentResult } from "../../../components/problems/problemContent";
-import { SingleQuestion } from "../../../components/problems/SingleQuestions";
-import { MultipleQuestions } from "../../../components/problems/MultipleQuestions";
-import { InputQuestions } from "../../../components/problems/InputQuestions";
+// import { SingleQuestion } from "../../../components/problems/SingleQuestions";
+
 
 const ProblemContent = () => {
   const [isFullScreen, setIsFullScreen] = useState<boolean>(false);
@@ -27,11 +26,11 @@ const ProblemContent = () => {
     problemId as unknown as number,
   );
 
-  console.log(data);
-  console.log("<<<<<<");
+ 
+
 
   const html = useMarkdown(data?.content ?? "");
-  if (data?.type !== "Classic-Algo") {
+  // if (data?.type !== 'Classic-Algo') {
     return (
       <div className={styles["problem-content-container"]}>
         <Card
@@ -58,21 +57,13 @@ const ProblemContent = () => {
         </div>
       </div>
     );
-  } else {
-    return (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flex: 1,
-          flexDirection: "column",
-        }}
-      >
-        <InputQuestions />
-      </div>
-    );
-  }
+  // } else {
+  //   return (
+  //     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 1, flexDirection: 'column' }}>
+  //       <SingleQuestion/>
+  //     </div>
+  //   )
+  // }
 };
 
 export default ProblemContent;
