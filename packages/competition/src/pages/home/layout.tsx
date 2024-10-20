@@ -28,11 +28,11 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
       navbarItemKey: "Library",
       navbarItemContent: "题库",
     },
-    {
-      navbarItemIcon: <Award size={20} />,
-      navbarItemKey: "Rank",
-      navbarItemContent: "排名",
-    },
+    // {
+    //   navbarItemIcon: <Award size={20} />,
+    //   navbarItemKey: "Rank",
+    //   navbarItemContent: "排名",
+    // },
   ];
   return (
     <div className={styles["page-container"]}>

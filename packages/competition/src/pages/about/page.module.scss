@@ -17,13 +17,13 @@
     max-width: $max-width;
     display: flex;
     flex-direction: row;
-    gap: 1%;
+    gap: 2%;
     padding: 1rem;
     box-sizing: border-box;
     .announcement-card {
       @include about-card();
       min-height: 100%;
-      width: 60%;
+      width: 70%;
       box-sizing: border-box;
     }
     .right-area {
