@@ -28,7 +28,7 @@ export const InputQuestions = () => {
     value: string,
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    setInputValue(event.target.value);
+    if(value) setInputValue(event.target.value);
   };
 
   const handleSave = () => {
