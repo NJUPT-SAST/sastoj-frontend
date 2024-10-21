@@ -19,7 +19,6 @@ export const MultipleQuestions = () => {
         (problemInfo) => problemInfo.key === "hi",
       );
 
-      console.log("选择", currentProblem?.select);
       if (currentProblem) {
         setSelected(currentProblem.select); // Set default value from localStorage
       }
@@ -27,6 +26,7 @@ export const MultipleQuestions = () => {
   }, []); // Empty dependency array ensures this runs only on component mount
 
   const handleCheckboxChange = (newSelected: string[]) => {
+    console.log("新的选择", newSelected);
     setSelected(newSelected);
   };
 
@@ -77,7 +77,7 @@ export const MultipleQuestions = () => {
             <span>(5分)这是第一个问题?</span>
           </div>
           <CheckboxGroup
-            defaultValue={selected}
+            value={selected}
             direction="column"
             onChange={handleCheckboxChange}
             options={[

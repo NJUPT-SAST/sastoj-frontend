@@ -93,8 +93,8 @@ importers:
         specifier: ^8.16.0
         version: 8.16.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@ui-aurora/react':
-        specifier: ^0.0.22
-        version: 0.0.22(@emotion/is-prop-valid@1.2.2)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))
+        specifier: 0.0.24
+        version: 0.0.24(@emotion/is-prop-valid@1.2.2)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(storybook@8.2.9(@babel/preset-env@7.25.8(@babel/core@7.25.8)))
       axios:
         specifier: ^1.6.8
         version: 1.6.8
@@ -3089,8 +3089,8 @@ packages:
     resolution: {integrity: sha512-wapVFfZg9H0qOYh4grNVQiMklJGluQrOUiOhYRrQWhx7BY/+I1IYb8BczWNbbUpO+pqy0rDciv3lQH5E1bCLrg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@ui-aurora/react@0.0.22':
-    resolution: {integrity: sha512-sn0c3NkjNwDc6sCVDTMl/+q+D0GnAMdPhZq/y2riLhd14DHhZkKX+IoxHSV1kB/tlH4EuQ3H5YpAgwUP10RzWA==}
+  '@ui-aurora/react@0.0.24':
+    resolution: {integrity: sha512-pvKKOScVhPf0RiiRU90aAPizi0pGBxyiwTRLgnrHXJNDKeydZP6ObyNk4jcFz+//e2zyBXLBdP+RlO5VUsWlQA==}
     peerDependencies:
       react: ^18.2.0
       react-dom: ^18.2.0
@@ -11030,7 +11030,7 @@ snapshots:
       '@typescript-eslint/types': 8.6.0
       eslint-visitor-keys: 3.4.3
 
-  '@ui-aurora/react@0.0.22(@emotion/is-prop-valid@1.2.2)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))':
+  '@ui-aurora/react@0.0.24(@emotion/is-prop-valid@1.2.2)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(storybook@8.2.9(@babel/preset-env@7.25.8(@babel/core@7.25.8)))':
     dependencies:
       '@storybook/addon-docs': 8.2.9(storybook@8.2.9(@babel/preset-env@7.25.8(@babel/core@7.25.8)))
       '@tanstack/react-table': 8.20.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
