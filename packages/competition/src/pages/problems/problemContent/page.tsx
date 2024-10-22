@@ -35,9 +35,7 @@ const ProblemContent = () => {
       <div className={styles["problem-content-container"]}>
         <Card
           className={`${styles["markdown-show-container"]} ${isFullScreen ? styles["full-screen"] : ""}`}
-          header={null}
           content={<ProblemContentResult html={html} CaseId={CaseId} />}
-          footer={null}
         ></Card>
         <div className={styles["problem-show"]}>
           <Card
