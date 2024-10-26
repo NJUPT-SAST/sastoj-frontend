@@ -1,4 +1,5 @@
 // import { Checkbox } from "@ui-aurora/react";
+import { CodeXml } from "lucide-react";
 import { useSwrGetProblems } from "../../../../swrHooks/problems";
 import { sortByKey } from "../../../../utils/aboutHandleData";
 import { SheetSkelecton } from "../../../skelecton/problems/sheet";
@@ -12,24 +13,26 @@ interface ProblemsListProps {
 export const ProblemsList: React.FC<ProblemsListProps> = ({ handleSelect }) => {
   const contestId = localStorage.getItem("contestId");
   const { data } = useSwrGetProblems(contestId as unknown as number);
-  const problems = sortByKey(data?.problems as object[], 'index')
-  if (!problems) return <SheetSkelecton />
-  
+  const problems = sortByKey(data?.problems as object[], "index");
+  if (!problems) return <SheetSkelecton />;
 
   return (
     <div className={styles["list-container"]}>
       {problems?.map((item) => {
         return (
-          <div
-            key={`${item.id}${item.title}`}
-            className={styles["list-item"]}
-            onClick={() => handleSelect(item.id)}
-          >
-            <span>
-              {item.index}. {item.title}
-            </span>
-            <span style={{ whiteSpace: 'nowrap' }}>Point: {item.score}</span>
-          </div>
+          <>
+            <div
+              key={`${item.id}${item.title}`}
+              className={styles["list-item"]}
+              onClick={() => handleSelect(item.id)}
+            >
+              <CodeXml size={18} />
+              <span style={{ flexGrow: "1", paddingLeft: "12px" }}>
+                {item.index}. {item.title}
+              </span>
+              <span style={{ whiteSpace: "nowrap" }}>Point: {item.score}</span>
+            </div>
+          </>
         );
       })}
     </div>

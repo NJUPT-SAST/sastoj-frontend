@@ -15,7 +15,7 @@ export const RoutetoLibrary = () => {
       shadow="none"
     >
       <span>前往题库</span>
-      <ArrowRight size={18} />
+      <ArrowRight size={14} />
     </Button>
   );
 };

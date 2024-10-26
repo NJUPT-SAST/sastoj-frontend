@@ -2,9 +2,8 @@
 
 .list-container {
   width: 100%;
-  border: 1px solid $divider-color;
+  border-bottom: 1px solid $divider-color;
   height: fit-content;
-  border-radius: 5px;
 
   .list-item {
     width: 100%;
@@ -12,7 +11,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 1rem 2rem 0.8rem 1.5rem;
     box-sizing: border-box;
     position: relative;
     cursor: pointer;

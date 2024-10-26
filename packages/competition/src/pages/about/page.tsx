@@ -5,14 +5,13 @@ import Information from "../../components/about/information";
 // import Time from "../../components/about/time";
 import { useMsg } from "../../stores/useMsg";
 import { useCasedata } from "../../hooks/useCasedata";
+import { RoutetoLibrary } from "../../components/route/RoutetoLibrary/RoutetoLibrary";
 
 const About = () => {
   const contestId = localStorage.getItem("contestId");
   const data = contestId ? useCasedata(contestId) : null;
-  const setTitle = useMsg(state => state.setTitle)
-  data && setTitle(data?.title)
-  
-  
+  const setTitle = useMsg((state) => state.setTitle);
+  data && setTitle(data?.title);
 
   return (
     <div className={styles["about-container"]}>
@@ -21,17 +20,17 @@ const About = () => {
           className={styles["announcement-card"]}
           shadow="regular"
           header={<h2>{data?.title}</h2>}
-          // footer={
-          //   <div
-          //     style={{
-          //       width: "100%",
-          //       display: "flex",
-          //       flexDirection: "row-reverse",
-          //     }}
-          //   >
-          //     <RoutetoLibrary />
-          //   </div>
-          // }
+          footer={
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "row-reverse",
+              }}
+            >
+              <RoutetoLibrary />
+            </div>
+          }
           content={
             data ? <span>{data?.description}</span> : <AnnouncementSkelecton />
           }
