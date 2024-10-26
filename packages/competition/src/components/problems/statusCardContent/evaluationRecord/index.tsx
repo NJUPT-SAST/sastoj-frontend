@@ -31,7 +31,7 @@ export const EvaluationRecord = () => {
         <>
           <div className={styles["evaluation-record-header"]}>
             <div>状态</div>
-            <div>时间</div>
+            <div>提交时间</div>
             <div>语言</div>
             <div>分数</div>
           </div>
@@ -41,7 +41,7 @@ export const EvaluationRecord = () => {
                 className={styles["evaluation-record-item"]}
                 key={index}
                 style={{
-                  backgroundColor: index % 2 !== 0 ? "#f5f5f5" : "#fff",
+                  backgroundColor: index % 2 === 0 ? "#f5f5f5" : "#fff",
                 }}
                 onClick={() => { setID(item.id) }}
               >
@@ -49,19 +49,16 @@ export const EvaluationRecord = () => {
                   <StatusTag status={item?.status} />
                 </div>
                 <div>
-                  {moment(item.createdAt).format("YYYY-MM-DD HH:mm:ss")}
+                  {moment(item.createdAt).format("MM.DD HH:mm:ss")}
                 </div>
                 <div>{item.language}</div>
                 <div>
                   <Badge
                     content={item.point.toString()}
-                    size="medium"
+                    size="small"
                     type={getPointColor(item?.point)}
-                    shadow="small"
                   />
                 </div>
-                {/* <span>time:{item.totalTime}</span>
-            <span>memory:{item.maxMemory}</span> */}
               </div>
             );
           })}

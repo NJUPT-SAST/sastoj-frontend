@@ -19,13 +19,13 @@ export const getStatus = (
   statusValue: number | undefined,
 ): [string, "info" | "success" | "warning" | "error" | "ghost"] => {
   const status: statusMapping = {
-    1: ["未开始", "ghost"],
-    2: ["进行中", "info"],
-    3: ["已结束", "success"],
-    4: ["已取消", "error"],
+    0: ["未开始", "ghost"],
+    1: ["进行中", "info"],
+    2: ["已结束", "ghost"],
+    3: ["已取消", "error"],
   };
 
-  return status[statusValue!] ?? ["未开始", "ghost"];
+  return status[statusValue!] ?? ["进行中", "info"];
 };
 
 export const handleDate = (date: string | undefined): string => {

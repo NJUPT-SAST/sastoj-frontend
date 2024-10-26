@@ -6,7 +6,7 @@ import styles from "./index.module.scss";
 import { ArrowLeft } from "lucide-react";
 import { useCasesStore } from "../../../stores/useCasesStore";
 import { handleTime, handleMemory } from "../selfResult/selfSuccess/index";
-import { Badge } from "@ui-aurora/react";
+import { Badge, Button } from "@ui-aurora/react";
 
 export const ProblemCases = () => {
   const { problemId } = useParams();
@@ -22,9 +22,16 @@ export const ProblemCases = () => {
   if (casesValue?.singleCases.length) {
     return (
       <div style={{ height: "fit-content" }}>
-        <span className={styles.icon}>
-          <ArrowLeft onClick={() => clearCaseId()} />
-        </span>
+        <Button
+          className={styles.icon}
+          color="secondary"
+          size="small"
+          shadow="small"
+          onClick={() => clearCaseId()}
+        >
+          <ArrowLeft size={20}/>
+          <span>返回题目内容</span>
+        </Button>
         <div className={styles["cases-container"]}>
           <>
             <div className={styles["cases-header"]}>
@@ -40,7 +47,7 @@ export const ProblemCases = () => {
                   className={styles["cases-item"]}
                   key={index}
                   style={{
-                    backgroundColor: index % 2 !== 0 ? "#f5f5f5" : "#fff",
+                    backgroundColor: index % 2 !== 0 ? "#eeeeee" : "#fff",
                   }}
                 >
                   <span className={styles.id}>{item.index + 1}</span>
@@ -52,14 +59,13 @@ export const ProblemCases = () => {
                   >{`${handleTime(Number(item.time))} ms`}</div>
                   <div
                     className={styles.font}
-                  >{`${handleMemory(Number(item.memory))} mb`}</div>
+                  >{`${handleMemory(Number(item.memory))} MB`}</div>
                   <div>
                     <Badge
                       className={styles.badge}
                       content={item.point.toString()}
                       size="small"
                       type={item.point == 0 ? "error" : "info"}
-                      shadow="small"
                     />
                   </div>
                 </div>
