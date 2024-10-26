@@ -17,7 +17,9 @@ export const useSelfTest = () => {
   useSelefpolling()
   const selfTest = useCallback(() => {
     const { code: input } = SelfsStatus.get(problemId!)!;
-    const { language, code } = problemsStatus.get(problemId!)!;
+    const { code } = problemsStatus.get(problemId!)!;
+    const language = JSON.parse(localStorage.getItem("language") ?? "").state.language;
+    console.log("拿到的language", language)
     trigger({ code, language, input })
       .then((res) => {
         setSelfState('Selfing', res?.uuid)
