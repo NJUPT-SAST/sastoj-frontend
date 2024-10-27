@@ -25,7 +25,7 @@ const routes = [
     children: [
       {
         index: true, // This sets the default child route
-        element: <Navigate to="/About" />,
+        element: <Navigate to="/about" />,
       },
       {
         path: "/about",

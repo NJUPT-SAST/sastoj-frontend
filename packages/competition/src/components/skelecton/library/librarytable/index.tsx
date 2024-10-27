@@ -22,7 +22,7 @@ const LibrarySkelecton = () => {
         columnHelper.accessor('point', {
             id: "point",
             cell: () => <i className={styles["span-font"]}></i>,
-            header: () => <span>POINT</span>,
+            header: () => <span>SCORE</span>,
         }),
         columnHelper.accessor('id', {
             id: "id",
