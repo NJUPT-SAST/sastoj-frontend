@@ -5,7 +5,7 @@ import { StatusTag } from "../statusTag";
 import styles from "./index.module.scss";
 import { ArrowLeft } from "lucide-react";
 import { useCasesStore } from "../../../stores/useCasesStore";
-import { Badge } from "@ui-aurora/react";
+import { Badge, Button } from "@ui-aurora/react";
 const transformNumberFromBigInt = (
   originNumber: string,
   type: "time" | "memory",
