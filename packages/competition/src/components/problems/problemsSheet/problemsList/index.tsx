@@ -1,10 +1,9 @@
-// import { Checkbox } from "@ui-aurora/react";
-import { CodeXml } from "lucide-react";
 import { useSwrGetProblems } from "../../../../swrHooks/problems";
 import { sortByKey } from "../../../../utils/aboutHandleData";
 import { SheetSkelecton } from "../../../skelecton/problems/sheet";
 import styles from "./index.module.scss";
 import React from "react";
+import { Problem } from "../../../../types/problem";
 
 interface ProblemsListProps {
   handleSelect: (problemId: number) => void;
@@ -18,7 +17,7 @@ export const ProblemsList: React.FC<ProblemsListProps> = ({ handleSelect }) => {
 
   return (
     <div className={styles["list-container"]}>
-      {problems?.map((item) => {
+      {problems?.map((item: Problem) => {
         return (
           <>
             <div
@@ -26,11 +25,11 @@ export const ProblemsList: React.FC<ProblemsListProps> = ({ handleSelect }) => {
               className={styles["list-item"]}
               onClick={() => handleSelect(item.id)}
             >
-              <CodeXml size={18} />
-              <span style={{ flexGrow: "1", paddingLeft: "12px" }}>
-                {item.index}. {item.title}
+              <div style={{ border: "1px solid #000", borderRadius: "50%", width: "1.8rem", height: "1.8rem", display: "flex", alignItems: "center", justifyContent: "center"}}>{item.index}</div>
+              <span style={{ flexGrow: "1", paddingLeft: "20px" }}>
+                {item.title}
               </span>
-              <span style={{ whiteSpace: "nowrap" }}>Point: {item.score}</span>
+              <span style={{ whiteSpace: "nowrap" }}>Score: {item.score}</span>
             </div>
           </>
         );

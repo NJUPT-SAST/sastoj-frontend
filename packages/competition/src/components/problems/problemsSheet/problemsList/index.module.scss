@@ -20,7 +20,7 @@
       font-size: 16px;
     }
     &:hover {
-      background-color: $background-color;
+      background-color: #dedede;
     }
     &:not(:last-child)::after {
       content: "";

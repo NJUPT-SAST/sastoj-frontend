@@ -22,7 +22,7 @@ export const StatusCardContentComponent = () => {
         <Button
           className={`${selected === 0 ? styles.active : ""}`}
           size="small"
-          color="border"
+          color={selected !== 0 ? "ghost" : undefined}
           onClick={() => setSelected(0)}
           shadow="none"
         >
@@ -32,7 +32,7 @@ export const StatusCardContentComponent = () => {
         <Button
           className={`${selected === 1 ? styles.active : ""}`}
           size="small"
-          color="border"
+          color={selected !== 1 ? "ghost" : undefined}
           onClick={() => setSelected(1)}
           shadow="none"
         >
@@ -40,7 +40,7 @@ export const StatusCardContentComponent = () => {
           <span>案例自测</span>
         </Button>
       </div>
-      <div className={styles.divider}></div>
+      {/* <div className={styles.divider}></div> */}
       <div className={styles["status-card-container"]}>
         <Carousel
           ref={carouselRef}

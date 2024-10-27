@@ -33,7 +33,7 @@ const ProblemsTable = (data: GetProblemsProps) => {
     columnHelper.accessor((row) => row.score, {
       id: "score",
       cell: (info) => <i className={styles["span-font"]}>{info.getValue()}</i>,
-      header: () => <span>POINT</span>,
+      header: () => <span>SCORE</span>,
     }),
     columnHelper.accessor((row) => row.id, {
       id: "id",
