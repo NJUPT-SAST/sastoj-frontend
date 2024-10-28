@@ -30,7 +30,6 @@ const ProblemContent = () => {
 
 
   const html = useMarkdown(data?.content ?? "");
-  // if (data?.type !== 'Classic-Algo') {
     return (
       <div className={styles["problem-content-container"]}>
         <Card
@@ -55,13 +54,6 @@ const ProblemContent = () => {
         </div>
       </div>
     );
-  // } else {
-  //   return (
-  //     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 1, flexDirection: 'column' }}>
-  //       <SingleQuestion/>
-  //     </div>
-  //   )
-  // }
 };
 
 export default ProblemContent;

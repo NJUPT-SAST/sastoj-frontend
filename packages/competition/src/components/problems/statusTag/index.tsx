@@ -13,6 +13,9 @@ const StatusDescriptions = (status: number): [string, "ghost" | "success" | "err
         case 7: return ['内存超限', "warning"];
         case 8: return ['输出超限', "warning"];
         case 9: return ['等待中', "info"];
+        case 10: return ['评测中', "info"];
+        case 11: return ['系统错误', "error"];
+        case 12: return ['不通过', "error"];
         default: return ["未知状态", "error"];
     }
 }

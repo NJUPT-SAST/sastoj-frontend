@@ -20,7 +20,7 @@ const transformNumberFromBigInt = (
     const paddedNumber = originNumber.padStart(6, "0"); // 确保长度为6
     const integerPart = paddedNumber.slice(0, paddedNumber.length - 6);
     const decimalPart = paddedNumber.slice(paddedNumber.length - 6);
-    return `${integerPart}.${decimalPart.slice(0, 2)}`; // 拼接成新的字符串
+    return `${integerPart||0}.${decimalPart.slice(0, 2)}`; // 拼接成新的字符串
   } else {
     // 对于 memory 类型，乘以 8 并除以 1000000，处理字符串
     const multipliedNumber = (parseInt(originNumber, 10) * 8).toString();
@@ -44,7 +44,6 @@ export const ProblemCases = () => {
   const cases = useCasesStore((state) => state.cases);
   const casesArr = cases.get(problemId!);
   const casesValue = casesArr?.find((item) => item.id == CaseId);
-  // console.log(casesValue);
 
   if (casesValue?.singleCases.length) {
     return (
