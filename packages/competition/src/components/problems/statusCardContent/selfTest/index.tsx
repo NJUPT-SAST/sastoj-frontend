@@ -1,9 +1,8 @@
-import { memo } from "react";
+import { lazy, memo, Suspense } from "react";
 import { useSelfEditor } from "../../../../hooks/useSelfEditor";
-// import CodeEditor from "../../../codeEditor";
-import { MonacoEditor } from "../../../monacoEditor";
 import { SelfResult } from "../../selfResult";
 import styles from "./index.module.scss";
+const MonacoEditor = lazy(() => import("../../../monacoEditor"));
 
 export const SelfTestComponent = () => {
   const { handleCodeEditor, defaultValue } = useSelfEditor();
@@ -14,10 +13,12 @@ export const SelfTestComponent = () => {
           onUpdate={handleCodeEditor}
           defaultValue={defaultValue}
         /> */}
-        <MonacoEditor
-          onUpdate={handleCodeEditor}
-          defaultValue={defaultValue}
-        ></MonacoEditor>
+        <Suspense fallback={<>Loading...</>}>
+          <MonacoEditor
+            onUpdate={handleCodeEditor}
+            defaultValue={defaultValue}
+          ></MonacoEditor>
+        </Suspense>
       </div>
       <div className={styles.divider} />
       <div className={styles["self-test-result-show"]}>
