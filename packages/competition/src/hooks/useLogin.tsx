@@ -22,10 +22,10 @@ export const useLogin = () => {
         .then((response) => {
           // console.log(response);
           localStorage.setItem("token", response?.token ?? undefined);
-          showToast({
-            type: "success",
-            content: <>登录成功</>,
-          });
+          // showToast({
+          //   type: "success",
+          //   content: <>登录成功</>,
+          // });
           setTimeout(() => {
             navigate("/select");
           }, 500);
