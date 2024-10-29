@@ -2,6 +2,7 @@ import Editor from "@monaco-editor/react";
 import { FC, useMemo, useRef } from "react";
 import { editor } from "monaco-editor";
 import { useLanguageStore } from "../../stores/useLanguageStore";
+import "./monacoConfig.ts";
 
 interface MonacoEditorProps {
   className?: string;
