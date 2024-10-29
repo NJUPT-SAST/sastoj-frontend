@@ -1,5 +1,5 @@
 import Editor from "@monaco-editor/react";
-import { FC, useMemo, useRef } from "react";
+import { FC, useEffect, useMemo, useRef } from "react";
 import { editor } from "monaco-editor";
 import { useLanguageStore } from "../../stores/useLanguageStore";
 import "./monacoConfig.ts";
@@ -40,6 +40,10 @@ export const MonacoEditor: FC<MonacoEditorProps> = ({
     };
     return languageMap[language] || "cpp";
   }, [language]);
+
+  useEffect(() => {
+    onUpdate?.(defaultValue ?? "", language);
+  }, []);
 
   return (
     <>
