@@ -6,6 +6,7 @@ import styles from "./index.module.scss";
 import { ArrowLeft } from "lucide-react";
 import { useCasesStore } from "../../../stores/useCasesStore";
 import { Badge, Button } from "@ui-aurora/react";
+
 const transformNumberFromBigInt = (
   originNumber: string,
   type: "time" | "memory",
@@ -37,10 +38,14 @@ const transformNumberFromBigInt = (
 
 const ProblemCases = () => {
   const { problemId } = useParams();
+  // const contestId=localStorage.getItem('contestId')
   const { clearCaseId, CaseId } = useCaseMoreStore((state) => ({
     clearCaseId: state.clearCaseId,
     CaseId: state.CaseId,
   }));
+
+  
+  
   const cases = useCasesStore((state) => state.cases);
   const casesArr = cases.get(problemId!);
   const casesValue = casesArr?.find((item) => item.id == CaseId);

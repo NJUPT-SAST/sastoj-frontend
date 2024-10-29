@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import useSWR from "swr";
-import { getCases, getProblem, historySubmits } from "../apis/user";
+import { getCases, getProblem, getSubmitDetail, historySubmits } from "../apis/user";
+import useSWRMutation from "swr/mutation";
 
 
 export const useSwrGetProblem = (contestId: number, problemId: number) => {
@@ -12,6 +13,14 @@ export const useSwrGetProblem = (contestId: number, problemId: number) => {
   return { data, isLoading, error, mutate };
 };
 
+export const useSwrGetSubmitDetail=(contestId: string, submissionId: string)=>{
+  const { data, isLoading, error, mutate } = useSWR(
+    [contestId, submissionId],
+    ([contestId, submissionId]) => getSubmitDetail({ contest_id: contestId, submission_id: submissionId }),
+  )
+  return { data, isLoading, error, mutate }
+}
+
 export const useSwrHistorySubmits = (contestId: string, problemId: string) => {
   const { data, isLoading, error, mutate } = useSWR(
     [contestId, problemId],
@@ -21,14 +30,10 @@ export const useSwrHistorySubmits = (contestId: string, problemId: string) => {
 }
 
 export const useGetCases = (contestId: string, submissionId: string) => {
-  const { data, isLoading, error, mutate } = useSWR(
+  const { data, error } = useSWRMutation(
     [contestId, submissionId],
     ([contestId, submissionId]) => getCases({ contest_id: contestId, submission_id: submissionId }),
-    {
-      revalidateOnMount: false,   // 禁用组件挂载时的自动请求
-      revalidateOnFocus: false,   // 禁用页面获取焦点时的自动请求
-      revalidateOnReconnect: false // 禁用重新连接时的自动请求
-  }
   )
-  return { data, isLoading, error, mutate }
+  return { data, error }
 }
+

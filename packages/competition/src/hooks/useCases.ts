@@ -8,16 +8,15 @@ export const useCases = (CaseId: string) => {
     const contestId = localStorage.getItem("contestId")
     const setCaseId = useCaseMoreStore(state => state.setCaseId)
     const { cases, setCases } = useCasesStore(state => ({ cases: state.cases, setCases: state.setCases }))
-
     const { problemId } = useParams();
-    const { mutate } = useGetCases(contestId!, CaseId)
+    
     const fetchdata = async () => {
         const casesValue = cases.get(problemId!)
         const casesBoolean = casesValue?.some(item => item.id == CaseId)
         if (cases.has(problemId!) && casesBoolean) {
             return
         } else {
-            const data = await mutate()
+            const {data} = useGetCases(contestId!, CaseId)
             if (data?.cases && problemId) {
                 setCases(problemId, data?.cases, CaseId)
             }
