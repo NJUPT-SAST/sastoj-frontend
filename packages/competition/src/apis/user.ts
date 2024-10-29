@@ -52,3 +52,22 @@ export const getCases = ({ contest_id, submission_id }: { contest_id: string, su
     method: 'GET'
   })
 }
+
+export interface DetailProps {
+  id: string;
+  code:string;
+  language:string;
+  point:number;
+  state: number;
+  totalTime: string;
+  maxMemory: string;
+  stderr?:string;
+  createdAt:string;
+}
+
+export const getSubmitDetail=({ contest_id, submission_id }: { contest_id: string, submission_id: string }):Promise<{detail:DetailProps}>=>{
+  return REQUEST({
+    url: `/user/contests/${contest_id}/submissions/${submission_id}`,
+    method: 'GET'
+  })
+}
