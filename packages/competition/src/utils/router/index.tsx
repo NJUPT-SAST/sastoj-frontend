@@ -1,94 +1,72 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import { Suspense, lazy } from "react";
 import loader from "./loader";
 import Error from "../../pages/error/page";
-
-// 懒加载页面组件
-const Home = lazy(() => import("../../pages/home/page"));
-const Library = lazy(() => import("../../pages/library/page"));
-const Login = lazy(() => import("../../pages/login/page"));
-const Rank = lazy(() => import("../../pages/rank/page"));
-const Select = lazy(() => import("../../pages/select/page"));
-const About = lazy(() => import("../../pages/about/page"));
-const Problems = lazy(() => import("../../pages/problems/page"));
-const ProblemContent = lazy(
-  () => import("../../pages/problems/problemContent/page"),
-);
 
 const routes = [
   {
     path: "/login",
-    element: (
-      <Suspense fallback={<div>Loading...</div>}>
-        <Login />
-      </Suspense>
-    ),
+    lazy: async () => {
+      const Login = (await import("../../pages/login/page")).default;
+      return { Component: Login, loader: undefined };
+    },
   },
   {
     path: "/",
-    element: (
-      <Suspense fallback={<div>Loading...</div>}>
-        <Home />
-      </Suspense>
-    ),
+    lazy: async () => {
+      const Home = (await import("../../pages/home/page")).default;
+      return { Component: Home, loader: loader };
+    },
     errorElement: <Error />,
-    loader: loader,
     children: [
       {
-        index: true, // This sets the default child route
+        index: true,
         element: <Navigate to="/about" />,
       },
       {
-        path: "/about",
-        element: (
-          <Suspense fallback={<div>Loading...</div>}>
-            <About />
-          </Suspense>
-        ),
+        path: "about",
+        lazy: async () => {
+          const About = (await import("../../pages/about/page")).default;
+          return { Component: About, loader: undefined };
+        },
       },
       {
-        path: "/library",
-        element: (
-          <Suspense fallback={<div>Loading...</div>}>
-            <Library />
-          </Suspense>
-        ),
+        path: "library",
+        lazy: async () => {
+          const Library = (await import("../../pages/library/page")).default;
+          return { Component: Library, loader: undefined };
+        },
       },
       {
-        path: "/rank",
-        element: (
-          <Suspense fallback={<div>Loading...</div>}>
-            <Rank />
-          </Suspense>
-        ),
+        path: "rank",
+        lazy: async () => {
+          const Rank = (await import("../../pages/rank/page")).default;
+          return { Component: Rank, loader: undefined };
+        },
       },
     ],
   },
   {
     path: "/select",
-    element: (
-      <Suspense fallback={<div>Loading...</div>}>
-        <Select />
-      </Suspense>
-    ),
-    loader: loader,
+    lazy: async () => {
+      const Select = (await import("../../pages/select/page")).default;
+      return { Component: Select, loader: loader };
+    },
   },
   {
     path: "/problems",
-    element: (
-      <Suspense fallback={<div>Loading...</div>}>
-        <Problems />
-      </Suspense>
-    ),
-    loader: loader,
+    lazy: async () => {
+      const Problems = (await import("../../pages/problems/page")).default;
+      return { Component: Problems, loader: loader };
+    },
     children: [
       {
         path: ":problemId",
-        element: (
-          <Suspense fallback={<div>Loading...</div>}>
-            <ProblemContent />
-          </Suspense>
-        ),
+        lazy: async () => {
+          const ProblemContent = (
+            await import("../../pages/problems/problemContent/page")
+          ).default;
+          return { Component: ProblemContent, loader: undefined };
+        },
       },
     ],
   },
