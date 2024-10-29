@@ -1,6 +1,8 @@
 import { ContentSkeleton } from "../../skelecton/problems/content";
 import styles from "./idnex.module.scss";
-import { ProblemCases } from "../problemCases";
+import { Suspense, lazy } from "react";
+
+const ProblemCases = lazy(() => import("../problemCases"));
 
 export const ProblemContentResult = ({
   html,
@@ -9,10 +11,12 @@ export const ProblemContentResult = ({
   html: string;
   CaseId: string | undefined;
 }) => {
-  if (!html) {
-    return <ContentSkeleton />;
-  }
-  if (html && CaseId) return <ProblemCases />;
+  if (html && CaseId)
+    return (
+      <Suspense fallback={<ContentSkeleton />}>
+        <ProblemCases />
+      </Suspense>
+    );
 
   return (
     <div

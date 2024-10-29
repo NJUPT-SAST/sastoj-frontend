@@ -20,7 +20,7 @@ const transformNumberFromBigInt = (
     const paddedNumber = originNumber.padStart(6, "0"); // 确保长度为6
     const integerPart = paddedNumber.slice(0, paddedNumber.length - 6);
     const decimalPart = paddedNumber.slice(paddedNumber.length - 6);
-    return `${integerPart||0}.${decimalPart.slice(0, 2)}`; // 拼接成新的字符串
+    return `${integerPart || 0}.${decimalPart.slice(0, 2)}`; // 拼接成新的字符串
   } else {
     // 对于 memory 类型，乘以 8 并除以 1000000，处理字符串
     const multipliedNumber = (parseInt(originNumber, 10) * 8).toString();
@@ -35,7 +35,7 @@ const transformNumberFromBigInt = (
   }
 };
 
-export const ProblemCases = () => {
+const ProblemCases = () => {
   const { problemId } = useParams();
   const { clearCaseId, CaseId } = useCaseMoreStore((state) => ({
     clearCaseId: state.clearCaseId,
@@ -45,19 +45,19 @@ export const ProblemCases = () => {
   const casesArr = cases.get(problemId!);
   const casesValue = casesArr?.find((item) => item.id == CaseId);
 
-  if (casesValue?.singleCases.length) {
-    return (
-      <div style={{ height: "fit-content" }}>
-        <Button
-          className={styles.icon}
-          color="secondary"
-          size="small"
-          shadow="small"
-          onClick={() => clearCaseId()}
-        >
-          <ArrowLeft size={20}/>
-          <span>返回题目内容</span>
-        </Button>
+  return (
+    <div style={{ height: "fit-content" }}>
+      <Button
+        className={styles.icon}
+        color="secondary"
+        size="small"
+        shadow="small"
+        onClick={() => clearCaseId()}
+      >
+        <ArrowLeft size={20} />
+        <span>返回题目内容</span>
+      </Button>
+      {casesValue?.singleCases.length ? (
         <div className={styles["cases-container"]}>
           <>
             <div className={styles["cases-header"]}>
@@ -99,19 +99,13 @@ export const ProblemCases = () => {
             })}
           </>
         </div>
-      </div>
-    );
-  } else
-    return (
-      <>
-        <ArrowLeft
-          style={{ marginBottom: 16 }}
-          size={30}
-          onClick={() => clearCaseId()}
-        />
+      ) : (
         <div style={{ height: "unset", marginTop: "40%" }}>
           <Empty />
         </div>
-      </>
-    );
+      )}
+    </div>
+  );
 };
+
+export default ProblemCases;
