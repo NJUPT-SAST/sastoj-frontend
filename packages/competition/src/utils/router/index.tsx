@@ -1,25 +1,36 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-
-import Home from "../../pages/home/page";
-import Library from "../../pages/library/page";
-import Login from "../../pages/login/page";
-import Rank from "../../pages/rank/page";
-import Select from "../../pages/select/page";
-import About from "../../pages/about/page";
-import Error from "../../pages/error/page";
-import Problems from "../../pages/problems/page";
-import ProblemContent from "../../pages/problems/problemContent/page";
+import { Suspense, lazy } from "react";
 import loader from "./loader";
+import Error from "../../pages/error/page";
+
+// 懒加载页面组件
+const Home = lazy(() => import("../../pages/home/page"));
+const Library = lazy(() => import("../../pages/library/page"));
+const Login = lazy(() => import("../../pages/login/page"));
+const Rank = lazy(() => import("../../pages/rank/page"));
+const Select = lazy(() => import("../../pages/select/page"));
+const About = lazy(() => import("../../pages/about/page"));
+const Problems = lazy(() => import("../../pages/problems/page"));
+const ProblemContent = lazy(
+  () => import("../../pages/problems/problemContent/page"),
+);
 
 const routes = [
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <Login />
+      </Suspense>
+    ),
   },
   {
     path: "/",
-    // replace: "/about",
-    element: <Home />,
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <Home />
+      </Suspense>
+    ),
     errorElement: <Error />,
     loader: loader,
     children: [
@@ -29,31 +40,55 @@ const routes = [
       },
       {
         path: "/about",
-        element: <About />,
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <About />
+          </Suspense>
+        ),
       },
       {
         path: "/library",
-        element: <Library />,
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Library />
+          </Suspense>
+        ),
       },
       {
         path: "/rank",
-        element: <Rank />,
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Rank />
+          </Suspense>
+        ),
       },
     ],
   },
   {
     path: "/select",
-    element: <Select />,
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <Select />
+      </Suspense>
+    ),
     loader: loader,
   },
   {
     path: "/problems",
-    element: <Problems />,
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <Problems />
+      </Suspense>
+    ),
     loader: loader,
     children: [
       {
         path: ":problemId",
-        element: <ProblemContent />,
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <ProblemContent />
+          </Suspense>
+        ),
       },
     ],
   },
