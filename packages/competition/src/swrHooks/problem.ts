@@ -30,10 +30,10 @@ export const useSwrHistorySubmits = (contestId: string, problemId: string) => {
 }
 
 export const useGetCases = (contestId: string, submissionId: string) => {
-  const { data, error } = useSWRMutation(
+  const { data, error,trigger } = useSWRMutation(
     [contestId, submissionId],
     ([contestId, submissionId]) => getCases({ contest_id: contestId, submission_id: submissionId }),
   )
-  return { data, error }
+  return { data, error,trigger }
 }
 

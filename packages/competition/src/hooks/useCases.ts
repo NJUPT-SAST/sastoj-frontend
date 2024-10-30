@@ -10,13 +10,15 @@ export const useCases = (CaseId: string) => {
     const { cases, setCases } = useCasesStore(state => ({ cases: state.cases, setCases: state.setCases }))
     const { problemId } = useParams();
     
+
+    const {trigger} = useGetCases(contestId!, CaseId)
     const fetchdata = async () => {
         const casesValue = cases.get(problemId!)
         const casesBoolean = casesValue?.some(item => item.id == CaseId)
         if (cases.has(problemId!) && casesBoolean) {
             return
         } else {
-            const {data} = useGetCases(contestId!, CaseId)
+            const data=await trigger()
             if (data?.cases && problemId) {
                 setCases(problemId, data?.cases, CaseId)
             }
