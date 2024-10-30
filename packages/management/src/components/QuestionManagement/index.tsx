@@ -1,5 +1,4 @@
-// import { IconTriangleDown, IconTriangleUp } from "@douyinfe/semi-icons";
-import { Button, Popconfirm, Table, Tag} from "@douyinfe/semi-ui";
+import { Button, Popconfirm, Table, Tag } from "@douyinfe/semi-ui";
 import { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";
 import { getProblemList } from "../../api/admin";
@@ -7,33 +6,31 @@ import EditModal from "../EditModal";
 import { ProblemData } from "../../types/ProblemTypes";
 import "./index.scss";
 
-
-
 export default function QuestionManagement() {
   const [problems, setProblems] = useState<ProblemData[]>([]);
   const [visible, setVisible] = useState(false);
   const [problemData, setProblemData] = useState<ProblemData>({
-    id: '',
-    typeId: '',
-    title: '',
-    content: '',
+    id: "",
+    typeId: "",
+    title: "",
+    content: "",
     point: 1,
-    contestId: '',
+    contestId: "",
     caseVersion: 1,
     index: 1,
-    config: '',
+    config: "",
     ownerId: 1,
     visability: 1,
-    metadata: {}
+    metadata: {},
   });
   const [isNew, setIsNew] = useState(false);
-  
-  
+
   useEffect(() => {
     getProblemList(1, 10).then((res) => {
       // console.log(res);
-
-      setProblems(res.data.problems);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      setProblems(res.problems);
     });
   }, []);
 
@@ -67,9 +64,7 @@ export default function QuestionManagement() {
     { title: "分值", dataIndex: "point" },
     {
       title: "操作",
-      render: (
-        
-      ) => {
+      render: () => {
         return (
           <>
             <Button
@@ -109,9 +104,22 @@ export default function QuestionManagement() {
 
   return (
     <>
-      <Button className="question-button" onClick={() => {setIsNew(true)}}>新增题目</Button>
+      <Button
+        className="question-button"
+        onClick={() => {
+          setIsNew(true);
+        }}
+      >
+        新增题目
+      </Button>
       <Table columns={columns} dataSource={problems} pagination={false}></Table>
-      <EditModal visible={visible} setVisible={setVisible} problemData={problemData} setProblemData = {setProblemData} isNew={isNew}/>
+      <EditModal
+        visible={visible}
+        setVisible={setVisible}
+        problemData={problemData}
+        setProblemData={setProblemData}
+        isNew={isNew}
+      />
     </>
   );
 }

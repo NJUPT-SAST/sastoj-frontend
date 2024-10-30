@@ -11,7 +11,7 @@ type ProblemDataWithoutId = Omit<ProblemData, 'id'>;
  */
 export const getProblemList = (pageNum: number, pageSize: number) => {
   return REQUEST.get("/problem/list", {
-    params: { currency: pageNum, size: pageSize },
+    params: { current: pageNum, size: pageSize },
   });
 };
 
@@ -23,8 +23,8 @@ export const getProblemList = (pageNum: number, pageSize: number) => {
  * @returns axios api
  */
 export const getContestList = (pageNum: number, pageSize: number) => {
-  return REQUEST.get("/contest?apifoxResponseId=437560253", {
-    params: { currency: pageNum, size: pageSize },
+  return REQUEST.get("/contest", {
+    params: { current: pageNum, size: pageSize },
   });
 };
 

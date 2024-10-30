@@ -19,5 +19,6 @@ export interface ProblemData {
   config: string; //题目配置
   ownerId: number;
   visability: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   metadata: any
 }

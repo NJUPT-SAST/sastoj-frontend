@@ -8,11 +8,13 @@ import StudentManagement from "../components/StudentManagement";
 import NotFound from "../components/NotFound";
 import ContestListPage from "../pages/ContestListPage";
 import LayoutPage from "../pages/LayoutPage";
-import { AdminPage } from "../pages/AdminPage";
 import App from "../App";
 import JudgerPage from "../pages/JudgerPage";
 import JudgeableProblems from "../components/JudgableProblems";
 import SubmissionList from "../components/SubmissionList";
+import { AdminPage } from "../pages/AdminPage";
+import CheckView from "../components/CheckView";
+import Login from "@sast/oj-login/src/page";
 const Router = () => {
   const routes = createBrowserRouter([
     {
@@ -29,7 +31,7 @@ const Router = () => {
           children: [
             {
               index: true, // 设置默认子路由
-              element: <Navigate to="/admin/contest" />, // 访问 / 时重定向
+              element: <Navigate to="contest" />, // 访问 / 时重定向
             },
             {
               path: "contest",
@@ -40,6 +42,7 @@ const Router = () => {
                 },
                 {
                   path: ":contestId", // 动态路由
+                  element: <AdminPage />,
                   children: [
                     {
                       index: true,
@@ -65,7 +68,7 @@ const Router = () => {
           children: [
             {
               index: true,
-              element: <Navigate to="/judger/contest" />,
+              element: <Navigate to="contest" />,
             },
             {
               path: "contest",
@@ -86,6 +89,10 @@ const Router = () => {
                       path: "problem/:problemId",
                       element: <SubmissionList />,
                     },
+                    {
+                      path: "problem/:problemId/check/:submissionId",
+                      element: <CheckView />,
+                    },
                   ],
                 },
               ],
@@ -97,6 +104,10 @@ const Router = () => {
           element: <NotFound />,
         },
       ],
+    },
+    {
+      path: "/login",
+      element: <Login></Login>,
     },
   ]);
   return <RouterProvider router={routes} />;

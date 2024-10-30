@@ -29,7 +29,7 @@ export const useLogin = () => {
             content: <>登录成功</>,
           });
           setTimeout(() => {
-            navigate("/select");
+            navigate("/admin");
           }, 500);
         })
         .catch((error) => {

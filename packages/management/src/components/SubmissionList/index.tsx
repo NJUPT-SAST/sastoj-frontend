@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getSubmissionsbyProblemId } from "../../api/judger";
 import { Pagination, Table } from "@douyinfe/semi-ui";
 import "./index.scss";
@@ -14,6 +14,10 @@ interface Submission {
 const SubmissionList = () => {
   const { problemId } = useParams();
   const [submissions, setSubmissions] = useState<Submission[]>([]);
+  const navigate = useNavigate();
+  const handleAffirm = (key: string) => {
+    navigate(`check/${key}`);
+  };
   const columns = [
     {
       title: "题目编号",
@@ -30,12 +34,13 @@ const SubmissionList = () => {
     {
       title: "提交时间",
       dataIndex: "create_time",
-    },{
-      title:"操作",
-      render:()=>(
-        <a href={`/management/submission/`}>查看</a>
-      )
-    }
+    },
+    {
+      title: "操作",
+      render: (record: { key: string }) => (
+        <a onClick={() => handleAffirm(record.key)}>批改</a>
+      ),
+    },
   ];
   const data = submissions.map((submission) => {
     return {
@@ -48,7 +53,7 @@ const SubmissionList = () => {
   });
   useEffect(() => {
     getSubmissionsbyProblemId(parseInt(problemId!)).then((res) => {
-      console.log(res);
+      // console.log(res);
       setSubmissions(res.data.submissions);
     });
   }, [problemId]);

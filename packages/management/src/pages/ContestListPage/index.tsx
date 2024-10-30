@@ -41,8 +41,13 @@ const ContestListPage = () => {
   useEffect(() => {
     setContextListLoading(true);
     getContestList(1, 10).then((res) => {
-      setContests(res.data.contests);
-      setTotalContest(res.data.contests.length);
+      console.log(res);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      setContests(res.contests);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      setTotalContest(res.contests.length);
       setContextListLoading(false);
     });
   }, []);
