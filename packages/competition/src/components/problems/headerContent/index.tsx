@@ -24,8 +24,8 @@ export const HeaderContent = () => {
   }));
   const selfTest = useSelfTest();
   const submit = useSubmited();
-  const handlesubmit = debounce(submit, 300);
-  const handleself = debounce(selfTest, 300);
+  const handleSubmit = debounce(submit, 300);
+  const handleSelf = debounce(selfTest, 300);
 
   useEffect(() => {
     if (submitState == "Submitting") {
@@ -63,7 +63,7 @@ export const HeaderContent = () => {
           onClick={() => {
             startSelf();
             setSelfLoading(true);
-            handleself();
+            handleSelf();
           }}
           disabled={selfLoading}
           shadow="none"
@@ -78,7 +78,7 @@ export const HeaderContent = () => {
           onClick={() => {
             startSubmit();
             setLoading(true);
-            handlesubmit();
+            handleSubmit();
           }}
           disabled={loading}
           shadow="none"
