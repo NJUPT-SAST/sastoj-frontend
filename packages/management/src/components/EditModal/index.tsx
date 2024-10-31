@@ -89,7 +89,7 @@ function EditModal(props: EditMadalProps) {
               placeholder={"请输入题目名称"}
               value={problemData.title}
               onChange={(value) => {
-                setProblemDetailImmer("title", value);
+                setProblemDataImmer("title", value);
               }}
             />
           </div>
@@ -415,7 +415,7 @@ function EditModal(props: EditMadalProps) {
           </Button>
         </div>
         <div
-          style={{ display: "flex", flexDirection: "column", margin: "0 auto", whiteSpace: "no-wrap", width: "min(400px,50vw)" }}
+          style={{ display: "flex", flexDirection: "column", margin: "0 auto", whiteSpace: "no-wrap", width: "min(400px,50vw)", flex: 1 }}
         >
           <div className="edit-modal-item">
             <Typography.Text strong>题目预览</Typography.Text>

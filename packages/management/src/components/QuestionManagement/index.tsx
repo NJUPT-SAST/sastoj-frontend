@@ -67,7 +67,7 @@ export default function QuestionManagement() {
     { title: "分值", dataIndex: "point" },
     {
       title: "操作",
-      render: (
+      render: (index:number
         
       ) => {
         return (
@@ -75,8 +75,9 @@ export default function QuestionManagement() {
             <Button
               theme="solid"
               onClick={() => {
-                setVisible(true);
+                setProblemData(problems[index]);
                 setIsNew(false);
+                setVisible(true);
                 // 获取题目详细信息
               }}
             >
@@ -109,7 +110,7 @@ export default function QuestionManagement() {
 
   return (
     <>
-      <Button className="question-button" onClick={() => {setIsNew(true)}}>新增题目</Button>
+      <Button className="question-button" onClick={() => {setIsNew(true),setVisible(true);}}>新增题目</Button>
       <Table columns={columns} dataSource={problems} pagination={false}></Table>
       <EditModal visible={visible} setVisible={setVisible} problemData={problemData} setProblemData = {setProblemData} isNew={isNew}/>
     </>

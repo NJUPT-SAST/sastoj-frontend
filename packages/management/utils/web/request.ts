@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // axios二次封装
-const devBaseURL = "http://127.0.0.1:4523/m1/3794358-3426485-default";
+const devBaseURL = "/api";
 const proBaseURL = "在生产环境下接口的baseURL";
 
 const BASE_URL =

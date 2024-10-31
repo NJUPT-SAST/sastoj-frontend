@@ -13,8 +13,13 @@ import App from "../App";
 import JudgerPage from "../pages/JudgerPage";
 import JudgeableProblems from "../components/JudgableProblems";
 import SubmissionList from "../components/SubmissionList";
+import { LoginPage } from "../pages/Login";
 const Router = () => {
   const routes = createBrowserRouter([
+    {
+      path: "/login",
+      element: <LoginPage />
+    },
     {
       path: "/",
       element: <App />,
