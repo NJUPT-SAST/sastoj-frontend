@@ -21,7 +21,7 @@ import { ProblemData } from "../../types/ProblemTypes";
 import { parse as TomlParse, stringify as TomlStringify } from "smol-toml";
 import "./index.scss";
 import MarkdownRender from "../MarkdownRender";
-
+import MonacoEditor from "@monaco-editor/react";
 interface EditMadalProps {
   visible: boolean;
   setVisible: (visible: boolean) => void;
@@ -35,18 +35,11 @@ function EditModal(props: EditMadalProps) {
   const { visible, setVisible, problemData, setProblemData, isNew } = props;
   const jsonConfig = TomlParse(problemData.config);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [optionList, setOptionList] = useState<any>([
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-  ]);
+  const [optionList, setOptionList] = useState<any>(["A", "B", "C"]); //改成problem.metaData
   const [loading, setLoading] = useState(false);
+  const [editorIsErr, setEditorIsErr] = useState(false);
 
-  function setProblemDetailImmer(
+  function setProblemDataImmer(
     key: ProblemDetailKey,
     value: ProblemData[typeof key]
   ) {
@@ -85,9 +78,9 @@ function EditModal(props: EditMadalProps) {
       closeOnEsc={true}
       maskClosable={true}
       lazyRender={true}
-      width={"80%"}
+      width={"60%"}
     >
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex", width: "100%" }}>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div className="edit-modal-item">
             <Typography.Text strong className="edit-modal-item-necessary">
@@ -98,7 +91,7 @@ function EditModal(props: EditMadalProps) {
               placeholder={"请输入题目名称"}
               value={problemData.title}
               onChange={(value) => {
-                setProblemDetailImmer("title", value);
+                setProblemDataImmer("title", value);
               }}
             />
           </div>
@@ -110,13 +103,19 @@ function EditModal(props: EditMadalProps) {
               placeholder="请选择题型"
               value={problemData.typeId}
               onChange={(value) => {
-                console.log(value);
-                setProblemDetailImmer("typeId", value);
+                setProblemDataImmer("typeId", value);
               }}
             >
-              <Select.Option value={0}>单选题</Select.Option>
-              <Select.Option value={1}>多选题</Select.Option>
-              <Select.Option value={2}>主观题</Select.Option>
+              <Select.Option value="freshcup-single-choice">
+                单选题
+              </Select.Option>
+              <Select.Option value="freshcup-multiple-choice">
+                多选题
+              </Select.Option>
+              <Select.Option value="freshcup-short-answer">
+                填空题
+              </Select.Option>
+              <Select.Option value="gojudge-classic-algo">算法题</Select.Option>
             </Select>
           </div>
           <div className="edit-modal-item">
@@ -128,7 +127,7 @@ function EditModal(props: EditMadalProps) {
               value={problemData.point}
               formatter={(value) => `${value}`.replace(/\D/g, "")}
               onChange={(value) => {
-                setProblemDetailImmer("point", Number(value));
+                setProblemDataImmer("point", Number(value));
               }}
               min={0}
               max={Number.MAX_SAFE_INTEGER}
@@ -140,16 +139,17 @@ function EditModal(props: EditMadalProps) {
               题干内容（支持Markdown语法）
             </Typography.Text>
             <TextArea
-              style={{ width: 280, height: 200 }}
+              style={{ width: 280 }}
               maxCount={10000}
               value={problemData.content}
               onChange={(value) => {
-                setProblemDetailImmer("content", value);
+                setProblemDataImmer("content", value);
               }}
             />
           </div>
 
-          {problemData.typeId === "2" ? null : (
+          {problemData.typeId === "freshcup-short-answer" ||
+          problemData.typeId === "gojudge-classic-algo" ? null : (
             <div className="edit-modal-item">
               <Typography.Text strong className="edit-modal-item-necessary">
                 选项
@@ -252,53 +252,123 @@ function EditModal(props: EditMadalProps) {
               </p>
             </div>
           )}
-          {problemData.typeId === "0" || problemData.typeId === "1" ? (
+          {problemData.typeId === "freshcup-single-choice" ||
+          problemData.typeId === "freshcup-multiple-choice" ||
+          problemData.typeId === "freshcup-short-answer" ? (
             <div className="edit-modal-item">
               <Typography.Text strong className="edit-modal-item-necessary">
                 正确答案
               </Typography.Text>
-              <Select
-                multiple={problemData.typeId === "1"}
-                value={jsonConfig.ReferenceAnswer as string}
-                onChange={(value) => {
-                  if (typeof value === "string") {
+              {problemData.typeId === "freshcup-single-choice" ||
+              problemData.typeId === "freshcup-multiple-choice" ? (
+                <Select
+                  multiple={problemData.typeId === "freshcup-multiple-choice"}
+                  value={jsonConfig.ReferenceAnswer as string}
+                  onChange={(value) => {
+                    if (typeof value === "string") {
+                      jsonConfig.ReferenceAnswer = value;
+                      setProblemDataImmer("config", TomlStringify(jsonConfig));
+                    } else if (typeof value === "object")
+                      jsonConfig.ReferenceAnswer = value;
+                    setProblemDataImmer("config", TomlStringify(jsonConfig));
+                  }}
+                >
+                  {
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    optionList.map((_: any, index: number) => {
+                      return (
+                        <Select.Option
+                          key={index}
+                          value={String.fromCharCode(index + 65)}
+                        >
+                          {String.fromCharCode(index + 65)}
+                        </Select.Option>
+                      );
+                    })
+                  }
+                </Select>
+              ) : (
+                <Input
+                  value={jsonConfig.ReferenceAnswer as string}
+                  onChange={(value) => {
                     jsonConfig.ReferenceAnswer = value;
-                    setProblemDetailImmer("config", TomlStringify(jsonConfig));
-                  } else if (typeof value === "object")
-                    jsonConfig.ReferenceAnswer = value;
-                  setProblemDetailImmer("config", TomlStringify(jsonConfig));
-                }}
-              >
-                {
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  optionList.map((_: any, index: number) => {
-                    return (
-                      <Select.Option
-                        key={index}
-                        value={String.fromCharCode(index + 65)}
-                      >
-                        {String.fromCharCode(index + 65)}
-                      </Select.Option>
-                    );
-                  })
-                }
-              </Select>
+                    setProblemDataImmer("config", TomlStringify(jsonConfig));
+                  }}
+                />
+              )}
             </div>
           ) : null}
-          {problemData.typeId === "2" ? (
+          {problemData.typeId === "gojudge-classic-algo" ? (
             <div className="edit-modal-item">
               <Typography.Text strong className="edit-modal-item-necessary">
-                正确答案
+                配置文件
               </Typography.Text>
-              <TextArea
-                autosize
-                maxCount={10000}
-                value={jsonConfig.ReferenceAnswer as string}
-                onChange={(value) => {
-                  jsonConfig.ReferenceAnswer = value;
-                  setProblemDetailImmer("config", TomlStringify(jsonConfig));
+              <MonacoEditor
+                height={"200px"}
+                language="toml"
+                onChange={(value: string | undefined) => {
+                  try {
+                    const parsed = TomlParse(value || "");
+                    if (parsed) {
+                      setEditorIsErr(false);
+                      setProblemDataImmer("config", TomlStringify(parsed));
+                    }
+                  } catch (e) {
+                    console.log(e);
+                    if (!editorIsErr) {
+                      setEditorIsErr(true);
+                    }
+                  }
                 }}
-              ></TextArea>
+                value={problemData.config}
+                options={{
+                  fontSize: 14,
+                  scrollBeyondLastLine: false,
+                  minimap: {
+                    enabled: false,
+                  },
+                  scrollbar: {
+                    verticalScrollbarSize: 6,
+                    horizontalScrollbarSize: 6,
+                  },
+                }}
+              />
+              {editorIsErr && (
+                <div
+                  style={{
+                    color: "#d32f2f",
+                    backgroundColor: "#fdecea",
+                    border: "1px solid #f5c2c7",
+                    borderRadius: "4px",
+                    padding: "8px 12px",
+                    display: "flex",
+                    alignItems: "center",
+                    marginTop: "20px",
+                    marginLeft: "10%",
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                    stroke="currentColor"
+                    style={{
+                      width: "20px",
+                      height: "20px",
+                      marginRight: "8px",
+                      color: "#d32f2f",
+                    }}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 9v2m0 4h.01M6.455 4.544A10 10 0 0117.546 19.455m0-14.911A10 10 0 016.455 19.455"
+                    />
+                  </svg>
+                  TOML 文件格式不正确捏
+                </div>
+              )}
             </div>
           ) : null}
 
@@ -306,7 +376,7 @@ function EditModal(props: EditMadalProps) {
             type="primary"
             theme="solid"
             htmlType="submit"
-            style={{ width: 80, marginBottom: 16 }}
+            style={{ width: 80, marginBottom: 16, marginLeft: "10%" }}
             loading={loading}
             onClick={() => {
               setLoading(true);
@@ -332,7 +402,6 @@ function EditModal(props: EditMadalProps) {
                     setLoading(false);
                   }, 500);
                 } else {
-                  // 修改题目
                   editProblem(problemData).then((res) => {
                     if (res?.data?.success) {
                       Toast.success("题目修改成功！");
@@ -346,17 +415,23 @@ function EditModal(props: EditMadalProps) {
                   }, 500);
                 }
               } else {
-                // 表单未填写完整的提示
                 Toast.warning("似乎有内容还没有填写");
                 setLoading(false);
               }
             }}
           >
-            {isNew ? "新增" : "修改"}
+            {isNew ? "保存新增" : "保存修改"}
           </Button>
         </div>
         <div
-          style={{ display: "flex", flexDirection: "column", margin: "0 auto" }}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            margin: "0 auto",
+            whiteSpace: "no-wrap",
+            width: "min(400px,50vw)",
+            flex: 1,
+          }}
         >
           <div className="edit-modal-item">
             <Typography.Text strong>题目预览</Typography.Text>

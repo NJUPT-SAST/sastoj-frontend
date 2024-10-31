@@ -3,7 +3,7 @@ import { beforeRequest, responseFailed, responseSuccess } from "./interceptors";
 
 // axios二次封装
 const devBaseURL = "/api";
-const proBaseURL = "https://acm.sast.fun/api";
+const proBaseURL = "在生产环境下接口的baseURL";
 
 const BASE_URL =
   process.env.NODE_ENV === "development" ? devBaseURL : proBaseURL;
@@ -19,7 +19,5 @@ const REQUEST = axios.create({
 
 REQUEST.interceptors.request.use(beforeRequest);
 REQUEST.interceptors.response.use(responseSuccess, responseFailed);
-
-
 
 export default REQUEST;

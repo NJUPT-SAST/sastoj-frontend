@@ -37,9 +37,9 @@ export default function QuestionManagement() {
   const columns = [
     {
       title: "序号",
-      dataIndex: "id",
-      render: (id: number) => {
-        return id + 1;
+      dataIndex: "index",
+      render: (index: number) => {
+        return index;
       },
     },
     {
@@ -48,12 +48,16 @@ export default function QuestionManagement() {
       render: (typeId: string) => {
         return (
           <>
-            {Number(typeId) === 0 ? (
+            {typeId === "freshcup-single-choice" ? (
               <Tag color={"blue"}>单选题</Tag>
-            ) : Number(typeId) === 1 ? (
+            ) : typeId === "freshcup-multiple-choice" ? (
               <Tag color={"light-green"}>多选题</Tag>
+            ) : typeId === "freshcup-short-answer" ? (
+              <Tag color={"pink"}>填空题</Tag>
+            ) : typeId === "gojudge-classic-algo" ? (
+              <Tag color={"orange"}>算法题</Tag>
             ) : (
-              <Tag color={"pink"}>主观题</Tag>
+              <Tag color={"red"}>未知</Tag>
             )}
           </>
         );
@@ -64,14 +68,16 @@ export default function QuestionManagement() {
     { title: "分值", dataIndex: "point" },
     {
       title: "操作",
-      render: () => {
+
+      render: (index: number) => {
         return (
-          <>
+          <div className="button-container2">
             <Button
               theme="solid"
               onClick={() => {
-                setVisible(true);
+                setProblemData(problems[index]);
                 setIsNew(false);
+                setVisible(true);
                 // 获取题目详细信息
               }}
             >
@@ -96,7 +102,7 @@ export default function QuestionManagement() {
                 删除
               </Button>
             </Popconfirm>
-          </>
+          </div>
         );
       },
     },
@@ -108,6 +114,7 @@ export default function QuestionManagement() {
         className="question-button"
         onClick={() => {
           setIsNew(true);
+          setVisible(true);
         }}
       >
         新增题目
