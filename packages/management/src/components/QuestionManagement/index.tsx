@@ -36,10 +36,10 @@ export default function QuestionManagement() {
 
   const columns = [
     {
-      title: "序号", 
-      dataIndex: "id",
-      render: (id: number) => {
-        return id + 1;
+      title: "序号",
+      dataIndex: "index",
+      render: (index: number) => {
+        return index;
       },
     },
     {
@@ -70,7 +70,7 @@ export default function QuestionManagement() {
       title: "操作",
       render: ( data: ProblemData) => {
         return (
-          <>
+          <div className="button-container2">
             <Button
               theme="solid"
               onClick={() => {
@@ -100,7 +100,7 @@ export default function QuestionManagement() {
                 删除
               </Button>
             </Popconfirm>
-          </>
+          </div>
         );
       },
     },

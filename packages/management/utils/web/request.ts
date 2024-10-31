@@ -20,6 +20,4 @@ const REQUEST = axios.create({
 REQUEST.interceptors.request.use(beforeRequest);
 REQUEST.interceptors.response.use(responseSuccess, responseFailed);
 
-
-
 export default REQUEST;

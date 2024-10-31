@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { produce } from "immer";
 import {
-    Modal,
-    Button,
-    Typography,
-    Input,
-    Toast,
-    Select,
-    TextArea,
-    InputNumber,
+  Modal,
+  Button,
+  Typography,
+  Input,
+  Toast,
+  Select,
+  TextArea,
+  InputNumber,
 } from "@douyinfe/semi-ui";
 import {
     IconTriangleDown,
@@ -24,11 +24,11 @@ import "./index.scss";
 import MarkdownRender from "../MarkdownRender";
 import MonacoEditor from "@monaco-editor/react";
 interface EditMadalProps {
-    visible: boolean;
-    setVisible: (visible: boolean) => void;
-    problemData: ProblemData;
-    setProblemData: (problemData: ProblemData) => void;
-    isNew: boolean;
+  visible: boolean;
+  setVisible: (visible: boolean) => void;
+  problemData: ProblemData;
+  setProblemData: (problemData: ProblemData) => void;
+  isNew: boolean;
 }
 
 type ProblemDetailKey = keyof ProblemData;
@@ -50,21 +50,21 @@ function EditModal(props: EditMadalProps) {
         );
     }
 
-    function updateList(index: number | null) {
-        if (index !== null) {
-            const newList = [...optionList];
-            newList.splice(index, 1);
-            setOptionList(newList);
-        } else {
-            if (optionList.length >= 8) {
-                Toast.warning("选项太多了啊，别再冲啦，出题人先生");
-            } else {
-                const newList = [...optionList];
-                newList.push(null);
-                setOptionList(newList);
-            }
-        }
+  function updateList(index: number | null) {
+    if (index !== null) {
+      const newList = [...optionList];
+      newList.splice(index, 1);
+      setOptionList(newList);
+    } else {
+      if (optionList.length >= 8) {
+        Toast.warning("选项太多了啊，别再冲啦，出题人先生");
+      } else {
+        const newList = [...optionList];
+        newList.push(null);
+        setOptionList(newList);
+      }
     }
+  }
 
     return (
         <Modal
