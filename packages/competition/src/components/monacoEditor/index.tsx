@@ -9,7 +9,7 @@ interface MonacoEditorProps {
   defaultValue?: string;
   onUpdate?: (value: string, language: string) => void;
 }
-export const MonacoEditor: FC<MonacoEditorProps> = ({
+const MonacoEditor: FC<MonacoEditorProps> = ({
   className,
   defaultValue,
   onUpdate,
@@ -60,3 +60,5 @@ export const MonacoEditor: FC<MonacoEditorProps> = ({
     </>
   );
 };
+
+export default MonacoEditor;

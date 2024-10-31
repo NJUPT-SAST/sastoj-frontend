@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
-import { createHtmlPlugin } from "vite-plugin-html"; // 用于生成 HTML 文件
-import compress from "rollup-plugin-gzip"; // 用于 Gzip 压缩
+import { createHtmlPlugin } from "vite-plugin-html";
+import compress from "rollup-plugin-gzip";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -27,11 +27,6 @@ export default defineConfig({
         manualChunks(id) {
           // 根据模块路径进行分块
           if (id.includes("node_modules")) {
-            // 提取 @codemirror 系列包
-            if (id.includes("@codemirror")) {
-              return "codemirror";
-            }
-
             // 提取 @emotion 系列包
             if (id.includes("@emotion")) {
               return "emotion";
@@ -75,11 +70,23 @@ export default defineConfig({
           }
 
           if (id.includes("src/components")) {
+            if (id.includes("monacoEditor")) {
+              return "my-monacoEditor";
+            }
+
             return "components";
           }
 
           if (id.includes("src/hooks")) {
             return "hooks";
+          }
+
+          if (id.includes("src/pages")) {
+            if (id.includes("problems")) {
+              return "problems";
+            }
+
+            return "pages";
           }
         },
       },
