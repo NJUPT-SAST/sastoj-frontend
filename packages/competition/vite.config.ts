@@ -70,11 +70,23 @@ export default defineConfig({
           }
 
           if (id.includes("src/components")) {
+            if (id.includes("monacoEditor")) {
+              return "my-monacoEditor";
+            }
+
             return "components";
           }
 
           if (id.includes("src/hooks")) {
             return "hooks";
+          }
+
+          if (id.includes("src/pages")) {
+            if (id.includes("problems")) {
+              return "problems";
+            }
+
+            return "pages";
           }
         },
       },
