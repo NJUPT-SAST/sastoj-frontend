@@ -22,3 +22,5 @@ export interface ProblemData {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   metadata: any
 }
+
+export type FCProblemTypes = "freshcup-single-choice" | "freshcup-multiple-choice" | "freshcup-short-answer" | "gojudge-classic-algo"
