@@ -15,7 +15,6 @@ import "katex/dist/katex.min.css"; // `rehype-katex` does not import the CSS for
  * @returns
  */
 
-
 function MarkdownRender(props: { text: string }) {
   return (
     <ReactMarkdown
@@ -24,13 +23,12 @@ function MarkdownRender(props: { text: string }) {
       skipHtml={false}
       className="markdown-body"
       components={{
-        // @ts-ignore
-        code({ node, inline, className, children, ...props }) {
+
+        code({ node, inline, className, children, ...props }: any) {
           const match = /language-(\w+)/.exec(className || "");
           return !inline && match ? (
             <SyntaxHighlighter
-            // @ts-ignore
-              style={oneDark}
+              style={oneDark as any}
               language={match[1]}
               PreTag="div"
               showLineNumbers={true}

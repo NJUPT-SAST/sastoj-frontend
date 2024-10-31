@@ -40,6 +40,7 @@ const Router = () => {
                 },
                 {
                   path: ":contestId", // 动态路由
+                  element: <AdminPage />,
                   children: [
                     {
                       index: true,

@@ -21,3 +21,4 @@ export interface ProblemData {
   visability: number;
   metadata: any
 }
+export type FCProblemTypes = "freshcup-single-choice" | "freshcup-multiple-choice" | "freshcup-short-answer" | "gojudge-classic-algo"
