@@ -48,12 +48,16 @@ export default function QuestionManagement() {
       render: (typeId: string) => {
         return (
           <>
-            {Number(typeId) === 0 ? (
+            {typeId === "freshcup-single-choice" ? (
               <Tag color={"blue"}>单选题</Tag>
-            ) : Number(typeId) === 1 ? (
+            ) : typeId === "freshcup-multiple-choice" ? (
               <Tag color={"light-green"}>多选题</Tag>
+            ) : typeId === "freshcup-short-answer" ? (
+              <Tag color={"pink"}>填空题</Tag>
+            ) : typeId === "gojudge-classic-algo" ? (
+              <Tag color={"orange"}>算法题</Tag>
             ) : (
-              <Tag color={"pink"}>主观题</Tag>
+              <Tag color={"red"}>未知</Tag>
             )}
           </>
         );
