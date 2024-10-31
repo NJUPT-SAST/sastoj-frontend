@@ -37,9 +37,9 @@ export default function QuestionManagement() {
   const columns = [
     {
       title: "序号",
-      dataIndex: "id",
-      render: (id: number) => {
-        return id + 1;
+      dataIndex: "index",
+      render: (index: number) => {
+        return index;
       },
     },
     {
@@ -69,11 +69,9 @@ export default function QuestionManagement() {
     {
       title: "操作",
 
-      render: (index:number
-        
-      ) => {
+      render: (index: number) => {
         return (
-          <>
+          <div className="button-container2">
             <Button
               theme="solid"
               onClick={() => {
@@ -104,7 +102,7 @@ export default function QuestionManagement() {
                 删除
               </Button>
             </Popconfirm>
-          </>
+          </div>
         );
       },
     },
@@ -112,8 +110,15 @@ export default function QuestionManagement() {
 
   return (
     <>
-
-      <Button className="question-button" onClick={() => {setIsNew(true),setVisible(true);}}>新增题目</Button>
+      <Button
+        className="question-button"
+        onClick={() => {
+          setIsNew(true);
+          setVisible(true);
+        }}
+      >
+        新增题目
+      </Button>
       <Table columns={columns} dataSource={problems} pagination={false}></Table>
       <EditModal
         visible={visible}

@@ -4,7 +4,7 @@ import {
     RouterProvider,
 } from "react-router-dom";
 import QuestionManagement from "../components/QuestionManagement";
-import StudentManagement from "../components/StudentManagement";
+import UserGroupManagement from "../components/UserGroupManagement";
 import NotFound from "../components/NotFound";
 import ContestListPage from "../pages/ContestListPage";
 import LayoutPage from "../pages/LayoutPage";
@@ -12,55 +12,60 @@ import App from "../App";
 import JudgerPage from "../pages/JudgerPage";
 import JudgeableProblems from "../components/JudgableProblems";
 import SubmissionList from "../components/SubmissionList";
-import { AdminPage } from "../pages/AdminPage";
+import {AdminPage} from "../pages/AdminPage";
 import CheckView from "../components/CheckView";
-import { LoginPage } from "../pages/Login";
+import {LoginPage} from "../pages/Login";
+import {ProtectedRoute} from "./ProtectedRoute.tsx";
 
 const Router = () => {
     const routes = createBrowserRouter([
         {
             path: "/login",
-            element: <LoginPage />,
+            element: <LoginPage/>,
         },
         {
             path: "/",
-            element: <App />,
+            element: <App/>,
             children: [
                 {
                     index: true,
-                    element: <Navigate to="/admin" />,
+                    element: <Navigate to="/admin"/>,
                 },
                 {
                     path: "admin",
-                    element: <LayoutPage />,
+                    element: <ProtectedRoute element={<LayoutPage/>}/>,
                     children: [
                         {
                             index: true,
-                            element: <Navigate to="contest" />,
+                            element: <Navigate to="contest"/>,
                         },
                         {
                             path: "contest",
                             children: [
                                 {
                                     index: true,
-                                    element: <ContestListPage />,
+                                    element: <ContestListPage/>,
                                 },
                                 {
                                     path: ":contestId",
-                                    element: <AdminPage />,
+                                    element: <AdminPage/>,
                                     children: [
                                         {
                                             index: true,
-                                            element: <QuestionManagement />,
+                                            element: <QuestionManagement/>,
                                         },
                                         {
                                             path: "question",
-                                            element: <QuestionManagement />,
+                                            element: <QuestionManagement/>,
                                         },
                                         {
                                             path: "student",
-                                            element: <StudentManagement />,
+                                            element: <UserGroupManagement/>,
                                         },
+                                        {
+                                            path: "edit",
+                                            element: <div>Edit</div>,
+                                        }
                                     ],
                                 },
                             ],
@@ -69,34 +74,34 @@ const Router = () => {
                 },
                 {
                     path: "judger",
-                    element: <LayoutPage />,
+                    element: <ProtectedRoute element={<LayoutPage/>}/>,
                     children: [
                         {
                             index: true,
-                            element: <Navigate to="contest" />,
+                            element: <Navigate to="contest"/>,
                         },
                         {
                             path: "contest",
                             children: [
                                 {
                                     index: true,
-                                    element: <ContestListPage />,
+                                    element: <ContestListPage/>,
                                 },
                                 {
                                     path: ":contestId",
-                                    element: <JudgerPage />,
+                                    element: <JudgerPage/>,
                                     children: [
                                         {
                                             index: true,
-                                            element: <JudgeableProblems />,
+                                            element: <JudgeableProblems/>,
                                         },
                                         {
                                             path: "problem/:problemId",
-                                            element: <SubmissionList />,
+                                            element: <SubmissionList/>,
                                         },
                                         {
                                             path: "problem/:problemId/check/:submissionId",
-                                            element: <CheckView />,
+                                            element: <CheckView/>,
                                         },
                                     ],
                                 },
@@ -106,12 +111,12 @@ const Router = () => {
                 },
                 {
                     path: "*",
-                    element: <NotFound />,
+                    element: <NotFound/>,
                 },
             ],
         },
     ]);
-    return <RouterProvider router={routes} />;
+    return <RouterProvider router={routes}/>;
 };
 
 export default Router;

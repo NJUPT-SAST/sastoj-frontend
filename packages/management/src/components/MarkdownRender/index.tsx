@@ -23,12 +23,12 @@ function MarkdownRender(props: { text: string }) {
             skipHtml={false}
             className="markdown-body"
             components={{
-
-
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
                 code({node, inline, className, children, ...props}: any) {
                     const match = /language-(\w+)/.exec(className || "");
                     return !inline && match ? (
                         <SyntaxHighlighter
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
                             style={oneDark as any}
                             language={match[1]}
                             PreTag="div"
