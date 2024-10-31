@@ -15,6 +15,7 @@ import {
     IconTriangleUp,
     IconPlusCircle,
     IconMinusCircle,
+    IconExpand,
 } from "@douyinfe/semi-icons";
 import { addProblem, editProblem } from "../../api/admin";
 import { ProblemData } from "../../types/ProblemTypes";
@@ -33,11 +34,11 @@ interface EditMadalProps {
 type ProblemDetailKey = keyof ProblemData;
 function EditModal(props: EditMadalProps) {
     const { visible, setVisible, problemData, setProblemData, isNew } = props;
-    const jsonConfig = TomlParse(problemData.config);
-    const [optionList, setOptionList] = useState<any>(["A", "B", "C"]); //改成problem.metaData
+    const jsonConfig = problemData?.config ? TomlParse(problemData.config) : {};
+    const [optionList, setOptionList] = useState<any>(["A", "B", "C"]);
     const [loading, setLoading] = useState(false);
     const [editorIsErr, setEditorIsErr] = useState(false);
-
+  console.log(111,problemData)
     function setProblemDataImmer(
         key: ProblemDetailKey,
         value: ProblemData[typeof key]
@@ -76,10 +77,10 @@ function EditModal(props: EditMadalProps) {
             closeOnEsc={true}
             maskClosable={true}
             lazyRender={true}
-            width={"60%"}
+            width={"90%"}
         >
-            <div style={{ display: "flex", width: "100%"}}>
-                <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ display: "flex", width: "100%", gap: "24px" }}>
+                <div style={{ display: "flex", flexDirection: "column", width: "40%" }}>
                     <div className="edit-modal-item">
                         <Typography.Text strong className="edit-modal-item-necessary">
                             题目名称
@@ -133,17 +134,45 @@ function EditModal(props: EditMadalProps) {
                     </div>
 
                     <div className="edit-modal-item">
-                        <Typography.Text strong className="edit-modal-item-necessary">
-                            题干内容（支持Markdown语法）
-                        </Typography.Text>
-                        <TextArea
-                            style={{ width: 280 }}
-                            maxCount={10000}
-                            value={problemData.content}
-                            onChange={(value) => {
-                                setProblemDataImmer("content", value);
-                            }}
-                        />
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <Typography.Text strong className="edit-modal-item-necessary">
+                                题干内容（支持Markdown语法）
+                            </Typography.Text>
+                            <Button
+                                icon={<IconExpand />}
+                                type="tertiary"
+                                onClick={() => {
+                                    Modal.info({
+                                        title: '编辑题干内容',
+                                        content: (
+                                            <div style={{ width: '100%', height: '80vh' }}>
+                                                <TextArea
+                                                    style={{ width: '100%', height: '100%' }}
+                                                    maxCount={10000}
+                                                    value={problemData.content}
+                                                    onChange={(value) => {
+                                                        setProblemDataImmer("content", value);
+                                                    }}
+                                                />
+                                            </div>
+                                        ),
+                                        width: '80%',
+                                        centered: true,
+                                        maskClosable: false
+                                    });
+                                }}
+                            />
+                        </div>
+                        <div style={{ width: '100%', minHeight: '400px' }}>
+                            <TextArea
+                                style={{ width: '100%', minHeight: '400px', resize: 'vertical' }}
+                                maxCount={10000}
+                                value={problemData.content}
+                                onChange={(value) => {
+                                    setProblemDataImmer("content", value);
+                                }}
+                            />
+                        </div>
                     </div>
 
                     {problemData.typeId === "freshcup-short-answer" ||
@@ -292,9 +321,58 @@ function EditModal(props: EditMadalProps) {
                     ) : null}
                     {problemData.typeId === "gojudge-classic-algo" ? (
                         <div className="edit-modal-item">
-                            <Typography.Text strong className="edit-modal-item-necessary">
-                                配置文件
-                            </Typography.Text>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                                <Typography.Text strong className="edit-modal-item-necessary">
+                                    配置文件
+                                </Typography.Text>
+                                <Button
+                                    theme="light"
+                                    style={{ marginRight: '8px' }}
+                                    onClick={() => {
+                                        Modal.info({
+                                            title: '配置文件编辑',
+                                            content: (
+                                                <div style={{ width: '80vw', height: '80vh' }}>
+                                                    <MonacoEditor
+                                                        height="calc(80vh - 100px)"
+                                                        language="toml"
+                                                        value={problemData.config}
+                                                        onChange={(value: string | undefined) => {
+                                                            try {
+                                                                const parsed = TomlParse(value || "");
+                                                                if (parsed) {
+                                                                    setEditorIsErr(false);
+                                                                    setProblemDataImmer("config", TomlStringify(parsed));
+                                                                }
+                                                            } catch (e) {
+                                                                if (!editorIsErr) {
+                                                                    setEditorIsErr(true);
+                                                                }
+                                                            }
+                                                        }}
+                                                        options={{
+                                                            fontSize: 14,
+                                                            scrollBeyondLastLine: false,
+                                                            minimap: {
+                                                                enabled: false,
+                                                            },
+                                                            scrollbar: {
+                                                                verticalScrollbarSize: 6,
+                                                                horizontalScrollbarSize: 6,
+                                                            },
+                                                        }}
+                                                    />
+                                                </div>
+                                            ),
+                                            width: '85vw',
+                                            centered: true,
+                                            maskClosable: false,
+                                        });
+                                    }}
+                                >
+                                    放大编辑
+                                </Button>
+                            </div>
                             <MonacoEditor
                                 height={"200px"}
                                 language="toml"
@@ -414,11 +492,14 @@ function EditModal(props: EditMadalProps) {
                         {isNew ? "保存新增" : "保存修改"}
                     </Button>
                 </div>
-                <div
-                    style={{ display: "flex", flexDirection: "column", margin: "0 auto", whiteSpace: "no-wrap", width: "min(400px,50vw)", flex: 1 }}
-                >
-                    <div className="edit-modal-item">
-                        <Typography.Text strong>题目预览</Typography.Text>
+                <div style={{ 
+                    display: "flex", 
+                    flexDirection: "column", 
+                    width: "50%",
+                    alignItems: "center"
+                }}>
+                    <div className="edit-modal-item" style={{ width: "100%" }}>
+                        <Typography.Text strong>题目预览 : </Typography.Text>
                         <MarkdownRender text={problemData.content} />
                     </div>
                 </div>

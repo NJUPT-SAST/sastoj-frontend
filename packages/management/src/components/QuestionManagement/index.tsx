@@ -27,16 +27,16 @@ export default function QuestionManagement() {
 
   useEffect(() => {
     getProblemList(1, 10).then((res) => {
-      // console.log(res);
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
+      // @ts-ignore
       setProblems(res.problems);
+    }).catch(err => {
+      console.error("获取题目列表失败:", err);
     });
   }, []);
 
   const columns = [
     {
-      title: "序号",
+      title: "序号", 
       dataIndex: "id",
       render: (id: number) => {
         return id + 1;
@@ -44,7 +44,7 @@ export default function QuestionManagement() {
     },
     {
       title: "题目类型",
-      dataIndex: "type_id",
+      dataIndex: "type_id", 
       render: (typeId: string) => {
         return (
           <>
@@ -68,19 +68,15 @@ export default function QuestionManagement() {
     { title: "分值", dataIndex: "point" },
     {
       title: "操作",
-
-      render: (index:number
-        
-      ) => {
+      render: ( data: ProblemData) => {
         return (
           <>
             <Button
               theme="solid"
               onClick={() => {
-                setProblemData(problems[index]);
+                setProblemData({...data});
                 setIsNew(false);
                 setVisible(true);
-                // 获取题目详细信息
               }}
             >
               编辑
@@ -112,8 +108,29 @@ export default function QuestionManagement() {
 
   return (
     <>
-
-      <Button className="question-button" onClick={() => {setIsNew(true),setVisible(true);}}>新增题目</Button>
+      <Button 
+        className="question-button" 
+        onClick={() => {
+          setProblemData({
+            id: "",
+            typeId: "",
+            title: "",
+            content: "",
+            point: 1,
+            contestId: "",
+            caseVersion: 1,
+            index: 1,
+            config: "",
+            ownerId: 1,
+            visability: 1,
+            metadata: {},
+          });
+          setIsNew(true);
+          setVisible(true);
+        }}
+      >
+        新增题目
+      </Button>
       <Table columns={columns} dataSource={problems} pagination={false}></Table>
       <EditModal
         visible={visible}
