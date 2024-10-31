@@ -9,14 +9,27 @@ export interface SingleCase {
     memory: string;
 }
 
+export interface SingleDetial {
+    id: string;
+    code:string;
+    language:string;
+    point:number;
+    state: number;
+    totalTime: string;
+    maxMemory: string;
+    stderr?:string;
+    createdAt:string;
+}
+
 export interface CasesType {
     id: string;
     singleCases: SingleCase[];
+    singleDetial: SingleDetial
 }
 
 export interface CasesStore {
     cases: Map<string, CasesType[]>;
-    setCases: (problemId: string, value: SingleCase[], id: string) => void;
+    setCases: (problemId: string, value: SingleCase[], id: string, detail: SingleDetial) => void;
 }
 
 
@@ -24,14 +37,14 @@ export const useCasesStore = create<CasesStore>()(
     persist(
         (set) => ({
             cases: new Map<string, CasesType[]>(),
-            setCases: (problemId: string, value: SingleCase[], id: string) =>
+            setCases: (problemId: string, value: SingleCase[], id: string, detail: SingleDetial) =>
                 set((state) => {
                     const updatedCases = new Map(state.cases);
                     if (updatedCases.has(problemId)) {
                         const existedCases = updatedCases.get(problemId);
-                        existedCases?.push({ id, singleCases: value });
+                        existedCases?.push({ id, singleCases: value, singleDetial: detail });
                     } else {
-                        updatedCases.set(problemId, [{ id, singleCases: value }]);
+                        updatedCases.set(problemId, [{ id, singleCases: value, singleDetial: detail }]);
                     }
                     return { cases: updatedCases };
                 }),

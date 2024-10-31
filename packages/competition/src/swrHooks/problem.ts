@@ -13,12 +13,12 @@ export const useSwrGetProblem = (contestId: number, problemId: number) => {
   return { data, isLoading, error, mutate };
 };
 
-export const useSwrGetSubmitDetail=(contestId: string, submissionId: string)=>{
-  const { data, isLoading, error, mutate } = useSWR(
+export const useSwrGetSubmitDetail = (contestId: string, submissionId: string) => {
+  const { data, error, trigger } = useSWRMutation(
     [contestId, submissionId],
     ([contestId, submissionId]) => getSubmitDetail({ contest_id: contestId, submission_id: submissionId }),
   )
-  return { data, isLoading, error, mutate }
+  return { data, error, trigger }
 }
 
 export const useSwrHistorySubmits = (contestId: string, problemId: string) => {
@@ -30,10 +30,10 @@ export const useSwrHistorySubmits = (contestId: string, problemId: string) => {
 }
 
 export const useGetCases = (contestId: string, submissionId: string) => {
-  const { data, error,trigger } = useSWRMutation(
+  const { data, error, trigger } = useSWRMutation(
     [contestId, submissionId],
     ([contestId, submissionId]) => getCases({ contest_id: contestId, submission_id: submissionId }),
   )
-  return { data, error,trigger }
+  return { data, error, trigger }
 }
 
