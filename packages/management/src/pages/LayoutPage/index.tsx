@@ -1,7 +1,7 @@
 import { Layout } from "@douyinfe/semi-ui";
 import { Outlet } from "react-router-dom";
 import OJHeader from "../../components/Header";
-
+import "./index.scss";
 const { Header } = Layout;
 
 const LayoutPage = () => {

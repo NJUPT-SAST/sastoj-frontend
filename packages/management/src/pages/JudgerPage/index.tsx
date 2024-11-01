@@ -1,6 +1,6 @@
 import { Layout } from "@douyinfe/semi-ui";
 import { Outlet } from "react-router-dom";
-import JudgerSider from "../../components/JudgerSider";
+import JudgerSider from "../../components/judger/JudgerSider";
 
 const JudgerPage = () => {
   const { Sider, Content } = Layout;

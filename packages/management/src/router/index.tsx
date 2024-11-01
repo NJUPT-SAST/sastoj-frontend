@@ -3,19 +3,19 @@ import {
     Navigate,
     RouterProvider,
 } from "react-router-dom";
-import QuestionManagement from "../components/QuestionManagement";
-import UserGroupManagement from "../components/UserGroupManagement";
+import UserGroupManagement from "../components/admin/UserGroupManagement/index.tsx";
 import NotFound from "../components/NotFound";
 import ContestListPage from "../pages/ContestListPage";
 import LayoutPage from "../pages/LayoutPage";
 import App from "../App";
 import JudgerPage from "../pages/JudgerPage";
-import JudgeableProblems from "../components/JudgableProblems";
-import SubmissionList from "../components/SubmissionList";
+import JudgeableProblems from "../components/judger/JudgableProblems/index.tsx";
+import SubmissionList from "../components/judger/SubmissionList/index.tsx";
 import {AdminPage} from "../pages/AdminPage";
-import CheckView from "../components/CheckView";
+import CheckView from "../components/judger/CheckView/index.tsx";
 import {LoginPage} from "../pages/Login";
 import {ProtectedRoute} from "./ProtectedRoute.tsx";
+import QuestionManagement from "../components/admin/QuestionManagement/index.tsx";
 
 const Router = () => {
     const routes = createBrowserRouter([

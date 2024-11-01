@@ -5,7 +5,6 @@ import {
 } from "axios";
 
 import { RequestCanceler } from "./Canceler";
-import { HTTP_STATUS } from "./status";
 
 export interface ResponseError {
   desc: string;
@@ -39,24 +38,24 @@ export const responseSuccess = (response: AxiosResponse) => {
 export const responseFailed = (error: AxiosError): Promise<never> | void => {
   const { response } = error;
 
-  if (response?.status === HTTP_STATUS.NOT_FOUND) {
-    return Promise.reject({ desc: "请求资源不存在" } as ResponseError);
-  } else if (response?.status === HTTP_STATUS.BAD_GATEWAY) {
-    return Promise.reject({ desc: "服务端出现了问题" } as ResponseError);
-  } else if (response?.status === HTTP_STATUS.FORBIDDEN) {
-    return Promise.reject({ desc: "没有权限访问" } as ResponseError);
-  } else if (response?.status === HTTP_STATUS.AUTHENTICATE) {
-    window.location.href = "/login";
-    localStorage.clearAll();
-    // return Promise.reject({ desc: "需要鉴权" } as ResponseError);
-  } else if (response?.status === HTTP_STATUS.SERVER_ERROR) {
-    return Promise.reject({
-      desc: "服务器错误",
-      state: response?.status,
-    } as ResponseError);
-  } else {
-    return Promise.reject({
-      desc: `发生错误， 错误码${response?.status}`,
-    } as ResponseError);
-  }
+  console.log("responseFailed", response, error);
+
+  // if (response?.status === HTTP_STATUS.NOT_FOUND) {
+  //   return Promise.reject({ desc: "请求资源不存在" } as ResponseError);
+  // } else if (response?.status === HTTP_STATUS.BAD_GATEWAY) {
+  //   return Promise.reject({ desc: "服务端出现了问题" } as ResponseError);
+  // } else if (response?.status === HTTP_STATUS.FORBIDDEN) {
+  //   return Promise.reject({ desc: "没有权限访问" } as ResponseError);
+  // } else if (response?.status === HTTP_STATUS.AUTHENTICATE) {
+  //   window.location.href = '/login';
+  //   localStorage.clearAll()
+  //   // return Promise.reject({ desc: "需要鉴权" } as ResponseError);
+  // } else if (response?.status === HTTP_STATUS.SERVER_ERROR) {
+  //   return Promise.reject({ desc: "服务器错误", state: response?.status } as ResponseError);
+  // } else {
+  //   return Promise.reject({
+  //     desc: `发生错误， 错误码${response?.status}`,
+  //   } as ResponseError);
+  // }
+
 };

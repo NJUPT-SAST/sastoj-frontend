@@ -21,7 +21,7 @@ export const useLogin = () => {
         } else {
             trigger({username, password})
                 .then((response) => {
-                    console.log(response);
+                    // console.log(response);
                     const token = response?.token;
                     localStorage.setItem("token", token ?? undefined);
                     localStorage.setItem("username", username ?? undefined);
