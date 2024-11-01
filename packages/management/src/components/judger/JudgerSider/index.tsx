@@ -2,7 +2,9 @@ import { IconChevronLeft, IconFile, IconHistory } from "@douyinfe/semi-icons";
 import { Nav } from "@douyinfe/semi-ui";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getJudgableProblemList } from "../../api/judger";
+import { getJudgableProblemList } from "../../../api/judger";
+import { voidWarning } from "../../../../utils/voidWarning";
+;
 interface Item {
   id: number;
   typeId: number;
@@ -19,16 +21,20 @@ interface Item {
 const JudgerSider = () => {
   const navigate = useNavigate();
   const { contestId } = useParams();
-  const [judgableProblems, setJudgableProblems] = useState([]);
-  const [openKeys, setOpenKeys] = useState<string[]>(["processing"]);//用来阻止菜单的自动折叠
+  const [judgableProblems, setJudgableProblems] = useState<Item[]>([]);
+
+  const [openKeys, setOpenKeys] = useState<string[]>(["processing"]); //用来阻止菜单的自动折叠
 
   useEffect(() => {
     getJudgableProblemList("1")
       .then((res) => {
-        const data = res.data.results.filter(
-          () => true
-          // item.contest_id === parseInt(contestId!)
-        );
+        console.log("res", res);
+        const data = voidWarning(res).results;
+        // .filter(
+        //   (item: Item) => item.contest_id === parseInt(contestId!)
+        // );
+        console.log("data", data);
+
         setJudgableProblems(data);
       })
       .catch((err) => {
@@ -36,6 +42,7 @@ const JudgerSider = () => {
       });
   }, [contestId]);
 
+  console.log("judgableProblems", judgableProblems);
   const items = [
     {
       itemKey: "back",
@@ -44,7 +51,7 @@ const JudgerSider = () => {
     },
     {
       itemKey: "processing",
-      text: "批改",
+      text: "可批改题目",
       icon: <IconFile size="large" />,
       items: judgableProblems.map((item: Item) => ({
         itemKey: item.id,
@@ -53,7 +60,7 @@ const JudgerSider = () => {
     },
     {
       itemKey: "judged-list",
-      text: "已批改答案",
+      text: "已批改题目",
       icon: <IconHistory size="large" />,
     },
   ];
@@ -71,7 +78,7 @@ const JudgerSider = () => {
         }}
         items={items}
         openKeys={openKeys}
-        onOpenChange={(keys) => setOpenKeys(keys as string[])}//设置该子项为打开状态
+        onOpenChange={(keys) => setOpenKeys(keys as string[])} //设置该子项为打开状态
         footer={{
           collapseButton: true,
         }}

@@ -15,7 +15,7 @@ const useMarkdown = (markdown: string): string => {
       .catch((error: Error) => {
         setError(error);
       });
-  }, [markdown,convertMarkdownToHtml]);
+  }, [markdown, convertMarkdownToHtml]);
 
   if (error) {
     throw error;

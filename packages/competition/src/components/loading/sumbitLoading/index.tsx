@@ -1,10 +1,6 @@
-import { RotateCw } from 'lucide-react';
-import styles from './index.module.scss'
-
+import { RotateCw } from "lucide-react";
+import styles from "./index.module.scss";
 
 export const SumbitLoading = () => {
-    return (
-        <RotateCw className={styles.rotate} />
-    );
+  return <RotateCw className={styles.rotate} />;
 };
-

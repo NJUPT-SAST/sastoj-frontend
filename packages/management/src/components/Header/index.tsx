@@ -17,12 +17,12 @@ export default function OJHeader(props: any) {
         <Col className="title-wrapper" span={12}>
           <Title heading={5}>{props.text}</Title>
         </Col>
-        <Col className="username-wrapper" span={3}>
+        <Col className="username-wrapper" span={2}>
           <Typography.Title heading={6}>
             {props.logout ? localStorage.getItem("username") : null}
           </Typography.Title>
         </Col>
-        <Col className="logout-wrapper" span={2}>
+        <Col className="logout-wrapper" span={3}>
           {props.logout ? (
             <Button
               theme="borderless"

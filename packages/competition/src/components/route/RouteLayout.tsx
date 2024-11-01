@@ -4,18 +4,15 @@ import { Dialog } from "@ui-aurora/react";
 import { useState } from "react";
 
 export const RouteLayout = ({ children }: { children: React.ReactNode }) => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
   const handleOK = () => {
-    setVisible(false)
+    setVisible(false);
     localStorage.clear();
     navigate("/login", { replace: true });
   };
   return (
-    <div
-      className={styles.icon}
-      onClick={() => setVisible(true)}
-    >
+    <div className={styles.icon} onClick={() => setVisible(true)}>
       <Dialog
         visible={visible}
         onCancel={() => setVisible(false)}
@@ -25,4 +22,4 @@ export const RouteLayout = ({ children }: { children: React.ReactNode }) => {
       {children}
     </div>
   );
-}
+};

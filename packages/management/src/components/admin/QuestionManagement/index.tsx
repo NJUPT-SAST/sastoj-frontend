@@ -1,10 +1,12 @@
 import { Button, Popconfirm, Table, Tag } from "@douyinfe/semi-ui";
 import { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";
-import { getProblemList } from "../../api/admin";
-import EditModal from "../EditModal";
-import { ProblemData } from "../../types/ProblemTypes";
+
 import "./index.scss";
+import { ProblemData } from "../../../types/ProblemTypes";
+import { getProblemList } from "../../../api/admin";
+import EditModal from "../../EditModal";
+import { voidWarning } from "../../../../utils/voidWarning";
 
 export default function QuestionManagement() {
   const [problems, setProblems] = useState<ProblemData[]>([]);
@@ -27,10 +29,8 @@ export default function QuestionManagement() {
 
   useEffect(() => {
     getProblemList(1, 10).then((res) => {
-      // @ts-expect-error res type is not properly defined in the API response
-      setProblems(res.problems);
-    }).catch(err => {
-      console.error("获取题目列表失败:", err);
+      // console.log(res);
+      setProblems(voidWarning(res).problems);
     });
   }, []);
 

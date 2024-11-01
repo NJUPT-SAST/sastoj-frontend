@@ -38,14 +38,11 @@ const transformNumberFromBigInt = (
 
 const ProblemCases = () => {
   const { problemId } = useParams();
-  // const contestId=localStorage.getItem('contestId')
   const { clearCaseId, CaseId } = useCaseMoreStore((state) => ({
     clearCaseId: state.clearCaseId,
     CaseId: state.CaseId,
   }));
 
-  
-  
   const cases = useCasesStore((state) => state.cases);
   const casesArr = cases.get(problemId!);
   const casesValue = casesArr?.find((item) => item.id == CaseId);
@@ -64,6 +61,9 @@ const ProblemCases = () => {
       </Button>
       {casesValue?.singleCases.length ? (
         <div className={styles["cases-container"]}>
+          <div>
+            <div></div>
+          </div>
           <>
             <div className={styles["cases-header"]}>
               <div>节点</div>

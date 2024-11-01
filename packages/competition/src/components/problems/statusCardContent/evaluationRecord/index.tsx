@@ -7,17 +7,18 @@ import { Empty } from "../../../empty";
 import { useState } from "react";
 import { useCases } from "../../../../hooks/useCases";
 
-
-export const getPointColor = (value: number): 'error' | 'success' | 'warning' => {
-  if (value == 0) return 'error'
-  else if (value == 100) return 'success'
-  return 'warning'
-}
+export const getPointColor = (
+  value: number,
+): "error" | "success" | "warning" => {
+  if (value == 0) return "error";
+  else if (value == 100) return "success";
+  return "warning";
+};
 
 export const EvaluationRecord = () => {
   const data = useSubmissons();
-  const [id, setID] = useState<string | null>()
-  useCases(id!)
+  const [id, setID] = useState<string | null>();
+  useCases(id!);
   if (!data) {
     return (
       <div className={styles["loading-container"]}>
@@ -43,14 +44,14 @@ export const EvaluationRecord = () => {
                 style={{
                   backgroundColor: index % 2 === 0 ? "#f5f5f5" : "#fff",
                 }}
-                onClick={() => { setID(item.id) }}
+                onClick={() => {
+                  setID(item.id);
+                }}
               >
                 <div>
                   <StatusTag status={item?.status} />
                 </div>
-                <div>
-                  {moment(item.createdAt).format("MM.DD HH:mm:ss")}
-                </div>
+                <div>{moment(item.createdAt).format("MM.DD HH:mm:ss")}</div>
                 <div>{item.language}</div>
                 <div>
                   <Badge

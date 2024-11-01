@@ -3,9 +3,8 @@ import { useMemo } from "react";
 import { showToast } from "@ui-aurora/react";
 import { useProblemsStatusStore } from "../stores/useProblemsStatusStore";
 
-export const useCodeEditor =() => {
+export const useCodeEditor = () => {
   const { problemId } = useParams();
-
 
   const [problemsStatus, initProblem, changeContent] = useProblemsStatusStore(
     (state) => [state.problemsStatus, state.initProblem, state.changeContent],
