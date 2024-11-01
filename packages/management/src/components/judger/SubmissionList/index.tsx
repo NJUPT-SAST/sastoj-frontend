@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getSubmissionsbyProblemId } from "../../api/judger";
+import { getSubmissionsbyProblemId } from "../../../api/judger";
 import { Pagination, Table } from "@douyinfe/semi-ui";
 import "./index.scss";
 interface Submission {

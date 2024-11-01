@@ -13,6 +13,7 @@ const canceler = new RequestCanceler();
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const beforeRequest = (config: InternalAxiosRequestConfig<any>) => {
   const token = localStorage.getItem("token");
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
   token && (config.headers.token = token);
 
   // 检查是否存在重复请求，若存在则取消已发的请求

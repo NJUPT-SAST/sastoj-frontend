@@ -1,10 +1,12 @@
 import { Button, Popconfirm, Table, Tag } from "@douyinfe/semi-ui";
 import { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";
-import { getProblemList } from "../../api/admin";
-import EditModal from "../EditModal";
-import { ProblemData } from "../../types/ProblemTypes";
+
 import "./index.scss";
+import { ProblemData } from "../../../types/ProblemTypes";
+import { getProblemList } from "../../../api/admin";
+import EditModal from "../../EditModal";
+import { voidWarning } from "../../../../utils/voidWarning";
 
 export default function QuestionManagement() {
   const [problems, setProblems] = useState<ProblemData[]>([]);
@@ -28,9 +30,7 @@ export default function QuestionManagement() {
   useEffect(() => {
     getProblemList(1, 10).then((res) => {
       // console.log(res);
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      setProblems(res.problems);
+      setProblems(voidWarning(res).problems);
     });
   }, []);
 
