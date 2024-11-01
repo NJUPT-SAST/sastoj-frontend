@@ -35,7 +35,7 @@
         @include about-card();
         padding: 1rem;
         width: 100%;
-        box-sizing: border-box
+        box-sizing: border-box;
       }
       .time-card {
         @include about-card();

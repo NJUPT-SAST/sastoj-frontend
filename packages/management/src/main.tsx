@@ -26,5 +26,5 @@ oml2d.onStageSlideIn = () => {
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Router />
-  </StrictMode>
+  </StrictMode>,
 );

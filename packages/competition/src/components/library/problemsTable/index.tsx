@@ -17,7 +17,7 @@ const columnHelper = createColumnHelper<Problem>();
 
 const ProblemsTable = (data: GetProblemsProps) => {
   const navigate = useNavigate();
-  const title = useMsg((state) => state.title)
+  const title = useMsg((state) => state.title);
   const columns = [
     columnHelper.accessor("index", {
       header: () => <span>#ID</span>,
@@ -27,7 +27,9 @@ const ProblemsTable = (data: GetProblemsProps) => {
     }),
     columnHelper.accessor((row) => row.title, {
       id: "title",
-      cell: (info) => <i className={styles["span-description"]}>{info.getValue()}</i>,
+      cell: (info) => (
+        <i className={styles["span-description"]}>{info.getValue()}</i>
+      ),
       header: () => <span>TITLE</span>,
     }),
     columnHelper.accessor((row) => row.score, {
@@ -60,7 +62,7 @@ const ProblemsTable = (data: GetProblemsProps) => {
   return (
     <OjTable
       columns={columns}
-      dataSource={sortByKey(data.problems, 'index')}
+      dataSource={sortByKey(data.problems, "index")}
       caption={title}
       className={styles["questions-table"]}
     />

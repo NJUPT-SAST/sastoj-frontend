@@ -17,7 +17,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "jsx": "react",
+    "jsx": "react"
   },
   "include": ["vite.config.ts"]
 }

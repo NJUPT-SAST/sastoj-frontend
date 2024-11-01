@@ -64,16 +64,26 @@ export const getDuration = (
  * @returns {Array<Object>} 排序后的对象数组。
  */
 
-export const sortByKey = (array: any[], key: string, ascending = true): any[] => {
-  if (!array || !Array.isArray(array) || array.some(item => item[key] === undefined)) {
+export const sortByKey = (
+  array: any[],
+  key: string,
+  ascending = true,
+): any[] => {
+  if (
+    !array ||
+    !Array.isArray(array) ||
+    array.some((item) => item[key] === undefined)
+  ) {
     return array; // 如果未找到属性，返回原数组
   }
-  return array.slice().sort((a, b) => ascending ? a[key] - b[key] : b[key] - a[key])
-}
+  return array
+    .slice()
+    .sort((a, b) => (ascending ? a[key] - b[key] : b[key] - a[key]));
+};
 
 export function debounce<T extends (...args: any[]) => any>(
   func: T,
-  wait: number
+  wait: number,
 ): (...args: Parameters<T>) => void {
   let timeout: ReturnType<typeof setTimeout>;
 

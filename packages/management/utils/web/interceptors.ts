@@ -12,7 +12,6 @@ export interface ResponseError {
   [property: string]: any;
 }
 
-
 const canceler = new RequestCanceler();
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -58,4 +57,5 @@ export const responseFailed = (error: AxiosError): Promise<never> | void => {
   //     desc: `发生错误， 错误码${response?.status}`,
   //   } as ResponseError);
   // }
+
 };

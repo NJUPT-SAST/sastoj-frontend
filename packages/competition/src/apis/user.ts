@@ -30,12 +30,18 @@ export interface GetHistoryProps {
   createdAt: string;
 }
 
-export const historySubmits = ({ contest_id, problem_id }: { contest_id: string, problem_id: string }): Promise<{ submissions: GetHistoryProps[] }> => {
+export const historySubmits = ({
+  contest_id,
+  problem_id,
+}: {
+  contest_id: string;
+  problem_id: string;
+}): Promise<{ submissions: GetHistoryProps[] }> => {
   return REQUEST({
     url: `/user/contests/${contest_id}/problems/${problem_id}/submissions`,
-    method: 'GET'
-  })
-}
+    method: "GET",
+  });
+};
 
 export interface CasesProps {
   index: number;
@@ -45,29 +51,40 @@ export interface CasesProps {
   memory: string;
 }
 
-
-export const getCases = ({ contest_id, submission_id }: { contest_id: string, submission_id: string }): Promise<{ cases: CasesProps[] }> => {
+export const getCases = ({
+  contest_id,
+  submission_id,
+}: {
+  contest_id: string;
+  submission_id: string;
+}): Promise<{ cases: CasesProps[] }> => {
   return REQUEST({
     url: `/user/contests/${contest_id}/submissions/${submission_id}/cases`,
-    method: 'GET'
-  })
-}
+    method: "GET",
+  });
+};
 
-export interface DetailProps {
+export interface SingleDetial {
   id: string;
-  code:string;
-  language:string;
-  point:number;
+  code: string;
+  language: string;
+  point: number;
   state: number;
   totalTime: string;
   maxMemory: string;
-  stderr?:string;
-  createdAt:string;
+  stderr?: string;
+  createdAt: string;
 }
 
-export const getSubmitDetail=({ contest_id, submission_id }: { contest_id: string, submission_id: string }):Promise<{detail:DetailProps}>=>{
+export const getSubmitDetail = ({
+  contest_id,
+  submission_id,
+}: {
+  contest_id: string;
+  submission_id: string;
+}): Promise<SingleDetial> => {
   return REQUEST({
     url: `/user/contests/${contest_id}/submissions/${submission_id}`,
-    method: 'GET'
-  })
-}
+    method: "GET",
+  });
+};

@@ -18,7 +18,10 @@ export const Empty = ({ description }: { description?: string }) => {
   return (
     <div className={styles.maomojiWrap}>
       <div className={styles.maomoji}>{randomMaomoji}</div>
-      <div className={styles.desc}> {description || '啊咧，好像暂时还没东西呢？'} </div>
+      <div className={styles.desc}>
+        {" "}
+        {description || "啊咧，好像暂时还没东西呢？"}{" "}
+      </div>
     </div>
   );
 };

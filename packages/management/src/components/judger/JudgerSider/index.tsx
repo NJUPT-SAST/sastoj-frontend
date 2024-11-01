@@ -22,6 +22,7 @@ const JudgerSider = () => {
   const navigate = useNavigate();
   const { contestId } = useParams();
   const [judgableProblems, setJudgableProblems] = useState<Item[]>([]);
+
   const [openKeys, setOpenKeys] = useState<string[]>(["processing"]); //用来阻止菜单的自动折叠
 
   useEffect(() => {
@@ -33,6 +34,7 @@ const JudgerSider = () => {
         //   (item: Item) => item.contest_id === parseInt(contestId!)
         // );
         console.log("data", data);
+
         setJudgableProblems(data);
       })
       .catch((err) => {

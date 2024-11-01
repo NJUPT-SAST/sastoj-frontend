@@ -4,7 +4,6 @@ import hljs from "highlight.js";
 import "highlight.js/styles/base16/atelier-cave-light.css";
 import renderer, { processMath } from "./renderer";
 
-
 export const marked = new Marked(
   {
     async: true,
