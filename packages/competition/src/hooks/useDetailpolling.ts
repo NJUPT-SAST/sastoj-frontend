@@ -7,49 +7,49 @@ import { BASE_URL } from "../utils/web/request";
 const POLLING_INTERVAL = 1000;
 
 export const useDetailpolling = () => {
-    const contestId = localStorage.getItem('contestId');
-    const { problemId } = useParams();
+  const contestId = localStorage.getItem("contestId");
+  const { problemId } = useParams();
 
-    const submitId = useSubmitStore((state) => state.submitId);
-    const setDetailState = useDetailStore((state) => state.setDetailState);
-    const clearHistory = useDetailStore((state) => state.clearHistory);
-    const endSubmit = useSubmitStore((state) => state.endSubmit);
-    const token = localStorage.getItem('token');
-    const [url, setUrl] = useState<string | undefined>()
+  const submitId = useSubmitStore((state) => state.submitId);
+  const setDetailState = useDetailStore((state) => state.setDetailState);
+  const clearHistory = useDetailStore((state) => state.clearHistory);
+  const endSubmit = useSubmitStore((state) => state.endSubmit);
+  const token = localStorage.getItem("token");
+  const [url, setUrl] = useState<string | undefined>();
 
-    useEffect(() => {
-        submitId && setUrl(`${BASE_URL}/user/contests/${contestId}/submissions/${submitId}`);
+  useEffect(() => {
+    submitId &&
+      setUrl(`${BASE_URL}/user/contests/${contestId}/submissions/${submitId}`);
+  }, [contestId, problemId, submitId]);
 
-    }, [contestId, problemId, submitId]);
-
-    useEffect(() => {
-        if (url !== undefined) {
-            clearHistory()
-            const fetchDetails = async () => {
-                try {
-                    const response = await fetch(url, {
-                        //@ts-ignore
-                        headers: {
-                            Token: token
-                        }
-                    });
-                    if (response.ok) {
-                        const data = await response.json();
-                        setDetailState(data);
-                        clearInterval(intervalId);
-                        endSubmit();
-                    } else {
-                        console.error("请求失败", response);
-                    }
-                } catch (err) {
-                    console.error("请求出错", err);
-                }
-            }
-            const intervalId = setInterval(fetchDetails, POLLING_INTERVAL);
-            return () => {
-                clearInterval(intervalId)
-                endSubmit();
-            }
+  useEffect(() => {
+    if (url !== undefined) {
+      clearHistory();
+      const fetchDetails = async () => {
+        try {
+          const response = await fetch(url, {
+            //@ts-ignore
+            headers: {
+              Token: token,
+            },
+          });
+          if (response.ok) {
+            const data = await response.json();
+            setDetailState(data);
+            clearInterval(intervalId);
+            endSubmit();
+          } else {
+            console.error("请求失败", response);
+          }
+        } catch (err) {
+          console.error("请求出错", err);
         }
-    }, [contestId, problemId, submitId, url])
-}
+      };
+      const intervalId = setInterval(fetchDetails, POLLING_INTERVAL);
+      return () => {
+        clearInterval(intervalId);
+        endSubmit();
+      };
+    }
+  }, [contestId, problemId, submitId, url]);
+};

@@ -43,13 +43,9 @@ const ProblemCases = () => {
     CaseId: state.CaseId,
   }));
 
-  
-  
   const cases = useCasesStore((state) => state.cases);
   const casesArr = cases.get(problemId!);
   const casesValue = casesArr?.find((item) => item.id == CaseId);
-
-
 
   return (
     <div style={{ height: "fit-content" }}>

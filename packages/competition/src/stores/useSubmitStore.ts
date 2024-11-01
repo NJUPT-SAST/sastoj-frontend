@@ -16,5 +16,5 @@ export const useSubmitStore = create<SubmitStore>((set) => ({
   setSubmitState: (state: SubmitType, Id: string) =>
     set({ submitState: state, submitId: Id }),
   endSubmit: () => set({ submitState: "UnSubmitted" }),
-  startSubmit: () => set({ submitState: "Submitting" })
+  startSubmit: () => set({ submitState: "Submitting" }),
 }));
