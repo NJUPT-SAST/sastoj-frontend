@@ -87,10 +87,8 @@ const UserGroupManagement: React.FC = () => {
                 columns={columns} 
                 dataSource={groups || []} 
                 rowKey="id"
-                onExpand={(expanded, record) => {
+                onExpand={(expanded: boolean, record: Group) => {
                     if (expanded !== undefined && record) {
-                        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                        // @ts-expect-error
                         return handleExpand(expanded, record);
                     }
                     return false;

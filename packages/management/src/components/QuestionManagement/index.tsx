@@ -27,7 +27,7 @@ export default function QuestionManagement() {
 
   useEffect(() => {
     getProblemList(1, 10).then((res) => {
-      // @ts-ignore
+      // @ts-expect-error res type is not properly defined in the API response
       setProblems(res.problems);
     }).catch(err => {
       console.error("获取题目列表失败:", err);

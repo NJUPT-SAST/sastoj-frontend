@@ -7,7 +7,6 @@ import {
   Input,
   Toast,
   Select,
-  TextArea,
   InputNumber,
 } from "@douyinfe/semi-ui";
 import {
@@ -15,7 +14,6 @@ import {
     IconTriangleUp,
     IconPlusCircle,
     IconMinusCircle,
-    IconExpand,
 } from "@douyinfe/semi-icons";
 import { addProblem, editProblem } from "../../api/admin";
 import { ProblemData } from "../../types/ProblemTypes";
@@ -23,6 +21,14 @@ import { parse as TomlParse, stringify as TomlStringify } from "smol-toml";
 import "./index.scss";
 import MarkdownRender from "../MarkdownRender";
 import MonacoEditor from "@monaco-editor/react";
+
+const ProblemTypeMap = {
+  '25': "gojudge-classic-algo",
+  '26': "freshcup-single-choice", 
+  '27': "freshcup-multiple-choice",
+  '28': "freshcup-short-answer"
+} as const;
+
 interface EditMadalProps {
   visible: boolean;
   setVisible: (visible: boolean) => void;
@@ -35,7 +41,7 @@ type ProblemDetailKey = keyof ProblemData;
 function EditModal(props: EditMadalProps) {
     const { visible, setVisible, problemData, setProblemData, isNew } = props;
     const jsonConfig = problemData?.config ? TomlParse(problemData.config) : {};
-    const [optionList, setOptionList] = useState<any>(["A", "B", "C"]);
+    const [optionList, setOptionList] = useState<string[]>(["A", "B", "C"]);
     const [loading, setLoading] = useState(false);
     const [editorIsErr, setEditorIsErr] = useState(false);
   console.log(111,problemData)
@@ -60,7 +66,8 @@ function EditModal(props: EditMadalProps) {
         Toast.warning("选项太多了啊，别再冲啦，出题人先生");
       } else {
         const newList = [...optionList];
-        newList.push(null);
+        const nextOption = String.fromCharCode(65 + optionList.length); // Generate next letter (A, B, C, etc)
+        newList.push(nextOption);
         setOptionList(newList);
       }
     }
@@ -71,7 +78,11 @@ function EditModal(props: EditMadalProps) {
             title={isNew ? "新增题目" : "题目编辑"}
             visible={visible}
             onOk={() => {
-                isNew ? addProblem(problemData) : editProblem(problemData);
+                if (isNew) {
+                    addProblem(problemData);
+                } else {
+                    editProblem(problemData);
+                }
             }}
             onCancel={() => setVisible(false)}
             closeOnEsc={true}
@@ -100,7 +111,7 @@ function EditModal(props: EditMadalProps) {
                         </Typography.Text>
                         <Select
                             placeholder="请选择题型"
-                            value={problemData.typeId}
+                            value={ProblemTypeMap[problemData.typeId as keyof typeof ProblemTypeMap]}
                             onChange={(value) => {
                                 setProblemDataImmer("typeId", value);
                             }}
@@ -132,51 +143,56 @@ function EditModal(props: EditMadalProps) {
                             max={Number.MAX_SAFE_INTEGER}
                         />
                     </div>
-
                     <div className="edit-modal-item">
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <Typography.Text strong className="edit-modal-item-necessary">
-                                题干内容（支持Markdown语法）
-                            </Typography.Text>
-                            <Button
-                                icon={<IconExpand />}
-                                type="tertiary"
-                                onClick={() => {
-                                    Modal.info({
-                                        title: '编辑题干内容',
-                                        content: (
-                                            <div style={{ width: '100%', height: '80vh' }}>
-                                                <TextArea
-                                                    style={{ width: '100%', height: '100%' }}
-                                                    maxCount={10000}
-                                                    value={problemData.content}
-                                                    onChange={(value) => {
-                                                        setProblemDataImmer("content", value);
-                                                    }}
-                                                />
-                                            </div>
-                                        ),
-                                        width: '80%',
-                                        centered: true,
-                                        maskClosable: false
-                                    });
-                                }}
-                            />
-                        </div>
-                        <div style={{ width: '100%', minHeight: '400px' }}>
-                            <TextArea
-                                style={{ width: '100%', minHeight: '400px', resize: 'vertical' }}
-                                maxCount={10000}
-                                value={problemData.content}
-                                onChange={(value) => {
-                                    setProblemDataImmer("content", value);
-                                }}
-                            />
-                        </div>
+                        <Typography.Text strong className="edit-modal-item-necessary">
+                            题干内容（支持Markdown语法）
+                        </Typography.Text>
+                        <textarea
+                            style={{
+                                width: '65%',
+                                height: '400px', 
+                                resize: 'none',
+                                marginTop: '8px',
+                                padding: '12px 16px',
+                                fontSize: '14px',
+                                lineHeight: '1.6',
+                                color: '#1C1F23',
+                                backgroundColor: '#fff',
+                                border: '1px solid #E5E6EB',
+                                borderRadius: '6px',
+                                transition: 'all 0.2s ease',
+                                outline: 'none',
+                                boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
+                            }}
+                            value={problemData.content}
+                            onChange={(e) => {
+                                setProblemDataImmer("content", e.target.value);
+                            }}
+                            onFocus={(e) => {
+                                const target = e.target as HTMLTextAreaElement;
+                                target.style.borderColor = '#6B7280';
+                                target.style.boxShadow = '0 1px 2px rgba(0, 0, 0, 0.05), 0 0 0 3px rgba(99, 102, 241, 0.1)';
+                            }}
+                            onBlur={(e) => {
+                                const target = e.target as HTMLTextAreaElement;
+                                target.style.borderColor = '#E5E6EB';
+                                target.style.boxShadow = '0 1px 2px rgba(0, 0, 0, 0.05)';
+                            }}
+                            onMouseEnter={(e) => {
+                                const target = e.target as HTMLTextAreaElement;
+                                target.style.borderColor = '#6B7280';
+                            }}
+                            onMouseLeave={(e) => {
+                                const target = e.target as HTMLTextAreaElement;
+                                if(target !== document.activeElement) {
+                                    target.style.borderColor = '#E5E6EB';
+                                }
+                            }}
+                        />
                     </div>
 
-                    {problemData.typeId === "freshcup-short-answer" ||
-                    problemData.typeId === "gojudge-classic-algo" ? null : (
+                    {ProblemTypeMap[problemData.typeId as keyof typeof ProblemTypeMap] === "freshcup-short-answer" ||
+                    ProblemTypeMap[problemData.typeId as keyof typeof ProblemTypeMap] === "gojudge-classic-algo" ? null : (
                         <div className="edit-modal-item">
                             <Typography.Text strong className="edit-modal-item-necessary">
                                 选项
@@ -191,7 +207,7 @@ function EditModal(props: EditMadalProps) {
                                         paddingLeft: 0,
                                     }}
                                 >
-                                    {optionList.map((value: any, index: number) => {
+                                    {optionList.map((value: string, index: number) => {
                                         return (
                                             <li
                                                 key={index}
@@ -276,17 +292,17 @@ function EditModal(props: EditMadalProps) {
                             </p>
                         </div>
                     )}
-                    {problemData.typeId === "freshcup-single-choice" ||
-                    problemData.typeId === "freshcup-multiple-choice" ||
-                    problemData.typeId === "freshcup-short-answer" ? (
+                    {ProblemTypeMap[problemData.typeId as keyof typeof ProblemTypeMap] === "freshcup-single-choice" ||
+                    ProblemTypeMap[problemData.typeId as keyof typeof ProblemTypeMap] === "freshcup-multiple-choice" ||
+                    ProblemTypeMap[problemData.typeId as keyof typeof ProblemTypeMap] === "freshcup-short-answer" ? (
                         <div className="edit-modal-item">
                             <Typography.Text strong className="edit-modal-item-necessary">
                                 正确答案
                             </Typography.Text>
-                            {problemData.typeId === "freshcup-single-choice" ||
-                            problemData.typeId === "freshcup-multiple-choice" ? (
+                            {ProblemTypeMap[problemData.typeId as keyof typeof ProblemTypeMap] === "freshcup-single-choice" ||
+                            ProblemTypeMap[problemData.typeId as keyof typeof ProblemTypeMap] === "freshcup-multiple-choice" ? (
                                 <Select
-                                    multiple={problemData.typeId === "freshcup-multiple-choice"}
+                                    multiple={ProblemTypeMap[problemData.typeId as keyof typeof ProblemTypeMap] === "freshcup-multiple-choice"}
                                     value={jsonConfig.ReferenceAnswer as string}
                                     onChange={(value) => {
                                         if (typeof value === "string") {
@@ -297,7 +313,7 @@ function EditModal(props: EditMadalProps) {
                                         setProblemDataImmer("config", TomlStringify(jsonConfig));
                                     }}
                                 >
-                                    {optionList.map((_: any, index: number) => {
+                                    {optionList.map((_: string, index: number) => {
                                         return (
                                             <Select.Option
                                                 key={index}
@@ -319,7 +335,7 @@ function EditModal(props: EditMadalProps) {
                             )}
                         </div>
                     ) : null}
-                    {problemData.typeId === "gojudge-classic-algo" ? (
+                    {ProblemTypeMap[problemData.typeId as keyof typeof ProblemTypeMap] === "gojudge-classic-algo" ? (
                         <div className="edit-modal-item">
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
                                 <Typography.Text strong className="edit-modal-item-necessary">
@@ -344,7 +360,7 @@ function EditModal(props: EditMadalProps) {
                                                                     setEditorIsErr(false);
                                                                     setProblemDataImmer("config", TomlStringify(parsed));
                                                                 }
-                                                            } catch (e) {
+                                                            } catch {
                                                                 if (!editorIsErr) {
                                                                     setEditorIsErr(true);
                                                                 }
@@ -383,7 +399,7 @@ function EditModal(props: EditMadalProps) {
                                             setEditorIsErr(false);
                                             setProblemDataImmer("config", TomlStringify(parsed));
                                         }
-                                    } catch (e) {
+                                    } catch {
                                         if (!editorIsErr) {
                                             setEditorIsErr(true);
                                         }
@@ -445,7 +461,7 @@ function EditModal(props: EditMadalProps) {
                         type="primary"
                         theme="solid"
                         htmlType="submit"
-                        style={{ width: 80, marginBottom: 16, marginLeft: "10%" }}
+                        style={{ width: 120, marginBottom: 16, marginLeft: "10%" }}
                         loading={loading}
                         onClick={() => {
                             setLoading(true);
@@ -455,36 +471,40 @@ function EditModal(props: EditMadalProps) {
                                 jsonConfig.length !== 0 &&
                                 problemData.content &&
                                 problemData.point &&
-                                (problemData.typeId === "2" || optionList.length !== 0) // 非主观题选项不能为空
+                                (ProblemTypeMap[problemData.typeId as keyof typeof ProblemTypeMap] === "freshcup-short-answer" || 
+                                ProblemTypeMap[problemData.typeId as keyof typeof ProblemTypeMap] === "gojudge-classic-algo" || 
+                                optionList.length !== 0) // 主观题不需要选项
                             ) {
                                 if (isNew) {
                                     // 新增题目
-                                    addProblem(problemData).then((res) => {
-                                        if (res?.data?.success) {
-                                            Toast.success("题目创建成功！");
-                                            setVisible(false);
-                                        } else {
-                                            Toast.error(res?.data?.errMsg);
-                                        }
-                                    });
-                                    setTimeout(() => {
-                                        setLoading(false);
-                                    }, 500);
+                                    addProblem(problemData)
+                                        .then((res) => {
+                                            if (res?.data?.success) {
+                                                Toast.success("题目创建成功！");
+                                                setVisible(false);
+                                            } else {
+                                                Toast.error(res?.data?.errMsg || "创建失败");
+                                            }
+                                        })
+                                        .finally(() => {
+                                            setLoading(false);
+                                        });
                                 } else {
-                                    editProblem(problemData).then((res) => {
-                                        if (res?.data?.success) {
-                                            Toast.success("题目修改成功！");
-                                            setVisible(false);
-                                        } else {
-                                            Toast.error(res?.data?.errMsg);
-                                        }
-                                    });
-                                    setTimeout(() => {
-                                        setLoading(false);
-                                    }, 500);
+                                    editProblem(problemData)
+                                        .then((res) => {
+                                            if (res?.data?.success) {
+                                                Toast.success("题目修改成功！");
+                                                setVisible(false);
+                                            } else {
+                                                Toast.error(res?.data?.errMsg || "修改失败");
+                                            }
+                                        })
+                                        .finally(() => {
+                                            setLoading(false);
+                                        });
                                 }
                             } else {
-                                Toast.warning("似乎有内容还没有填写");
+                                Toast.warning("似乎还有内容没有填写喵");
                                 setLoading(false);
                             }
                         }}
