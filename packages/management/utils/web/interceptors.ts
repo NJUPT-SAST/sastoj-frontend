@@ -31,7 +31,7 @@ export const beforeRequest = (config: InternalAxiosRequestConfig<any>) => {
 export const responseSuccess = (response: AxiosResponse) => {
   //成功则返回response里有用的data
   // response.config && canceler.removePendingRequest(response.config);
-  return response.data ;
+  return response.data;
 };
 
 //失败则进行统一的错误处理
@@ -57,5 +57,4 @@ export const responseFailed = (error: AxiosError): Promise<never> | void => {
   //     desc: `发生错误， 错误码${response?.status}`,
   //   } as ResponseError);
   // }
-
 };

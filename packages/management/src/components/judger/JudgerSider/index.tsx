@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getJudgableProblemList } from "../../../api/judger";
 import { voidWarning } from "../../../../utils/voidWarning";
-;
 interface Item {
   id: number;
   typeId: number;
@@ -28,21 +27,18 @@ const JudgerSider = () => {
   useEffect(() => {
     getJudgableProblemList("1")
       .then((res) => {
-        console.log("res", res);
         const data = voidWarning(res).results;
         // .filter(
         //   (item: Item) => item.contest_id === parseInt(contestId!)
         // );
-        console.log("data", data);
 
         setJudgableProblems(data);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   }, [contestId]);
 
-  console.log("judgableProblems", judgableProblems);
   const items = [
     {
       itemKey: "back",
