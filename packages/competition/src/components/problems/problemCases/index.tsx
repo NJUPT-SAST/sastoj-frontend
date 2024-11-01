@@ -65,6 +65,9 @@ const ProblemCases = () => {
       </Button>
       {casesValue?.singleCases.length ? (
         <div className={styles["cases-container"]}>
+          <div>
+            <div></div>
+          </div>
           <>
             <div className={styles["cases-header"]}>
               <div>节点</div>

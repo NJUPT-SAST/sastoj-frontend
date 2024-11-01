@@ -9,7 +9,7 @@ export interface ProblemDetail {
 }
 export interface ProblemData {
   id: string;
-  typeId: string
+  typeId: string;
   title: string; //题目名称
   content: string; //题目内容
   point: number; //题目分值
@@ -20,7 +20,7 @@ export interface ProblemData {
   ownerId: number;
   visability: number;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  metadata: any
+  metadata: any;
 }
 
 export type FCProblemTypes = "freshcup-single-choice" | "freshcup-multiple-choice" | "freshcup-short-answer" | "gojudge-classic-algo"

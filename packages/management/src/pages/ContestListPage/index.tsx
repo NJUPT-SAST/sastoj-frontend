@@ -30,12 +30,12 @@ const ContestListPage = () => {
   const navigate = useNavigate();
   const { Text } = Typography;
   const location = useLocation(); // 获取当前路径
-  const pathSegments = location.pathname.split('/'); // 按 `/` 分割路径
+  const pathSegments = location.pathname.split("/"); // 按 `/` 分割路径
 
   const handleClick = (id: string) => {
     console.log("查看");
-    if(pathSegments.includes("admin")) navigate("/admin/contest/" + id);
-    else if(pathSegments.includes("judger"))navigate("/judger/contest/" + id);
+    if (pathSegments.includes("admin")) navigate("/admin/contest/" + id);
+    else if (pathSegments.includes("judger")) navigate("/judger/contest/" + id);
   };
 
   useEffect(() => {

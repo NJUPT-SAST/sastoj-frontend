@@ -20,13 +20,13 @@ const JudgerSider = () => {
   const navigate = useNavigate();
   const { contestId } = useParams();
   const [judgableProblems, setJudgableProblems] = useState([]);
-  const [openKeys, setOpenKeys] = useState<string[]>(["processing"]);//用来阻止菜单的自动折叠
+  const [openKeys, setOpenKeys] = useState<string[]>(["processing"]); //用来阻止菜单的自动折叠
 
   useEffect(() => {
     getJudgableProblemList("1")
       .then((res) => {
         const data = res.data.results.filter(
-          () => true
+          () => true,
           // item.contest_id === parseInt(contestId!)
         );
         setJudgableProblems(data);
@@ -71,7 +71,7 @@ const JudgerSider = () => {
         }}
         items={items}
         openKeys={openKeys}
-        onOpenChange={(keys) => setOpenKeys(keys as string[])}//设置该子项为打开状态
+        onOpenChange={(keys) => setOpenKeys(keys as string[])} //设置该子项为打开状态
         footer={{
           collapseButton: true,
         }}

@@ -41,12 +41,12 @@ function EditModal(props: EditMadalProps) {
 
   function setProblemDataImmer(
     key: ProblemDetailKey,
-    value: ProblemData[typeof key]
+    value: ProblemData[typeof key],
   ) {
     setProblemData(
       produce(problemData, (draft) => {
         (draft[key] as ProblemData[typeof key]) = value;
-      })
+      }),
     );
   }
 
