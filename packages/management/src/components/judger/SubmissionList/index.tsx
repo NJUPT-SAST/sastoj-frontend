@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getSubmissionsbyProblemId } from "../../../api/judger";
-import { Pagination, Table } from "@douyinfe/semi-ui";
+import { Button, Pagination, Table } from "@douyinfe/semi-ui";
 import "./index.scss";
+import { voidWarning } from "../../../../utils/voidWarning";
 interface Submission {
   id: number;
   code: string;
@@ -38,7 +39,7 @@ const SubmissionList = () => {
     {
       title: "操作",
       render: (record: { key: string }) => (
-        <a onClick={() => handleAffirm(record.key)}>批改</a>
+        <Button onClick={() => handleAffirm(record.key)}>批改</Button>
       ),
     },
   ];
@@ -53,8 +54,8 @@ const SubmissionList = () => {
   });
   useEffect(() => {
     getSubmissionsbyProblemId(parseInt(problemId!)).then((res) => {
-      // console.log(res);
-      setSubmissions(res.data.submissions);
+      console.log(res);
+      setSubmissions(voidWarning(res).submissions);
     });
   }, [problemId]);
   return (

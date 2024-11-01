@@ -25,8 +25,6 @@ interface UserResponse {
   users: User[];
 }
 
-
-
 const UserGroupManagement: React.FC = () => {
   //所有的用户组
   const [groups, setGroups] = useState<Group[]>();
@@ -58,7 +56,7 @@ const UserGroupManagement: React.FC = () => {
       // 仅在首次展开时加载数据
       try {
         const userRes: UserResponse = voidWarning(
-          await getUsersByPage(1, 100, [thisGroup.id])
+          await getUsersByPage(1, 100, [thisGroup.id]),
         );
         const updatedGroups = groups!.map((group) =>
           group.id === thisGroup.id
@@ -69,7 +67,7 @@ const UserGroupManagement: React.FC = () => {
                   id: user.username, // 使用 username 作为 id
                 })),
               }
-            : group
+            : group,
         );
         // console.log(updatedGroups);
         setGroups(updatedGroups);
@@ -145,4 +143,3 @@ const UserGroupManagement: React.FC = () => {
   );
 };
 export default UserGroupManagement;
-

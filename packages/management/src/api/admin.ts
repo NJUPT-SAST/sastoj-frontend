@@ -1,5 +1,5 @@
 import REQUEST from "../../utils/web/request";
-import {ProblemData} from "../types/ProblemTypes";
+import { ProblemData } from "../types/ProblemTypes";
 
 type ProblemDataWithoutId = Omit<ProblemData, "id">;
 /**
@@ -9,9 +9,9 @@ type ProblemDataWithoutId = Omit<ProblemData, "id">;
  * @returns axios api
  */
 export const getProblemList = (pageNum: number, pageSize: number) => {
-    return REQUEST.get("/problem/list", {
-        params: {current: pageNum, size: pageSize},
-    });
+  return REQUEST.get("/problem/list", {
+    params: { current: pageNum, size: pageSize },
+  });
 };
 
 /**
@@ -21,9 +21,9 @@ export const getProblemList = (pageNum: number, pageSize: number) => {
  * @returns axios api
  */
 export const getContestList = (pageNum: number, pageSize: number) => {
-    return REQUEST.get("/contest", {
-        params: {current: pageNum, size: pageSize},
-    });
+  return REQUEST.get("/contest", {
+    params: { current: pageNum, size: pageSize },
+  });
 };
 
 /**
@@ -71,5 +71,34 @@ export const getProblemType = () => {
 export const editProblem = (problemData: ProblemData) => {
   return REQUEST.put("/problem", {
     data: problemData,
+  });
+};
+
+/**
+ * 获取用户组列表
+ * @param pageNum 页数
+ * @param pageSize 每页展示数量
+ * @returns axios api
+ */
+export const getGroupsByPages = (pageNum: number, pageSize: number) => {
+  return REQUEST.get("/group", {
+    params: { current: pageNum, size: pageSize },
+  });
+};
+export const getUsersByPage = (
+  pageNum: number,
+  pageSize: number,
+  GroupIds: string[],
+  username = "",
+  state = 0,
+) => {
+  return REQUEST.get("/users", {
+    params: {
+      current: pageNum,
+      size: pageSize,
+      group_ids: GroupIds,
+      username,
+      state,
+    },
   });
 };
