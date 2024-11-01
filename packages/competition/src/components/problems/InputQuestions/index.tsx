@@ -14,7 +14,9 @@ export const InputQuestions = () => {
     // Fetch stored answer from localStorage when the component mounts
     const problemsInfo = localStorage.getItem("problems-info");
     if (problemsInfo) {
-      const lastProblemsInfo: ProblemInfo[] = JSON.parse(problemsInfo);
+      const lastProblemsInfo: ProblemInfo[] = JSON.parse(
+        problemsInfo,
+      ) as unknown as ProblemInfo[];
       const currentProblem = lastProblemsInfo.find(
         (problemInfo) => problemInfo.key === "hi",
       );
@@ -45,7 +47,9 @@ export const InputQuestions = () => {
           JSON.stringify(currentProblemsInfo),
         );
       } else {
-        const lastProblemsInfo: ProblemInfo[] = JSON.parse(problemsInfo);
+        const lastProblemsInfo: ProblemInfo[] = JSON.parse(
+          problemsInfo,
+        ) as unknown as ProblemInfo[];
 
         // Update or add problem information
         const updatedProblemsInfo = lastProblemsInfo.map((problemInfo) =>

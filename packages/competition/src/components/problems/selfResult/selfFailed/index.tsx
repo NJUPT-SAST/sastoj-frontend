@@ -11,7 +11,7 @@ export const SelfFailed = ({
 }) => {
   return (
     <div className={styles.container}>
-      <div className={styles.errorTitle}>{compileMsg || "执行错误"}</div>
+      <div className={styles.errorTitle}>{compileMsg ?? "执行错误"}</div>
       {stdout ? (
         <div className={styles.errorMessage}>
           {stdout}

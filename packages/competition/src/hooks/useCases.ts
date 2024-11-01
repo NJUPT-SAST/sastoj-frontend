@@ -31,7 +31,7 @@ export const useCases = (CaseId: string) => {
 
   useEffect(() => {
     if (CaseId && contestId && problemId) {
-      fetchdata();
+      void fetchdata();
       setCaseId(CaseId);
     }
   }, [CaseId]);

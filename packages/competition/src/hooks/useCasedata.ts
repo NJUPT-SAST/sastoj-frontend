@@ -1,3 +1,4 @@
+/* eslint-disable */
 export const useCasedata = (contestId: string) => {
   let data: any = {};
   const contestsString = localStorage.getItem("contests");

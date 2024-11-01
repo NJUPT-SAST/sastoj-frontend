@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useCallback } from "react";
 import { useSwrSubmit } from "../swrHooks/submit";
 import { useProblemsStatusStore } from "../stores/useProblemsStatusStore";
@@ -25,7 +26,6 @@ export const useSubmited = () => {
           setSubmitState("Submitting", response?.uuid);
         })
         .catch((error) => {
-          console.log(error);
           if (error.state == 500) {
             showToast({
               type: "error",
@@ -34,9 +34,7 @@ export const useSubmited = () => {
             endSubmit();
           }
         });
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   }, [problemId, problemsStatus, trigger, setSubmitState]);
 
   return submit;

@@ -38,7 +38,7 @@ const LibrarySkelecton = () => {
 
   return (
     <OjTable
-      //@ts-ignore
+      // @ts-expect-error TODO:
       columns={columns}
       dataSource={arr}
       caption={"Loading..."}

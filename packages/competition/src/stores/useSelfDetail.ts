@@ -10,7 +10,7 @@ export interface SelfDetail {
 }
 
 interface SelfDetailStore {
-  SelfDetail: {} | SelfDetail;
+  SelfDetail: object | SelfDetail;
   setSelfDetail: (value: SelfDetail) => void;
   clearSelfDetail: () => void;
 }

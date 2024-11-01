@@ -30,8 +30,7 @@ export const useLogin = () => {
             navigate("/select");
           }, 500);
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
           showToast({
             type: "error",
             content: <>登陆失败，用户名和密码错误</>,

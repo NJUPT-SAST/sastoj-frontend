@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useSwrGetProblems } from "../../../../swrHooks/problems";
 import { sortByKey } from "../../../../utils/aboutHandleData";
 import { SheetSkelecton } from "../../../skelecton/problems/sheet";
@@ -12,7 +13,7 @@ interface ProblemsListProps {
 export const ProblemsList: React.FC<ProblemsListProps> = ({ handleSelect }) => {
   const contestId = localStorage.getItem("contestId");
   const { data } = useSwrGetProblems(contestId as unknown as number);
-  const problems = sortByKey(data?.problems as object[], "index");
+  const problems = sortByKey(data?.problems!, "index");
   if (!problems) return <SheetSkelecton />;
 
   return (

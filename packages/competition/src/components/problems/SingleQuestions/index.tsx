@@ -14,7 +14,9 @@ export const SingleQuestion = () => {
   useEffect(() => {
     const problemsInfo = localStorage.getItem("problems-info");
     if (problemsInfo) {
-      const lastProblemsInfo: ProblemInfo[] = JSON.parse(problemsInfo);
+      const lastProblemsInfo: ProblemInfo[] = JSON.parse(
+        problemsInfo,
+      ) as unknown as ProblemInfo[];
       const foundProblemInfo = lastProblemsInfo.find(
         (problemInfo) => problemInfo.key === "hello",
       );
@@ -36,7 +38,6 @@ export const SingleQuestion = () => {
             value={String(selected)}
             direction="vertical"
             onChange={(value) => {
-              console.log(value);
               setSelected(value);
             }}
             options={[
@@ -84,8 +85,9 @@ export const SingleQuestion = () => {
                 );
               } else {
                 // 如果有数据，则直接覆盖与 key 为 "hello" 的数据
-                const lastProblemsInfo: ProblemInfo[] =
-                  JSON.parse(problemsInfo);
+                const lastProblemsInfo: ProblemInfo[] = JSON.parse(
+                  problemsInfo,
+                ) as unknown as ProblemInfo[];
                 const updatedProblemsInfo = lastProblemsInfo.map(
                   (problemInfo) =>
                     problemInfo.key === "hello"

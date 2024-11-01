@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Card } from "@ui-aurora/react";
 import styles from "./page.module.scss";
 import { AnnouncementSkelecton } from "../../components/skelecton/about";

@@ -13,15 +13,20 @@ export const useSubmissons = () => {
     problemId as unknown as string,
   );
   useEffect(() => {
-    if (
-      prevSubmitState.current === "Submitting" &&
-      submitState === "UnSubmitted" &&
-      contestId &&
-      problemId
-    ) {
-      mutate();
-    }
-    prevSubmitState.current = submitState;
+    const performMutation = async () => {
+      if (
+        prevSubmitState.current === "Submitting" &&
+        submitState === "UnSubmitted" &&
+        contestId &&
+        problemId
+      ) {
+        await mutate();
+      }
+      prevSubmitState.current = submitState;
+    };
+
+    void performMutation();
   }, [submitState]);
+
   return swrData;
 };

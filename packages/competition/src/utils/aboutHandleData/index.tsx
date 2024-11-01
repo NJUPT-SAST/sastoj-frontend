@@ -1,10 +1,10 @@
 type TypeMapping = Record<number, string>;
-type statusMapping = Record<
+type StatusMapping = Record<
   number,
   [string, "info" | "success" | "warning" | "error" | "ghost"]
 >;
 
-export const getType = (typeValue: number | undefined) => {
+export const getType = (typeValue?: number): string => {
   const type: TypeMapping = {
     1: "IOI",
     2: "ACM",
@@ -16,9 +16,9 @@ export const getType = (typeValue: number | undefined) => {
 };
 
 export const getStatus = (
-  statusValue: number | undefined,
+  statusValue?: number,
 ): [string, "info" | "success" | "warning" | "error" | "ghost"] => {
-  const status: statusMapping = {
+  const status: StatusMapping = {
     0: ["未开始", "ghost"],
     1: ["进行中", "info"],
     2: ["已结束", "ghost"],
@@ -28,25 +28,25 @@ export const getStatus = (
   return status[statusValue!] ?? ["进行中", "info"];
 };
 
-export const handleDate = (date: string | undefined): string => {
+export const handleDate = (date?: string): string => {
   if (!date) {
     return "loading...";
   }
   const newDate = new Date(date);
-  const year = newDate.getFullYear();
-  const month = String(newDate.getMonth() + 1).padStart(2, "0");
-  const day = String(newDate.getDate()).padStart(2, "0");
-  const hours = String(newDate.getHours()).padStart(2, "0");
-  const minutes = String(newDate.getMinutes()).padStart(2, "0");
-
-  const formattedDate = `${year}-${month}-${day}  ${hours}:${minutes}`;
+  const formattedDate = [
+    newDate.getFullYear(),
+    String(newDate.getMonth() + 1).padStart(2, "0"),
+    String(newDate.getDate()).padStart(2, "0"),
+    String(newDate.getHours()).padStart(2, "0"),
+    String(newDate.getMinutes()).padStart(2, "0"),
+  ]
+    .join("-")
+    .replace(/-/g, " ")
+    .trim();
   return formattedDate;
 };
 
-export const getDuration = (
-  startTime: string | undefined,
-  endTime: string | undefined,
-): string => {
+export const getDuration = (startTime?: string, endTime?: string): string => {
   if (!startTime || !endTime) {
     return "loading...";
   }
@@ -58,17 +58,16 @@ export const getDuration = (
 
 /**
  * 根据指定属性对对象数组进行排序。
- * @param {Array<any>} array - 要排序的对象数组。
- * @param {string} key - 用于排序的对象属性名。
+ * @param {Array<T>} array - 要排序的对象数组。
+ * @param {keyof T} key - 用于排序的对象属性名。
  * @param {boolean} [ascending=true] - 是否按升序排序。默认为升序。
- * @returns {Array<Object>} 排序后的对象数组。
+ * @returns {Array<T>} 排序后的对象数组。
  */
-
-export const sortByKey = (
-  array: any[],
-  key: string,
+export const sortByKey = <T extends Record<string, number>>(
+  array: T[],
+  key: keyof T,
   ascending = true,
-): any[] => {
+): T[] => {
   if (
     !array ||
     !Array.isArray(array) ||
@@ -81,19 +80,18 @@ export const sortByKey = (
     .sort((a, b) => (ascending ? a[key] - b[key] : b[key] - a[key]));
 };
 
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: unknown[]) => unknown>(
   func: T,
   wait: number,
 ): (...args: Parameters<T>) => void {
   let timeout: ReturnType<typeof setTimeout>;
 
-  return function (...args: Parameters<T>) {
-    //@ts-ignore
-    const context = this;
+  return function (...args: Parameters<T>): void {
     clearTimeout(timeout);
 
     timeout = setTimeout(() => {
-      func.apply(context, args);
+      // @ts-expect-error TODO:
+      func.apply(this, args);
     }, wait);
   };
 }

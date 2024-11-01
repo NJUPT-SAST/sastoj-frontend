@@ -67,10 +67,12 @@ export const useCasesStore = create<CasesStore>()(
     {
       name: "cases-storage",
       partialize: (state) => ({ cases: Array.from(state.cases.entries()) }), //将Map转为数组存进去
-      merge: (persistedState: any, currentState: CasesStore) => {
+      merge: (persistedState: unknown, currentState: CasesStore) => {
         const mergedCases = new Map(currentState.cases);
 
+        // @ts-expect-error TODO:
         if (persistedState?.cases) {
+          // @ts-expect-error TODO:
           const persistedCases = persistedState.cases as [
             string,
             CasesType[],

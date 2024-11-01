@@ -14,12 +14,13 @@ export const MultipleQuestions = () => {
     // Fetch stored answers from localStorage when the component mounts
     const problemsInfo = localStorage.getItem("problems-info");
     if (problemsInfo) {
-      const lastProblemsInfo: ProblemInfo[] = JSON.parse(problemsInfo);
+      const lastProblemsInfo: ProblemInfo[] = JSON.parse(
+        problemsInfo,
+      ) as unknown as ProblemInfo[];
       const currentProblem = lastProblemsInfo.find(
         (problemInfo) => problemInfo.key === "hi",
       );
 
-      console.log("选择", currentProblem?.select);
       if (currentProblem) {
         setSelected(currentProblem.select); // Set default value from localStorage
       }
@@ -44,7 +45,9 @@ export const MultipleQuestions = () => {
           JSON.stringify(currentProblemsInfo),
         );
       } else {
-        const lastProblemsInfo: ProblemInfo[] = JSON.parse(problemsInfo);
+        const lastProblemsInfo: ProblemInfo[] = JSON.parse(
+          problemsInfo,
+        ) as unknown as ProblemInfo[];
 
         // Update or add problem information
         const updatedProblemsInfo = lastProblemsInfo.map((problemInfo) =>

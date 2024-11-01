@@ -54,7 +54,7 @@ const renderer: RendererObject = {
   tablerow(content: string) {
     return `<tr class="">\n${content}</tr>\n`;
   },
-  tablecell(content: string, flags: any) {
+  tablecell(content: string, flags) {
     const tag = flags.header ? "th" : "td";
     const attributes = flags.align ? ` align="${flags.align}"` : "";
     return `<${tag}${attributes}>${content}</${tag}>\n`;

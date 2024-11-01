@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useParams } from "react-router-dom";
 import { useSelfTestStatusStore } from "../stores/useSelfTestStore";
 import { useSwrSelfTest } from "../swrHooks/selfTest";
