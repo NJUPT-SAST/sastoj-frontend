@@ -32,7 +32,7 @@ export const getContestList = (pageNum: number, pageSize: number) => {
  * @returns axios api
  */
 export const addProblem = (problemData: ProblemDataWithoutId) => {
-  return REQUEST.post("/problem/list", {
+  return REQUEST.post("/problem", {
     data: problemData,
   });
 };

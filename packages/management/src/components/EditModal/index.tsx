@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { produce } from "immer";
 import {
   Modal,
@@ -20,7 +20,7 @@ import { ProblemData } from "../../types/ProblemTypes";
 import { parse as TomlParse, stringify as TomlStringify } from "smol-toml";
 import "./index.scss";
 import MarkdownRender from "../MarkdownRender";
-import MonacoEditor from "@monaco-editor/react";
+import React from "react";
 
 const ProblemTypeMap = {
   '25': "gojudge-classic-algo",
@@ -28,6 +28,12 @@ const ProblemTypeMap = {
   '27': "freshcup-multiple-choice",
   '28': "freshcup-short-answer"
 } as const;
+const ProblemTypeMapReverse = {
+    "gojudge-classic-algo": '25',
+    "freshcup-single-choice": '26', 
+    "freshcup-multiple-choice": '27',
+    "freshcup-short-answer": '28'
+  } as const;
 
 interface EditMadalProps {
   visible: boolean;
@@ -38,13 +44,32 @@ interface EditMadalProps {
 }
 
 type ProblemDetailKey = keyof ProblemData;
+
+// 懒加载 Monaco Editor
+const MonacoEditor = React.lazy(() => import("@monaco-editor/react"));
+
+// 使用 React.memo 包装 Monaco Editor 组件
+const EditorWrapper = React.memo(({ value, onChange, height, options }: any) => (
+  <React.Suspense fallback={<div>加载中...</div>}>
+    <MonacoEditor
+      height={height}
+      language="toml"
+      value={value}
+      onChange={onChange}
+      options={options}
+    />
+  </React.Suspense>
+));
+
 function EditModal(props: EditMadalProps) {
     const { visible, setVisible, problemData, setProblemData, isNew } = props;
-    const jsonConfig = problemData?.config ? TomlParse(problemData.config) : {};
+    const jsonConfig = useMemo(() => 
+        problemData?.config ? TomlParse(problemData.config) : {}
+    , [problemData?.config]);
     const [optionList, setOptionList] = useState<string[]>(["A", "B", "C"]);
     const [loading, setLoading] = useState(false);
     const [editorIsErr, setEditorIsErr] = useState(false);
-  console.log(111,problemData)
+//   console.log(111,problemData)
     function setProblemDataImmer(
         key: ProblemDetailKey,
         value: ProblemData[typeof key]
@@ -73,17 +98,90 @@ function EditModal(props: EditMadalProps) {
     }
   }
 
+    const handleEditorChange = useCallback((value: string | undefined) => {
+        try {
+            const parsed = TomlParse(value || "");
+            if (parsed) {
+                setEditorIsErr(false);
+                setProblemDataImmer("config", TomlStringify(parsed));
+            }
+        } catch {
+            if (!editorIsErr) {
+                setEditorIsErr(true);
+            }
+        }
+    }, [editorIsErr, setProblemDataImmer]);
+
+    const handleSubmit = useCallback(() => {
+        setLoading(true);
+        if (
+            problemData.title &&
+            jsonConfig.length !== 0 &&
+            problemData.content &&
+            problemData.point &&
+            (ProblemTypeMap[problemData.typeId as keyof typeof ProblemTypeMap] === "freshcup-short-answer" || 
+            ProblemTypeMap[problemData.typeId as keyof typeof ProblemTypeMap] === "gojudge-classic-algo" || 
+            optionList.length !== 0)
+        ) {
+            const action = isNew ? addProblem : editProblem;
+            action(problemData)
+                .then((res) => {
+                    if (res?.data?.success) {
+                        Toast.success(isNew ? "题目创建成功！" : "题目修改成功！");
+                        setVisible(false);
+                    } else {
+                        Toast.error(res?.data?.errMsg || (isNew ? "创建失败" : "修改失败"));
+                    }
+                })
+                .finally(() => {
+                    setLoading(false);
+                });
+        } else {
+            Toast.warning("似乎还有内容没有填写喵");
+            setLoading(false);
+        }
+    }, [problemData, jsonConfig, optionList, isNew, setVisible]);
+
+    // 使用 useMemo 优化 editor options
+    const editorOptions = useMemo(() => ({
+        fontSize: 14,
+        scrollBeyondLastLine: false,
+        minimap: {
+            enabled: false,
+        },
+        scrollbar: {
+            verticalScrollbarSize: 6,
+            horizontalScrollbarSize: 6,
+        },
+    }), []);
+
+    // 在EditorWrapper前添加一个处理文件上传的函数
+    const handleFileUpload = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const content = e.target?.result as string;
+                try {
+                    // 验证是否为有效的TOML
+                    const parsed = TomlParse(content);
+                    if (parsed) {
+                        setProblemDataImmer("config", content);
+                        Toast.success("TOML文件导入成功");
+                    }
+                } catch (error) {
+                    Toast.error("无效的TOML文件格式");
+                }
+            };
+            reader.readAsText(file);
+        }
+    }, [setProblemDataImmer]);
+
     return (
         <Modal
             title={isNew ? "新增题目" : "题目编辑"}
             visible={visible}
-            onOk={() => {
-                if (isNew) {
-                    addProblem(problemData);
-                } else {
-                    editProblem(problemData);
-                }
-            }}
+            onOk={handleSubmit}
             onCancel={() => setVisible(false)}
             closeOnEsc={true}
             maskClosable={true}
@@ -113,7 +211,8 @@ function EditModal(props: EditMadalProps) {
                             placeholder="请选择题型"
                             value={ProblemTypeMap[problemData.typeId as keyof typeof ProblemTypeMap]}
                             onChange={(value) => {
-                                setProblemDataImmer("typeId", value);
+                                console.log(value)
+                                setProblemDataImmer("typeId", ProblemTypeMapReverse[value as keyof typeof ProblemTypeMapReverse]);
                             }}
                         >
                             <Select.Option value="freshcup-single-choice">
@@ -123,7 +222,7 @@ function EditModal(props: EditMadalProps) {
                                 多选题
                             </Select.Option>
                             <Select.Option value="freshcup-short-answer">
-                                填空题
+                                简答题
                             </Select.Option>
                             <Select.Option value="gojudge-classic-algo">算法题</Select.Option>
                         </Select>
@@ -144,12 +243,40 @@ function EditModal(props: EditMadalProps) {
                         />
                     </div>
                     <div className="edit-modal-item">
-                        <Typography.Text strong className="edit-modal-item-necessary">
-                            题干内容（支持Markdown语法）
-                        </Typography.Text>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                            <Typography.Text strong className="edit-modal-item-necessary">
+                                题干内容（支持Markdown语法）
+                            </Typography.Text>
+                            <div>
+                                <input
+                                    type="file"
+                                    accept=".md,.markdown"
+                                    onChange={(event) => {
+                                        const file = event.target.files?.[0];
+                                        if (file) {
+                                            const reader = new FileReader();
+                                            reader.onload = (e) => {
+                                                const content = e.target?.result as string;
+                                                setProblemDataImmer("content", content);
+                                                Toast.success("Markdown文件导入成功");
+                                            };
+                                            reader.readAsText(file);
+                                        }
+                                    }}
+                                    style={{ display: 'none' }}
+                                    id="markdown-upload"
+                                />
+                                <Button
+                                    theme="light"
+                                    onClick={() => document.getElementById('markdown-upload')?.click()}
+                                >
+                                    导入Markdown
+                                </Button>
+                            </div>
+                        </div>
                         <textarea
                             style={{
-                                width: '65%',
+                                width: '75%',
                                 height: '400px', 
                                 resize: 'none',
                                 marginTop: '8px',
@@ -326,6 +453,7 @@ function EditModal(props: EditMadalProps) {
                                 </Select>
                             ) : (
                                 <Input
+                                    placeholder="请输入正确答案"
                                     value={jsonConfig.ReferenceAnswer as string}
                                     onChange={(value) => {
                                         jsonConfig.ReferenceAnswer = value;
@@ -341,82 +469,50 @@ function EditModal(props: EditMadalProps) {
                                 <Typography.Text strong className="edit-modal-item-necessary">
                                     配置文件
                                 </Typography.Text>
-                                <Button
-                                    theme="light"
-                                    style={{ marginRight: '8px' }}
-                                    onClick={() => {
-                                        Modal.info({
-                                            title: '配置文件编辑',
-                                            content: (
-                                                <div style={{ width: '80vw', height: '80vh' }}>
-                                                    <MonacoEditor
-                                                        height="calc(80vh - 100px)"
-                                                        language="toml"
-                                                        value={problemData.config}
-                                                        onChange={(value: string | undefined) => {
-                                                            try {
-                                                                const parsed = TomlParse(value || "");
-                                                                if (parsed) {
-                                                                    setEditorIsErr(false);
-                                                                    setProblemDataImmer("config", TomlStringify(parsed));
-                                                                }
-                                                            } catch {
-                                                                if (!editorIsErr) {
-                                                                    setEditorIsErr(true);
-                                                                }
-                                                            }
-                                                        }}
-                                                        options={{
-                                                            fontSize: 14,
-                                                            scrollBeyondLastLine: false,
-                                                            minimap: {
-                                                                enabled: false,
-                                                            },
-                                                            scrollbar: {
-                                                                verticalScrollbarSize: 6,
-                                                                horizontalScrollbarSize: 6,
-                                                            },
-                                                        }}
-                                                    />
-                                                </div>
-                                            ),
-                                            width: '85vw',
-                                            centered: true,
-                                            maskClosable: false,
-                                        });
-                                    }}
-                                >
-                                    放大编辑
-                                </Button>
+                                <div style={{ display: 'flex', gap: '8px' }}>
+                                    <input
+                                        type="file"
+                                        accept=".toml"
+                                        onChange={handleFileUpload}
+                                        style={{ display: 'none' }}
+                                        id="toml-upload"
+                                    />
+                                    <Button
+                                        theme="light"
+                                        onClick={() => document.getElementById('toml-upload')?.click()}
+                                    >
+                                        导入TOML
+                                    </Button>
+                                    <Button
+                                        theme="light"
+                                        onClick={() => {
+                                            Modal.info({
+                                                title: '配置文件编辑',
+                                                content: (
+                                                    <div style={{ width: '80vw', height: '80vh' }}>
+                                                        <EditorWrapper
+                                                            height="calc(80vh - 100px)"
+                                                            value={problemData.config}
+                                                            onChange={handleEditorChange}
+                                                            options={editorOptions}
+                                                        />
+                                                    </div>
+                                                ),
+                                                width: '85vw',
+                                                centered: true,
+                                                maskClosable: false,
+                                            });
+                                        }}
+                                    >
+                                        放大编辑
+                                    </Button>
+                                </div>
                             </div>
-                            <MonacoEditor
+                            <EditorWrapper
                                 height={"200px"}
-                                language="toml"
-                                onChange={(value: string | undefined) => {
-                                    try {
-                                        const parsed = TomlParse(value || "");
-                                        if (parsed) {
-                                            setEditorIsErr(false);
-                                            setProblemDataImmer("config", TomlStringify(parsed));
-                                        }
-                                    } catch {
-                                        if (!editorIsErr) {
-                                            setEditorIsErr(true);
-                                        }
-                                    }
-                                }}
                                 value={problemData.config}
-                                options={{
-                                    fontSize: 14,
-                                    scrollBeyondLastLine: false,
-                                    minimap: {
-                                        enabled: false,
-                                    },
-                                    scrollbar: {
-                                        verticalScrollbarSize: 6,
-                                        horizontalScrollbarSize: 6,
-                                    },
-                                }}
+                                onChange={handleEditorChange}
+                                options={editorOptions}
                             />
                             {editorIsErr && (
                                 <div
@@ -463,51 +559,7 @@ function EditModal(props: EditMadalProps) {
                         htmlType="submit"
                         style={{ width: 120, marginBottom: 16, marginLeft: "10%" }}
                         loading={loading}
-                        onClick={() => {
-                            setLoading(true);
-                            // 表单验证，确保必要字段不为空
-                            if (
-                                problemData.title &&
-                                jsonConfig.length !== 0 &&
-                                problemData.content &&
-                                problemData.point &&
-                                (ProblemTypeMap[problemData.typeId as keyof typeof ProblemTypeMap] === "freshcup-short-answer" || 
-                                ProblemTypeMap[problemData.typeId as keyof typeof ProblemTypeMap] === "gojudge-classic-algo" || 
-                                optionList.length !== 0) // 主观题不需要选项
-                            ) {
-                                if (isNew) {
-                                    // 新增题目
-                                    addProblem(problemData)
-                                        .then((res) => {
-                                            if (res?.data?.success) {
-                                                Toast.success("题目创建成功！");
-                                                setVisible(false);
-                                            } else {
-                                                Toast.error(res?.data?.errMsg || "创建失败");
-                                            }
-                                        })
-                                        .finally(() => {
-                                            setLoading(false);
-                                        });
-                                } else {
-                                    editProblem(problemData)
-                                        .then((res) => {
-                                            if (res?.data?.success) {
-                                                Toast.success("题目修改成功！");
-                                                setVisible(false);
-                                            } else {
-                                                Toast.error(res?.data?.errMsg || "修改失败");
-                                            }
-                                        })
-                                        .finally(() => {
-                                            setLoading(false);
-                                        });
-                                }
-                            } else {
-                                Toast.warning("似乎还有内容没有填写喵");
-                                setLoading(false);
-                            }
-                        }}
+                        onClick={handleSubmit}
                     >
                         {isNew ? "保存新增" : "保存修改"}
                     </Button>
@@ -528,4 +580,4 @@ function EditModal(props: EditMadalProps) {
     );
 }
 
-export default EditModal;
+export default React.memo(EditModal);
