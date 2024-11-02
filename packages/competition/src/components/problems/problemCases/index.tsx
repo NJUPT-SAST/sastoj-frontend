@@ -1,11 +1,13 @@
 import { useParams } from "react-router-dom";
 import { useCaseMoreStore } from "../../../stores/useCaseMoreStore";
 import { Empty } from "../../empty";
-import { StatusTag } from "../statusTag";
+import { StatusDescriptions, StatusTag } from "../statusTag";
 import styles from "./index.module.scss";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Database, Timer } from "lucide-react";
 import { useCasesStore } from "../../../stores/useCasesStore";
 import { Badge, Button } from "@ui-aurora/react";
+import { handleDate } from "../../../utils/aboutHandleData";
+import { Editor } from "@monaco-editor/react";
 
 const transformNumberFromBigInt = (
   originNumber: string,
@@ -43,11 +45,18 @@ const ProblemCases = () => {
     CaseId: state.CaseId,
   }));
 
-  
-  
+
+
   const cases = useCasesStore((state) => state.cases);
   const casesArr = cases.get(problemId!);
   const casesValue = casesArr?.find((item) => item.id == CaseId);
+  //提交详细结果
+  const [stateResult, , color] = StatusDescriptions(casesValue?.singleDetial?.state!!)
+  const createTime = handleDate(casesValue?.singleDetial.createdAt)
+  const totalTime = transformNumberFromBigInt(casesValue?.singleDetial?.totalTime||'0', "time")
+  const totalMemory = transformNumberFromBigInt(casesValue?.singleDetial?.maxMemory||'0', "memory")
+  //是否展示空的判断
+  const isEmpty = !casesValue?.singleCases.length && !casesValue?.singleDetial
 
 
 
@@ -63,6 +72,35 @@ const ProblemCases = () => {
         <ArrowLeft size={20} />
         <span>返回题目内容</span>
       </Button>
+      {casesValue?.singleDetial ? (
+        <div className={styles['cases-result']}>
+          {/* <MonacoEditor
+              defaultValue={casesValue?.singleDetial?.code}
+            /> */}
+          <div className={styles['result-statetime']}>
+            <span style={{ color: color }} className={styles['state']}>{stateResult}</span>
+            <div style={{ fontSize: '0.9rem' }}>提交于:<span>{createTime}</span></div>
+          </div>
+          <div className={styles['result-more']}>
+            <div className={styles['result-more-item']}>
+              <span className={styles['result-more-item-icon']}><Timer />执行总用时</span>
+              <span>{totalTime} ms</span>
+            </div>
+            <div className={styles['result-more-item']}>
+              <span className={styles['result-more-item-icon']}><Database />消耗最大内存</span>
+              <span>{totalMemory} MB</span>
+            </div>
+          </div>
+          {/* <Editor
+            defaultLanguage="cpp"
+            defaultValue={casesValue?.singleDetial?.code || ''}
+            options={{
+              readOnly: true, // 设置编辑器为只读
+              minimap: { enabled: false }, // 禁用小地图
+            }}
+          /> */}
+        </div>
+      ) : ''}
       {casesValue?.singleCases.length ? (
         <div className={styles["cases-container"]}>
           <>
@@ -105,11 +143,11 @@ const ProblemCases = () => {
             })}
           </>
         </div>
-      ) : (
+      ) : ''}
+      {isEmpty &&
         <div style={{ height: "unset", marginTop: "40%" }}>
           <Empty />
-        </div>
-      )}
+        </div>}
     </div>
   );
 };
