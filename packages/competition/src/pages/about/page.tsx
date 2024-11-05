@@ -6,7 +6,7 @@ import Information from "../../components/about/information";
 // import Time from "../../components/about/time";
 import { useMsg } from "../../stores/useMsg";
 import { useCasedata } from "../../hooks/useCasedata";
-import { RoutetoLibrary } from "../../components/route/RoutetoLibrary/RoutetoLibrary";
+import { RouteLibrary } from "../../components/route/RoutetoLibrary/RoutetoLibrary";
 
 const About = () => {
   const contestId = localStorage.getItem("contestId");
@@ -29,7 +29,7 @@ const About = () => {
                 flexDirection: "row-reverse",
               }}
             >
-              <RoutetoLibrary />
+              <RouteLibrary />
             </div>
           }
           content={
