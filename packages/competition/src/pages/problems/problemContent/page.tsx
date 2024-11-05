@@ -26,6 +26,7 @@ const ProblemContent = () => {
   );
 
   const html = useMarkdown(data?.content ?? "");
+
   return (
     <div className={styles["problem-content-container"]}>
       <Card

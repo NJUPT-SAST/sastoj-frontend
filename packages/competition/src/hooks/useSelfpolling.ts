@@ -8,7 +8,7 @@ import { useSelfDetail } from "../stores/useSelfDetail";
 
 const POLLING_INTERVAL = 1000;
 
-export const useSelefpolling = () => {
+export const useSelfpolling = () => {
   const [url, setUrl] = useState<string | undefined>();
   const contestId = localStorage.getItem("contestId");
   const token = localStorage.getItem("token");

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useSelfTestStatusStore } from "../stores/useSelfTestStore";
 import { useSwrSelfTest } from "../swrHooks/selfTest";
 import { useSelfStore } from "../stores/useSelfSotre";
-import { useSelefpolling } from "./useSelfpolling";
+import { useSelfpolling } from "./useSelfpolling";
 import { useCallback } from "react";
 import { useProblemsStatusStore } from "../stores/useProblemsStatusStore";
 import { showToast } from "@ui-aurora/react";
@@ -18,7 +18,7 @@ export const useSelfTest = () => {
     endSelf: state.endSelf,
   }));
 
-  useSelefpolling();
+  useSelfpolling();
   const selfTest = useCallback(() => {
     const { code: input } = SelfsStatus.get(problemId!)!;
     const { code } = problemsStatus.get(problemId!)!;
