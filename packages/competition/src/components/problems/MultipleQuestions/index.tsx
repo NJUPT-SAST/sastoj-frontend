@@ -1,14 +1,23 @@
 import { useState, useEffect } from "react";
-import { Badge, Button, CheckboxGroup } from "@ui-aurora/react";
+import { Badge, Button, CheckboxGroup, CheckboxProps } from "@ui-aurora/react";
 import styles from "./index.module.scss";
+import { useSwrSubmit } from "../../../swrHooks/submit";
 
 interface ProblemInfo {
   key: string;
   select: string[];
 }
 
-export const MultipleQuestions = () => {
+interface MultipleQuestionsProps {
+  score: number;
+  title: string;
+  options: CheckboxProps[];
+  id: string;
+}
+
+export const MultipleQuestions = (props: MultipleQuestionsProps) => {
   const [selected, setSelected] = useState<string[]>([]);
+  const { trigger } = useSwrSubmit();
 
   useEffect(() => {
     // Fetch stored answers from localStorage when the component mounts
@@ -18,7 +27,7 @@ export const MultipleQuestions = () => {
         problemsInfo,
       ) as unknown as ProblemInfo[];
       const currentProblem = lastProblemsInfo.find(
-        (problemInfo) => problemInfo.key === "hi",
+        (problemInfo) => problemInfo.key === props.id,
       );
 
       if (currentProblem) {
@@ -35,7 +44,7 @@ export const MultipleQuestions = () => {
     if (selected.length > 0) {
       const problemsInfo = localStorage.getItem("problems-info");
       const currentProblemsInfo: ProblemInfo[] = [
-        { key: "hi", select: selected },
+        { key: props.id, select: selected },
       ];
 
       if (!problemsInfo) {
@@ -51,71 +60,54 @@ export const MultipleQuestions = () => {
 
         // Update or add problem information
         const updatedProblemsInfo = lastProblemsInfo.map((problemInfo) =>
-          problemInfo.key === "hi"
+          problemInfo.key === props.id
             ? { ...problemInfo, select: selected }
             : problemInfo,
         );
 
         const problemExists = lastProblemsInfo.some(
-          (problemInfo) => problemInfo.key === "hi",
+          (problemInfo) => problemInfo.key === props.id,
         );
         if (!problemExists) {
-          updatedProblemsInfo.push({ key: "hi", select: selected });
+          updatedProblemsInfo.push({ key: props.id, select: selected });
         }
 
         localStorage.setItem(
           "problems-info",
           JSON.stringify(updatedProblemsInfo),
         );
+
+        void trigger({ code: selected.join(" "), language: "" });
       }
     }
   };
 
   return (
-    <>
-      <ol style={{ width: "40%" }}>
-        <li>
-          <div className={styles.container}>
-            <Badge content="多选题" size="small" type="info" />
-            <span>(5分)这是第一个问题?</span>
-          </div>
-          <CheckboxGroup
-            defaultValue={selected}
-            direction="column"
-            onChange={handleCheckboxChange}
-            options={[
-              {
-                key: 1,
-                label: "nodejs",
-                value: "node",
-              },
-              {
-                key: 2,
-                label: "nestjs",
-                value: "nest",
-              },
-              {
-                key: 3,
-                label: "nextjs",
-                value: "next",
-              },
-            ]}
-          />
-        </li>
-      </ol>
+    <div style={{ height: "98%", display: "flex", flexDirection: "column" }}>
+      <div className={styles.container}>
+        <Badge content="多选题" size="small" type="info" />
+        <span>
+          ({props.score}分){props.title}
+        </span>
+        <CheckboxGroup
+          value={selected}
+          direction="column"
+          onChange={handleCheckboxChange}
+          options={props.options}
+        />
+      </div>
       <div
         style={{
           display: "flex",
           gap: "4px",
-          width: "40%",
           justifyContent: "end",
         }}
       >
         <Button shadow="none" onClick={handleSave}>
-          保存
+          提交
         </Button>
         <Button shadow="none">下一题</Button>
       </div>
-    </>
+    </div>
   );
 };

@@ -7,7 +7,7 @@ import React from "react";
 import { Problem } from "../../../../types/problem";
 
 interface ProblemsListProps {
-  handleSelect: (problemId: number) => void;
+  handleSelect: (problemId: string) => void;
 }
 
 export const ProblemsList: React.FC<ProblemsListProps> = ({ handleSelect }) => {

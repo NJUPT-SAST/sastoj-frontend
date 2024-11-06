@@ -12,6 +12,7 @@ interface SingleQuestionProps {
   title: string;
   options: RadioProps[];
   score: number;
+  id: string;
 }
 
 export const SingleQuestion = (props: SingleQuestionProps) => {
@@ -26,7 +27,7 @@ export const SingleQuestion = (props: SingleQuestionProps) => {
         problemsInfo,
       ) as unknown as ProblemInfo[];
       const foundProblemInfo = lastProblemsInfo.find(
-        (problemInfo) => problemInfo.key === "hello",
+        (problemInfo) => problemInfo.key === props.id,
       );
       if (foundProblemInfo) {
         setSelected(foundProblemInfo.select);
@@ -65,7 +66,7 @@ export const SingleQuestion = (props: SingleQuestionProps) => {
             if (selected) {
               const problemsInfo = localStorage.getItem("problems-info");
               const currentProblemsInfo: ProblemInfo[] = [
-                { key: "hello", select: selected },
+                { key: props.id, select: selected },
               ];
 
               if (!problemsInfo) {
@@ -75,23 +76,23 @@ export const SingleQuestion = (props: SingleQuestionProps) => {
                   JSON.stringify(currentProblemsInfo),
                 );
               } else {
-                // 如果有数据，则直接覆盖与 key 为 "hello" 的数据
+                // 如果有数据，则直接覆盖与 key 为 props.id 的数据
                 const lastProblemsInfo: ProblemInfo[] = JSON.parse(
                   problemsInfo,
                 ) as unknown as ProblemInfo[];
                 const updatedProblemsInfo = lastProblemsInfo.map(
                   (problemInfo) =>
-                    problemInfo.key === "hello"
+                    problemInfo.key === props.id
                       ? { ...problemInfo, select: selected }
                       : problemInfo,
                 );
 
-                // 如果 "hello" 不存在，添加新问题
+                // 如果 props.id 不存在，添加新问题
                 const problemExists = lastProblemsInfo.some(
-                  (problemInfo) => problemInfo.key === "hello",
+                  (problemInfo) => problemInfo.key === props.id,
                 );
                 if (!problemExists) {
-                  updatedProblemsInfo.push({ key: "hello", select: selected });
+                  updatedProblemsInfo.push({ key: props.id, select: selected });
                 }
 
                 localStorage.setItem(

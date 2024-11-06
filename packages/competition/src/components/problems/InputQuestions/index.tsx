@@ -11,6 +11,7 @@ interface ProblemInfo {
 interface InputQuestionsProps {
   score: number;
   title: string;
+  id: string;
 }
 
 export const InputQuestions = (props: InputQuestionsProps) => {
@@ -26,7 +27,7 @@ export const InputQuestions = (props: InputQuestionsProps) => {
         problemsInfo,
       ) as unknown as ProblemInfo[];
       const currentProblem = lastProblemsInfo.find(
-        (problemInfo) => problemInfo.key === "hi",
+        (problemInfo) => problemInfo.key === props.id,
       );
       if (currentProblem) {
         setInputValue(currentProblem.answer); // Set default value from localStorage
@@ -44,9 +45,7 @@ export const InputQuestions = (props: InputQuestionsProps) => {
   const handleSave = () => {
     if (inputValue.trim()) {
       const problemsInfo = localStorage.getItem("problems-info");
-      const currentProblemsInfo: ProblemInfo[] = [
-        { key: "hi", answer: inputValue },
-      ];
+      const currentProblemsInfo: ProblemInfo[] = [];
 
       if (!problemsInfo) {
         // Store new data if localStorage is empty
@@ -61,16 +60,16 @@ export const InputQuestions = (props: InputQuestionsProps) => {
 
         // Update or add problem information
         const updatedProblemsInfo = lastProblemsInfo.map((problemInfo) =>
-          problemInfo.key === "hi"
+          problemInfo.key === props.id
             ? { ...problemInfo, answer: inputValue }
             : problemInfo,
         );
 
         const problemExists = lastProblemsInfo.some(
-          (problemInfo) => problemInfo.key === "hi",
+          (problemInfo) => problemInfo.key === props.id,
         );
         if (!problemExists) {
-          updatedProblemsInfo.push({ key: "hi", answer: inputValue });
+          updatedProblemsInfo.push({ key: props.id, answer: inputValue });
         }
 
         localStorage.setItem(

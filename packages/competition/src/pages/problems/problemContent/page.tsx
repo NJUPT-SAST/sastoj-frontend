@@ -1,4 +1,4 @@
-import { Card, RadioProps } from "@ui-aurora/react";
+import { Card, CheckboxProps, RadioProps } from "@ui-aurora/react";
 import styles from "./page.module.scss";
 import useMarkdown from "../../../hooks/useMarkdown";
 import { CodeEditorCardContent } from "../../../components/problems/codeEditorCardContent";
@@ -11,7 +11,6 @@ import { ProblemContentResult } from "../../../components/problems/problemConten
 import { SingleQuestion } from "../../../components/problems/SingleQuestions";
 import { InputQuestions } from "../../../components/problems/InputQuestions";
 import { MultipleQuestions } from "../../../components/problems/MultipleQuestions";
-// import { SingleQuestion } from "../../../components/problems/SingleQuestions";
 
 const ProblemContent = () => {
   const [isFullScreen, setIsFullScreen] = useState<boolean>(false);
@@ -42,6 +41,31 @@ const ProblemContent = () => {
     return options;
   };
 
+  const multipleChoiceTransform = (metadata: string) => {
+    const options: CheckboxProps[] = [];
+    for (const [key, value] of Object.entries(JSON.parse(metadata) as object)) {
+      options.push({
+        value: key,
+        label: value as unknown as string,
+      });
+    }
+
+    return options;
+  };
+
+  if (data?.type === "Multiple-Choice") {
+    return (
+      <ShowQuestionCard>
+        <MultipleQuestions
+          title={data.content}
+          score={data.score}
+          options={multipleChoiceTransform(data.metadata.options)}
+          id={data.id}
+        ></MultipleQuestions>
+      </ShowQuestionCard>
+    );
+  }
+
   if (data?.type === "Single-Choice") {
     return (
       <ShowQuestionCard>
@@ -49,6 +73,7 @@ const ProblemContent = () => {
           title={data.content}
           score={data.score}
           options={singleChoiceTransform(data.metadata.options)}
+          id={data.id}
         ></SingleQuestion>
       </ShowQuestionCard>
     );
@@ -60,15 +85,8 @@ const ProblemContent = () => {
         <InputQuestions
           title={data.content}
           score={data.score}
+          id={data.id}
         ></InputQuestions>
-      </ShowQuestionCard>
-    );
-  }
-
-  if (data?.type === "Multiple-Choice") {
-    return (
-      <ShowQuestionCard>
-        <MultipleQuestions></MultipleQuestions>
       </ShowQuestionCard>
     );
   }

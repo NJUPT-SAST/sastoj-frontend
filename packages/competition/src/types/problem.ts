@@ -2,7 +2,7 @@ export interface Problem {
   title: string;
   point: number;
   index: number;
-  id: number;
+  id: string;
   content: string;
   score: number;
   type: string;
