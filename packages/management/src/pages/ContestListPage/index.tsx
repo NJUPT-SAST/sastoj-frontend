@@ -74,7 +74,7 @@ const ContestListPage = () => {
                 <div key={index} className="contest">
                   <Card
                     title={contest.title}
-                    style={{ maxWidth: 300 }}
+                    style={{ maxWidth: 300, height: 180 }}
                     headerExtraContent={
                       <Text link onClick={() => handleClick(contest.id)}>
                         查看
