@@ -2,6 +2,7 @@ import { Badge, Button, RadioGroup, RadioProps } from "@ui-aurora/react";
 import styles from "./index.module.scss";
 import { useState, useEffect } from "react";
 import { useSwrSubmit } from "../../../swrHooks/submit";
+import useSwitchQuestion from "../../../hooks/useSwitchQuestion";
 
 interface ProblemInfo {
   select: string | number;
@@ -16,8 +17,10 @@ interface SingleQuestionProps {
 }
 
 export const SingleQuestion = (props: SingleQuestionProps) => {
+  const contestId = Number(localStorage.getItem("contestId") ?? 0);
   const [selected, setSelected] = useState<string | number>();
   const { trigger } = useSwrSubmit();
+  const switchNextQuestion = useSwitchQuestion(contestId);
 
   // 从 localStorage 获取默认值
   useEffect(() => {
@@ -107,7 +110,14 @@ export const SingleQuestion = (props: SingleQuestionProps) => {
         >
           提交
         </Button>
-        <Button shadow="none">下一题</Button>
+        <Button
+          shadow="none"
+          onClick={() => {
+            switchNextQuestion(props.id);
+          }}
+        >
+          下一题
+        </Button>
       </div>
     </div>
   );

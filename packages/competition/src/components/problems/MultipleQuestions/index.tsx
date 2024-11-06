@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Badge, Button, CheckboxGroup, CheckboxProps } from "@ui-aurora/react";
 import styles from "./index.module.scss";
 import { useSwrSubmit } from "../../../swrHooks/submit";
+import useSwitchQuestion from "../../../hooks/useSwitchQuestion";
 
 interface ProblemInfo {
   key: string;
@@ -16,8 +17,10 @@ interface MultipleQuestionsProps {
 }
 
 export const MultipleQuestions = (props: MultipleQuestionsProps) => {
+  const contestId = Number(localStorage.getItem("contestId") ?? 0);
   const [selected, setSelected] = useState<string[]>([]);
   const { trigger } = useSwrSubmit();
+  const switchNextQuestion = useSwitchQuestion(contestId);
 
   useEffect(() => {
     // Fetch stored answers from localStorage when the component mounts
@@ -106,7 +109,14 @@ export const MultipleQuestions = (props: MultipleQuestionsProps) => {
         <Button shadow="none" onClick={handleSave}>
           提交
         </Button>
-        <Button shadow="none">下一题</Button>
+        <Button
+          shadow="none"
+          onClick={() => {
+            switchNextQuestion(props.id);
+          }}
+        >
+          下一题
+        </Button>
       </div>
     </div>
   );

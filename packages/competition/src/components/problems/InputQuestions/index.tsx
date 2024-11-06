@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Badge, Button, Input } from "@ui-aurora/react";
 import styles from "./index.module.scss";
 import { useSwrSubmit } from "../../../swrHooks/submit";
+import useSwitchQuestion from "../../../hooks/useSwitchQuestion";
 
 interface ProblemInfo {
   key: string;
@@ -15,7 +16,9 @@ interface InputQuestionsProps {
 }
 
 export const InputQuestions = (props: InputQuestionsProps) => {
+  const contestId = Number(localStorage.getItem("contestId") ?? 0);
   const [inputValue, setInputValue] = useState<string>("");
+  const switchNextQuestion = useSwitchQuestion(contestId);
 
   const { trigger } = useSwrSubmit();
 
@@ -103,7 +106,14 @@ export const InputQuestions = (props: InputQuestionsProps) => {
         <Button shadow="none" onClick={handleSave}>
           提交
         </Button>
-        <Button shadow="none">下一题</Button>
+        <Button
+          shadow="none"
+          onClick={() => {
+            switchNextQuestion(props.id);
+          }}
+        >
+          下一题
+        </Button>
       </div>
     </div>
   );
