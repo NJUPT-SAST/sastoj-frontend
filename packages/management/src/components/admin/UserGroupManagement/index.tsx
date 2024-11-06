@@ -1,8 +1,12 @@
-import { Table, Toast } from "@douyinfe/semi-ui";
+import { Button, Form, Modal, Table, Toast, Tooltip } from "@douyinfe/semi-ui";
 import { useEffect, useState } from "react";
-import { getGroupsByPages, getUsersByPage } from "../../../api/admin.ts";
+import {
+  addBatchUsers,
+  getGroupsByPages,
+  getUsersByPage,
+} from "../../../api/admin.ts";
 import { voidWarning } from "../../../../utils/voidWarning.ts";
-
+import "./index.scss";
 //接收的数据类型
 interface Group {
   id: string;
@@ -28,7 +32,9 @@ interface UserResponse {
 const UserGroupManagement: React.FC = () => {
   //所有的用户组
   const [groups, setGroups] = useState<Group[]>();
-
+  const [visible, setVisible] = useState(false);
+  const [ids, setIds] = useState<number[]>([]);
+  const [number, setNumber] = useState(0);
   const fetchGroups = async () => {
     try {
       const res: GroupResponse = voidWarning(await getGroupsByPages(1, 10));
@@ -77,7 +83,41 @@ const UserGroupManagement: React.FC = () => {
       }
     }
   };
-
+  const handleTooltip = (user: User) => {
+    console.log(user);
+  };
+  const handleBatchAddUser = () => {
+    setVisible(true);
+  };
+  const handleAddUser = () => {
+    console.log("添加用户");
+  };
+  const handleOk = async () => {
+    if (ids.length === 0) {
+      Toast.error({ content: "请输入用户组id", duration: 2 });
+      return;
+    }
+    if (number <= 0) {
+      Toast.error({ content: "请输入正确的用户数量", duration: 2 });
+      return;
+    }
+    try {
+      await addBatchUsers(ids, number);
+      Toast.success({ content: "批量添加用户成功", duration: 2 });
+      setVisible(false);
+      // 重新获取用户组数据
+      await fetchGroups();
+    } catch (error) {
+      console.error("Error adding batch users:", error);
+      Toast.error({ content: "批量添加用户失败", duration: 2 });
+    }
+  };
+  const handleCancel = () => {
+    setVisible(false);
+    // 清空表单数据
+    setIds([]);
+    setNumber(0);
+  };
   const columns = [
     {
       title: "序号",
@@ -93,6 +133,54 @@ const UserGroupManagement: React.FC = () => {
 
   return (
     <div>
+      <div className="btn-group">
+        <Button type="primary" className="btn" onClick={handleBatchAddUser}>
+          批量添加用户
+        </Button>
+        <Button type="primary" className="btn" onClick={handleAddUser}>
+          添加用户
+        </Button>
+      </div>
+
+      <Modal
+        title="批量添加用户"
+        visible={visible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        closeOnEsc={true}
+      >
+        <Form>
+          <Form.Input
+            field="groupIds"
+            placeholder="请输入用户组id，多个id用逗号隔开"
+            label="用户组id"
+            defaultValue=""
+            onChange={(value) => {
+              if (value) {
+                setIds(
+                  value
+                    .split(",")
+                    .map((id) => Number(id.trim()))
+                    .filter((id) => !isNaN(id)),
+                );
+              } else {
+                setIds([]);
+              }
+            }}
+            className="input"
+          />
+
+          <Form.InputNumber
+            field="userCount"
+            placeholder="请输入用户数量"
+            label="用户数量"
+            defaultValue={number}
+            onChange={(value) => setNumber(value as number)}
+            className="input"
+          />
+        </Form>
+      </Modal>
+
       <Table
         columns={columns}
         dataSource={groups || []}
@@ -112,16 +200,6 @@ const UserGroupManagement: React.FC = () => {
                 title: "用户名",
                 dataIndex: "username",
                 key: "username",
-                //   render: (text, user) => (
-                //     <Tooltip content="点击查看详情">
-                //       <span
-                //         onClick={() => handleTooltip(user)}
-                //         style={{ cursor: "pointer" }}
-                //       >
-                //         {text}
-                //       </span>
-                //     </Tooltip>
-                //   ),
               },
               {
                 title: "所在用户组的Id",
@@ -132,6 +210,21 @@ const UserGroupManagement: React.FC = () => {
                 title: "状态",
                 dataIndex: "state",
                 key: "state",
+              },
+              {
+                title: "操作",
+                dataIndex: "operation",
+                key: "operation",
+                render: (user) => (
+                  <Tooltip content="未完成">
+                    <Button
+                      type="primary"
+                      onClick={() => handleTooltip(user as User)}
+                    >
+                      查看详情
+                    </Button>
+                  </Tooltip>
+                ),
               },
             ]}
             dataSource={record?.childrens || []}

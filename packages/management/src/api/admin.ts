@@ -85,6 +85,16 @@ export const getGroupsByPages = (pageNum: number, pageSize: number) => {
     params: { current: pageNum, size: pageSize },
   });
 };
+
+/**
+ * 获取用户列表
+ * @param pageNum 页数
+ * @param pageSize 每页展示数量
+ * @param GroupIds 用户组id列表
+ * @param username 用户名
+ * @param state 用户状态
+ * @returns axios api
+ */
 export const getUsersByPage = (
   pageNum: number,
   pageSize: number,
@@ -99,6 +109,21 @@ export const getUsersByPage = (
       group_ids: GroupIds,
       username,
       state,
+    },
+  });
+};
+
+/**
+ * 批量添加用户
+ * @param groupIds 用户组id列表
+ * @param number 用户数量
+ * @returns axios api
+ */
+export const addBatchUsers = (groupIds: number[], number: number) => {
+  return REQUEST.post("/users/batch", {
+    data: {
+      groupIds: groupIds,
+      number: number,
     },
   });
 };
