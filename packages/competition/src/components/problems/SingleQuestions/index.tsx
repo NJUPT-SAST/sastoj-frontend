@@ -1,14 +1,22 @@
-import { Badge, Button, RadioGroup } from "@ui-aurora/react";
+import { Badge, Button, RadioGroup, RadioProps } from "@ui-aurora/react";
 import styles from "./index.module.scss";
 import { useState, useEffect } from "react";
+import { useSwrSubmit } from "../../../swrHooks/submit";
 
 interface ProblemInfo {
   select: string | number;
   key: string;
 }
 
-export const SingleQuestion = () => {
+interface SingleQuestionProps {
+  title: string;
+  options: RadioProps[];
+  score: number;
+}
+
+export const SingleQuestion = (props: SingleQuestionProps) => {
   const [selected, setSelected] = useState<string | number>();
+  const { trigger } = useSwrSubmit();
 
   // 从 localStorage 获取默认值
   useEffect(() => {
@@ -27,44 +35,27 @@ export const SingleQuestion = () => {
   }, []);
 
   return (
-    <>
-      <ol style={{ width: "40%" }}>
-        <li>
-          <div className={styles.container}>
-            <Badge content="单选题" size="small" type="info" />
-            <span>(5分)这是第一个问题?</span>
-          </div>
-          <RadioGroup
-            value={String(selected)}
-            direction="vertical"
-            onChange={(value) => {
-              setSelected(value);
-            }}
-            options={[
-              {
-                label: "第一个最大的元素👨",
-                value: "nodejs",
-                size: "large",
-              },
-              {
-                label: "第二个中等的元素👩",
-                value: "vuejs",
-                size: "large",
-              },
-              {
-                label: "第三个最小的元素🧒",
-                value: "react",
-                size: "large",
-              },
-            ]}
-          />
-        </li>
-      </ol>
+    <div style={{ height: "98%", display: "flex", flexDirection: "column" }}>
+      <div style={{ flexGrow: "1" }}>
+        <div className={styles.container}>
+          <Badge content="单选题" size="small" type="info" />
+          <span>
+            ({props.score}分){props.title}
+          </span>
+        </div>
+        <RadioGroup
+          value={String(selected)}
+          direction="vertical"
+          onChange={(value) => {
+            setSelected(value);
+          }}
+          options={props.options ?? []}
+        />
+      </div>
       <div
         style={{
           display: "flex",
           gap: "4px",
-          width: "40%",
           justifyContent: "end",
         }}
       >
@@ -107,14 +98,16 @@ export const SingleQuestion = () => {
                   "problems-info",
                   JSON.stringify(updatedProblemsInfo),
                 );
+
+                void trigger({ code: String(selected), language: "" });
               }
             }
           }}
         >
-          保存
+          提交
         </Button>
         <Button shadow="none">下一题</Button>
       </div>
-    </>
+    </div>
   );
 };

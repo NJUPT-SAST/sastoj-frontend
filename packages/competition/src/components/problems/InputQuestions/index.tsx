@@ -1,14 +1,22 @@
 import { useState, useEffect } from "react";
 import { Badge, Button, Input } from "@ui-aurora/react";
 import styles from "./index.module.scss";
+import { useSwrSubmit } from "../../../swrHooks/submit";
 
 interface ProblemInfo {
   key: string;
   answer: string;
 }
 
-export const InputQuestions = () => {
+interface InputQuestionsProps {
+  score: number;
+  title: string;
+}
+
+export const InputQuestions = (props: InputQuestionsProps) => {
   const [inputValue, setInputValue] = useState<string>("");
+
+  const { trigger } = useSwrSubmit();
 
   useEffect(() => {
     // Fetch stored answer from localStorage when the component mounts
@@ -30,7 +38,7 @@ export const InputQuestions = () => {
     value: string,
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    if (value) setInputValue(event.target.value);
+    if (value !== undefined) setInputValue(event.target.value);
   };
 
   const handleSave = () => {
@@ -69,34 +77,35 @@ export const InputQuestions = () => {
           "problems-info",
           JSON.stringify(updatedProblemsInfo),
         );
+
+        void trigger({ code: inputValue, language: "" });
       }
     }
   };
 
   return (
-    <>
-      <ol style={{ width: "40%" }}>
-        <li>
-          <div className={styles.container}>
-            <Badge content="解答题" size="small" type="info" />
-            <span>(5分)这是第一个问题?</span>
-          </div>
-          <Input value={inputValue} onChange={handleInputChange} />
-        </li>
-      </ol>
+    <div style={{ display: "flex", flexDirection: "column", height: "98%" }}>
+      <div className={styles.container}>
+        <Badge content="解答题" size="small" type="info" />
+        <span>
+          ({props.score}分){props.title}
+        </span>
+        <div style={{ paddingRight: "3rem", width: "100%" }}>
+          <Input value={inputValue} onChange={handleInputChange} size="small" />
+        </div>
+      </div>
       <div
         style={{
           display: "flex",
           gap: "4px",
-          width: "40%",
           justifyContent: "end",
         }}
       >
         <Button shadow="none" onClick={handleSave}>
-          保存
+          提交
         </Button>
         <Button shadow="none">下一题</Button>
       </div>
-    </>
+    </div>
   );
 };

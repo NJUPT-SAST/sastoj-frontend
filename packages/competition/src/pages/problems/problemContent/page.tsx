@@ -1,13 +1,16 @@
-import { Card } from "@ui-aurora/react";
+import { Card, RadioProps } from "@ui-aurora/react";
 import styles from "./page.module.scss";
 import useMarkdown from "../../../hooks/useMarkdown";
 import { CodeEditorCardContent } from "../../../components/problems/codeEditorCardContent";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { StatusCardContent } from "../../../components/problems/statusCardContent";
 import { useSwrGetProblem } from "../../../swrHooks/problem";
 import { useParams } from "react-router-dom";
 import { useMonitorCaseId } from "../../../hooks/useMonitorCaseId";
 import { ProblemContentResult } from "../../../components/problems/problemContent";
+import { SingleQuestion } from "../../../components/problems/SingleQuestions";
+import { InputQuestions } from "../../../components/problems/InputQuestions";
+import { MultipleQuestions } from "../../../components/problems/MultipleQuestions";
 // import { SingleQuestion } from "../../../components/problems/SingleQuestions";
 
 const ProblemContent = () => {
@@ -26,6 +29,49 @@ const ProblemContent = () => {
   );
 
   const html = useMarkdown(data?.content ?? "");
+
+  const singleChoiceTransform = (metadata: string) => {
+    const options: RadioProps[] = [];
+    for (const [key, value] of Object.entries(JSON.parse(metadata) as object)) {
+      options.push({
+        value: key,
+        label: value as unknown as string,
+      });
+    }
+
+    return options;
+  };
+
+  if (data?.type === "Single-Choice") {
+    return (
+      <ShowQuestionCard>
+        <SingleQuestion
+          title={data.content}
+          score={data.score}
+          options={singleChoiceTransform(data.metadata.options)}
+        ></SingleQuestion>
+      </ShowQuestionCard>
+    );
+  }
+
+  if (data?.type === "Short-Answer") {
+    return (
+      <ShowQuestionCard>
+        <InputQuestions
+          title={data.content}
+          score={data.score}
+        ></InputQuestions>
+      </ShowQuestionCard>
+    );
+  }
+
+  if (data?.type === "Multiple-Choice") {
+    return (
+      <ShowQuestionCard>
+        <MultipleQuestions></MultipleQuestions>
+      </ShowQuestionCard>
+    );
+  }
 
   return (
     <div className={styles["problem-content-container"]}>
@@ -51,4 +97,20 @@ const ProblemContent = () => {
   );
 };
 
+const ShowQuestionCard = (props: { children: ReactNode }) => {
+  return (
+    <div
+      style={{
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        flexGrow: "1",
+        padding: "1rem",
+        boxSizing: "border-box",
+      }}
+    >
+      <Card content={props.children} size="large"></Card>
+    </div>
+  );
+};
 export default ProblemContent;
