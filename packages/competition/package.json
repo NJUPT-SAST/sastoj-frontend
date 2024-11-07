@@ -26,7 +26,7 @@
     "@monaco-editor/react": "^4.6.0",
     "@replit/codemirror-lang-csharp": "^6.2.0",
     "@tanstack/react-table": "^8.20.5",
-    "@ui-aurora/react": "^0.0.30",
+    "@ui-aurora/react": "^0.0.31",
     "@vitejs/plugin-react": "^4.3.3",
     "axios": "^1.7.7",
     "babel-plugin-react-compiler": "19.0.0-beta-6fc168f-20241025",
