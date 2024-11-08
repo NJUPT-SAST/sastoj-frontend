@@ -18,104 +18,109 @@ import { ProtectedRoute } from "./ProtectedRoute.tsx";
 import QuestionManagement from "../components/admin/QuestionManagement/index.tsx";
 
 const Router = () => {
-  const routes = createBrowserRouter([
+  const routes = createBrowserRouter(
+    [
+      {
+        path: "/login",
+        element: <LoginPage />,
+      },
+      {
+        path: "/",
+        element: <App />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/admin" />,
+          },
+          {
+            path: "admin",
+            element: <ProtectedRoute element={<LayoutPage />} />,
+            children: [
+              {
+                index: true,
+                element: <Navigate to="contest" />,
+              },
+              {
+                path: "contest",
+                children: [
+                  {
+                    index: true,
+                    element: <ContestListPage />,
+                  },
+                  {
+                    path: ":contestId",
+                    element: <AdminPage />,
+                    children: [
+                      {
+                        index: true,
+                        element: <QuestionManagement />,
+                      },
+                      {
+                        path: "question",
+                        element: <QuestionManagement />,
+                      },
+                      {
+                        path: "student",
+                        element: <UserGroupManagement />,
+                      },
+                      {
+                        path: "edit",
+                        element: <div>Edit</div>,
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            path: "judger",
+            element: <ProtectedRoute element={<LayoutPage />} />,
+            children: [
+              {
+                index: true,
+                element: <Navigate to="contest" />,
+              },
+              {
+                path: "contest",
+                children: [
+                  {
+                    index: true,
+                    element: <ContestListPage />,
+                  },
+                  {
+                    path: ":contestId",
+                    element: <JudgerPage />,
+                    children: [
+                      {
+                        index: true,
+                        element: <JudgeableProblems />,
+                      },
+                      {
+                        path: "problem/:problemId",
+                        element: <SubmissionList />,
+                      },
+                      {
+                        path: "problem/:problemId/check/:submissionId",
+                        element: <CheckView />,
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            path: "*",
+            element: <NotFound />,
+          },
+        ],
+      },
+    ],
     {
-      path: "/login",
-      element: <LoginPage />,
+      basename: process.env.NODE_ENV === "production" ? "/dashboard/" : "/",
     },
-    {
-      path: "/",
-      element: <App />,
-      children: [
-        {
-          index: true,
-          element: <Navigate to="/admin" />,
-        },
-        {
-          path: "admin",
-          element: <ProtectedRoute element={<LayoutPage />} />,
-          children: [
-            {
-              index: true,
-              element: <Navigate to="contest" />,
-            },
-            {
-              path: "contest",
-              children: [
-                {
-                  index: true,
-                  element: <ContestListPage />,
-                },
-                {
-                  path: ":contestId",
-                  element: <AdminPage />,
-                  children: [
-                    {
-                      index: true,
-                      element: <QuestionManagement />,
-                    },
-                    {
-                      path: "question",
-                      element: <QuestionManagement />,
-                    },
-                    {
-                      path: "student",
-                      element: <UserGroupManagement />,
-                    },
-                    {
-                      path: "edit",
-                      element: <div>Edit</div>,
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-        {
-          path: "judger",
-          element: <ProtectedRoute element={<LayoutPage />} />,
-          children: [
-            {
-              index: true,
-              element: <Navigate to="contest" />,
-            },
-            {
-              path: "contest",
-              children: [
-                {
-                  index: true,
-                  element: <ContestListPage />,
-                },
-                {
-                  path: ":contestId",
-                  element: <JudgerPage />,
-                  children: [
-                    {
-                      index: true,
-                      element: <JudgeableProblems />,
-                    },
-                    {
-                      path: "problem/:problemId",
-                      element: <SubmissionList />,
-                    },
-                    {
-                      path: "problem/:problemId/check/:submissionId",
-                      element: <CheckView />,
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-        {
-          path: "*",
-          element: <NotFound />,
-        },
-      ],
-    },
-  ]);
+  );
   return <RouterProvider router={routes} />;
 };
 
