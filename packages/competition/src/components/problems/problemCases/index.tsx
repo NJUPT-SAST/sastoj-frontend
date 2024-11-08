@@ -7,7 +7,6 @@ import { ArrowLeft, Database, Timer } from "lucide-react";
 import { useCasesStore } from "../../../stores/useCasesStore";
 import { Badge, Button } from "@ui-aurora/react";
 import { handleDate } from "../../../utils/aboutHandleData";
-import { Editor } from "@monaco-editor/react";
 
 const transformNumberFromBigInt = (
   originNumber: string,
@@ -51,12 +50,15 @@ const ProblemCases = () => {
   const casesArr = cases.get(problemId!);
   const casesValue = casesArr?.find((item) => item.id == CaseId);
   //提交详细结果
-  const [stateResult, , color] = StatusDescriptions(casesValue?.singleDetial?.state!!)
+  // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+  const [stateResult, , color] = StatusDescriptions(casesValue?.singleDetial?.state!)
   const createTime = handleDate(casesValue?.singleDetial.createdAt)
-  const totalTime = transformNumberFromBigInt(casesValue?.singleDetial?.totalTime||'0', "time")
-  const totalMemory = transformNumberFromBigInt(casesValue?.singleDetial?.maxMemory||'0', "memory")
+  const totalTime = transformNumberFromBigInt(casesValue?.singleDetial?.totalTime ?? '0', "time")
+  const totalMemory = transformNumberFromBigInt(casesValue?.singleDetial?.maxMemory ?? '0', "memory")
   //是否展示空的判断
   const isEmpty = !casesValue?.singleCases.length && !casesValue?.singleDetial
+
+
 
 
 
@@ -74,11 +76,8 @@ const ProblemCases = () => {
       </Button>
       {casesValue?.singleDetial ? (
         <div className={styles['cases-result']}>
-          {/* <MonacoEditor
-              defaultValue={casesValue?.singleDetial?.code}
-            /> */}
           <div className={styles['result-statetime']}>
-            <span style={{ color: color }} className={styles['state']}>{stateResult}</span>
+            <span style={{ color: color }} className={styles.state}>{stateResult}</span>
             <div style={{ fontSize: '0.9rem' }}>提交于:<span>{createTime}</span></div>
           </div>
           <div className={styles['result-more']}>
@@ -91,14 +90,12 @@ const ProblemCases = () => {
               <span>{totalMemory} MB</span>
             </div>
           </div>
-          {/* <Editor
-            defaultLanguage="cpp"
-            defaultValue={casesValue?.singleDetial?.code || ''}
-            options={{
-              readOnly: true, // 设置编辑器为只读
-              minimap: { enabled: false }, // 禁用小地图
-            }}
-          /> */}
+          <div className={styles.codebox}>
+            <pre>
+              <code>{casesValue.singleDetial.code}
+              </code>
+            </pre>
+          </div>
         </div>
       ) : ''}
       {casesValue?.singleCases.length ? (
