@@ -3,7 +3,7 @@ import { beforeRequest, responseFailed, responseSuccess } from "./interceptors";
 
 // axios二次封装
 const devBaseURL = "/api";
-const proBaseURL = "在生产环境下接口的baseURL";
+const proBaseURL = "/api";
 
 const BASE_URL =
   process.env.NODE_ENV === "development" ? devBaseURL : proBaseURL;
