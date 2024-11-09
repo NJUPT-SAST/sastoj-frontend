@@ -29,7 +29,7 @@ export default function QuestionManagement() {
 
   useEffect(() => {
     getProblemList(1, 10).then((res) => {
-      // console.log(res);
+      // console.log(res.problems);
       setProblems(voidWarning(res).problems);
     });
   }, []);
@@ -69,13 +69,14 @@ export default function QuestionManagement() {
     {
       title: "操作",
 
-      render: (index: number) => {
+      render: (problem: ProblemData) => {
         return (
           <div className="button-container2">
             <Button
               theme="solid"
               onClick={() => {
-                setProblemData(problems[index]);
+                setProblemData(problem);
+                // console.log(problems, index);
                 setIsNew(false);
                 setVisible(true);
                 // 获取题目详细信息
