@@ -1,0 +1,24 @@
+.table-container {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  .caption {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3px;
+  }
+  .pagination {
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    box-sizing: border-box;
+  }
+}
+
+td {
+  height: 1.5rem;
+}
