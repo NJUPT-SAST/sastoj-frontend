@@ -1,12 +1,12 @@
 import { Button, Popconfirm, Table, Tag } from "@douyinfe/semi-ui";
 import { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";
-
 import "./index.scss";
 import { ProblemData } from "../../../types/ProblemTypes";
 import { getProblemList } from "../../../api/admin";
 import EditModal from "../../EditModal";
 import { voidWarning } from "../../../../utils/voidWarning";
+import { useParams } from "react-router-dom";
 
 export default function QuestionManagement() {
   const [problems, setProblems] = useState<ProblemData[]>([]);
@@ -25,14 +25,19 @@ export default function QuestionManagement() {
     visability: 1,
     metadata: {},
   });
+  const { contestId } = useParams();
+
   const [isNew, setIsNew] = useState(false);
 
   useEffect(() => {
-    getProblemList(1, 10).then((res) => {
+    const contestIdNumber =
+      contestId !== undefined ? parseInt(contestId, 10) : 0;
+
+    getProblemList(1, 10, contestIdNumber).then((res) => {
       // console.log(res.problems);
       setProblems(voidWarning(res).problems);
     });
-  }, []);
+  }, [contestId]);
 
   const columns = [
     {

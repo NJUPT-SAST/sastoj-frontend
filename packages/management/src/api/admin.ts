@@ -6,11 +6,16 @@ type ProblemDataWithoutId = Omit<ProblemData, "id">;
  * 获取题目列表
  * @param pageNum 页数
  * @param pageSize 每页展示数量
+ * @param contestId
  * @returns axios api
  */
-export const getProblemList = (pageNum: number, pageSize: number) => {
+export const getProblemList = (
+  pageNum: number,
+  pageSize: number,
+  contestId: number,
+) => {
   return REQUEST.get("/problem/list", {
-    params: { current: pageNum, size: pageSize },
+    params: { current: pageNum, size: pageSize, contest_id: contestId },
   });
 };
 
