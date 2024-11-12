@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { useCallback } from "react";
+import { useEffect } from "react";
 import { useSwrSubmit } from "../swrHooks/submit";
 import { useProblemsStatusStore } from "../stores/useProblemsStatusStore";
 import { useParams } from "react-router-dom";
@@ -16,11 +16,17 @@ export const useSubmited = () => {
     setSubmitState: state.setSubmitState,
     endSubmit: state.endSubmit,
   }));
+  // const language: string =
+  //   JSON.parse(localStorage.getItem("language") ?? "")?.state?.language ?? "C";
   const language = useLanguageStore((state) => state.language);
+
+  useEffect(() => {
+    console.log("当前选中的语言", language);
+  }, [language]);
 
   // useDetailSSE();
   useDetailpolling();
-  const submit = useCallback(() => {
+  const submit = () => {
     try {
       const { code } = problemsStatus.get(problemId!)!;
       console.log("此次提交的信息", code, language);
@@ -38,7 +44,7 @@ export const useSubmited = () => {
           }
         });
     } catch (error) {}
-  }, [problemId, problemsStatus, trigger, setSubmitState]);
+  };
 
   return submit;
 };
