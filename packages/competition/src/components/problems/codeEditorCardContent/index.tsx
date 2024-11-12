@@ -110,7 +110,6 @@ export const CodeEditorCardContent: React.FC<CodeEditorCardContentProps> = ({
   const { handleCodeEditor, defaultValue } = useCodeEditor();
   const setLanguage = useLanguageStore((state) => state.setLanguage);
   const language = useLanguageStore((state) => state.language);
-
   const handleChange = (value: OptionProps) => {
     setLanguage(value.value as LanguageType);
   };

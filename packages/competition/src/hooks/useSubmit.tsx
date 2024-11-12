@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { useSubmitStore } from "../stores/useSubmitStore";
 import { useDetailpolling } from "./useDetailpolling";
 import { showToast } from "@ui-aurora/react";
+import { useLanguageStore } from "../stores/useLanguageStore";
 
 export const useSubmited = () => {
   const { trigger } = useSwrSubmit();
@@ -15,12 +16,14 @@ export const useSubmited = () => {
     setSubmitState: state.setSubmitState,
     endSubmit: state.endSubmit,
   }));
+  const language = useLanguageStore((state) => state.language);
 
   // useDetailSSE();
   useDetailpolling();
   const submit = useCallback(() => {
     try {
-      const { code, language } = problemsStatus.get(problemId!)!;
+      const { code } = problemsStatus.get(problemId!)!;
+      console.log("此次提交的信息", code, language);
       trigger({ code, language })
         .then((response) => {
           setSubmitState("Submitting", response?.uuid);
