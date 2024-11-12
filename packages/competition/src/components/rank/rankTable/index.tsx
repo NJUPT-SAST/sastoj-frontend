@@ -1,80 +1,45 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
 import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
-  getPaginationRowModel,
   PaginationState,
 } from "@tanstack/react-table";
 import { Table, Tbody, Td, Th, Thead, Tr } from "@ui-aurora/react";
 import { Pagination } from "@ui-aurora/react"; // Assuming Pagination component exists in your UI library
+import { User } from "../../../types/rank";
+import { useSWRGetRank } from "../../../swrHooks/rank";
 
 // Define the types
-export interface Response {
-  users: User[];
-  [property: string]: any;
-}
-
-export interface User {
-  penalty?: number;
-  problems: Problem[];
-  rank: number;
-  totalScore: number;
-  username: string;
-  [property: string]: any;
-}
-
-export interface Problem {
-  point: number;
-  problemId: string;
-  scoreAchievedTime: string;
-  state: number;
-  triedTimes?: number;
-  [property: string]: any;
-}
 
 // Helper to create columns
 const columnHelper = createColumnHelper<User>();
 
-const defaultData: Response = {
-  users: [
-    {
-      rank: 1,
-      username: "User1",
-      totalScore: 100,
-      penalty: 10,
-      problems: [
-        { problemId: "P1", point: 50, scoreAchievedTime: "10:00", state: 1 },
-        { problemId: "P2", point: 50, scoreAchievedTime: "20:00", state: 1 },
-        { problemId: "P3", point: 40, scoreAchievedTime: "25:00", state: 1 },
-      ],
-    },
-    {
-      rank: 2,
-      username: "User2",
-      totalScore: 80,
-      penalty: 20,
-      problems: [
-        { problemId: "P1", point: 40, scoreAchievedTime: "15:00", state: 1 },
-        { problemId: "P2", point: 40, scoreAchievedTime: "25:00", state: 1 },
-        { problemId: "P3", point: 40, scoreAchievedTime: "25:00", state: 1 },
-      ],
-    },
-    // Add more users here if needed for testing pagination
-  ],
+// Define status to color mapping for inline styles
+const STATUS_COLORS = {
+  "1": { backgroundColor: "#f3f4f6" }, // ProblemUnaccepted - light gray
+  "2": { backgroundColor: "#fef3c7" }, // ProblemAccepted - light yellow
+  "3": { backgroundColor: "#d1fae5" }, // ProblemFirstAccepted - light green
 };
 
 export function RankTable() {
-  const [data, _setData] = React.useState(() => [...defaultData.users]);
-
   // Pagination state
   const [pagination, setPagination] = React.useState<PaginationState>({
     pageIndex: 0,
-    pageSize: 1, // Set page size to 5 for example
+    pageSize: 10,
   });
+
+  const { data: rankData } = useSWRGetRank(
+    localStorage.getItem("contestId") as unknown as string,
+    pagination.pageIndex,
+    pagination.pageSize,
+  );
+
+  const data = React.useMemo(
+    () => (rankData ? [...rankData.users] : []),
+    [rankData],
+  );
 
   // Dynamically create columns based on the problems in the first user
   const problemColumns =
@@ -110,63 +75,87 @@ export function RankTable() {
 
   // Initialize the table with pagination
   const table = useReactTable({
-    data,
+    data: data,
     columns,
     state: {
       pagination,
     },
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    onPaginationChange: setPagination,
   });
 
   return (
-    <div>
-      <Table>
-        <Thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <Tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <Th key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext(),
-                      )}
-                </Th>
-              ))}
-            </Tr>
-          ))}
-        </Thead>
-        <Tbody>
-          {table
-            .getRowModel()
-            .rows.slice(
-              pagination.pageIndex * pagination.pageSize,
-              (pagination.pageIndex + 1) * pagination.pageSize,
-            )
-            .map((row) => (
-              <Tr key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <Td key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </Td>
+    <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
+      <div style={{ flexGrow: 1 }}>
+        <Table>
+          <Thead>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <Tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <Th key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
+                  </Th>
                 ))}
               </Tr>
             ))}
-        </Tbody>
-      </Table>
+          </Thead>
+          <Tbody>
+            {table
+              .getRowModel()
+              .rows.slice(
+                pagination.pageIndex * pagination.pageSize,
+                (pagination.pageIndex + 1) * pagination.pageSize,
+              )
+              .map((row) => (
+                <Tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => {
+                    const problemIndex = cell.column.id.match(/\d+/)?.[0];
+                    const isProblemColumn = problemIndex !== undefined;
+                    const problemStatus = isProblemColumn
+                      ? row.original.problems[parseInt(problemIndex) - 1]?.state
+                      : 0;
 
-      <div>
-        <Pagination
-          total={data.length}
-          pageSize={pagination.pageSize}
-          activePage={pagination.pageIndex + 1}
-          onChange={(page) =>
-            setPagination({ ...pagination, pageIndex: page - 1 })
-          }
-        />
+                    return (
+                      <Td
+                        key={cell.id}
+                        // @ts-expect-error TODO:
+                        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                        style={STATUS_COLORS[`${problemStatus}`]}
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </Td>
+                    );
+                  })}
+                </Tr>
+              ))}
+          </Tbody>
+        </Table>
+      </div>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "flex-end",
+          marginTop: "1rem",
+        }}
+      >
+        <div style={{ width: "fit-content", padding: "1rem" }}>
+          <Pagination
+            total={data.length}
+            pageSize={pagination.pageSize}
+            defaultActivePage={1}
+            onChange={(page) => {
+              setPagination({ ...pagination, pageIndex: page - 1 });
+            }}
+          />
+        </div>
       </div>
     </div>
   );
