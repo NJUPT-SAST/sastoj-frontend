@@ -1,7 +1,7 @@
 export type LanguageType =
   | "Bash"
   | "C"
-  | 'C++'
+  | "C++"
   | "C++98"
   | "C++11"
   | "C++11(O2)"

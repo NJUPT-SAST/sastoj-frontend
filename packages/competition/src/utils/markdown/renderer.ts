@@ -1,11 +1,11 @@
 import { RendererObject } from "marked";
 import katex from "katex";
-import 'katex/dist/katex.min.css';
+import "katex/dist/katex.min.css";
 import styles from "./renderer.module.scss";
 
 // 预处理公式
 export const processMath = (markdown: string) => {
-  markdown = markdown.replace(/\\s/g, '\\,');
+  markdown = markdown.replace(/\\s/g, "\\,");
   // 替换块级公式
   let html = markdown.replace(/\$\$(.*?)\$\$/gs, (match, p1: string) => {
     try {
@@ -34,7 +34,7 @@ const renderer: RendererObject = {
     const escapedText = text.toLowerCase().replace(/[^\w]+/g, "-");
 
     return `
-            <h${level} class=${styles['h-title']}>
+            <h${level} class=${styles["h-title"]}>
               <a name="${escapedText}" class="anchor">
                 <span class=${styles["header-link"]}>${text}</span>
               </a>
@@ -42,7 +42,7 @@ const renderer: RendererObject = {
   },
   blockquote(quote: string) {
     return `<blockquote class=${styles["block-quote"]}>
-              <p class=${'block-quote-p'}>${quote}</p>
+              <p class=${"block-quote-p"}>${quote}</p>
             </blockquote>`;
   },
   link(href: string, title: string | null | undefined, text: string | false) {
@@ -54,7 +54,7 @@ const renderer: RendererObject = {
   tablerow(content: string) {
     return `<tr class="">\n${content}</tr>\n`;
   },
-  tablecell(content: string, flags: any) {
+  tablecell(content: string, flags) {
     const tag = flags.header ? "th" : "td";
     const attributes = flags.align ? ` align="${flags.align}"` : "";
     return `<${tag}${attributes}>${content}</${tag}>\n`;
@@ -63,7 +63,7 @@ const renderer: RendererObject = {
     const tag = ordered ? "ol" : "ul";
     const startAttribute = ordered && start !== null ? ` start="${start}"` : "";
     return `<${tag} ${startAttribute} class=${styles.list}>\n${body}</${tag}>\n`;
-  }
+  },
 };
 
 export default renderer;

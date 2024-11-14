@@ -1,20 +1,20 @@
 @use "@/variables" as *;
 
 .h1 {
-    width: 40%;
-    height: 3.5rem;
-    @include skeleton-loading();
+  width: 40%;
+  height: 3.5rem;
+  @include skeleton-loading();
 }
 
 .description {
-    width: 100%;
-    // width: 5rem;
-    height: 1rem;
-    @include skeleton-loading();
-    margin-bottom: 1.5rem;
+  width: 100%;
+  // width: 5rem;
+  height: 1rem;
+  @include skeleton-loading();
+  margin-bottom: 1.5rem;
 
-    &:nth-child(even) {
-        width: 70% !important;
-        margin-bottom: 2rem !important;
-    }
+  &:nth-child(even) {
+    width: 70% !important;
+    margin-bottom: 2rem !important;
+  }
 }

@@ -31,16 +31,18 @@ export const getContest = (contestId: number): Promise<GetContestProps> => {
   });
 };
 
-
 interface SelfTestProps {
   uuid: string;
 }
 
-export const selfTest = (url: string, { arg }: { arg: { code: string; language: string; input: string } }): Promise<SelfTestProps> => {
+export const selfTest = (
+  url: string,
+  { arg }: { arg: { code: string; language: string; input: string } },
+): Promise<SelfTestProps> => {
   return REQUEST({
     url: url,
     method: "POST",
-    data: arg
+    data: arg,
   });
 };
 

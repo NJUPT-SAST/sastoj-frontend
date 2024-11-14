@@ -44,8 +44,6 @@ const ProblemCases = () => {
     CaseId: state.CaseId,
   }));
 
-
-
   const cases = useCasesStore((state) => state.cases);
   const casesArr = cases.get(problemId!);
   const casesValue = casesArr?.find((item) => item.id == CaseId);
@@ -57,8 +55,6 @@ const ProblemCases = () => {
   const totalMemory = transformNumberFromBigInt(casesValue?.singleDetial?.maxMemory ?? '0', "memory")
   //是否展示空的判断
   const isEmpty = !casesValue?.singleCases.length && !casesValue?.singleDetial
-
-
 
 
 
@@ -100,6 +96,9 @@ const ProblemCases = () => {
       ) : ''}
       {casesValue?.singleCases.length ? (
         <div className={styles["cases-container"]}>
+          <div>
+            <div></div>
+          </div>
           <>
             <div className={styles["cases-header"]}>
               <div>节点</div>

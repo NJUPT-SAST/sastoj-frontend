@@ -1,22 +1,22 @@
 .container {
-    margin: 1rem;
-    border: 1px solid #F4CCCC;
-    background-color: #FFF0F0;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    box-sizing: border-box;
+  margin: 0 1rem;
+  border: 1px solid #f4cccc;
+  background-color: #fff0f0;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
 }
 
 .errorTitle {
-    color: #DD4B39;
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 0.8rem;
+  color: #dd4b39;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.8rem;
 }
 
 .errorMessage {
-    color: #DD4B39;
-    font-family: 'Courier New', Courier, monospace;
-    white-space: pre-wrap;
-    font-size: 0.9rem;
+  color: #dd4b39;
+  font-family: "Courier New", Courier, monospace;
+  white-space: pre-wrap;
+  font-size: 0.9rem;
 }

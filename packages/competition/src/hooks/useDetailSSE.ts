@@ -26,22 +26,18 @@ export const useDetailSSE = () => {
   useEffect(() => {
     if (url !== undefined) {
       clearHistory();
-      console.log("url", url);
 
       SSEInstance = new EventSource(url);
 
       SSEInstance.onopen = function () {
-        console.log("SSE成功打开");
         // onOpen();
       };
 
-      SSEInstance.onerror = function (event: Event) {
-        console.log("SSE链接断开", event);
+      SSEInstance.onerror = function () {
         // onError(event);
       };
 
       SSEInstance.onmessage = function (event: MessageEvent<string>) {
-        console.log("SSE收到信息", JSON.parse(event.data));
         setDetailState(JSON.parse(event.data) as Detail);
       };
 

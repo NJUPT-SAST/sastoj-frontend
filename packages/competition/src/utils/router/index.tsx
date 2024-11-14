@@ -1,59 +1,72 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-
-import Home from "../../pages/home/page";
-import Library from "../../pages/library/page";
-import Login from "../../pages/login/page";
-import Rank from "../../pages/rank/page";
-import Select from "../../pages/select/page";
-import About from "../../pages/about/page";
-import Error from "../../pages/error/page";
-import Problems from "../../pages/problems/page";
-import ProblemContent from "../../pages/problems/problemContent/page";
 import loader from "./loader";
+import Error from "../../pages/error/page";
 
 const routes = [
   {
     path: "/login",
-    element: <Login />,
+    lazy: async () => {
+      const Login = (await import("../../pages/login/page")).default;
+      return { Component: Login, loader: undefined };
+    },
   },
   {
     path: "/",
-    // replace: "/about",
-    element: <Home />,
+    lazy: async () => {
+      const Home = (await import("../../pages/home/page")).default;
+      return { Component: Home, loader: loader };
+    },
     errorElement: <Error />,
-    loader: loader,
     children: [
       {
-        index: true, // This sets the default child route
+        index: true,
         element: <Navigate to="/about" />,
       },
       {
-        path: "/about",
-        element: <About />,
+        path: "about",
+        lazy: async () => {
+          const About = (await import("../../pages/about/page")).default;
+          return { Component: About, loader: undefined };
+        },
       },
       {
-        path: "/library",
-        element: <Library />,
+        path: "library",
+        lazy: async () => {
+          const Library = (await import("../../pages/library/page")).default;
+          return { Component: Library, loader: undefined };
+        },
       },
       {
-        path: "/rank",
-        element: <Rank />,
+        path: "rank",
+        lazy: async () => {
+          const Rank = (await import("../../pages/rank/page")).default;
+          return { Component: Rank, loader: undefined };
+        },
       },
     ],
   },
   {
     path: "/select",
-    element: <Select />,
-    loader: loader,
+    lazy: async () => {
+      const Select = (await import("../../pages/select/page")).default;
+      return { Component: Select, loader: loader };
+    },
   },
   {
     path: "/problems",
-    element: <Problems />,
-    loader: loader,
+    lazy: async () => {
+      const Problems = (await import("../../pages/problems/page")).default;
+      return { Component: Problems, loader: loader };
+    },
     children: [
       {
         path: ":problemId",
-        element: <ProblemContent />,
+        lazy: async () => {
+          const ProblemContent = (
+            await import("../../pages/problems/problemContent/page")
+          ).default;
+          return { Component: ProblemContent, loader: undefined };
+        },
       },
     ],
   },

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Button, Select, type OptionProps } from "@ui-aurora/react";
 // import CodeEditor from "../../codeEditor";
 import styles from "./index.module.scss";
@@ -6,7 +6,7 @@ import { Scan } from "lucide-react";
 import { useCodeEditor } from "../../../hooks/useCodeEditor";
 import { useLanguageStore } from "../../../stores/useLanguageStore";
 import { LanguageType } from "../../../types/language";
-import { MonacoEditor } from "../../monacoEditor";
+const MonacoEditor = lazy(() => import("../../monacoEditor"));
 
 interface CodeEditorCardContentProps {
   setIsFullScreen: () => void;
@@ -110,9 +110,7 @@ export const CodeEditorCardContent: React.FC<CodeEditorCardContentProps> = ({
   const { handleCodeEditor, defaultValue } = useCodeEditor();
   const setLanguage = useLanguageStore((state) => state.setLanguage);
   const language = useLanguageStore((state) => state.language);
-
   const handleChange = (value: OptionProps) => {
-    console.log("选中的value", value);
     setLanguage(value.value as LanguageType);
   };
 
@@ -143,11 +141,13 @@ export const CodeEditorCardContent: React.FC<CodeEditorCardContentProps> = ({
         defaultValue={defaultValue}
         onUpdate={handleCodeEditor}
       /> */}
-      <MonacoEditor
-        defaultValue={defaultValue}
-        onUpdate={handleCodeEditor}
-        className={styles["code-editor"]}
-      />
+      <Suspense fallback=<>Loading...</>>
+        <MonacoEditor
+          defaultValue={defaultValue}
+          onUpdate={handleCodeEditor}
+          className={styles["code-editor"]}
+        />
+      </Suspense>
     </div>
   );
 };

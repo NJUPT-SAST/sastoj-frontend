@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { Navbar, NavbarItemProps } from "@ui-aurora/react";
-import { Home as HomeIcon, LayoutList } from "lucide-react";
+import { Award, Home as HomeIcon, LayoutList } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import Logo from "../../components/logo";
@@ -28,11 +28,11 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
       navbarItemKey: "Library",
       navbarItemContent: "题库",
     },
-    // {
-    //   navbarItemIcon: <Award size={20} />,
-    //   navbarItemKey: "Rank",
-    //   navbarItemContent: "排名",
-    // },
+    {
+      navbarItemIcon: <Award size={20} />,
+      navbarItemKey: "Rank",
+      navbarItemContent: "排名",
+    },
   ];
   return (
     <div className={styles["page-container"]}>

@@ -1,0 +1,25 @@
+@use "../../variable.scss" as *;
+.contests-container {
+  margin-top: 20px;
+  gap: clamp(20px, 2vw, 2vw);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.contest-list-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.pagination {
+  margin-top: 20px;
+}
+.contest-create-button {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+.contest {
+  width: 300px;
+  height: 200px;
+}

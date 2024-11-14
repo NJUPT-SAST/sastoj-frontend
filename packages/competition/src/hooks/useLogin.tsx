@@ -22,16 +22,15 @@ export const useLogin = () => {
         .then((response) => {
           // console.log(response);
           localStorage.setItem("token", response?.token ?? undefined);
-          showToast({
-            type: "success",
-            content: <>登录成功</>,
-          });
+          // showToast({
+          //   type: "success",
+          //   content: <>登录成功</>,
+          // });
           setTimeout(() => {
             navigate("/select");
           }, 500);
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
           showToast({
             type: "error",
             content: <>登陆失败，用户名和密码错误</>,

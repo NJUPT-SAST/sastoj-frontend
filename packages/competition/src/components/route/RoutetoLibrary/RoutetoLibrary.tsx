@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import styles from "./index.module.scss";
 
-export const RoutetoLibrary = () => {
+export const RouteLibrary = () => {
   const navigate = useNavigate();
   return (
     <Button

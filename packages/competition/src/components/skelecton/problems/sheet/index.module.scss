@@ -1,45 +1,45 @@
 @use "@/variables" as *;
 
 .list-container {
+  width: 100%;
+  border: 1px solid $divider-color;
+  height: fit-content;
+  border-radius: 5px;
+
+  .list-item {
     width: 100%;
-    border: 1px solid $divider-color;
-    height: fit-content;
-    border-radius: 5px;
+    height: 3rem;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem 2rem;
+    box-sizing: border-box;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s $cubic-bezier;
 
-    .list-item {
-        width: 100%;
-        height: 3rem;
-        justify-content: space-between;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        padding: 1rem 2rem;
-        box-sizing: border-box;
-        position: relative;
-        cursor: pointer;
-        transition: all 0.2s $cubic-bezier;
-
-        span {
-            width: 5rem;
-            height: 1rem;
-            @include skeleton-loading();
-            &:last-child {
-                width: 3.5rem;
-            }
-        }
-
-        &:hover {
-            background-color: $background-color;
-        }
-
-        &:not(:last-child)::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background-color: $divider-color;
-        }
+    span {
+      width: 5rem;
+      height: 1rem;
+      @include skeleton-loading();
+      &:last-child {
+        width: 3.5rem;
+      }
     }
+
+    &:hover {
+      background-color: $background-color;
+    }
+
+    &:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: $divider-color;
+    }
+  }
 }
