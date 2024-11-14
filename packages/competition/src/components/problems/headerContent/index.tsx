@@ -46,18 +46,18 @@ export const HeaderContent = () => {
   return (
     <div className={styles["header-content-container"]}>
       <Button
-        className={styles["run-button"]}
         size="small"
         color="border"
         onClick={() => setSheetVisible(true)}
         shadow="none"
       >
-        <ListCollapse />
-        <span>题目列表</span>
+        <div className={styles["run-button"]}>
+          <ListCollapse />
+          <span>题目列表</span>
+        </div>
       </Button>
       <div className={styles["run-buttons-container"]}>
         <Button
-          className={styles["run-button"]}
           size="small"
           color="border"
           onClick={() => {
@@ -68,11 +68,12 @@ export const HeaderContent = () => {
           disabled={selfLoading}
           shadow="none"
         >
-          {!selfLoading ? <CirclePlay /> : <SumbitLoading />}
-          <span>{!selfLoading ? "自测" : "自测中"}</span>
+          <div className={styles["run-button"]}>
+            {!selfLoading ? <CirclePlay /> : <SumbitLoading />}
+            <span>{!selfLoading ? "自测" : "自测中"}</span>
+          </div>
         </Button>
         <Button
-          className={styles["run-button"]}
           size="small"
           color="border"
           onClick={() => {
@@ -83,8 +84,10 @@ export const HeaderContent = () => {
           disabled={loading}
           shadow="none"
         >
-          {!loading ? <Send /> : <SumbitLoading />}
-          <span>{!loading ? "提交" : "评测中"}</span>
+          <div className={styles["run-button"]}>
+            {!loading ? <Send /> : <SumbitLoading />}
+            <span>{!loading ? "提交" : "评测中"}</span>
+          </div>
         </Button>
         <ProblemsSheet
           visible={sheetVisible}
