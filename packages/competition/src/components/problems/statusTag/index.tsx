@@ -1,6 +1,7 @@
 import { Badge } from "@ui-aurora/react";
 import styles from "./index.module.scss";
 
+
 const StatusDescriptions = (
   status: number,
 ): [string, "ghost" | "success" | "error" | "warning" | "info" | undefined] => {
