@@ -48,15 +48,21 @@ const ProblemCases = () => {
   const casesArr = cases.get(problemId!);
   const casesValue = casesArr?.find((item) => item.id == CaseId);
   //提交详细结果
-  // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
-  const [stateResult, , color] = StatusDescriptions(casesValue?.singleDetial?.state!)
-  const createTime = handleDate(casesValue?.singleDetial.createdAt)
-  const totalTime = transformNumberFromBigInt(casesValue?.singleDetial?.totalTime ?? '0', "time")
-  const totalMemory = transformNumberFromBigInt(casesValue?.singleDetial?.maxMemory ?? '0', "memory")
+  const [stateResult, color] = StatusDescriptions(
+    // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+    casesValue?.singleDetial?.state!,
+  );
+  const createTime = handleDate(casesValue?.singleDetial.createdAt);
+  const totalTime = transformNumberFromBigInt(
+    casesValue?.singleDetial?.totalTime ?? "0",
+    "time",
+  );
+  const totalMemory = transformNumberFromBigInt(
+    casesValue?.singleDetial?.maxMemory ?? "0",
+    "memory",
+  );
   //是否展示空的判断
-  const isEmpty = !casesValue?.singleCases.length && !casesValue?.singleDetial
-
-
+  const isEmpty = !casesValue?.singleCases.length && !casesValue?.singleDetial;
 
   return (
     <div style={{ height: "fit-content" }}>
@@ -71,29 +77,40 @@ const ProblemCases = () => {
         <span>返回题目内容</span>
       </Button>
       {casesValue?.singleDetial ? (
-        <div className={styles['cases-result']}>
-          <div className={styles['result-statetime']}>
-            <span style={{ color: color }} className={styles.state}>{stateResult}</span>
-            <div style={{ fontSize: '0.9rem' }}>提交于:<span>{createTime}</span></div>
+        <div className={styles["cases-result"]}>
+          <div className={styles["result-statetime"]}>
+            <span style={{ color: color }} className={styles.state}>
+              {stateResult}
+            </span>
+            <div style={{ fontSize: "0.9rem" }}>
+              提交于:<span>{createTime}</span>
+            </div>
           </div>
-          <div className={styles['result-more']}>
-            <div className={styles['result-more-item']}>
-              <span className={styles['result-more-item-icon']}><Timer />执行总用时</span>
+          <div className={styles["result-more"]}>
+            <div className={styles["result-more-item"]}>
+              <span className={styles["result-more-item-icon"]}>
+                <Timer />
+                执行总用时
+              </span>
               <span>{totalTime} ms</span>
             </div>
-            <div className={styles['result-more-item']}>
-              <span className={styles['result-more-item-icon']}><Database />消耗最大内存</span>
+            <div className={styles["result-more-item"]}>
+              <span className={styles["result-more-item-icon"]}>
+                <Database />
+                消耗最大内存
+              </span>
               <span>{totalMemory} MB</span>
             </div>
           </div>
           <div className={styles.codebox}>
             <pre>
-              <code>{casesValue.singleDetial.code}
-              </code>
+              <code>{casesValue.singleDetial.code}</code>
             </pre>
           </div>
         </div>
-      ) : ''}
+      ) : (
+        ""
+      )}
       {casesValue?.singleCases.length ? (
         <div className={styles["cases-container"]}>
           <div>
@@ -139,11 +156,14 @@ const ProblemCases = () => {
             })}
           </>
         </div>
-      ) : ''}
-      {isEmpty &&
+      ) : (
+        ""
+      )}
+      {isEmpty && (
         <div style={{ height: "unset", marginTop: "40%" }}>
           <Empty />
-        </div>}
+        </div>
+      )}
     </div>
   );
 };
