@@ -88,11 +88,11 @@ const optionsList: OptionProps[] = [
     value: "PHP",
     key: 13,
   },
-  // {
-  //   label: 'Python3',
-  //   value: 'Python3',
-  //   key: 14
-  // },
+  {
+    label: "Python3",
+    value: "Python3",
+    key: 14,
+  },
   {
     label: "Ruby",
     value: "Ruby",
